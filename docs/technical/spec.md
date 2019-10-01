@@ -76,7 +76,7 @@ En tant que guide, je veux pouvoir créer et publier une nouvelle course.
 
 Je consulte le [calendrier global](images/CalendrierGlobal.png) des courses, je sélectionne [une date](images/CalendrierJour.png), j'ajoute une course
 
-J'introduis les [caractéristiques de la course](images/Course)
+J'introduis les [caractéristiques de la course](images/Course.png)
 
 Je publie
 
