@@ -1,5 +1,7 @@
 @extends('layouts.base')
 
+@section('title', 'Toutes les courses')
+
 @section('body-content')
   <table>
     <tr>

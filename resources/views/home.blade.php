@@ -1,5 +1,7 @@
 @extends('layouts.base')
 
+@section('title', 'Accueil')
+
 @section('body-content')
   <div class="title m-b-md">
     Hixe
