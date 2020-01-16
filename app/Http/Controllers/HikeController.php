@@ -12,7 +12,6 @@ class HikeController extends Controller
     public function listAllHikes()
     {
       $hikes = Hike::all();
-        
       return view('all_hikes')->with(compact(['hikes']));
     }
 }
