@@ -7,9 +7,14 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-<div class="container">
-    <table class="table">
-        <thead class="thead-dark">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<div class="container mt-4">
+    <table  id="hikesTable"  class="table table-hover mt-3">
+        <input class="form-control" id="filterName" type="text" placeholder="Search..">
+  <br>
+        <thead>
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Date</th>
@@ -29,10 +34,10 @@
 
             <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
             <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-            <td>{{ count($hike->users()->get()) }}</td>
+            <td>{{ $hike->users()->count() }}</td>
             <td>{{ $hike->min_num_participants }}</td>
             <td>{{ $hike->max_num_participants }}</td>
-            <td>{{ $hike->states->name }}</td>
+            <td>{{ $hike->state->name }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -40,13 +45,8 @@
 </div>
 
 <script>
-    $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-});
+    $(document).ready( function () {
+    $('#hikesTable').DataTable();
+} );
 </script>
 @endsection

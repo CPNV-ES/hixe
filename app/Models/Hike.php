@@ -23,7 +23,7 @@ class Hike extends Model
     return $this->belongsToMany(Destination::class);
   }
 
-  public function states()
+  public function state()
   {
     return $this->belongsTo(State::class);
   }
