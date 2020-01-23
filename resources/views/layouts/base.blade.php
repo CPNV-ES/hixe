@@ -82,10 +82,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2 logo">
-                <a href="/"><img class="img-fluid align-middle" src="{{ asset('img/logo.png') }}"/></a>
+                <div class="text-center">
+                    <a href="/"><img class="img-fluid" src="{{ asset('img/logo.png') }}"/></a>
+                </div>
             </div>
             <div class="col-md-8">
-                <img class="img-fluid align-middle" src="{{ asset('img/imageprincipale.jpg') }}"/></a>
+                <div class="text-center">
+                    <img class="img-fluid" src="{{ asset('img/imageprincipale.jpg') }}"/></a>
+                </div>
             </div>
             <div class="col-md-1 containermenu">
                 <div class="menuright">
@@ -101,6 +105,21 @@
             </div>
         </div>
     </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="http://www.clubalpinsion.ch/">Club Alpin Sion</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Mes Courses <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Créer une course</a>
+                <a class="nav-item nav-link" href="#">Liste des courses</a>
+            </div>
+        </div>
+    </nav>
+
 
     <div class="content">
         @yield('body-content')
