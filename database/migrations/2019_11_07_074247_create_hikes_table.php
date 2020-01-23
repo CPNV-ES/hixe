@@ -15,6 +15,7 @@ class CreateHikesTable extends Migration {
 		Schema::create('hikes', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('name');
 			$table->string('meeting_location', 100);
 			$table->dateTime('meeting_date');
 			$table->dateTime('beginning_date');
