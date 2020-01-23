@@ -11,6 +11,7 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">Name</th>
                 <th scope="col">Date</th>
                 <th scope="col">Destination</th>
                 <th scope="col">Guide</th>
@@ -23,13 +24,15 @@
         <tbody>
         @foreach ($hikes as $hike)
         <tr>
-            <th scope="row">{{ $hike->meeting_date }}</td>
+            <th scope="row">{{ $hike->name }}</th>
+            <td>{{ $hike->meeting_date }}</td>
+
             <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
             <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
             <td>{{ count($hike->users()->get()) }}</td>
             <td>{{ $hike->min_num_participants }}</td>
             <td>{{ $hike->max_num_participants }}</td>
-            <td>{{ $hike->states->name}}</td>
+            <td>{{ $hike->states->name }}</td>
         </tr>
         @endforeach
     </tbody>
