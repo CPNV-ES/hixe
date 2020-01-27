@@ -11,10 +11,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="css/app.css" rel="stylesheet">
+    <link href="{{ asset('/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 
     <!--Font Awesome -->
     <script src="https://kit.fontawesome.com/30414cf885.js" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('/lib/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
 
 </head>
 
