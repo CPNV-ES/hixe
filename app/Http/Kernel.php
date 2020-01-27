@@ -20,7 +20,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Illuminate\Session\Middleware\StartSession::class,
-        AuthenticateWithEnv::class
+        Middleware\AuthenticateWithEnv::class
     ];
 
     /**
@@ -36,8 +36,7 @@ class Kernel extends HttpKernel
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\DevLogin::class
+            \Illuminate\Routing\Middleware\SubstituteBindings::class
         ],
 
         'api' => [

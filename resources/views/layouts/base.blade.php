@@ -96,7 +96,11 @@
             <div class="col-md-1 containermenu">
                 <div class="menuright">
                     <i class="fas fa-user fa-2x"></i>
-                    <p>Hubert Login</p>
+                    @if(Auth::check())
+                        <p>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
+                        @else
+                        <p>Connexion</p>
+                    @endif
                 </div>
             </div>
         </div>

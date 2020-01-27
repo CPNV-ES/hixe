@@ -19,17 +19,16 @@ class AuthenticateWithEnv
      */
     public function handle($request, Closure $next)
     {
-        dd('test');
-        if(env('USER_FIRSTNAME') <> "" && env('USER_LASTNAME') <> "" && env('USER_EMAIL') <> "" && env('USER_PASSWORD') <> "" && env('USER_NUMBER') <> ""){
+        if(env('USER_FIRSTNAME') <> "" && env('USER_LASTNAME') <> "" && env('USER_EMAIL') <> "" && env('USER_PASSWORD') <> "" && env('USER_NUMBER') <> "" && env('USER_BIRTHDATE') <> ""){
             //Test si l'utilsiateur du .env existe dans la DB
             if(User::where('firstname', '=', env('USER_FIRSTNAME'))->exists()){
                 //Test la connexion avec l'utilisateur du .env
-                if(!Auth::attempt(['name' => env('USER_NAME'), 'password' => env('USER_PASSWORD'), 'email' => env('USER_EMAIL')])) {
+                if(!Auth::attempt(['firstname' => env('USER_FIRSTNAME'), 'lastname' => env('USER_LASTNAME'), 'email_address' => env('USER_EMAIL'), 'member_number' => env('USER_NUMBER'), 'birthdate' => env('USER_BIRTHDATE'), 'password' => env('USER_PASSWORD')])) {
                     return response('Erreur 409 : Accès refusée.', 409);
                 }
             }else{
                 //Création de l'utilisateur du .env
-                Artisan::call("make:user ". env('USER_NAME') ." ". env('USER_EMAIL')." ". env('USER_PASSWORD'));
+                Artisan::call("make:user ". env('USER_FIRSTNAME') ." ". env('USER_LASTNAME')." ". env('USER_EMAIL')." ". env('USER_NUMBER')." ". env('USER_BIRTHDATE')." ". env('USER_PASSWORD'));
             }
         }else{
             return response('Erreur 409 : .env incomplet.', 409);
