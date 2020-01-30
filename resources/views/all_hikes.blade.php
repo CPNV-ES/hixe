@@ -12,8 +12,6 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <div class="container mt-4">
     <table  id="hikesTable"  class="table table-hover mt-3">
-        <input class="form-control" id="filterName" type="text" placeholder="Search..">
-  <br>
         <thead>
             <tr>
                 <th scope="col">Name</th>
