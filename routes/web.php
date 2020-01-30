@@ -20,3 +20,7 @@ Route::get('hikes', 'HikeController@listAllHikes');
 Route::get('Profile', function () {
     return view('profile');
 });
+
+Route::get('/ajouter', function (){
+    return view('create_hike');
+});
