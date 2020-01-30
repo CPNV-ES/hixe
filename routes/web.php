@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('hikes', 'HikeController@listAllHikes');
 
+Route::get('calendar','HikeController@showCalendar');
+
 Route::get('Profile', function () {
     return view('profile');
 });
