@@ -14,4 +14,11 @@ class HikeController extends Controller
       $hikes = Hike::all();
       return view('all_hikes')->with(compact(['hikes']));
     }
+
+    public function addMultiHixe(Request $request){
+      dd('coucou');
+      $hike = new Hike();
+      $hike->name = $request->get('name');
+
+    }
 }
