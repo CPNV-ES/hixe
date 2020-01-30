@@ -46,7 +46,7 @@ class MakeUser extends Command
         $birthdate = $this->argument('birthdate');
         $password = Hash::make($this->argument('password'));
 
-        if(User::where('firstname', '=', $firstname)->exists()){
+        if(User::where('member_number', '=', $email_address)->exists()){
             $this->line("Erreur: l'utilisateur $firstname existe déjà");
         }else{
             $user = new User;

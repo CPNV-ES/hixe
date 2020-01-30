@@ -93,16 +93,16 @@
                     <p>Calendrier</p>
                 </div>
             </div>
-            <div class="col-md-1 containermenu">
-                <div class="menuright">
-                    <i class="fas fa-user fa-2x"></i>
-                    @if(Auth::check())
-                        <p>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
-                        @else
-                        <p>Connexion</p>
-                    @endif
+                <div class="col-md-1 containermenu" onclick="location.href='Profile'">
+                    <div class="menuright">
+                        <i class="fas fa-user fa-2x"></i>
+                        @if(Auth::check())
+                            <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p>
+                            @else
+                            <p>Connexion</p>
+                        @endif
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 
