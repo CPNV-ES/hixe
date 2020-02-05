@@ -15,10 +15,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('hikes', 'HikeController@listAllHikes');
-
-Route::get('calendar','HikeController@showCalendar');
+Route::resource('hikes', 'HikeController');
 
 Route::get('Profile', function () {
     return view('profile');
 });
+
+Route::get('hikes_calendar','HikeCalendarController@index');
+Route::get('hikes_calendar/{date}','HikeCalendarController@show');
