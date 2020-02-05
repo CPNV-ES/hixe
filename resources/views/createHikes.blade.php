@@ -55,7 +55,7 @@
                                     </tr>
                                 </tbody>
                             </table> 
-                            <div id="insert-more"> Add New Row </div>
+                            <div id="insert-more" class="btn btn-primary btn-round"> Add New Row </div>
                         </div>
                     </div>
                 </div>
