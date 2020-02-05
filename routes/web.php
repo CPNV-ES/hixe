@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,4 +24,4 @@ Route::get('Profile', function () {
 Route::get('addHikes', function (){
     return view('createHikes');
 });
-Route::post('addMultiHikes', 'HikeController@addMultiHixe');
+Route::resource('addMultiHikes', 'MultiHikesController');

@@ -7,11 +7,16 @@
 <div class="content">
     <div class="row justify-content-md-center">
       <div class="col-md-10">
+      @if (session('success'))
+          <div class="alert alert-success">
+              {{ session('success') }}
+          </div>
+      @endif
         <div class="card">
           <div class="card-header">
             <h5 class="title">{{__(" Insérer des cours")}}</h5>
           </div>
-          <div class="card-body">
+          <div class="card-body">          
             <form method="post" action="addMultiHikes" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
@@ -27,28 +32,30 @@
                                     <td>name</td>
                                     <td>Départ</td>
                                     <td>Retour</td>
-                                    <td>Description</td>
+                                    <td>Destination</td>
                                     <td>Type</td>
                                     <td>Dénivelé</td>
                                     <td>Difficulté</td>
                                     <td>Max Pers.</td>
                                     <td>CdC</td>
+                                    <td>Altitude</td>
                                 </thead>
                                 <tbody>
                                     <tr id="rows">
-                                        <td><input type="text" name="name" class="form-control" value=''></td>
-                                        <td><input type="time" name="start" class="form-control" value=''></td>
-                                        <td><input type="time" name="finish" class="form-control" value=''></td>
-                                        <td><input type="text" name="description" class="form-control" value=''></td>
-                                        <td><input type="text" name="type" class="form-control" value=''></td>
-                                        <td><input type="text" name="elevation" class="form-control" value=''></td>
-                                        <td><input type="text" name="difficulty" class="form-control" value=''></td>
-                                        <td><input type="text" name="max" class="form-control" value=''></td>
-                                        <td><input type="text" name="cdc" class="form-control" value=''></td>
+                                        <td><input type="text" name="name[]" class="form-control" value=''></td>
+                                        <td><input type="datetime-local" name="start[]" class="form-control" value=''></td>
+                                        <td><input type="datetime-local" name="finish[]" class="form-control" value=''></td>
+                                        <td><input type="text" name="destination[]" class="form-control" value=''></td>
+                                        <td><input type="text" name="type[]" class="form-control" value=''></td>
+                                        <td><input type="text" name="elevation[]" class="form-control" value=''></td>
+                                        <td><input type="text" name="difficulty[]" class="form-control" value=''></td>
+                                        <td><input type="text" name="max[]" class="form-control" value=''></td>
+                                        <td><input type="text" name="cdc[]" class="form-control" value=''></td>
+                                        <td><input type="number" name="altitude[]" class="form-control" value=''></td>
                                     </tr>
                                 </tbody>
                             </table> 
-                            <a href="#" id="insert-more"> Add New Row </a>
+                            <div id="insert-more"> Add New Row </div>
                         </div>
                     </div>
                 </div>
@@ -81,5 +88,4 @@
 });
 
 </script>
-
 @endsection
