@@ -36,6 +36,13 @@
         @endforeach
         </tbody>
     </table>
-    <div><input value="Ajouter un évenement" type="submit" class="btn btn-primary"/></div>
+    <div>
+        <a href="/hikes/create">
+            <input value="Ajouter un évenement" type="submit" class="btn btn-primary"/>
+        </a>
+        <a href="/hikes_calendar">
+            <input value="Retour" type="button" class="btn btn-primary"/>
+        </a>
+    </div>
 </div>
 @endsection
