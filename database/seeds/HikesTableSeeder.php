@@ -3,7 +3,7 @@
 use App\Models\Hike;
 use Illuminate\Database\Seeder;
 
-class HikeSeeder extends Seeder
+class HikesTableSeeder extends Seeder
 {
   /**
    * Run the database seeds.
