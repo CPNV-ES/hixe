@@ -21,11 +21,9 @@
             enctype="multipart/form-data">
               @csrf
               @method('post')
-              <div class="row">
-              </div>
               <!-- Date -->
                 <div class="row">
-                    <div class="col-md-11 pr-1">
+                    <div class="col-md-12 pr-1">
                         <div class="form-group">
                             <table id="mytable">
                                 <thead>
@@ -56,14 +54,14 @@
                                     </tr>
                                 </tbody>
                             </table> 
-                            <div class="d-flex justify-content-end">
-                              <div id="insert-more" class="btn btn-secondary btn-round d-flex justify-content-end" style="margin-top:15px"> Add Row </div>
-                            </div> 
                         </div>
                     </div>
                 </div>
-              <div class="footer ">
-                <button type="submit" class="btn btn-primary btn-round">{{__('Save')}}</button>
+              <div class="row footer ">
+                <div class="col-md-12 pr-1 d-flex justify-content-end">
+                  <div id="insert-more" class="btn btn-secondary btn-round" style="margin-right:15px" > Add Row </div>
+                  <button type="submit" class="btn btn-primary btn-round">{{__('Save')}}</button>
+                </div>
               </div>
             </form>
         </div>
