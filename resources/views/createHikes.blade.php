@@ -27,29 +27,29 @@
                         <div class="form-group">
                             <table id="mytable">
                                 <thead>
-                                    <td>name</td>
-                                    <td>Départ</td>
-                                    <td>Retour</td>
-                                    <td>Destination</td>
-                                    <td>Type</td>
-                                    <td>Dénivelé</td>
-                                    <td>Difficulté</td>
+                                    <td>Nom</td>
+                                    <td>Meeting location</td>
+                                    <td>Meeting date</td>
+                                    <td>Start</td>
+                                    <td>Finish</td>
+                                    <td>Min Pers.</td>
                                     <td>Max Pers.</td>
-                                    <td>CdC</td>
+                                    <td>Difficulé</td>
+                                    <td>Info</td>
                                     <td>Altitude</td>
                                 </thead>
                                 <tbody>
                                     <tr id="rows">
-                                        <td><input type="text" name="name[]" class="form-control" value=''></td>
-                                        <td><input type="datetime-local" name="start[]" class="form-control" value=''></td>
-                                        <td><input type="datetime-local" name="finish[]" class="form-control" value=''></td>
-                                        <td><input type="text" name="destination[]" class="form-control" value=''></td>
-                                        <td><input type="text" name="type[]" class="form-control" value=''></td>
-                                        <td><input type="text" name="elevation[]" class="form-control" value=''></td>
-                                        <td><input type="text" name="difficulty[]" class="form-control" value=''></td>
-                                        <td><input type="text" name="max[]" class="form-control" value=''></td>
-                                        <td><input type="text" name="cdc[]" class="form-control" value=''></td>
-                                        <td><input type="number" name="altitude[]" class="form-control" value=''></td>
+                                        <td><input type="text"            name="name[]" class="form-control" value=''></td>
+                                        <td><input type="text"            name="meetingLocation[]" class="form-control" value=''></td>
+                                        <td><input type="datetime-local"  name="meetingDate[]" class="form-control" value=''></td>
+                                        <td><input type="datetime-local"  name="start[]" class="form-control" value=''></td>
+                                        <td><input type="datetime-local"  name="finish[]" class="form-control" value=''></td>
+                                        <td><input type="number"          name="min[]" class="form-control" value=''></td>
+                                        <td><input type="number"          name="max[]" class="form-control" value=''></td>
+                                        <td><input type="number"          name="difficulty[]" class="form-control" value=''></td>
+                                        <td><input type="text"          name="info[]" class="form-control" value=''></td>
+                                        <td><input type="number"          name="altitude[]" class="form-control" value=''></td>
                                         <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
                                     </tr>
                                 </tbody>
