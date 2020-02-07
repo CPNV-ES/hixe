@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', 'Toutes les courses')
+@section('title', 'Ajouter des courses')
 
 @section('body-content')
 
@@ -52,10 +52,13 @@
                                         <td><input type="text" name="max[]" class="form-control" value=''></td>
                                         <td><input type="text" name="cdc[]" class="form-control" value=''></td>
                                         <td><input type="number" name="altitude[]" class="form-control" value=''></td>
+                                        <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
                                     </tr>
                                 </tbody>
                             </table> 
-                            <div id="insert-more" class="btn btn-primary btn-round"> Add New Row </div>
+                            <div class="d-flex justify-content-end">
+                              <div id="insert-more" class="btn btn-secondary btn-round d-flex justify-content-end" style="margin-top:15px"> Add Row </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -86,6 +89,12 @@
          }
      });
 });
-
+function deleteRow(r){
+  var i = r.parentNode.parentNode.rowIndex;
+  var tbllenght = $('#mytable tr').length-1;
+  if(tbllenght != 1){
+    document.getElementById('mytable').deleteRow(i);
+  }
+}
 </script>
 @endsection
