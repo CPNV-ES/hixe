@@ -29,6 +29,6 @@ class HikeCalendarController extends Controller
     public function show($date)
     {
         $dayHikes = Hike::where('meeting_date','=',$date)->get();
-        return view('day_calendar')->with(compact(['dayHikes']));
+        return view('day_calendar')->with(compact(['dayHikes','date']));
     }
 }

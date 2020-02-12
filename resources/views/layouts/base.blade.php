@@ -18,6 +18,7 @@
 
     <script src="{{ asset('/lib/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/js/app.js')}}"></script>
 
 </head>
 
