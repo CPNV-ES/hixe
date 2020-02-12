@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', 'Toutes les courses')
+@section('title', 'Profile')
 
 @section('body-content')
 <h2>Votre Profils</h2>

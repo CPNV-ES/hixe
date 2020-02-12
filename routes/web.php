@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +19,9 @@ Route::get('hikes', 'HikeController@listAllHikes');
 Route::get('Profile', function () {
     return view('profile');
 });
+
+//multi hikes
+Route::get('addHikes', function (){
+    return view('createHikes');
+});
+Route::resource('MultiHikes', 'MultiHikesController');
