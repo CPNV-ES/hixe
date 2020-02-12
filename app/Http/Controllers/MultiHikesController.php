@@ -7,6 +7,7 @@ use App\Models\Hike;
 
 class MultiHikesController extends Controller
 {
+
     public function store(Request $request){
 
       $validatedData = $request->validate([
@@ -19,11 +20,15 @@ class MultiHikesController extends Controller
         'altitude' => 'required'
       ]);
 
+        //dd($validatedData);
+
       $bResult = true;
       foreach($validatedData as $i){
-        if ($i[0] == ""){
-          $bResult = false;
-        }
+        foreach($i as $x){
+          if ($x == ""){
+            $bResult = false;  
+          }
+        }        
       }
 
       if($bResult == true){
@@ -42,9 +47,11 @@ class MultiHikesController extends Controller
           $hike->state_id = 1;    
           $hike->save();
         }
-        return redirect()->back()->with('success', 'Saved!'); 
+        //with doesn't working
+        return redirect('addHikes')->with('status', 'Profile updated!');
       }else{
-        echo "Non";
+        //with doesn't working
+        return redirect('addHikes')->with('status', 'Profile not updated!');
       }
       
     }

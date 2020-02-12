@@ -7,17 +7,18 @@
 <div class="content">
     <div class="row justify-content-md-center">
       <div class="col-md-10">
-      @if (session('success'))
-          <div class="alert alert-success">
-              {{ session('success') }}
-          </div>
-      @endif
+        <!-- MSG succes or error doesn't working -->
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="card">
           <div class="card-header">
             <h5 class="title">{{__(" Insérer des cours")}}</h5>
           </div>
           <div class="card-body">          
-            <form method="post" action="addMultiHikes" autocomplete="off"
+            <form method="post" action="MultiHikes" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')

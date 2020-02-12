@@ -24,4 +24,4 @@ Route::get('Profile', function () {
 Route::get('addHikes', function (){
     return view('createHikes');
 });
-Route::resource('addMultiHikes', 'MultiHikesController');
+Route::resource('MultiHikes', 'MultiHikesController');
