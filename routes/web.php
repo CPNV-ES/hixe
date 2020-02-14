@@ -25,3 +25,7 @@ Route::get('addHikes', function (){
     return view('createHikes');
 });
 Route::resource('MultiHikes', 'MultiHikesController');
+
+Route::get('/ajouter', function (){
+    return view('create_hike');
+});
