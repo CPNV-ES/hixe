@@ -26,9 +26,9 @@ class MultiHikesController extends Controller
       foreach($validatedData as $i){
         foreach($i as $x){
           if ($x == ""){
-            $bResult = false;  
+            $bResult = false;
           }
-        }        
+        }
       }
 
       if($bResult == true){
@@ -44,15 +44,15 @@ class MultiHikesController extends Controller
           $hike->difficulty = $request->input('difficulty')[$i];
           $hike->additional_info = $request->input('info')[$i];
           $hike->drop_in_altitude = $request->input('altitude')[$i];
-          $hike->state_id = 1;    
+          $hike->state_id = 1;
           $hike->save();
         }
         //with doesn't working
-        return redirect('addHikes')->with('status', 'Profile updated!');
+        return redirect('multiHikes')->with('status', 'Profile updated!');
       }else{
         //with doesn't working
-        return redirect('addHikes')->with('status', 'Profile not updated!');
+        return redirect('multiHikes')->with('status', 'Profile not updated!');
       }
-      
+
     }
 }

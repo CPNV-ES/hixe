@@ -17,8 +17,8 @@
           <div class="card-header">
             <h5 class="title">{{__(" Insérer des cours")}}</h5>
           </div>
-          <div class="card-body">          
-            <form method="post" action="MultiHikes" autocomplete="off"
+          <div class="card-body">
+            <form method="post" action="addMultiHikes" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')
@@ -54,7 +54,7 @@
                                         <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
                                     </tr>
                                 </tbody>
-                            </table> 
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
     </div>
   </div>
 
- 
+
 
 
 <script>
