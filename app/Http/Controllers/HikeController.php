@@ -9,9 +9,11 @@ use App\Models\Role;
 
 class HikeController extends Controller
 {
-    public function listAllHikes()
+    public function index()
     {
-      $hikes = Hike::all();
-      return view('all_hikes')->with(compact(['hikes']));
+        $hikes = Hike::all();
+        return view('all_hikes')->with(compact(['hikes']));
     }
+
+
 }

@@ -3,15 +3,9 @@
 @section('title', 'Toutes les courses')
 
 @section('body-content')
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-<div class="container mt-4">
-    <table  id="hikesTable"  class="table table-hover mt-3">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.20/b-1.6.1/b-flash-1.6.1/kt-2.5.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.css"/>
+<div class="container mt-4 table-responsive">
+    <table  id="hikesTable"  class="table table table-hover mt-3">
         <thead>
             <tr>
                 <th scope="col">Name</th>
