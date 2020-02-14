@@ -20,6 +20,7 @@ Route::get('Profile', function () {
     return view('profile');
 });
 
+
 Route::get('hikes_calendar','HikeCalendarController@index');
 Route::get('hikes_calendar/{date}','HikeCalendarController@show');
 
@@ -28,3 +29,10 @@ Route::get('multiHikes', function (){
     return view('createMultiHikes');
 });
 Route::resource('addMultiHikes', 'MultiHikesController');
+Route::resource('MultiHikes', 'MultiHikesController');
+
+
+Route::get('/ajouter', function (){
+    return view('create_hike');
+});
+

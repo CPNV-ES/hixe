@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet" type="text/css">
     <!--Font Awesome -->
     <script src="https://kit.fontawesome.com/30414cf885.js" crossorigin="anonymous"></script>
 
