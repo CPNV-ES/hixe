@@ -88,7 +88,7 @@
                     <p>Calendrier</p>
                 </div>
             </div>
-                <div class="col-md-1 containermenu" onclick="location.href='Profile'">
+                <div class="col-md-1 containermenu" onclick="location.href='/Profile'">
                     <div class="menuright">
                         <i class="fas fa-user fa-2x"></i>
                         @if(Auth::check())

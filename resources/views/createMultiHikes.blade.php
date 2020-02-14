@@ -43,9 +43,9 @@
                                     <tr id="rows">
                                         <td><input type="text"            name="name[]" class="form-control" value=''></td>
                                         <td><input type="text"            name="meetingLocation[]" class="form-control" value=''></td>
-                                        <td><input type="datetime-local"  name="meetingDate[]" class="form-control" value=''></td>
-                                        <td><input type="datetime-local"  name="start[]" class="form-control" value=''></td>
-                                        <td><input type="datetime-local"  name="finish[]" class="form-control" value=''></td>
+                                        <td><input type="date"  name="meetingDate[]" class="form-control" value=''></td>
+                                        <td><input type="date"  name="start[]" class="form-control" value=''></td>
+                                        <td><input type="date"  name="finish[]" class="form-control" value=''></td>
                                         <td><input type="number"  min="1"        name="min[]" class="form-control" value=''></td>
                                         <td><input type="number"  min="1"        name="max[]" class="form-control" value=''></td>
                                         <td><input type="number" min="1" max="9"   name="difficulty[]" class="form-control" value=''></td>
