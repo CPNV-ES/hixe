@@ -20,7 +20,7 @@ class HikeController extends Controller
     }
     public function show($id){
         $hike = Hike::find($id);
-        return view('profile')->with(compact(['hike']));
+        return view('create_hike')->with(compact(['hike']));
     }
 
 }
