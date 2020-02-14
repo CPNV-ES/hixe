@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\State;
 
 class StatesTableSeeder extends Seeder
 {
@@ -11,22 +12,20 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('states')->insert(
-            [
-                'name' => 'Draft',
-            ],
-            [
-                'name' => 'Open',
-            ],
-            [
-                'name' => 'Confirmed',
-            ],
-            [
-                'name' => 'Cancelled',
-            ],
-            [
-                'name' => 'Done',
-            ]
-        );
+        State::insert([
+            'name' => 'Draft',
+        ]);
+        State::insert([
+            'name' => 'Open',
+        ]);
+        State::insert([
+            'name' => 'Confirmed',
+        ]);
+        State::insert([
+            'name' => 'Cancelled',
+        ])
+        ;State::insert([
+        'name' => 'Done',
+        ]);
     }
 }

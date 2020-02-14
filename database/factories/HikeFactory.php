@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Hike::class, function (Faker $faker) {
   return [
+    'name' => 'test',
     'meeting_location' => $faker->streetAddress,
     'meeting_date' => $faker->dateTimeBetween('now', '+1 month'),
     'beginning_date' => $faker->dateTimeBetween('now', '+1 day'),

@@ -12,5 +12,7 @@ class User extends Model
       'firstname', 'lastname', 'email_address', 'member_number', 'birthdate', 'password', 'created_at', 'updated_at'
   ];
 
-
+  public function hikes(){
+      return $this->belongsToMany(Hike::Class)->withPivot('role_id');
+  }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Equipment;
 
 class EquipmentsTableSeeder extends Seeder
 {
@@ -11,16 +12,14 @@ class EquipmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('equipments')->insert(
-            [
-                'name' => 'Snowmobile',
-            ],
-            [
-                'name' => 'Sticks',
-            ],
-            [
-                'name' => 'Bindings',
-            ]
-        );
+        Equipment::insert([
+            'name' => 'Snowmobile',
+        ]);
+        Equipment::insert([
+            'name' => 'Sticks',
+        ]);
+        Equipment::insert([
+            'name' => 'Bindings',
+        ]);
     }
 }
