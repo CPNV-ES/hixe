@@ -37,7 +37,7 @@
         </tbody>
     </table>
     <div>
-        <a href="/hikes/create">
+        <a href="{{route('hikes.create')}}">
             <input value="Ajouter un évenement" type="submit" class="btn btn-primary"/>
         </a>
         <a href="/hikes_calendar">

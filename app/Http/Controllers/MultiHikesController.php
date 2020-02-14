@@ -7,7 +7,12 @@ use App\Models\Hike;
 
 class MultiHikesController extends Controller
 {
+    public function index(){
 
+    }
+    public function create(){
+        return view('createMultiHikes');
+    }
     public function store(Request $request){
 
       $validatedData = $request->validate([
@@ -48,10 +53,10 @@ class MultiHikesController extends Controller
           $hike->save();
         }
         //with doesn't working
-        return redirect('multiHikes')->with('status', 'Profile updated!');
+        return redirect('multiHikes/create')->with('status', 'Profile updated!');
       }else{
         //with doesn't working
-        return redirect('multiHikes')->with('status', 'Profile not updated!');
+        return redirect('multiHikes/create')->with('status', 'Profile not updated!');
       }
 
     }

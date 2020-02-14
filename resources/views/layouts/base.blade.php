@@ -109,10 +109,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">Mes Courses <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="hikes_calendar">Calendrier</a>
-                <a class="nav-item nav-link" href="#">Créer une course</a>
-                <a class="nav-item nav-link" href="hikes">Liste des courses</a>
-                <a class="nav-item nav-link" href="multiHikes">Créer multiples courses</a>
+                <a class="nav-item nav-link" href="/hikes_calendar">Calendrier</a>
+            <a class="nav-item nav-link" href="{{route('hikes.create')}}">Créer une course</a>
+                <a class="nav-item nav-link" href="{{route('hikes.index')}}">Liste des courses</a>
+                <a class="nav-item nav-link" href="{{route('multiHikes.create')}}">Créer multiples courses</a>
             </div>
         </div>
     </nav>

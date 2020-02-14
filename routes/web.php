@@ -14,25 +14,22 @@ Route::get('/', function () {
     return view('home');
 });
 
+// Hikes
 Route::resource('hikes', 'HikeController');
+
 
 Route::get('Profile', function () {
     return view('profile');
 });
 
-
+// Calendar
 Route::get('hikes_calendar','HikeCalendarController@index');
 Route::get('hikes_calendar/{date}','HikeCalendarController@show');
 
 //multi hikes
-Route::get('multiHikes', function (){
-    return view('createMultiHikes');
-});
-Route::resource('addMultiHikes', 'MultiHikesController');
-Route::resource('MultiHikes', 'MultiHikesController');
 
 
-Route::get('/ajouter', function (){
-    return view('create_hike');
-});
+Route::resource('multiHikes', 'MultiHikesController');
+
+
 

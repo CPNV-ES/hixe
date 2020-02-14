@@ -18,7 +18,7 @@
             <h5 class="title">{{__(" Insérer des cours")}}</h5>
           </div>
           <div class="card-body">
-            <form method="post" action="addMultiHikes" autocomplete="off"
+            <form method="POST" action="/multiHikes" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')
@@ -46,9 +46,9 @@
                                         <td><input type="datetime-local"  name="meetingDate[]" class="form-control" value=''></td>
                                         <td><input type="datetime-local"  name="start[]" class="form-control" value=''></td>
                                         <td><input type="datetime-local"  name="finish[]" class="form-control" value=''></td>
-                                        <td><input type="number"          name="min[]" class="form-control" value=''></td>
-                                        <td><input type="number"          name="max[]" class="form-control" value=''></td>
-                                        <td><input type="number"          name="difficulty[]" class="form-control" value=''></td>
+                                        <td><input type="number"  min="1"        name="min[]" class="form-control" value=''></td>
+                                        <td><input type="number"  min="1"        name="max[]" class="form-control" value=''></td>
+                                        <td><input type="number" min="1" max="9"   name="difficulty[]" class="form-control" value=''></td>
                                         <td><input type="text"          name="info[]" class="form-control" value=''></td>
                                         <td><input type="number"          name="altitude[]" class="form-control" value=''></td>
                                         <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
