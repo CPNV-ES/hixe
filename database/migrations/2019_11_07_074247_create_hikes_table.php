@@ -20,8 +20,8 @@ class CreateHikesTable extends Migration {
 			$table->dateTime('meeting_date');
 			$table->dateTime('beginning_date');
 			$table->dateTime('ending_date');
-			$table->boolean('min_num_participants')->nullable();
-			$table->boolean('max_num_participants')->nullable();
+			$table->integer('min_num_participants')->nullable();
+			$table->integer('max_num_participants')->nullable();
 			$table->boolean('difficulty');
 			$table->string('additional_info', 45)->nullable();
 			$table->integer('drop_in_altitude');
