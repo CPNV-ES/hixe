@@ -30,7 +30,7 @@
                 @foreach($hikes as $hike)
                 {
                     title : '{{ $hike->name }}',
-                    start : '{{ $hike->meeting_date }}',
+                    start : '{{ $hike->beginning_date }}',
                     end : '{{$hike->ending_date}}',
                     url: 'hikes/{{$hike->id}}',
 
