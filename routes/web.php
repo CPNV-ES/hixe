@@ -27,8 +27,6 @@ Route::get('hikes_calendar','HikeCalendarController@index');
 Route::get('hikes_calendar/{date}','HikeCalendarController@show');
 
 //multi hikes
-
-
 Route::resource('multiHikes', 'MultiHikesController');
 
 

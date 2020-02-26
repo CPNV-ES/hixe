@@ -8,24 +8,25 @@ use App\Models\Hike;
 class MultiHikesController extends Controller
 {
     public function index(){
-
+      return view('createMultiHikes');
     }
     public function create(){
-        return view('createMultiHikes');
+        //return view('createMultiHikes');
     }
     public function store(Request $request){
+      
 
       $validatedData = $request->validate([
         'name' => 'required',
         'meetingLocation' => 'required',
-        'meetingDate' => 'required',
+        'Date' => 'required',
         'start' => 'required',
         'finish' => 'required',
         'difficulty' => 'required',
         'altitude' => 'required'
+        //|after_or_equal:start
+        //|after:start
       ]);
-
-        //dd($validatedData);
 
       $bResult = true;
       foreach($validatedData as $i){
@@ -41,9 +42,9 @@ class MultiHikesController extends Controller
           $hike = new Hike();
           $hike->name = $request->input('name')[$i];
           $hike->meeting_location = $request->input('meetingLocation')[$i];
-          $hike->meeting_date = $request->input('meetingDate')[$i];
-          $hike->beginning_date = $request->input('start')[$i];
-          $hike->ending_date = $request->input('finish')[$i];
+          $hike->meeting_date = $request->input('Date')[$i];
+          $hike->beginning_date = $request->input('Date')[$i].' '.$request->input('start')[$i];
+          $hike->ending_date = $request->input('Date')[$i].' '.$request->input('finish')[$i];
           $hike->min_num_participants = $request->input('min')[$i];
           $hike->max_num_participants = $request->input('max')[$i];
           $hike->difficulty = $request->input('difficulty')[$i];
@@ -53,10 +54,10 @@ class MultiHikesController extends Controller
           $hike->save();
         }
         //with doesn't working
-        return redirect('multiHikes/create')->with('status', 'Profile updated!');
+        return redirect(route('multiHikes.index'))->with('message', 'Vos Hixe ont été créé');
       }else{
         //with doesn't working
-        return redirect('multiHikes/create')->with('status', 'Profile not updated!');
+        return redirect(route('multiHikes.index'))->with('message', 'Hixes non créé');
       }
 
     }
