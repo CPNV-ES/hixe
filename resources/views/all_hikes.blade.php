@@ -24,25 +24,27 @@
         </thead>
         <tbody>
         @foreach ($hikes as $hike)
-        <tr>
-            <th scope="row">{{ $hike->name }}</th>
-            <td>{{ $hike->meeting_date }}</td>
-
-            <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-            <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-            <td>{{ $hike->users()->count() }}</td>
-            <td>{{ $hike->min_num_participants }}</td>
-            <td>{{ $hike->max_num_participants }}</td>
-            <td>{{ $hike->state->name }}</td>
-        </tr>
+            <tr data-hikeurl="{{ route('hikes.edit', $hike) }}">
+                <td scope="row">{{ $hike->name }}</td>
+                <td>{{ $hike->meeting_date }}</td>
+                <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                <td>{{ $hike->users()->count() }}</td>
+                <td>{{ $hike->min_num_participants }}</td>
+                <td>{{ $hike->max_num_participants }}</td>
+                <td>{{ $hike->state->name }}</td>
+            </tr>
         @endforeach
     </tbody>
     </table>
 </div>
 
 <script>
-    $(document).ready( function () {
-    $('#hikesTable').DataTable();
-} );
+    $(document).ready(function() {
+        var table = $('#hikesTable').DataTable();
+        $('#hikesTable tbody').on('click', 'tr', function() {
+            window.location = $(this).data('hikeurl');
+        });
+    });
 </script>
 @endsection
