@@ -19,9 +19,7 @@
         background:lightblue;
         cursor: pointer;
     }
-    .fc-time{
-        display : none;
-    }
+
  </style>
 <script>
     $(document).ready(function() {
@@ -41,8 +39,8 @@
             ],
 
             dayClick: function(date, jsEvent, view) {
-
-                window.location.href ="/hikes_calendar/"+date.format();
+                var newdate = moment(date).format("YYYY-MM-DD");
+                window.location.href ="/hikes_calendar/"+newdate;
             },
             eventClick: function(info) {
                 info.jsEvent.preventDefault(); // don't let the browser navigate
@@ -50,7 +48,8 @@
                 if (info.event.url) {
                     window.open(info.event.url);
                 }
-            }
+            },
+
         })
     });
 </script>
