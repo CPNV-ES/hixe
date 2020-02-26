@@ -30,7 +30,7 @@ class HikeCalendarController extends Controller
     {
         $from = $date;
         $to = date('Y-m-d', strtotime($date . ' +1 day'));
-        $dayHikes = Hike::whereBetween('meeting_date',[$from,$to])->get();
+        $dayHikes = Hike::whereBetween('beginning_date',[$from,$to])->get();
         return view('day_calendar')->with(compact(['dayHikes','date']));
     }
 }
