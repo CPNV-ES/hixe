@@ -31,7 +31,8 @@
                                 <thead>
                                     <td>Nom*</td>
                                     <td>Meeting location*</td>
-                                    <td>Date*</td>
+                                    <td>Meeting Date*</td>
+                                    <td>Hixe date*</td>
                                     <td>Start*</td>
                                     <td>Finish*</td>
                                     <td>Min Pers.</td>
@@ -44,7 +45,8 @@
                                     <tr id="rows">
                                         <td><input type="text"    name="name[]" class="form-control" value=''></td>
                                         <td><input type="text"    name="meetingLocation[]" class="form-control" value=''></td>
-                                        <td><input type="date"    name="Date[]" class="form-control" value=''></td>
+                                        <td><input type="date"    name="meetingDate[]" class="form-control" value=''></td>
+                                        <td><input type="date"    name="hixeDate[]" class="form-control" value=''></td>
                                         <td><input type="time"    name="start[]" class="form-control" value=''></td>
                                         <td><input type="time"    name="finish[]" class="form-control" value=''></td>
                                         <td><input type="number"  min="1"        name="min[]" class="form-control" value=''></td>

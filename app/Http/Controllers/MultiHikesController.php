@@ -19,7 +19,8 @@ class MultiHikesController extends Controller
       $validatedData = $request->validate([
         'name' => 'required',
         'meetingLocation' => 'required',
-        'Date' => 'required',
+        'meetingDate' => 'required',
+        'hixeDate' => 'required',
         'start' => 'required',
         'finish' => 'required',
         'difficulty' => 'required',
@@ -42,9 +43,9 @@ class MultiHikesController extends Controller
           $hike = new Hike();
           $hike->name = $request->input('name')[$i];
           $hike->meeting_location = $request->input('meetingLocation')[$i];
-          $hike->meeting_date = $request->input('Date')[$i];
-          $hike->beginning_date = $request->input('Date')[$i].' '.$request->input('start')[$i];
-          $hike->ending_date = $request->input('Date')[$i].' '.$request->input('finish')[$i];
+          $hike->meeting_date = $request->input('meetingDate')[$i];
+          $hike->beginning_date = $request->input('hixeDate')[$i].' '.$request->input('start')[$i];
+          $hike->ending_date = $request->input('hixeDate')[$i].' '.$request->input('finish')[$i];
           $hike->min_num_participants = $request->input('min')[$i];
           $hike->max_num_participants = $request->input('max')[$i];
           $hike->difficulty = $request->input('difficulty')[$i];
