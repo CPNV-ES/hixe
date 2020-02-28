@@ -23,4 +23,9 @@ class HikeController extends Controller
         return view('create_hike')->with(compact(['hike']));
     }
 
+    public function myHixe(){
+        $hikes = Hike::all();
+        return view('home')->with(compact('hikes'));
+    }
+
 }
