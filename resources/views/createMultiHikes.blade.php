@@ -8,10 +8,11 @@
     <div class="row justify-content-md-center">
       <div class="col-md-10">
         <!-- MSG succes or error doesn't working -->
-        @if (session('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
+        @if( Session::has('message') )
+          <div class="alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              {{ Session::get('message') }}
+          </div>
         @endif
         <div class="card">
           <div class="card-header">
