@@ -41,7 +41,6 @@
             ],
 
             dayClick: function(date, jsEvent, view) {
-
                 window.location.href ="/hikes_calendar/"+date.format();
             },
             eventClick: function(info) {
