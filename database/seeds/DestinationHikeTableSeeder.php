@@ -14,8 +14,16 @@ class DestinationHikeTableSeeder extends Seeder
     public function run()
     {
         DB::table('destination_hike')->insert([
-            'hike_id' => factory(Hike::class)->create()->id,
-            'destination_id' => factory(Destination::class)->create()->id,
+            'hike_id' => Hike::all()->random()->id,
+            'destination_id' => Destination::all()->random()->id,
+        ]);
+        DB::table('destination_hike')->insert([
+            'hike_id' => Hike::all()->random()->id,
+            'destination_id' => Destination::all()->random()->id,
+        ]);
+        DB::table('destination_hike')->insert([
+            'hike_id' => Hike::all()->random()->id,
+            'destination_id' => Destination::all()->random()->id,
         ]);
     }
 }

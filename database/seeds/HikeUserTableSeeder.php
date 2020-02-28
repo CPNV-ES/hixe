@@ -15,9 +15,25 @@ class HikeUserTableSeeder extends Seeder
     public function run()
     {
         DB::table('hike_user')->insert([
-            'user_id' => factory(User::class)->create()->id,
-            'hike_id' => factory(Hike::class)->create()->id,
-            'role_id' => factory(Role::class)->create()->id,
+            'user_id' => User::all()->random()->id,
+            'hike_id' => Hike::all()->random()->id,
+            'role_id' => Role::all()->random()->id,
         ]);
+        DB::table('hike_user')->insert([
+            'user_id' => User::all()->random()->id,
+            'hike_id' => Hike::all()->random()->id,
+            'role_id' => Role::all()->random()->id,
+        ]);
+        DB::table('hike_user')->insert([
+            'user_id' => User::all()->random()->id,
+            'hike_id' => Hike::all()->random()->id,
+            'role_id' => Role::all()->random()->id,
+        ]);
+        DB::table('hike_user')->insert([
+            'user_id' => User::all()->random()->id,
+            'hike_id' => Hike::all()->random()->id,
+            'role_id' => Role::all()->random()->id,
+        ]);
+
     }
 }

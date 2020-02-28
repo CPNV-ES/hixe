@@ -14,8 +14,16 @@ class HikeTrainingTableSeeder extends Seeder
     public function run()
     {
         DB::table('hike_training')->insert([
-            'hike_id' => factory(Hike::class)->create()->id,
-            'training_id' => factory(Training::class)->create()->id,
+            'hike_id' => Hike::all()->random()->id,
+            'training_id' => Training::all()->random()->id,
+        ]);
+        DB::table('hike_training')->insert([
+            'hike_id' => Hike::all()->random()->id,
+            'training_id' => Training::all()->random()->id,
+        ]);
+        DB::table('hike_training')->insert([
+            'hike_id' => Hike::all()->random()->id,
+            'training_id' => Training::all()->random()->id,
         ]);
     }
 }
