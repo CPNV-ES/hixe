@@ -20,6 +20,7 @@
     <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/app.js')}}"></script>
 
+
 </head>
 
 <style>
@@ -122,6 +123,9 @@
         @yield('body-content')
     </div>
 </div>
+
+@stack('scripts')
 </body>
+
 
 </html>

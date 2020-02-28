@@ -20,26 +20,45 @@ class HikeController extends Controller
         return view('all_hikes')->with(compact(['hikes']));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
+
     {
         return view('create_hike');
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $newHike = new Hike();
+        $newHike->name = $request->input('hikeName');
+        $newHike->meeting_location = $request->input('locationRdv');
+        $newHike->meeting_date = $request->input('dateRdv').' '.$request->input('timeRdv');
+        $newHike->beginning_date = $request->input('dateHike').' '.$request->input('startHike');
+        $newHike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
+        $newHike->min_num_participants = $request->input('minParticipants');
+        $newHike->max_num_participants = $request->input('maxParticipants');
+        $newHike->difficulty = 1;
+        $newHike->additional_info = $request->input('addInfo');
+        $newHike->drop_in_altitude = $request->input('dropAltitude');
+
+        // TO DO : Take the real state_id
+        $newHike->state_id = 1;
+
+        $newHike->save();
+
+        return redirect()->action("HikeController@index");
+
     }
+
 
     /**
      * Display the specified resource.
