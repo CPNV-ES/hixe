@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <form method="post" action="/hikes">
+        <form method="POST" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-3">
