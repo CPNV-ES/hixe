@@ -8,12 +8,16 @@
     <div class="row justify-content-md-center">
       <div class="col-md-10">
         <!-- MSG succes or error doesn't working -->
-        
-        @dd(Session::all())
-        @if( Session::has('message') )
+        @if (isset($success))
           <div class="alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              {{ Session::get('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ $success }}
+          </div>
+        @endif
+        @if (isset($false))
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ $false }}
           </div>
         @endif
         <div class="card">

@@ -56,10 +56,12 @@ class MultiHikesController extends Controller
           $hike->save();
         }
         //with doesn't working
-        return redirect(route('multiHikes.index'))->with('message', 'Vos Hixe ont été créé');
+        //return redirect(route('multiHikes.index'))->with('message', 'Vos Hixe ont été créé');
+        return view('createMultiHikes',['success'=> 'Vos course on bien été ajouté']);
       }else{
         //with doesn't working
-        return redirect(route('multiHikes.index'))->with('message', 'Hixes non créé');
+        //return redirect(route('multiHikes.index'))->with('message', 'Hixes non créé');
+        return view('createMultiHikes',['false'=> "Vos course n'ont pas été ajouté, un des champs n'est pas correcte"]);
       }
 
     }
