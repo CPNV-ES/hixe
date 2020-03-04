@@ -29,7 +29,7 @@ class HikeController extends Controller
     public function create(Request $request)
 
     {
-        return view('create_hike');
+        return view('create_hike', ['hike' => new Hike]);
     }
     /**
      * Store a newly created resource in storage.

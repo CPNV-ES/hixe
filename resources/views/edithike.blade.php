@@ -22,7 +22,7 @@
         </div>
 
         <form method="POST" action="{{ route('hikes.update',$hike) }}" enctype="multipart/form-data">
-            @include('subviews/subviewhike',$hike)
+            @include('subviews/subviewhike', $hike)
         </form>
     </div>
     @endsection

@@ -23,7 +23,7 @@
 
         <form method="POST" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
             <input type="hidden" _method="PUT"/>
-            @include('subviews/subviewhike')
+            @include('subviews/subviewhike', $hike)
         </form>
     </div>
     @endsection
