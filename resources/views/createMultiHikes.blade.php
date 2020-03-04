@@ -8,6 +8,8 @@
     <div class="row justify-content-md-center">
       <div class="col-md-10">
         <!-- MSG succes or error doesn't working -->
+        
+        @dd(Session::all())
         @if( Session::has('message') )
           <div class="alert alert-success alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -20,7 +22,7 @@
           </div>
           <div class="card-body">
             <p><em>Champs obligatoire*</em></p>
-            <form method="POST" action="/multiHikes" autocomplete="off"
+          <form method="POST" action="{{ route("multiHikes.store") }}" autocomplete="off"
             enctype="multipart/form-data">
               @csrf
               @method('post')
