@@ -14,13 +14,12 @@ Route::get('/', function () {
     return view('home');
 });
 
-// Hikes
-Route::resource('hikes', 'HikeController');
-
-
 Route::get('Profile', function () {
     return view('profile');
 });
+
+// Hikes
+Route::resource('hikes', 'HikeController');
 
 // Calendar
 Route::get('hikes_calendar','HikeCalendarController@index');
@@ -28,8 +27,10 @@ Route::get('hikes_calendar/{date}','HikeCalendarController@show');
 
 //multi hikes
 
-
 Route::resource('multiHikes', 'MultiHikesController');
 
+//Authentification
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
 
 
