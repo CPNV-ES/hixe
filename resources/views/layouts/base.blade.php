@@ -8,6 +8,7 @@
     <title>@yield('title') - Hixe</title>
 
     <!-- Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
@@ -19,6 +20,10 @@
     <script src="{{ asset('/lib/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/app.js')}}"></script>
+    
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -108,7 +113,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Mes Courses <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="/">Mes Courses <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="/hikes_calendar">Calendrier</a>
             <a class="nav-item nav-link" href="{{route('hikes.create')}}">Créer une course</a>
                 <a class="nav-item nav-link" href="{{route('hikes.index')}}">Liste des courses</a>
@@ -122,6 +127,9 @@
         @yield('body-content')
     </div>
 </div>
+
+@stack('scripts')
 </body>
+
 
 </html>

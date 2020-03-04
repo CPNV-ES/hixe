@@ -10,9 +10,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HikeController@myHixe');
 
 // Hikes
 Route::resource('hikes', 'HikeController');
