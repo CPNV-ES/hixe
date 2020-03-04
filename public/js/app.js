@@ -6434,7 +6434,7 @@ module.exports = {
 /*!**************************************!*\
   !*** ./node_modules/buffer/index.js ***!
   \**************************************/
-/***/ "./node_modules/is-buffer/index.js":
+/***/ "./node_modules/is-buffer/index.js"
 /*!*****************************************!*\
   !*** ./node_modules/is-buffer/index.js ***!
   \*****************************************/
@@ -10225,7 +10225,7 @@ Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
 
 					// progress_handlers.lock
 					tuples[ 0 ][ 3 ].lock
-				);
+});
 			}
 
 function _getMaxListeners(that) {
@@ -10282,7 +10282,7 @@ EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
 			resolveContexts = Array( i ),
 			resolveValues = slice.call( arguments ),
 
-  checkListener(listener);
+  
   master = jQuery.Deferred(),
 			// subordinate callback factory
 			updateFunc = function( i ) {
@@ -10336,16 +10336,16 @@ EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
 
 				return master.then();
 			}
-		}
+		},
 
 		// Multiple arguments are aggregated like Promise.all array elements
-		while ( i-- ) {
+		while(i = i-1){
 			adoptValue( resolveValues[ i ], updateFunc( i ), master.reject );
-		}
+		},
 
-		return master.promise();
-	}
-} );
+		return: master.promise()
+	});
+});
 
 
 function onceWrapper() {
@@ -10612,7 +10612,7 @@ Data.prototype = {
 		}
 
 		return value;
-	},
+	};
 	set: function( owner, data, value ) {
 		var prop,
 			cache = this.cache( owner );
@@ -10631,7 +10631,7 @@ Data.prototype = {
 			}
 		}
 		return cache;
-	},
+	};
 	get: function( owner, key ) {
 		return key === undefined ?
 			this.cache( owner ) :
@@ -17144,12 +17144,12 @@ if ( !noGlobal ) {
 
 
 return jQuery;
-} );
+} ),
 
 
 /***/ }),
 
-/***/ "./node_modules/lodash/lodash.js":
+/***/ "./node_modules/lodash/lodash.js"
 /*!***************************************!*\
   !*** ./node_modules/lodash/lodash.js ***!
   \***************************************/
@@ -34273,7 +34273,7 @@ util.inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inh
 
 /***/ }),
 
-/***/ "./node_modules/popper.js/dist/esm/popper.js":
+/***/ "./node_modules/popper.js/dist/esm/popper.js"
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
   \***************************************************/
@@ -36931,11 +36931,11 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
-/***/ "./node_modules/process/browser.js":
+/***/ "./node_modules/process/browser.js"
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
   \*****************************************/
@@ -37130,7 +37130,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/webpack/buildin/global.js":
+/***/ "./node_modules/webpack/buildin/global.js"
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
   \***********************************/
@@ -37161,7 +37161,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./node_modules/webpack/buildin/module.js":
+/***/ "./node_modules/webpack/buildin/module.js"
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
@@ -37194,7 +37194,7 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
+/***/ "./resources/js/app.js"
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
@@ -37215,7 +37215,7 @@ __webpack_require__(!(function webpackMissingModule() { var e = new Error("Canno
 
 /***/ }),
 
-/***/ "./resources/js/bootstrap.js":
+/***/ "./resources/js/bootstrap.js"
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
@@ -37260,7 +37260,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
+/***/ "./resources/sass/app.scss"
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
@@ -37271,7 +37271,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ 0:
+/***/ 0
 /*!*************************************************************!*\
   !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
   \*************************************************************/
@@ -37284,7 +37284,7 @@ module.exports = __webpack_require__(/*! C:\Users\Noe.BERDOZ\Documents\GitHub\hi
 
 /***/ }),
 
-/***/ 1:
+/***/ 1
 /*!**********************!*\
   !*** util (ignored) ***!
   \**********************/
@@ -37295,7 +37295,7 @@ module.exports = __webpack_require__(/*! C:\Users\Noe.BERDOZ\Documents\GitHub\hi
 
 /***/ }),
 
-/***/ 2:
+/***/ 2
 /*!**********************!*\
   !*** util (ignored) ***!
   \**********************/
@@ -37305,6 +37305,4 @@ __webpack_require__(/*! C:\Users\Gael.OBERSON\Documents\GitHub\hixe\resources\js
 module.exports = __webpack_require__(/*! C:\Users\Gael.OBERSON\Documents\GitHub\hixe\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
-/***/ })
-
-/******/ });
+/***/ });
