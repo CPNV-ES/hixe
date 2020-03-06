@@ -58,13 +58,13 @@
 
 @section('body-content')
 <div class="content">
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center mt-4">
         @if(Auth::check())
         <div class="col-md-10">
         <div class="title m-b-md">
-            Mes Courses
-          </div>
-          <table  id="hikesTable"  class="table table table-hover mt-3">
+            <h3>Cours a venir</h3>
+        </div>
+        <table  id="hikesTable"  class="table table table-hover mt-3">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
@@ -78,28 +78,68 @@
                 </tr>
             </thead>
             <tbody>
-
-              
             @foreach ($hikes as $hike)
-              @php
-              $arrayEmail = implode(', ', $hike->users()->pluck('email_address')->toArray());
-              $emailCo = Auth::user()->email_address;
-              $pos = strpos($arrayEmail, $emailCo);
-              @endphp
-              @if($pos == true)
-                <tr>
-                  <th scope="row">{{ $hike->name }}</th>
-                  <td>{{ $hike->meeting_date }}</td>
-                  <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-                  <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                  <td>{{ $hike->users()->count() }}</td>
-                  <td>{{ $hike->min_num_participants }}</td>
-                  <td>{{ $hike->max_num_participants }}</td>
-                  <td>{{ $hike->state->name }}</td>
-                </tr>
-              @endif
+                @if($hike->beginning_date > date('Y-m-d H:i:s'))
+                    @php
+                    $arrayEmail = implode(', ', $hike->users()->pluck('email_address')->toArray());
+                    $emailCo = Auth::user()->email_address;
+                    $pos = strpos($arrayEmail, $emailCo);
+                    @endphp
+                    @if($pos == true || $pos == Auth::user()->email_address)
+                        <tr>
+                        <th scope="row">{{ $hike->name }}</th>
+                        <td>{{ $hike->meeting_date }}</td>
+                        <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                        <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                        <td>{{ $hike->users()->count() }}</td>
+                        <td>{{ $hike->min_num_participants }}</td>
+                        <td>{{ $hike->max_num_participants }}</td>
+                        <td>{{ $hike->state->name }}</td>
+                        </tr>
+                    @endif
+                @endif
             @endforeach
-        </tbody>
+            </tbody>
+        </table>
+        <div class="title m-b-md">
+            <h3>Cours Effectuer</h3>
+        </div>
+        <table  id="hikesTable"  class="table table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Guide</th>
+                    <th scope="col">Inscrits</th>
+                    <th scope="col">Minimum</th>
+                    <th scope="col">Maximum</th>
+                    <th scope="col">État</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach ($hikes as $hike)
+                @if($hike->beginning_date < date('Y-m-d H:i:s'))
+                    @php
+                    $arrayEmail = implode(', ', $hike->users()->pluck('email_address')->toArray());
+                    $emailCo = Auth::user()->email_address;
+                    $pos = strpos($arrayEmail, $emailCo);
+                    @endphp
+                    @if($pos == true || $pos == Auth::user()->email_address)
+                        <tr>
+                        <th scope="row">{{ $hike->name }}</th>
+                        <td>{{ $hike->meeting_date }}</td>
+                        <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                        <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                        <td>{{ $hike->users()->count() }}</td>
+                        <td>{{ $hike->min_num_participants }}</td>
+                        <td>{{ $hike->max_num_participants }}</td>
+                        <td>{{ $hike->state->name }}</td>
+                        </tr>
+                    @endif
+                @endif
+            @endforeach
+            </tbody>
         </table>
         @else
         <div class="col-md-4">

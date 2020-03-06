@@ -6,18 +6,12 @@
 
 <div class="content">
     <div class="row justify-content-md-center">
-      <div class="col-md-10">
+      <div class="col-md-12">
         <!-- MSG succes or error doesn't working -->
-        @if (isset($success))
-          <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{ $success }}
-          </div>
-        @endif
-        @if (isset($false))
-          <div class="alert alert-danger alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{ $false }}
+        @dd(Session::all())
+        @if (session('message'))
+          <div class="alert alert-success">
+              {{ session('message') }}
           </div>
         @endif
         <div class="card">
@@ -37,6 +31,7 @@
                             <table id="mytable">
                                 <thead>
                                     <td>Nom*</td>
+                                    <td>Chef de cours*</td>
                                     <td>Meeting location*</td>
                                     <td>Meeting Date*</td>
                                     <td>Hixe date*</td>
@@ -51,6 +46,13 @@
                                 <tbody>
                                     <tr id="rows">
                                         <td><input type="text"    name="name[]" class="form-control" value=''></td>
+                                        <td>
+                                          <select class="form-control" name="chef[]">
+                                            @foreach($users as $user)
+                                          <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>  
+                                            @endforeach
+                                          </select>
+                                        </td>
                                         <td><input type="text"    name="meetingLocation[]" class="form-control" value=''></td>
                                         <td><input type="date"    name="meetingDate[]" class="form-control" value=''></td>
                                         <td><input type="date"    name="hixeDate[]" class="form-control" value=''></td>

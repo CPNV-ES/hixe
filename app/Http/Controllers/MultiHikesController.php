@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hike;
+use App\Models\User;
 
 
 class MultiHikesController extends Controller
 {
     public function index(){
-      return view('createMultiHikes');
+      $users = User::all();
+      return view('createMultiHikes')->with(compact('users'));
     }
     public function create(){
         //return view('createMultiHikes');
@@ -54,14 +56,17 @@ class MultiHikesController extends Controller
           $hike->drop_in_altitude = $request->input('altitude')[$i];
           $hike->state_id = 1;
           $hike->save();
+          $hike->users()->attach($hike->id,[
+            'user_id' => $request->input('chef')[$i],
+            'role_id'=> 1
+          ]);
         }
         //with doesn't working
-        //return redirect(route('multiHikes.index'))->with('message', 'Vos Hixe ont été créé');
-        return view('createMultiHikes',['success'=> 'Vos course on bien été ajouté']);
+        return redirect(route('multiHikes.index'))->with('message', 'Vos Hixe ont été créé');
       }else{
         //with doesn't working
-        //return redirect(route('multiHikes.index'))->with('message', 'Hixes non créé');
-        return view('createMultiHikes',['false'=> "Vos course n'ont pas été ajouté, un des champs n'est pas correcte"]);
+        return redirect(route('multiHikes.index'))->with('message', 'Hixes non créé');
+        //dd($a);
       }
 
     }
