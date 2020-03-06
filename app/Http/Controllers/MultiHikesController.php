@@ -11,7 +11,7 @@ class MultiHikesController extends Controller
 
     }
     public function create(){
-        return view('createMultiHikes');
+        return view('multihikes.create');
     }
     public function store(Request $request){
 

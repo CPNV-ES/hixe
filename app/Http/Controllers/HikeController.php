@@ -9,16 +9,34 @@ use App\Models\Role;
 
 class HikeController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $hikes = Hike::all();
-        return view('all_hikes')->with(compact(['hikes']));
-    }
-    public function create(Request $request)
-    {
-        return view('create_hike');
+        return view('hikes.index')->with(compact(['hikes']));
     }
 
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+
+    {
+        return view('hikes.create', ['hike' => new Hike]);
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request){
         $newHike = new Hike();
         $newHike->name = $request->input('hikeName');
@@ -41,9 +59,17 @@ class HikeController extends Controller
 
     }
 
-    public function show($id){
-        $hike = Hike::find($id);
-        return view('create_hike')->with(compact(['hike']));
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        // $hike = Hike::find($id);
+        // return view('hikes.show')->with(compact(['hike']));
     }
 
     public function myHixe(){
@@ -51,4 +77,38 @@ class HikeController extends Controller
         return view('home')->with(compact('hikes'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $hike = Hike::find($id);
+        return view('hikes.edit')->with(compact(['hike']));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

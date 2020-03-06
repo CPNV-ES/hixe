@@ -16,6 +16,7 @@ Route::get('/', 'HikeController@myHixe');
 Route::resource('hikes', 'HikeController');
 
 
+
 Route::get('Profile', function () {
     return view('profile');
 });
