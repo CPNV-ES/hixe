@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <input type="text" name="numcours[]" class="form-control"/>
+                                    <input type="number" name="numcours[]" class="form-control"/>
                                 </div>
                             </td>
                             <td>
