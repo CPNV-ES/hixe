@@ -23,7 +23,7 @@ class MultiHikesController extends Controller
         'name' => 'required',
         'meetingLocation' => 'required',
         'meetingDate' => 'required',
-        'hixeDate' => 'required',
+        'hikeDate' => 'required',
         'start' => 'required',
         'finish' => 'required',
         'difficulty' => 'required',
@@ -47,8 +47,8 @@ class MultiHikesController extends Controller
           $hike->name = $request->input('name')[$i];
           $hike->meeting_location = $request->input('meetingLocation')[$i];
           $hike->meeting_date = $request->input('meetingDate')[$i];
-          $hike->beginning_date = $request->input('hixeDate')[$i].' '.$request->input('start')[$i];
-          $hike->ending_date = $request->input('hixeDate')[$i].' '.$request->input('finish')[$i];
+          $hike->beginning_date = $request->input('hikeDate')[$i].' '.$request->input('start')[$i];
+          $hike->ending_date = $request->input('hikeDate')[$i].' '.$request->input('finish')[$i];
           $hike->min_num_participants = $request->input('min')[$i];
           $hike->max_num_participants = $request->input('max')[$i];
           $hike->difficulty = $request->input('difficulty')[$i];
@@ -62,10 +62,10 @@ class MultiHikesController extends Controller
           ]);
         }
         //with doesn't working
-        return redirect(route('multiHikes.index'))->with('message', 'Vos Hixe ont été créé');
+        return redirect(route('multiHikes.index'))->with('message', 'Vos Hike ont été créé');
       }else{
         //with doesn't working
-        return redirect(route('multiHikes.index'))->with('message', 'Hixes non créé');
+        return redirect(route('multiHikes.index'))->with('message', 'Hikes non créé');
         //dd($a);
       }
 

@@ -8,7 +8,7 @@
     <div class="row justify-content-md-center">
       <div class="col-md-12">
         <!-- MSG succes or error doesn't working -->
-        @dd(Session::all())
+        
         @if (session('message'))
           <div class="alert alert-success">
               {{ session('message') }}
@@ -34,7 +34,7 @@
                                     <td>Chef de cours*</td>
                                     <td>Meeting location*</td>
                                     <td>Meeting Date*</td>
-                                    <td>Hixe date*</td>
+                                    <td>Hike date*</td>
                                     <td>Start*</td>
                                     <td>Finish*</td>
                                     <td>Min Pers.</td>
@@ -55,7 +55,7 @@
                                         </td>
                                         <td><input type="text"    name="meetingLocation[]" class="form-control" value=''></td>
                                         <td><input type="date"    name="meetingDate[]" class="form-control" value=''></td>
-                                        <td><input type="date"    name="hixeDate[]" class="form-control" value=''></td>
+                                        <td><input type="date"    name="hikeDate[]" class="form-control" value=''></td>
                                         <td><input type="time"    name="start[]" class="form-control" value=''></td>
                                         <td><input type="time"    name="finish[]" class="form-control" value=''></td>
                                         <td><input type="number"  min="1"        name="min[]" class="form-control" value=''></td>

@@ -47,7 +47,7 @@ class HikeController extends Controller
         return view('create_hike')->with(compact(['hike']));
     }
 
-    public function myHixe(){
+    public function myHike(){
         /*
         Pas utilisé parce qu'avec cette requette il ne resort pas le guides et les destinations
         */
