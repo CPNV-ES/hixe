@@ -17,7 +17,7 @@ class HikeCalendarController extends Controller
     public function index()
     {
         $hikes=Hike::all();
-        return view('calendar')->with(compact(['hikes']));
+        return view('hikecalendar.index')->with(compact(['hikes']));
     }
 
     /**
@@ -31,6 +31,6 @@ class HikeCalendarController extends Controller
         $from = $date;
         $to = date('Y-m-d', strtotime($date . ' +1 day'));
         $dayHikes = Hike::whereBetween('beginning_date',[$from,$to])->get();
-        return view('day_calendar')->with(compact(['dayHikes','date']));
+        return view('hikecalendar.show')->with(compact(['dayHikes','date']));
     }
 }

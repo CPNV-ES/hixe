@@ -20,11 +20,19 @@ class Hike extends Model
 
   public function destinations()
   {
-    return $this->belongsToMany(Destination::class);
+    return $this->belongsToMany(Destination::class)->withPivot('order');
   }
 
   public function state()
   {
     return $this->belongsTo(State::class);
+  }
+  public function equipment()
+  {
+    return $this->belongsToMany(Equipment::class);
+  }
+  public function trainings()
+  {
+    return $this->belongsToMany(Training::class);
   }
 }
