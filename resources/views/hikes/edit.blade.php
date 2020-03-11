@@ -22,6 +22,7 @@
         </div>
 
         <form method="POST" action="{{ route('hikes.update',$hike) }}" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PUT">
             @include('subviews/subviewhike', $hike)
         </form>
     </div>

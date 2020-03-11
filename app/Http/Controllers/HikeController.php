@@ -98,7 +98,23 @@ class HikeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $hike = Hike::find($id);
+        $hike->name = $request->input('hikeName');
+        $hike->meeting_location = $request->input('locationRdv');
+        $hike->meeting_date = $request->input('dateRdv').' '.$request->input('dateRdv');;
+        $hike->beginning_date = $request->input('dateHike').' '.$request->input('startHike');
+        $hike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
+        $hike->min_num_participants = $request->input('minParticipants');
+        $hike->max_num_participants = $request->input('maxParticipants');
+        $hike->difficulty = $request->input('difficulty');
+        $hike->additional_info = $request->input('addInfo');
+        $hike->drop_in_altitude = $request->input('dropAltitude');
+        $hike->state_id = 1;
+        foreach($request->input('cours') as $item){
+            $hike->trainings()->attach($hike->id,[
+
+            ]);
+        }
     }
 
     /**

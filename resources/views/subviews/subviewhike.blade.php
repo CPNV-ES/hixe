@@ -147,20 +147,12 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <i class="fas fa-map-marker-alt"> Départ </i>
+                    <i class="fas fa-map-marker-alt"></i>
                 </div>
             </div>
             <input type="text" class="form-control" value="{{ $destination->location}}">
         </div>
         @endforeach
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <i class="fas fa-map-marker-alt">Arrivée</i>
-                </div>
-            </div>
-            <input type="text" class="form-control">
-        </div>
     </div>
     <div class="form-group offset-4 col-md-4">
         <label>Informations additionnelles</label>
