@@ -8,11 +8,10 @@
     <div class="row justify-content-md-center">
       <div class="col-md-12">
         <!-- MSG succes or error doesn't working -->
-        
-        @if (session('message'))
-          <div class="alert alert-success">
-              {{ session('message') }}
-          </div>
+        @if (Session::has('status'))
+            <div class="alert alert-success">
+                {{ Session::get('status') }}
+            </div>
         @endif
         <div class="card">
           <div class="card-header">
@@ -48,9 +47,9 @@
                                         <td><input type="text"    name="name[]" class="form-control" value=''></td>
                                         <td>
                                           <select class="form-control" name="chef[]">
-                                            @foreach($users as $user)
-                                          <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>  
-                                            @endforeach
+                                          @foreach($users as $user)
+                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>  
+                                          @endforeach
                                           </select>
                                         </td>
                                         <td><input type="text"    name="meetingLocation[]" class="form-control" value=''></td>

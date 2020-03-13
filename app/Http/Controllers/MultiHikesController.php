@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hike;
 use App\Models\User;
-
+use storage\framework\sessions;
+use Redirect;
+use Session;
 
 class MultiHikesController extends Controller
 {
-    public function index(){
+    public function index(Request $msg){
+      //dd($msg->request->all());
+      foreach($msg->request->all() as $i){
+        dd($i);
+      }
       $users = User::all();
       return view('createMultiHikes')->with(compact('users'));
     }
@@ -17,8 +23,6 @@ class MultiHikesController extends Controller
         //return view('createMultiHikes');
     }
     public function store(Request $request){
-      
-
       $validatedData = $request->validate([
         'name' => 'required',
         'meetingLocation' => 'required',
@@ -62,12 +66,13 @@ class MultiHikesController extends Controller
           ]);
         }
         //with doesn't working
-        return redirect(route('multiHikes.index'))->with('message', 'Vos Hike ont été créé');
+        return Redirect::route('multiHikes.index', ['msg' => 'Success']);
       }else{
         //with doesn't working
-        return redirect(route('multiHikes.index'))->with('message', 'Hikes non créé');
-        //dd($a);
+        return Redirect::route('multiHikes.index', ['msg' => 'Errors']);
       }
-
+      
+      
+      
     }
 }
