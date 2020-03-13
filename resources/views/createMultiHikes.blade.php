@@ -8,14 +8,19 @@
     <div class="row justify-content-md-center">
       <div class="col-md-12">
         <!-- MSG succes or error doesn't working -->
-        @if (Session::has('status'))
+        @if (Session::has('success'))
             <div class="alert alert-success">
-                {{ Session::get('status') }}
+                {{ Session::get('success') }}
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
             </div>
         @endif
         <div class="card">
           <div class="card-header">
-            <h5 class="title">{{__(" Insérer des cours")}}</h5>
+            <h5 class="title">{{__(" Insérer des courses")}}</h5>
           </div>
           <div class="card-body">
             <p><em>Champs obligatoire*</em></p>
@@ -30,7 +35,7 @@
                             <table id="mytable">
                                 <thead>
                                     <td>Nom*</td>
-                                    <td>Chef de cours*</td>
+                                    <td>Chef de course*</td>
                                     <td>Meeting location*</td>
                                     <td>Meeting Date*</td>
                                     <td>Hike date*</td>
@@ -40,7 +45,7 @@
                                     <td>Max Pers.</td>
                                     <td>Difficulé*</td>
                                     <td>Info</td>
-                                    <td>Altitude*</td>
+                                    <td>Dénivelé*</td>
                                 </thead>
                                 <tbody>
                                     <tr id="rows">
@@ -61,7 +66,7 @@
                                         <td><input type="number"  min="1"        name="max[]" class="form-control" value=''></td>
                                         <td><input type="number"  min="1" max="9"   name="difficulty[]" class="form-control" value=''></td>
                                         <td><input type="text"    name="info[]" class="form-control" value=''></td>
-                                        <td><input type="number"  min="1" name="altitude[]" class="form-control" value=''></td>
+                                        <td><input type="number"  min="1" name="denivele[]" class="form-control" value=''></td>
                                         <td><input type="button"  class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
                                     </tr>
                                 </tbody>

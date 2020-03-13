@@ -9,19 +9,23 @@ use storage\framework\sessions;
 use Redirect;
 use Session;
 
-class MultiHikesController extends Controller
-{
+class MultiHikesController extends Controller{
     public function index(Request $msg){
-      //dd($msg->request->all());
-      foreach($msg->request->all() as $i){
-        dd($i);
+      foreach($msg->request->all() as $message){
+        if($message == "Errors"){
+          Session::flash('error', "Errors lors de l'ajout des courses");
+        }else{
+          Session::flash('success', "Toutes vos courses ont été créé");
+        }
       }
       $users = User::all();
       return view('createMultiHikes')->with(compact('users'));
     }
+
     public function create(){
         //return view('createMultiHikes');
     }
+
     public function store(Request $request){
       $validatedData = $request->validate([
         'name' => 'required',
@@ -31,7 +35,7 @@ class MultiHikesController extends Controller
         'start' => 'required',
         'finish' => 'required',
         'difficulty' => 'required',
-        'altitude' => 'required'
+        'denivele' => 'required'
         //|after_or_equal:start
         //|after:start
       ]);
@@ -57,7 +61,7 @@ class MultiHikesController extends Controller
           $hike->max_num_participants = $request->input('max')[$i];
           $hike->difficulty = $request->input('difficulty')[$i];
           $hike->additional_info = $request->input('info')[$i];
-          $hike->drop_in_altitude = $request->input('altitude')[$i];
+          $hike->drop_in_altitude = $request->input('denivele')[$i];
           $hike->state_id = 1;
           $hike->save();
           $hike->users()->attach($hike->id,[
