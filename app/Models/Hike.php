@@ -8,6 +8,10 @@ class Hike extends Model
 {
   public $timestamps = false;
 
+  protected $fillable = [
+      'name', 'meeting_location', 'meeting_date', 'beginning_date', 'ending_date', 'min_num_participants', 'max_num_participants', 'difficulty', 'additional_info', 'drop_in_altitude'
+  ];
+
   public function users()
   {
     return $this->belongsToMany(User::class)->withPivot('role_id');
@@ -27,6 +31,7 @@ class Hike extends Model
   {
     return $this->belongsTo(State::class);
   }
+<<<<<<< HEAD
   public function equipment()
   {
     return $this->belongsToMany(Equipment::class);
@@ -34,5 +39,16 @@ class Hike extends Model
   public function trainings()
   {
     return $this->belongsToMany(Training::class);
+=======
+
+  public function equipments()
+  {
+    return $this->belongsToMany(Equipment::Class);
+  }
+
+  public function trainings()
+  {
+    return $this->belongsToMany(Training::Class);
+>>>>>>> feature/CreateSeeders
   }
 }

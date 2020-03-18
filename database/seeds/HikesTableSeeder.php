@@ -3,7 +3,7 @@
 use App\Models\Hike;
 use Illuminate\Database\Seeder;
 
-class HikeSeeder extends Seeder
+class HikesTableSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -13,6 +13,6 @@ class HikeSeeder extends Seeder
   public function run()
   {
     $nbToCreate = 3;
-    factory(Hike::class, $nbToCreate)->create();
+    factory(App\Models\Hike::class, $nbToCreate)->create();
   }
 }

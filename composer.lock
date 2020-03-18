@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "8f234e62b1b5381203a8ee33d03f4b15",
+=======
+    "content-hash": "1b03462bcc3ae498d4580c115e843d04",
+>>>>>>> feature/CreateSeeders
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3249,16 +3253,16 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.8.0",
+            "version": "v1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
-                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
                 "shasum": ""
             },
             "require": {
@@ -3267,12 +3271,12 @@
             "require-dev": {
                 "ext-intl": "*",
                 "phpunit/phpunit": "^4.8.35 || ^5.7",
-                "squizlabs/php_codesniffer": "^1.5"
+                "squizlabs/php_codesniffer": "^2.9.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -3295,7 +3299,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2018-07-12T10:23:15+00:00"
+            "time": "2019-12-12T13:22:17+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -3347,6 +3351,7 @@
         },
         {
             "name": "laravel/ui",
+<<<<<<< HEAD
             "version": "v1.2.0",
             "source": {
                 "type": "git",
@@ -3357,6 +3362,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/ui/zipball/bb64fca681566ca94457d490a00f899516e75664",
                 "reference": "bb64fca681566ca94457d490a00f899516e75664",
+=======
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "0287d4eee80aad718bdf7f90117cfe720c493064"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/0287d4eee80aad718bdf7f90117cfe720c493064",
+                "reference": "0287d4eee80aad718bdf7f90117cfe720c493064",
+>>>>>>> feature/CreateSeeders
                 "shasum": ""
             },
             "require": {
@@ -3371,6 +3388,12 @@
             },
             "type": "library",
             "extra": {
+<<<<<<< HEAD
+=======
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+>>>>>>> feature/CreateSeeders
                 "laravel": {
                     "providers": [
                         "Laravel\\Ui\\UiServiceProvider"
@@ -3397,6 +3420,7 @@
                 "laravel",
                 "ui"
             ],
+<<<<<<< HEAD
             "time": "2020-02-13T21:12:28+00:00"
         },
         {
@@ -3459,6 +3483,9 @@
                 "debugbar"
             ],
             "time": "2019-11-24T09:46:11+00:00"
+=======
+            "time": "2019-12-20T15:09:01+00:00"
+>>>>>>> feature/CreateSeeders
         },
         {
             "name": "mockery/mockery",
