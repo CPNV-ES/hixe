@@ -58,9 +58,9 @@
                                           </select>
                                         </td>
                                         <td><input type="text"    name="meetingLocation[]" class="form-control" value=''></td>
-                                        <td><input type="date"    name="meetingDate[]" class="form-control" value=''></td>
-                                        <td><input type="date"    name="hikeDate[]" class="form-control" value=''></td>
-                                        <td><input type="time"    name="start[]" class="form-control" value=''></td>
+                                        <td><input type="date"    name="meetingDate[]" class="form-control" value='' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                        <td><input type="date"    name="hikeDate[]" class="form-control"></td>
+                                        <td><input type="time"    name="start[]" class="form-control" value='' onblur="AutoInpute(value, this, 'finish[]')"></td>
                                         <td><input type="time"    name="finish[]" class="form-control" value=''></td>
                                         <td><input type="number"  min="1"        name="min[]" class="form-control" value=''></td>
                                         <td><input type="number"  min="1"        name="max[]" class="form-control" value=''></td>
@@ -110,6 +110,12 @@ function deleteRow(r){
   if(tbllenght != 1){
     document.getElementById('mytable').deleteRow(i);
   }
+}
+
+function AutoInpute(autoValue, i, name){
+  w = i.parentNode.parentNode.rowIndex - 1;
+  var x = document.getElementsByName(name);
+  x[w].value = autoValue;
 }
 </script>
 @endsection
