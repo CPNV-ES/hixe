@@ -8,7 +8,7 @@ class Equipment extends Model
 {
   public $timestamps = false;
 
-  protected $table = 'equipments';
+  protected $table = 'equipment';
 
   protected $fillable = [
       'name'
