@@ -19,7 +19,7 @@ class MultiHikesController extends Controller{
         }
       }
       $users = User::all();
-      return view('createMultiHikes')->with(compact('users'));
+      return view('multihikes.create')->with(compact('users'));
     }
 
     public function create(){
