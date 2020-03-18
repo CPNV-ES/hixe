@@ -18,6 +18,7 @@ class CreateDestinationsTable extends Migration {
 			$table->string('location', 100)->nullable()->unique('location_UNIQUE');
 			$table->string('latitude', 45)->nullable();
 			$table->string('longitude', 45)->nullable();
+			$table->integer('order')->nullable();
 		});
 	}
 
