@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Hike;
 use App\Models\User;
 use App\Models\Role;
+use Auth;
 
 class HikeController extends Controller
 {
@@ -72,7 +73,16 @@ class HikeController extends Controller
         // return view('hikes.show')->with(compact(['hike']));
     }
 
-    public function myHixe(){
+    public function myHike(){
+        /*
+        Pas utilisé parce qu'avec cette requette il ne resort pas le guides et les destinations
+        */
+        /*
+        $hikes = Hike::where('email_address', Auth::user()->email_address)
+        ->join('hike_user', 'hike_user.hike_id', '=', 'hikes.id')
+        ->join('users', 'hike_user.user_id', '=', 'users.id')
+        ->select('*')->get();
+        */
         $hikes = Hike::all();
         return view('home')->with(compact('hikes'));
     }

@@ -4,28 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hike;
+use App\Models\User;
+use storage\framework\sessions;
+use Redirect;
+use Session;
 
-class MultiHikesController extends Controller
-{
-    public function index(){
-
+class MultiHikesController extends Controller{
+    public function index(Request $msg){
+      foreach($msg->request->all() as $message){
+        if($message == "Errors"){
+          Session::flash('error', "Errors lors de l'ajout des courses");
+        }else{
+          Session::flash('success', "Toutes vos courses ont été créé");
+        }
+      }
+      $users = User::all();
+      return view('createMultiHikes')->with(compact('users'));
     }
+
     public function create(){
-        return view('multihikes.create');
+      //return view('multihikes.create');
     }
-    public function store(Request $request){
 
+    public function store(Request $request){
       $validatedData = $request->validate([
         'name' => 'required',
         'meetingLocation' => 'required',
         'meetingDate' => 'required',
+        'hikeDate' => 'required',
         'start' => 'required',
         'finish' => 'required',
         'difficulty' => 'required',
-        'altitude' => 'required'
+        'denivele' => 'required'
+        //|after_or_equal:start
+        //|after:start
       ]);
-
-        //dd($validatedData);
 
       $bResult = true;
       foreach($validatedData as $i){
@@ -42,22 +55,28 @@ class MultiHikesController extends Controller
           $hike->name = $request->input('name')[$i];
           $hike->meeting_location = $request->input('meetingLocation')[$i];
           $hike->meeting_date = $request->input('meetingDate')[$i];
-          $hike->beginning_date = $request->input('start')[$i];
-          $hike->ending_date = $request->input('finish')[$i];
+          $hike->beginning_date = $request->input('hikeDate')[$i].' '.$request->input('start')[$i];
+          $hike->ending_date = $request->input('hikeDate')[$i].' '.$request->input('finish')[$i];
           $hike->min_num_participants = $request->input('min')[$i];
           $hike->max_num_participants = $request->input('max')[$i];
           $hike->difficulty = $request->input('difficulty')[$i];
           $hike->additional_info = $request->input('info')[$i];
-          $hike->drop_in_altitude = $request->input('altitude')[$i];
+          $hike->drop_in_altitude = $request->input('denivele')[$i];
           $hike->state_id = 1;
           $hike->save();
+          $hike->users()->attach($hike->id,[
+            'user_id' => $request->input('chef')[$i],
+            'role_id'=> 1
+          ]);
         }
         //with doesn't working
-        return redirect('multiHikes/create')->with('status', 'Profile updated!');
+        return Redirect::route('multiHikes.index', ['msg' => 'Success']);
       }else{
         //with doesn't working
-        return redirect('multiHikes/create')->with('status', 'Profile not updated!');
+        return Redirect::route('multiHikes.index', ['msg' => 'Errors']);
       }
-
+      
+      
+      
     }
 }
