@@ -88,7 +88,7 @@
                     @if($pos == true || $pos == Auth::user()->email_address)
                         <tr>
                         <th scope="row">{{ $hike->name }}</th>
-                        <td>{{ $hike->meeting_date }}</td>
+                        <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
                         <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
                         <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
                         <td>{{ $hike->users()->count() }}</td>
@@ -112,9 +112,6 @@
                     <th scope="col">Destination</th>
                     <th scope="col">Guide</th>
                     <th scope="col">Inscrits</th>
-                    <th scope="col">Minimum</th>
-                    <th scope="col">Maximum</th>
-                    <th scope="col">État</th>
                 </tr>
             </thead>
             <tbody>
@@ -128,13 +125,10 @@
                     @if($pos == true || $pos == Auth::user()->email_address)
                         <tr>
                         <th scope="row">{{ $hike->name }}</th>
-                        <td>{{ $hike->meeting_date }}</td>
+                        <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
                         <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
                         <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                        <td>{{ $hike->users()->count() }}</td>
-                        <td>{{ $hike->min_num_participants }}</td>
-                        <td>{{ $hike->max_num_participants }}</td>
-                        <td>{{ $hike->state->name }}</td>
+                        <td>{{ implode(', ', $hike->users()->pluck('firstname')->toArray()) }}</td>
                         </tr>
                     @endif
                 @endif
