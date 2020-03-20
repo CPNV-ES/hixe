@@ -1,4 +1,7 @@
 <style>
+.select:hover{
+    cursor: pointer;
+}
   .login-container{
     margin-top: 5%;
     margin-bottom: 5%;
@@ -86,15 +89,15 @@
                     $pos = strpos($arrayEmail, $emailCo);
                     @endphp
                     @if($pos == true || $pos == Auth::user()->email_address)
-                        <tr>
-                        <th scope="row">{{ $hike->name }}</th>
-                        <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
-                        <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-                        <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                        <td>{{ $hike->users()->count() }}</td>
-                        <td>{{ $hike->min_num_participants }}</td>
-                        <td>{{ $hike->max_num_participants }}</td>
-                        <td>{{ $hike->state->name }}</td>
+                        <tr class="select" onclick="location.href='{{ route('hikes.edit', $hike) }}'">
+                            <th scope="row">{{ $hike->name }}</th>
+                            <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
+                            <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                            <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                            <td>{{ $hike->users()->count() }}</td>
+                            <td>{{ $hike->min_num_participants }}</td>
+                            <td>{{ $hike->max_num_participants }}</td>
+                            <td>{{ $hike->state->name }}</td>
                         </tr>
                     @endif
                 @endif
@@ -123,12 +126,12 @@
                     $pos = strpos($arrayEmail, $emailCo);
                     @endphp
                     @if($pos == true || $pos == Auth::user()->email_address)
-                        <tr>
-                        <th scope="row">{{ $hike->name }}</th>
-                        <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
-                        <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-                        <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                        <td>{{ implode(', ', $hike->users()->pluck('firstname')->toArray()) }}</td>
+                        <tr class="select" onclick="location.href='{{ route('hikes.edit', $hike) }}'">
+                            <th scope="row">{{ $hike->name }}</th>
+                            <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
+                            <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                            <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                            <td>{{ implode(', ', $hike->users()->pluck('firstname')->toArray()) }}</td>
                         </tr>
                     @endif
                 @endif
