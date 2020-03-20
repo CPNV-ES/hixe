@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         @foreach ($hikes as $hike)
-            <tr data-hikeurl="{{ route('hikes.edit', $hike) }}">
+            <tr onclick="location.href='{{ route('hikes.show', $hike) }}'">
                 <td scope="row">{{ $hike->name }}</td>
                 <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
                 <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
@@ -33,6 +33,7 @@
                 <td>{{ $hike->min_num_participants }}</td>
                 <td>{{ $hike->max_num_participants }}</td>
                 <td>{{ $hike->state->name }}</td>
+                <td><a href="{{ route('hikes.destroy',$hike)}}">x</a></td>
             </tr>
         @endforeach
     </tbody>

@@ -126,7 +126,7 @@
                     $pos = strpos($arrayEmail, $emailCo);
                     @endphp
                     @if($pos == true || $pos == Auth::user()->email_address)
-                        <tr class="select" onclick="location.href='{{ route('hikes.edit', $hike) }}'">
+                        <tr class="select" onclick="location.href='{{ route('hikes.show', $hike) }}'">
                             <th scope="row">{{ $hike->name }}</th>
                             <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
                             <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
