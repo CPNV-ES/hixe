@@ -94,7 +94,7 @@ class HikeController extends Controller
      */
     public function edit($id)
     {
-        dd($id);
+        dd("Edit : ".$id);
         $hike = Hike::find($id);
         return view('hikes.edit')->with(compact(['hike']));
     }
@@ -119,8 +119,6 @@ class HikeController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
-        //Hike::destroy($id);
-        // return redirect(route('hikes'));
+        dd("delete : ".$id);
     }
 }
