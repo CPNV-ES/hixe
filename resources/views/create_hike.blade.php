@@ -43,23 +43,19 @@
                     <input type="text" name="locationRdv" class="form-control">
                 </div>
                 <div class="form-group offset-1 col-md-4">
-                    <table class="table" id="table-cours">
+                    </select>
+                    <table class="table"">
                         <thead>
-                        <th>Cours requis</th>
-                        <th>Numéro</th>
+                        <th>Cours requis & Numéro</th>
                         <th></th>
                         </thead>
                         <tbody>
                         <tr>
                             <td>
-                                <div class="input-group">
-                                    <input type="text" name="cours[]" class="form-control"/>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="input-group">
-                                    <input type="number" name="numcours[]" class="form-control"/>
-                                </div>
+                                <select class="form-control">
+                                    <option>
+                                        << Sélectionner un cours >>
+                                    </option>
                             </td>
                             <td>
                                 <div class="input-group-append">
@@ -89,7 +85,7 @@
                     <input type="time" name="endHike" class="form-control">
                 </div>
                 <div class="form-group offset-2 col-md-4">
-                    <table class="table" id="table-equip">
+                    <table class="table">
                         <thead>
                         <th>Matériel requis</th>
                         <th></th>
@@ -117,23 +113,55 @@
 
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label>Destination</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-map-marker-alt"> Départ </i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-map-marker-alt">Arrivée</i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control">
-                    </div>
+                    <table class="table">
+                        <thead>
+                        <th>Destination & Étapes</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-map-marker-alt"> </i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="hikestep[]" class="form-control"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-secondary" name="remove-material" hidden>
+                                        X
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr id="destination">
+                            <td>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-map-marker-alt"> </i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="hikeend[]" class="form-control"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-secondary" name="remove-material" hidden>
+                                        X
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <input type="button" value="Ajouter une étape" class="btn btn-secondary" id="addRowStep"/>
+
                 </div>
                 <div class="form-group offset-4 col-md-4">
                     <label>Informations additionnelles</label>
