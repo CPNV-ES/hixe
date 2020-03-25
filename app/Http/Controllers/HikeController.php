@@ -67,10 +67,9 @@ class HikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // $hike = Hike::find($id);
-        // return view('hikes.show')->with(compact(['hike']));
+    public function show($id){
+        $hike = Hike::find($id);
+        return view('hikes.show')->with(compact('hike'));
     }
 
     public function myHike(){
@@ -95,6 +94,7 @@ class HikeController extends Controller
      */
     public function edit($id)
     {
+        dd("Edit : ".$id);
         $hike = Hike::find($id);
         return view('hikes.edit')->with(compact(['hike']));
     }
@@ -119,6 +119,6 @@ class HikeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd("delete : ".$id);
     }
 }
