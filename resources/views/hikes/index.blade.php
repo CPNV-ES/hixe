@@ -41,12 +41,12 @@
                 <td>{{ $hike->min_num_participants }}</td>
                 <td>{{ $hike->max_num_participants }}</td>
                 <td>{{ $hike->state->name }}</td>
-                <td><a href="{{route('hikes.edit',$hike)}}"><i class="far fa-edit"></i></a></td>
+                <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
                 <td>
                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE"/>
-                        <input type="submit" value="X" />
+                        <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                     </form>
                 </td>
             </tr>
