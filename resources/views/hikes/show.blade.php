@@ -13,7 +13,6 @@
                 <div class="p-2">
                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
                         @csrf
-                        @method('POST')
                         <input type="hidden" name="_method" value="DELETE"/>
                         <input type="submit" class="fas fa-trash-alt" value="delete" />
                     </form> 
