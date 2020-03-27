@@ -122,6 +122,9 @@ class HikeController extends Controller
         $hike = Hike::find($id);
         
         $hike->users()->detach();
+        $hike->equipment()->detach();
+        $hike->trainings()->detach();
+        $hike->destinations()->detach();
         $hike->delete();
         return redirect(route('hikes.index'));
         //dd("delete : ".$id);
