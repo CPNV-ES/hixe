@@ -125,6 +125,7 @@
 </div>
 
 @stack('scripts')
+<script src="{{ asset('/js/utils.js') }}"></script>
 </body>
 
 

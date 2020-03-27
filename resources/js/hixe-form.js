@@ -1,7 +1,10 @@
 function addRow(parent) {
-    parent.querySelector('.btn').hidden = false;
     var rows = parent.querySelectorAll('tbody tr');
-    var lastRow = rows[rows.length - 1].cloneNode(true);
+    var lastRow = rows.last().cloneNode(true);
+
+    rows.forEach(function (elem) {
+        elem.querySelector('.btn').hidden = false;
+    });
 
     // Unfill content of input when added
     lastRow.querySelectorAll('input').forEach(function(elem){
@@ -11,6 +14,7 @@ function addRow(parent) {
     lastRow.querySelector('.btn').addEventListener('click', (a) => { // () => Is like function() but doesn't keep the scope
         deleteRow(lastRow);
     });
+
     parent.querySelector('tbody').appendChild(lastRow);
 }
 
@@ -23,8 +27,10 @@ function deleteRow(child) {
 }
 
 // Add course row on click
-addRowCourse.addEventListener('click', function() {
-    addRow(this.parentElement.querySelector('table'));
+tableTraining.querySelector('tbody').addEventListener('change', evt => {
+        addRow(evt.target.parentElement.parentElement.parentElement.parentElement);
+        evt.target.addEventListener('change', evt => {evt.stopPropagation(); });
+
 });
 
 // Add material row on click
@@ -44,15 +50,21 @@ document.querySelectorAll('tbody .btn').forEach(function (elem) {
 });
 
 function addStep(elem) {
+   // Contain the step input
    var newStep = elem.cloneNode(true);
 
    // Unifll content
    newStep.querySelector('input[type="text"]').value = '';
+
+   // Show delete button
    newStep.querySelector('button').hidden = false;
+
+   // Delete step
    newStep.querySelector('button').addEventListener('click', function () {
         deleteRow(newStep);
    })
-   console.log(newStep);
+
+   // Insert clone before destination id
    elem.parentNode.insertBefore(newStep, destination);
 
 }

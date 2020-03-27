@@ -43,8 +43,7 @@
                     <input type="text" name="locationRdv" class="form-control">
                 </div>
                 <div class="form-group offset-1 col-md-4">
-                    </select>
-                    <table class="table"">
+                    <table class="table" id="tableTraining">
                         <thead>
                         <th>Cours requis & Numéro</th>
                         <th></th>
@@ -52,10 +51,14 @@
                         <tbody>
                         <tr>
                             <td>
-                                <select class="form-control">
-                                    <option>
+                                <select name="trainings" type="button" class="form-control">
+                                    <option value="1">
                                         << Sélectionner un cours >>
                                     </option>
+                                    <option value="2">
+                                        << Sélectionner un cours2 >>
+                                    </option>
+                                </select>
                             </td>
                             <td>
                                 <div class="input-group-append">
@@ -67,7 +70,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <input type="button" value="Ajouter un cours" class="btn btn-secondary" id="addRowCourse"/>
+                    <!-- <input type="button" value="Ajouter un cours" class="btn btn-secondary" id="addRowCourse"/> -->
                 </div>
             </div>
 
