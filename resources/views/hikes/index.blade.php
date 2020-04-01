@@ -10,11 +10,11 @@
     
 
 <div class="container mt-4 table-responsive">
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    @if (Session::has('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
     <table  id="hikesTable"  class="table table table-hover mt-3">
         <thead>
             <tr>
@@ -46,7 +46,7 @@
                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE"/>
-                        <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
                     </form>
                 </td>
             </tr>

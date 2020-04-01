@@ -14,7 +14,7 @@
                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE"/>
-                        <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                    <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
                     </form> 
                 </div>
             </div>
