@@ -34,8 +34,9 @@ tableTraining.querySelector('tbody').addEventListener('change', evt => {
 });
 
 // Add material row on click
-addRowMaterial.addEventListener('click', function() {
-    addRow(this.parentElement.querySelector('table'));
+tableMaterial.querySelector('tbody').addEventListener('change', evt => {
+        addRow(evt.target.parentElement.parentElement.parentElement.parentElement);
+        evt.target.addEventListener('change', evt => {evt.stopPropagation(); });
 });
 
 // Add step for hike
