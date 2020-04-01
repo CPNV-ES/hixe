@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Hike;
 use App\Models\User;
 use App\Models\Role;
+use storage\framework\sessions;
+use Redirect;
+use Session;
 use Auth;
 
 class HikeController extends Controller
@@ -15,8 +18,13 @@ class HikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $msg)
     {
+        foreach($msg->request->all() as $message){
+            if($message != "Errors"){
+              Session::flash('success', "La course été supprimer");
+            }
+          }
         $hikes = Hike::all();
         return view('hikes.index')->with(compact(['hikes']));
     }
@@ -119,6 +127,13 @@ class HikeController extends Controller
      */
     public function destroy($id)
     {
-        dd("delete : ".$id);
+        $hike = Hike::find($id);
+        
+        $hike->users()->detach();
+        $hike->equipment()->detach();
+        $hike->trainings()->detach();
+        $hike->destinations()->detach();
+        $hike->delete();
+        return Redirect::route('hikes.index', ['msg' => 'Success']);
     }
 }

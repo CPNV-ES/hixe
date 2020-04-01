@@ -8,14 +8,13 @@
         <div class="row">
             <div class="col-sm-12 d-flex justify-content-end">
                 <div class="p-2">
-                    <a href="{{route('hikes.edit',$hike)}}"><i class="far fa-edit"></i></a>
+                    <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
                 </div>
                 <div class="p-2">
                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
                         @csrf
-                        @method('POST')
                         <input type="hidden" name="_method" value="DELETE"/>
-                        <input type="submit" class="fas fa-trash-alt" value="delete" />
+                    <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
                     </form> 
                 </div>
             </div>
