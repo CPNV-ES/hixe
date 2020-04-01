@@ -27,6 +27,7 @@ class Hike extends Model
   {
     return $this->belongsTo(State::class);
   }
+<<<<<<< HEAD
   public function equipment()
   {
     return $this->belongsToMany(Equipment::class);
@@ -35,4 +36,16 @@ class Hike extends Model
   {
     return $this->belongsToMany(Training::class);
   }
+=======
+
+  public function equipment()
+  {
+      return $this->belongsToMany(Equipment::class);
+  }
+
+  public function training() {
+      return $this->belongsToMany(Training::class);
+  }
+
+>>>>>>> 8fd8921bff5452f8ad7d5a1f4530dd7b135fa7c8
 }

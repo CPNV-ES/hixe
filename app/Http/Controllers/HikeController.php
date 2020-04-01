@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipment;
+use App\Models\Training;
 use Illuminate\Http\Request;
 use App\Models\Hike;
 use App\Models\User;
@@ -38,7 +40,7 @@ class HikeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $newHike = new Hike();
+        $newHike = new Hike;
         $newHike->name = $request->input('hikeName');
         $newHike->meeting_location = $request->input('locationRdv');
         $newHike->meeting_date = $request->input('dateRdv').' '.$request->input('timeRdv');
@@ -53,7 +55,19 @@ class HikeController extends Controller
         // TO DO : Take the real state_id
         $newHike->state_id = 1;
 
+        $newEquipment = new Equipment;
+        $newEquipment->name = $request->input('material');
+
+        $newCourse = new Training;
+        $newCourse->certificate_number = $request->input('numcours');
+        $newCourse->description = $request->input('cours');
+
+        $newCourse->save();
+        $newEquipment->save();
         $newHike->save();
+
+        $newHike->equipment()->attach($newEquipment->id);
+        $newHike->training()->attach($newCourse->id);
 
         return redirect()->action("HikeController@index");
 
