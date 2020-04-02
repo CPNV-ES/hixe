@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Hike;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Destination;
 
 class HikeController extends Controller
 {
@@ -29,9 +30,11 @@ class HikeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-
     {
-        return view('hikes.create', ['hike' => new Hike]);
+        $equipment = Equipment::all();
+        $trainings = Training::all();
+        $destinations = Destination::all();
+        return view('hikes.create', ['hike' => new Hike])->with(compact(['equipment','trainings','destinations']));
     }
     /**
      * Store a newly created resource in storage.
@@ -55,19 +58,18 @@ class HikeController extends Controller
         // TO DO : Take the real state_id
         $newHike->state_id = 1;
 
-        $newEquipment = new Equipment;
-        $newEquipment->name = $request->input('material');
-
-        $newCourse = new Training;
-        $newCourse->certificate_number = $request->input('numcours');
-        $newCourse->description = $request->input('cours');
-
-        $newCourse->save();
-        $newEquipment->save();
         $newHike->save();
 
-        $newHike->equipment()->attach($newEquipment->id);
-        $newHike->training()->attach($newCourse->id);
+        foreach($request->trainings as $training) {
+            $newHike->training()->attach($training);
+        }
+
+        foreach($request->materials as $material) {
+            $newHike->equipment()->attach($material);
+        }
+
+        /*$newHike->equipment()->attach($newEquipment->id);
+        $newHike->training()->attach($newCourse->id);*/
 
         return redirect()->action("HikeController@index");
 
@@ -99,8 +101,11 @@ class HikeController extends Controller
      */
     public function edit($id)
     {
+        $equipment = Equipment::all();
+        $trainings = Training::all();
+        $destinations = Destination::all();
         $hike = Hike::find($id);
-        return view('hikes.edit')->with(compact(['hike']));
+        return view('hikes.edit')->with(compact(['hike','trainings','equipment','destinations']));
     }
 
     /**

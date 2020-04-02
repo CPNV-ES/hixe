@@ -6,7 +6,7 @@
 @section('title', 'Accueil')
 
 @section('body-content')
-
+@dd($trainings)
     <script
         src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -43,8 +43,7 @@
                     <input type="text" name="locationRdv" class="form-control">
                 </div>
                 <div class="form-group offset-1 col-md-4">
-                    </select>
-                    <table class="table"">
+                    <table class="table" id="tableTraining">
                         <thead>
                         <th>Cours requis & Numéro</th>
                         <th></th>
@@ -52,10 +51,17 @@
                         <tbody>
                         <tr>
                             <td>
-                                <select class="form-control">
+                                <select name="trainings[]" type="button" class="form-control">
                                     <option>
                                         << Sélectionner un cours >>
                                     </option>
+                                    <option value="2">
+                                        << Sélectionner un cours2 >>
+                                    </option>
+                                    <option value="3">
+                                        << Sélectionner un cours3 >>
+                                    </option>
+                                </select>
                             </td>
                             <td>
                                 <div class="input-group-append">
@@ -67,7 +73,6 @@
                         </tr>
                         </tbody>
                     </table>
-                    <input type="button" value="Ajouter un cours" class="btn btn-secondary" id="addRowCourse"/>
                 </div>
             </div>
 
@@ -85,7 +90,7 @@
                     <input type="time" name="endHike" class="form-control">
                 </div>
                 <div class="form-group offset-2 col-md-4">
-                    <table class="table">
+                    <table class="table" id="tableMaterial">
                         <thead>
                         <th>Matériel requis</th>
                         <th></th>
@@ -93,9 +98,17 @@
                         <tbody>
                         <tr>
                             <td>
-                                <div class="input-group">
-                                    <input type="text" name="material[]" class="form-control"/>
-                                </div>
+                                <select name="materials[]" type="button" class="form-control">
+                                    <option>
+                                        << Sélectionner un matériel >>
+                                    </option>
+                                    <option value="2">
+                                        << Sélectionner un matériel2 >>
+                                    </option>
+                                    <option value="3">
+                                        << Sélectionner un matériel3 >>
+                                    </option>
+                                </select>
                             </td>
                             <td>
                                 <div class="input-group-append">
@@ -107,7 +120,6 @@
                         </tr>
                         </tbody>
                     </table>
-                    <input type="button" value="Ajouter un matériel" class="btn btn-secondary" id="addRowMaterial"/>
                 </div>
             </div>
 

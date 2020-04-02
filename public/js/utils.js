@@ -93,7 +93,12 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\zazar\\Documents\\Website\\hixe\\resources\\js\\utils.js'");
+// Creation of last method
+Array.prototype.last = function () {
+  return this[this.length - 1];
+};
+
+NodeList.prototype.last = Array.prototype.last;
 
 /***/ }),
 
