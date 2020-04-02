@@ -26,11 +26,17 @@
             </thead>
             <tbody>
                 @if($hike->exists)
-                    @foreach ($hike->trainings as $training)
+                    @foreach ($hike->trainings as $hiketraining)
                     <tr>
                         <td>
-                            <select name="trainings[]" type="button" class="form-control" readonly>
-                                <option>{{ $training->description }}</option>
+                            <select name="trainings[]" type="button" class="form-control" disabled>
+                                @foreach($trainings as $training)
+                                    <option 
+                                    @if($hiketraining->description == $training->description)
+                                        selected
+                                    @endif
+                            value="{{$training->id}}">{{ $training->description }}</option>
+                                @endforeach
                             </select>
                         </td>
                         <td>
@@ -66,7 +72,7 @@
                         <select name="trainings[]" type="button" class="form-control">
                             <option disabled selected><< Sélectionner un cours >></option>
                             @foreach($trainings as $training)
-                                <option>{{$training->description}}</option>
+                                <option value="{{$training->id}}">{{$training->description}}</option>
                             @endforeach
                         </select>
                     </td>
@@ -105,11 +111,17 @@
             </thead>
             <tbody>
             @if($hike->exists)
-                    @foreach ($hike->equipment as $item)
+                    @foreach ($hike->equipment as $hikeitem)
                     <tr>
                         <td>
-                            <select name="equipment[]" type="button" class="form-control" readonly>
-                                <option>{{ $item->name }}</option>
+                            <select name="equipment[]" type="button" class="form-control" disabled>
+                                @foreach($equipment as $item)
+                                <option
+                                @if($item->name == $hikeitem->name)
+                                selected
+                                @endif
+                            value="{{$item->id}}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </td>
                         <td>
@@ -146,7 +158,7 @@
                             <option disabled selected><< Sélectionner un matériel >></option>
                             @foreach($equipment as $item)
                                 
-                            <option>{{$item->name}}</option>
+                            <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
                     </td>
@@ -189,11 +201,15 @@
                            
                             <select name="hikestep[]" type="button" class="form-control">
                             @foreach($destinations as $destination)
+                            
                                 <option 
                                 
                                 @if($waypoint->location == $destination->location) 
                                     selected  
-                                @endif>
+                                @endif
+                                value="{{ $destination->id }}"
+                                >
+
                                 {{ $destination->location }}
                                 </option>
                             @endforeach
@@ -222,8 +238,9 @@
                             </div>
                          
                             <select name="hikestep[]" type="button" class="form-control">
+                                <option disabled selected><< Sélectionner une destination >></option>
                             @foreach($destinations as $destination)
-                                <option>{{ $destination->location }}</option>
+                                <option value="{{ $destination->id }}">{{ $destination->location }}</option>
                             @endforeach
                             </select>
                         </div>

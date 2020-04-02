@@ -43,6 +43,7 @@ class HikeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+       
         $newHike = new Hike;
         $newHike->name = $request->input('hikeName');
         $newHike->meeting_location = $request->input('locationRdv');
@@ -61,15 +62,17 @@ class HikeController extends Controller
         $newHike->save();
 
         foreach($request->trainings as $training) {
-            $newHike->training()->attach($training);
+            $newHike->trainings()->attach($training);
         }
 
-        foreach($request->materials as $material) {
+        foreach($request->equipment as $material) {
             $newHike->equipment()->attach($material);
         }
-
-        /*$newHike->equipment()->attach($newEquipment->id);
-        $newHike->training()->attach($newCourse->id);*/
+        $i=0;
+        foreach($request->hikestep as $hikestep) {
+            $i++;
+            $newHike->destinations()->attach($hikestep,['order'=>$i]);
+        }
 
         return redirect()->action("HikeController@index");
 
@@ -117,6 +120,7 @@ class HikeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        @dd($request);
         $hike = Hike::find($id);
         $hike->name = $request->input('hikeName');
         $hike->meeting_location = $request->input('locationRdv');
