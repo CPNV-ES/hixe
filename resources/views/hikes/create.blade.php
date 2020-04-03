@@ -22,8 +22,12 @@
         </div>
 
         <form method="POST" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
-            <input type="hidden" _method="PUT"/>
+            @csrf
             @include('subviews/subviewhike', $hike)
+            <div class="form-group offset-8 col-md-2">
+                <input type="submit" class="btn btn-primary" value="Sauvegarder">
+            </div>
         </form>
     </div>
+    
     @endsection

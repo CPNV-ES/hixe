@@ -10,9 +10,6 @@ class Equipment extends Model
 
   protected $table = 'equipment';
 
-  protected $fillable = [
-      'name'
-  ];
 
   public function hikes(){
       return $this->belongsToMany(Hike::Class);

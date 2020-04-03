@@ -1,4 +1,3 @@
-@csrf
 
 <div class="form-row">
     <div class="form-group col-md-3">
@@ -20,45 +19,62 @@
     <input type="text" name="locationRdv" class="form-control" value="{{ $hike->meeting_location ?? '' }}">
     </div>
     <div class="form-group offset-1 col-md-4">
-        <table class="table" id="table-cours">
+        <table class="table" id="tableTraining">
             <thead>
-                <th>Cours requis</th>
-                <th>Numéro</th>
+                <th>Cours requis & Numéro</th>
                 <th></th>
             </thead>
             <tbody>
-                @foreach ($hike->trainings as $training)
-                <tr>
-                    <td>
-                        <div class="input-group">
-                        <input type="text" name="cours[]" class="form-control" value="{{ $training->description }}"/>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <input type="text" name="numcours[]" class="form-control" value="{{ $training->certificate_number }}"/>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" name="remove-cours">
-                                X
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
+                @if($hike->exists)
+                    @foreach ($hike->trainings as $hiketraining)
+                    <tr>
+                        <td>
+                            <select name="trainings[]" type="button" class="form-control" readonly>
+                                @foreach($trainings as $training)
+                                    <option 
+                                    @if($hiketraining->description == $training->description)
+                                        selected
+                                    @endif
+                            value="{{$training->id}}">{{ $training->description }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" name="remove-cours">
+                                    X
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <td>
+                            <select name="trainings[]" type="button" class="form-control">
+                                <option disabled selected><< Sélectionner un cours >></option>
+                                @foreach($trainings as $training)
+                                    <option>{{$training->description}}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" name="remove-cours" hidden>
+                                    X
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @endif
                 @if(!$hike->exists)
                 <tr>
                     <td>
-                        <div class="input-group">
-                        <input type="text" name="cours[]" class="form-control"/>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <input type="text" name="numcours[]" class="form-control"/>
-                        </div>
+                        <select name="trainings[]" type="button" class="form-control">
+                            <option disabled selected><< Sélectionner un cours >></option>
+                            @foreach($trainings as $training)
+                                <option value="{{$training->id}}">{{$training->description}}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <div class="input-group-append">
@@ -71,7 +87,6 @@
                 @endif
             </tbody>
         </table>
-        <input type="button" value="Ajouter un cours" class="btn btn-secondary" id="addRowCourse"/>
     </div>
 </div>
 
@@ -89,39 +104,63 @@
         <input type="time" name="endHike" class="form-control" value="{{ $hike->ending_date ? Carbon\Carbon::parse($hike->ending_date)->format('h:i') : '' }}">
     </div>
     <div class="form-group offset-2 col-md-4">
-        <table class="table" id="table-equip">
+        <table class="table" id="tableMaterial">
             <thead>
                 <th>Matériel requis</th>
                 <th></th>
             </thead>
             <tbody>
-                @foreach ($hike->equipment as $equipment)
-                <tr>
-                    <td>
-
-                        <div class="input-group">
-                            <input type="text" name="material[]" class="form-control" value="{{ $equipment->name}}"/>
-                        </div>
-
-                    </td>
-                    <td>
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" name="remove-material" @empty($equipment){{'hidden'}}@endempty>
-                                X
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-
+            @if($hike->exists)
+                    @foreach ($hike->equipment as $hikeitem)
+                    <tr>
+                        <td>
+                            <select name="equipment[]" type="button" class="form-control" readonly>
+                                @foreach($equipment as $item)
+                                <option
+                                @if($item->name == $hikeitem->name)
+                                selected
+                                @endif
+                            value="{{$item->id}}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" name="remove-material">
+                                    X
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <td>
+                            <select name="equipment[]" type="button" class="form-control">
+                                <option disabled selected><< Sélectionner un matériel >></option>
+                                @foreach($equipment as $item)
+                                <option>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" name="remove-material" hidden>
+                                    X
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @endif
                 @if(!$hike->exists)
                 <tr>
                     <td>
-
-                        <div class="input-group">
-                            <input type="text" name="material[]" class="form-control"/>
-                        </div>
-
+                        <select name="equipment[]" type="button" class="form-control">
+                            <option disabled selected><< Sélectionner un matériel >></option>
+                            @foreach($equipment as $item)
+                                
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <div class="input-group-append">
@@ -134,7 +173,7 @@
                 @endif
             </tbody>
         </table>
-        <input type="button" value="Ajouter un matériel" class="btn btn-secondary" id="addRowMaterial"/>
+        
     </div>
 </div>
 
@@ -142,25 +181,86 @@
 
     <div class="form-group col-md-4">
 
-        <label>Destination</label>
-        @foreach ($hike->destinations as $destination)
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <i class="fas fa-map-marker-alt"> Départ </i>
-                </div>
-            </div>
-            <input type="text" class="form-control" value="{{ $destination->location}}">
-        </div>
-        @endforeach
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <i class="fas fa-map-marker-alt">Arrivée</i>
-                </div>
-            </div>
-            <input type="text" class="form-control">
-        </div>
+        <table class="table">
+            <thead>
+                <th>Destination & Étapes</th>
+                <th></th>
+            </thead>
+                <tbody>
+                
+                @if($hike->exists)
+                @foreach ($hike->destinations as $waypoint)
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fas fa-map-marker-alt"> </i>
+                                </div>
+                            </div>
+                           
+                            <select name="hikestep[]" type="button" class="form-control">
+                            @foreach($destinations as $destination)
+                            
+                                <option 
+                                
+                                @if($waypoint->location == $destination->location) 
+                                    selected  
+                                @endif
+                                value="{{ $destination->id }}"
+                                >
+
+                                {{ $destination->location }}
+                                </option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" name="remove-material">
+                                X
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
+                @if(!$hike->exists)
+                
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fas fa-map-marker-alt"> </i>
+                                </div>
+                            </div>
+                         
+                            <select name="hikestep[]" type="button" class="form-control">
+                                <option disabled selected><< Sélectionner une destination >></option>
+                            @foreach($destinations as $destination)
+                                <option value="{{ $destination->id }}">{{ $destination->location }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" name="remove-material" hidden>
+                                X
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            
+                @endif
+                <tr id="destination">
+                    
+                </tr>
+            </tbody>
+        </table>
+        <input type="button" value="Ajouter une étape" class="btn btn-secondary" id="addRowStep"/>
     </div>
     <div class="form-group offset-4 col-md-4">
         <label>Informations additionnelles</label>
@@ -212,9 +312,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group offset-8 col-md-2">
-        <input type="submit" class="btn btn-primary" value="Ajouter">
-    </div>
+    
 </div>
 
 
