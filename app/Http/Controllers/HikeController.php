@@ -52,7 +52,7 @@ class HikeController extends Controller
         $newHike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
         $newHike->min_num_participants = $request->input('minParticipants');
         $newHike->max_num_participants = $request->input('maxParticipants');
-        $newHike->difficulty = 1;
+        $newHike->difficulty = $request->input('difficulty');
         $newHike->additional_info = $request->input('addInfo');
         $newHike->drop_in_altitude = $request->input('dropAltitude');
 
@@ -120,6 +120,7 @@ class HikeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $hike = Hike::find($id);
         $hike->name = $request->input('hikeName');
         $hike->meeting_location = $request->input('locationRdv');
@@ -137,6 +138,7 @@ class HikeController extends Controller
 
         $hike->save();
 
+        
         foreach($request->trainings as $training) {
             $hike->trainings()->attach($training);
         }

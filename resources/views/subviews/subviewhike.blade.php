@@ -29,7 +29,7 @@
                     @foreach ($hike->trainings as $hiketraining)
                     <tr>
                         <td>
-                            <select name="trainings[]" type="button" class="form-control" disabled>
+                            <select name="trainings[]" type="button" class="form-control" readonly>
                                 @foreach($trainings as $training)
                                     <option 
                                     @if($hiketraining->description == $training->description)
@@ -114,7 +114,7 @@
                     @foreach ($hike->equipment as $hikeitem)
                     <tr>
                         <td>
-                            <select name="equipment[]" type="button" class="form-control" disabled>
+                            <select name="equipment[]" type="button" class="form-control" readonly>
                                 @foreach($equipment as $item)
                                 <option
                                 @if($item->name == $hikeitem->name)
