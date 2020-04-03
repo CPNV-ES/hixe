@@ -61,7 +61,7 @@
             </div>
             <div class="col-sm-4">
                 <p class="lead">Destinations</p>
-                <p>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</p>
+                <p>{{ implode(' -> ', $hike->destinations()->pluck('location')->toArray()) }}</p>
             </div>
             <div class="col-sm-4">
                 <p class="lead">Guides</p>

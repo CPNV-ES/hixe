@@ -171,7 +171,7 @@ class HikeController extends Controller
             $i++;
             $hike->destinations()->attach($hikestep,['order'=>$i]);
         }
-        return Redirect::route('hikes.edit',$id);
+        return Redirect::route('hikes.show',$id);
     }
     
 
