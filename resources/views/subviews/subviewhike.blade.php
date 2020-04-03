@@ -1,4 +1,4 @@
-@csrf
+
 <div class="form-row">
     <div class="form-group col-md-3">
         <label>Nom du Hike</label>
@@ -312,9 +312,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group offset-8 col-md-2">
-        <input type="submit" class="btn btn-primary" value="Ajouter">
-    </div>
+    
 </div>
 
 

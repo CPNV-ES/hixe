@@ -120,11 +120,10 @@ class HikeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        @dd($request);
         $hike = Hike::find($id);
         $hike->name = $request->input('hikeName');
         $hike->meeting_location = $request->input('locationRdv');
-        $hike->meeting_date = $request->input('dateRdv').' '.$request->input('dateRdv');;
+        $hike->meeting_date = $request->input('dateRdv').' '.$request->input('timeRdv');
         $hike->beginning_date = $request->input('dateHike').' '.$request->input('startHike');
         $hike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
         $hike->min_num_participants = $request->input('minParticipants');
@@ -132,13 +131,29 @@ class HikeController extends Controller
         $hike->difficulty = $request->input('difficulty');
         $hike->additional_info = $request->input('addInfo');
         $hike->drop_in_altitude = $request->input('dropAltitude');
-        $hike->state_id = 1;
-        foreach($request->input('cours') as $item){
-            $hike->trainings()->attach($hike->id,[
 
-            ]);
+        // TO DO : Take the real state_id
+        $hike->state_id = 1;
+
+        $hike->save();
+
+        foreach($request->trainings as $training) {
+            $hike->trainings()->attach($training);
         }
+
+        foreach($request->equipment as $material) {
+            $hike->equipment()->attach($material);
+        }
+        $i=0;
+        foreach($request->hikestep as $hikestep) {
+            $i++;
+            $hike->destinations()->attach($hikestep,['order'=>$i]);
+        }
+
+        
+
     }
+    
 
     /**
      * Remove the specified resource from storage.
