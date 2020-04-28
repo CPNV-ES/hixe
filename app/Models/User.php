@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
   public $timestamps = false;
 
     protected $fillable = [
-        'firstname', 'lastname', 'email_address', 'member_number', 'birthdate', 'password', 'created_at', 'updated_at'
+        'firstname', 'lastname', 'email_address', 'github_id', 'member_number', 'birthdate', 'password', 'remember_token', 'created_at', 'updated_at'
     ];
 
     

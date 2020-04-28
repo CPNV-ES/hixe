@@ -30,7 +30,7 @@ Route::get('hikes_calendar/{date}','HikeCalendarController@show');
 Route::resource('multiHikes', 'MultiHikesController');
 
 //Authentification
-Route::get('login/github', 'Auth\LoginController@redirectToProvider');
-Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
-
+Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/callback', 'Auth\AuthController@handleProviderCallback');
+Route::post('auth/logout', 'Auth\AuthController@logoutUser');
 
