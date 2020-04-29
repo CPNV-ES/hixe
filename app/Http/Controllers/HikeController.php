@@ -13,6 +13,7 @@ use Redirect;
 use Session;
 use Auth;
 use App\Models\Destination;
+use App\Http\Requests\HikesPost;
 
 class HikeController extends Controller
 {
@@ -51,41 +52,54 @@ class HikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-       
-        $newHike = new Hike;
-        $newHike->name = $request->input('hikeName');
-        $newHike->meeting_location = $request->input('locationRdv');
-        $newHike->meeting_date = $request->input('dateRdv').' '.$request->input('timeRdv');
-        $newHike->beginning_date = $request->input('dateHike').' '.$request->input('startHike');
-        $newHike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
-        $newHike->min_num_participants = $request->input('minParticipants');
-        $newHike->max_num_participants = $request->input('maxParticipants');
-        $newHike->difficulty = $request->input('difficulty');
-        $newHike->additional_info = $request->input('addInfo');
-        $newHike->drop_in_altitude = $request->input('dropAltitude');
+    public function store(HikesPost $request){
+        dd($request);
+        $validatedData = $request->validated();
 
-        // TO DO : Take the real state_id
-        $newHike->state_id = 1;
-
-        $newHike->save();
-
-        foreach($request->trainings as $training) {
-            $newHike->trainings()->attach($training);
+        $bResult = true;
+        foreach($validatedData as $i){
+            if ($i == ""){
+                $bResult = false;
+            }
         }
+        
+        if($bResult == true){
+            $newHike = new Hike;
+            $newHike->name = $request->input('hikeName');
+            $newHike->meeting_location = $request->input('locationRdv');
+            $newHike->meeting_date = $request->input('dateRdv').' '.$request->input('timeRdv');
+            $newHike->beginning_date = $request->input('dateHike').' '.$request->input('startHike');
+            $newHike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
+            $newHike->min_num_participants = $request->input('minParticipants');
+            $newHike->max_num_participants = $request->input('maxParticipants');
+            $newHike->difficulty = $request->input('difficulty');
+            $newHike->additional_info = $request->input('addInfo');
+            $newHike->drop_in_altitude = $request->input('dropAltitude');
 
-        foreach($request->equipment as $material) {
-            $newHike->equipment()->attach($material);
-        }
-        $i=0;
-        foreach($request->hikestep as $hikestep) {
-            $i++;
-            $newHike->destinations()->attach($hikestep,['order'=>$i]);
-        }
+            // TO DO : Take the real state_id
+            $newHike->state_id = 1;
+            $newHike->save();
 
-        return redirect()->action("HikeController@index");
+            foreach($request->trainings as $training) {
+                $newHike->trainings()->attach($training);
+            }
+
+            foreach($request->equipment as $material) {
+                $newHike->equipment()->attach($material);
+            }
+            $i=0;
+            foreach($request->hikestep as $hikestep) {
+                $i++;
+                $newHike->destinations()->attach($hikestep,['order'=>$i]);
+            }
+            //return redirect()->action("HikeController@index");
+            dd("ok");
+        }else{
+            dd("et NON");
+        }
 
     }
+
 
 
     /**

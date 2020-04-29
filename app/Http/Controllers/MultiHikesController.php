@@ -29,7 +29,6 @@ class MultiHikesController extends Controller{
 
     public function store(MultiHikesPost $request){
       $validatedData = $request->validated();
-      dd($validatedData);
 
       $bResult = true;
       foreach($validatedData as $i){
@@ -40,7 +39,7 @@ class MultiHikesController extends Controller{
         }
       }
 
-      /*if($bResult == true){*/
+      if($bResult == true){
         for($i = 0; $i < count($request->input('name')); $i++){
           $hike = new Hike();
           $hike->name = $request->input('name')[$i];
@@ -59,15 +58,13 @@ class MultiHikesController extends Controller{
             'user_id' => $request->input('chef')[$i],
             'role_id'=> 1
           ]);
-        }/*
+        }
         //with doesn't working
         return Redirect::route('multiHikes.index', ['msg' => 'Success']);
       }else{
         //with doesn't working
         return Redirect::route('multiHikes.index', ['msg' => 'Errors']);
-      }*/
-
-      return Redirect::route('multiHikes.index');
+      }
       
       
       
