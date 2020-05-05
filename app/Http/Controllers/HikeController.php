@@ -14,6 +14,7 @@ use Session;
 use Auth;
 use App\Models\Destination;
 use App\Http\Requests\HikesPost;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class HikeController extends Controller
 {
@@ -25,8 +26,13 @@ class HikeController extends Controller
     public function index(Request $msg)
     {
         foreach($msg->request->all() as $message){
-            if($message != "Errors"){
-              Session::flash('success', "La course été supprimer");
+            switch($message){
+                case "Success":
+                    Session::flash('success', "La course été supprimé");
+                    break;
+                case "Add":
+                    Session::flash('success', "La course été Ajouté");
+                    break;
             }
           }
         $hikes = Hike::all();
@@ -53,17 +59,6 @@ class HikeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(HikesPost $request){
-        dd($request);
-        $validatedData = $request->validated();
-
-        $bResult = true;
-        foreach($validatedData as $i){
-            if ($i == ""){
-                $bResult = false;
-            }
-        }
-        
-        if($bResult == true){
             $newHike = new Hike;
             $newHike->name = $request->input('hikeName');
             $newHike->meeting_location = $request->input('locationRdv');
@@ -92,12 +87,7 @@ class HikeController extends Controller
                 $i++;
                 $newHike->destinations()->attach($hikestep,['order'=>$i]);
             }
-            //return redirect()->action("HikeController@index");
-            dd("ok");
-        }else{
-            dd("et NON");
-        }
-
+            return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
 
 
