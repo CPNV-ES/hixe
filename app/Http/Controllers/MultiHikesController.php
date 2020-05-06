@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Hike;
 use App\Models\User;
 use storage\framework\sessions;
-use App\Http\Requests\MultiHikesPost;
 use Redirect;
 use Session;
+use App\Http\Requests\HikesPost;
+use App\Http\Requests\MultiHikesPost;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class MultiHikesController extends Controller{
     public function index(Request $msg){
@@ -28,18 +30,7 @@ class MultiHikesController extends Controller{
     }
 
     public function store(MultiHikesPost $request){
-      $validatedData = $request->validated();
 
-      $bResult = true;
-      foreach($validatedData as $i){
-        foreach($i as $x){
-          if ($x == ""){
-            $bResult = false;
-          }
-        }
-      }
-
-      if($bResult == true){
         for($i = 0; $i < count($request->input('name')); $i++){
           $hike = new Hike();
           $hike->name = $request->input('name')[$i];
@@ -59,14 +50,6 @@ class MultiHikesController extends Controller{
             'role_id'=> 1
           ]);
         }
-        //with doesn't working
-        return Redirect::route('multiHikes.index', ['msg' => 'Success']);
-      }else{
-        //with doesn't working
-        return Redirect::route('multiHikes.index', ['msg' => 'Errors']);
-      }
-      
-      
-      
+          
     }
 }

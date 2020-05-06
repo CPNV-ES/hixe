@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-
 class HikesPost extends FormRequest
 {
     /**
