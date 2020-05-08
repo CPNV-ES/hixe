@@ -272,7 +272,7 @@
     <div class="form-group col-md-2">
         <label>Dénivelé</label>
         <div class="input-group">
-        <input name="dropAltitude" type="number" class="form-control" value="{{ $hike->drop_in_altitude ?? '' }}">
+        <input name="dropAltitude" min="1" type="number" class="form-control" value="{{ $hike->drop_in_altitude ?? '' }}">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     mètres
@@ -296,7 +296,7 @@
     <div class="form-group col-md-2">
         <label>Participants</label>
         <div class="input-group">
-            <input type="number" name="minParticipants" class="form-control" value="{{$hike->min_num_participants ?? ''}}">
+            <input type="number" name="minParticipants" min="1" class="form-control" value="{{$hike->min_num_participants ?? ''}}">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     min
