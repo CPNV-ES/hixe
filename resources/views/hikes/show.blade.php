@@ -24,25 +24,25 @@
         <hr class="my-4">
         <div class="row">
             <div class="col-sm-4">
-                <p class="lead">Meeting date</p>
+                <p class="lead">Date de la réunion</p>
                 <p>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="lead">Beginning date </p>
+                <p class="lead">Date de début</p>
                 <p>{{ date('d.m.Y à H:i:s', strtotime($hike->beginning_date)) }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="lead">Eding date</p>
+                <p class="lead">Date de fin</p>
                 <p>{{ date('d.m.Y à H:i:s', strtotime($hike->ending_date)) }}</p>
             </div>
         </div><br>
         <div class="row">
             <div class="col-sm-3">
-                <p class="lead">min participant</p>
+                <p class="lead">min participants</p>
                 <p> {{ $hike->min_num_participants }}</p>
             </div>
             <div class="col-sm-3">
-                <p class="lead">max participant</p>
+                <p class="lead">max participants</p>
                 <p>{{ $hike->max_num_participants }}</p>
             </div>
             <div class="col-sm-3">
@@ -70,7 +70,7 @@
         </div><hr class="my-4">
         <div class="row">
             <div class="col-sm-4">
-                <p class="lead">Participant</p>
+                <p class="lead">Participants</p>
                 <p> {{ implode(', ', $hike->users()->pluck('firstname')->toArray()) }}</p>
             </div>
             <div class="col-sm-4">
@@ -85,7 +85,7 @@
         <hr class="my-4">
         <div class="row">
             <div class="col-sm-12">
-                <h5>Meeting location </h5>
+                <h5>Lieu de la réunion</h5>
                 <p> {{ $hike->meeting_location }}</p>
                 <p><iframe width="1000" height="600" id="gmap_canvas" src="https://maps.google.com/maps?q={{ $hike->meeting_location }}&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></p>
             </div>
