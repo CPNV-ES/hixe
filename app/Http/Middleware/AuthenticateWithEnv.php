@@ -19,7 +19,7 @@ class AuthenticateWithEnv
      */
     public function handle($request, Closure $next)
     {
-        if(env('USER_FIRSTNAME') <> "" && env('USER_LASTNAME') <> "" && env('USER_EMAIL') <> "" && env('USER_PASSWORD') <> "" && env('USER_NUMBER') <> "" && env('USER_BIRTHDATE') <> ""){
+        /*if(env('USER_FIRSTNAME') <> "" && env('USER_LASTNAME') <> "" && env('USER_EMAIL') <> "" && env('USER_PASSWORD') <> "" && env('USER_NUMBER') <> "" && env('USER_BIRTHDATE') <> ""){
             //Test si l'utilsiateur du .env existe dans la DB
             if(User::where('email_address', '=', env('USER_EMAIL'))->exists()){
                 //Test la connexion avec l'utilisateur du .env
@@ -32,7 +32,7 @@ class AuthenticateWithEnv
             }
         }else{
             return response('Erreur 409 : .env incomplet.', 409);
-        }
+        }*/
         return $next($request);
     }
 }
