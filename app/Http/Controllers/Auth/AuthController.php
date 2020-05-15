@@ -55,14 +55,19 @@ class AuthController extends Controller
             return $authUser;
         }
 
-        $names = explode(" ", $githubUser->name);
-
-        return User::create([
-            'firstname' => $names[0],
-            'lastname' => $names[1],
-            'email_address' => $githubUser->email,
-            'github_id' => $githubUser->id,
-        ]);
+        if($githubUser->name){
+            return User::create([
+                'firstname' => $githubUser->name,
+                'email_address' => $githubUser->email,
+                'github_id' => $githubUser->id,
+            ]);
+        }else{
+            return User::create([
+                'firstname' => $githubUser->nickname,
+                'email_address' => $githubUser->email,
+                'github_id' => $githubUser->id,
+            ]);
+        }
     }
 
     public function logoutUser(){
