@@ -141,7 +141,7 @@ class HikeController extends Controller
      */
     public function update(HikesPost $request, $id)
     {
-        
+
         $hike = Hike::find($id);
         $hike->equipment()->detach();
         $hike->trainings()->detach();
@@ -162,7 +162,7 @@ class HikeController extends Controller
 
         $hike->save();
 
-        
+
         foreach($request->trainings as $training) {
             $hike->trainings()->attach($training);
         }
@@ -177,7 +177,7 @@ class HikeController extends Controller
         }
         return Redirect::route('hikes.show',$id);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -188,12 +188,32 @@ class HikeController extends Controller
     public function destroy($id)
     {
         $hike = Hike::find($id);
-        
+
         $hike->users()->detach();
         $hike->equipment()->detach();
         $hike->trainings()->detach();
         $hike->destinations()->detach();
         $hike->delete();
         return Redirect::route('hikes.index', ['msg' => 'Success']);
+    }
+
+    /**
+     * Receive AJAX request from search-predictable.js
+     * @param Request $request
+     */
+    function fetch(Request $request)
+    {
+        if($request->get('query'))
+        {
+            $query = $request->get('query');
+            $data = Destination::where('location', 'LIKE' $query["keyword"])->get(); // location is the column name
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach($data as $row)
+            {
+                $output .= '<li><a href="#"> .$row->location.' '</a></li>';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
     }
 }

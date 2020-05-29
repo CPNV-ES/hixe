@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @push('scripts')
     <script src="{{ asset('/js/hixe-form.js') }}"></script>
+    <script src="{{ asset('/js/search-predictable.js') }}"></script>
 @endpush
 
 @section('title', 'Accueil')
@@ -27,7 +28,7 @@
                     </ul>
                 </div>
             @endif
-            
+
         </div>
 
         <form method="POST" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
@@ -38,5 +39,5 @@
             </div>
         </form>
     </div>
-    
+
     @endsection

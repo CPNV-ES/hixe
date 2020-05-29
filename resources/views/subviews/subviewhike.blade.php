@@ -31,7 +31,7 @@
                         <td>
                             <select name="trainings[]" type="button" class="form-control" readonly>
                                 @foreach($trainings as $training)
-                                    <option 
+                                    <option
                                     @if($hiketraining->description == $training->description)
                                         selected
                                     @endif
@@ -157,7 +157,7 @@
                         <select name="equipment[]" type="button" class="form-control">
                             <option disabled selected><< Sélectionner un matériel >></option>
                             @foreach($equipment as $item)
-                                
+
                             <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
@@ -173,7 +173,7 @@
                 @endif
             </tbody>
         </table>
-        
+
     </div>
 </div>
 
@@ -187,7 +187,7 @@
                 <th></th>
             </thead>
                 <tbody>
-                
+
                 @if($hike->exists)
                 @foreach ($hike->destinations as $waypoint)
                 <tr>
@@ -198,14 +198,14 @@
                                     <i class="fas fa-map-marker-alt"> </i>
                                 </div>
                             </div>
-                           
+
                             <select name="hikestep[]" type="button" class="form-control">
                             @foreach($destinations as $destination)
-                            
-                                <option 
-                                
-                                @if($waypoint->location == $destination->location) 
-                                    selected  
+
+                                <option
+
+                                @if($waypoint->location == $destination->location)
+                                    selected
                                 @endif
                                 value="{{ $destination->id }}"
                                 >
@@ -227,7 +227,7 @@
                 @endforeach
                 @endif
                 @if(!$hike->exists)
-                
+
                 <tr>
                     <td>
                         <div class="input-group">
@@ -236,13 +236,17 @@
                                     <i class="fas fa-map-marker-alt"> </i>
                                 </div>
                             </div>
-                         
-                            <select name="hikestep[]" type="button" class="form-control">
+
+                            <!-- <select name="hikestep[]" type="button" class="form-control">
                                 <option disabled selected><< Sélectionner une destination >></option>
                             @foreach($destinations as $destination)
                                 <option value="{{ $destination->id }}">{{ $destination->location }}</option>
                             @endforeach
-                            </select>
+                            </select> -->
+
+                            <input type="text" name="destination[]" id="destination" class="form-control" placeholder="Destination"/>
+                            <div id="destinationList"></div>
+                            {{ csrf_field() }}
                         </div>
                     </td>
                     <td>
@@ -253,10 +257,10 @@
                         </div>
                     </td>
                 </tr>
-            
+
                 @endif
                 <tr id="destination">
-                    
+
                 </tr>
             </tbody>
         </table>
@@ -312,7 +316,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 
