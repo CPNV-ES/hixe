@@ -244,10 +244,13 @@
                             @endforeach
                             </select> -->
 
-                            <input type="text" name="destination[]" id="destination" class="form-control" placeholder="Destination" data-url="{{ route('autocomplete.fetch') }}"/>
-                            <div id="destinationList"></div>
+                            <input type="text" name="destination[]" id="destination-input" class="form-control" placeholder="Destination" data-url="{{ route('autocomplete.fetch') }}"/>
+
                             {{ csrf_field() }}
                         </div>
+                        <!-- Autocomplete location goes here -->
+                        <div id="destinationList"></div>
+
                     </td>
                     <td>
                         <div class="input-group-append">

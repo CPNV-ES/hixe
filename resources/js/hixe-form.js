@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var newStep = elem.cloneNode(true);
 
         // Unifll content
-        newStep.querySelector('select[type="button"]').value = '';
+        newStep.querySelector('input').value = '';
 
         // Show delete button
         newStep.querySelector('button').hidden = false;
@@ -83,5 +83,5 @@ document.addEventListener("DOMContentLoaded", function () {
         elem.parentNode.insertBefore(newStep, destination);
 
     }
-    
+
 });

@@ -1,4 +1,4 @@
-    $('#destination').keyup(function(){
+    $('#destination-input').keyup(function(){
         var query = $(this).val();
         if(query != '')
         {
@@ -16,7 +16,7 @@
     });
 
     $(document).on('click', 'li', function(){
-        $('#destination').val($(this).text());
+        $('#destination-input').val($(this).text());
         $('#destinationList').fadeOut();
     });
 
