@@ -244,7 +244,7 @@
                             @endforeach
                             </select> -->
 
-                            <input type="text" name="destination[]" id="destination" class="form-control" placeholder="Destination"/>
+                            <input type="text" name="destination[]" id="destination" class="form-control" placeholder="Destination" data-url="{{ route('autocomplete.fetch') }}"/>
                             <div id="destinationList"></div>
                             {{ csrf_field() }}
                         </div>
@@ -318,5 +318,4 @@
     </div>
 
 </div>
-
 

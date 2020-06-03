@@ -15,6 +15,7 @@ use Auth;
 use App\Models\Destination;
 use App\Http\Requests\HikesPost;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\DB;
 
 class HikeController extends Controller
 {
@@ -206,11 +207,13 @@ class HikeController extends Controller
         if($request->get('query'))
         {
             $query = $request->get('query');
-            $data = Destination::where('location', 'LIKE' $query["keyword"])->get(); // location is the column name
+            $data = DB::table('destinations')
+                ->where('location', 'LIKE', "%{$query}%") // location is the column name
+                ->get();
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach($data as $row)
             {
-                $output .= '<li><a href="#"> .$row->location.' '</a></li>';
+                $output .= '<li><a href="#">'.$row->location.'</a></li>';
             }
             $output .= '</ul>';
             echo $output;
