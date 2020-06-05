@@ -15,9 +15,7 @@ Route::get('/', 'HikeController@myHike');
 // Hikes
 Route::resource('hikes', 'HikeController');
 
-Route::get('Profile', function () {
-    return view('profile');
-});
+Route::resource('profile', 'UserController');
 
 // Hikes
 Route::resource('hikes', 'HikeController');
