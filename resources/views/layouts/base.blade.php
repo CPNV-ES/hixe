@@ -93,16 +93,14 @@
                     <p>Calendrier</p>
                 </div>
             </div>
+            @if(Auth::check())
                 <div class="col-md-1 containermenu" onclick="location.href='/Profile'">
                     <div class="menuright">
                         <i class="fas fa-user fa-2x"></i>
-                        @if(Auth::check())
-                            <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p>
-                            @else
-                            <p>Connexion</p>
-                        @endif
+                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p> 
                     </div>
                 </div>
+            @endif
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
