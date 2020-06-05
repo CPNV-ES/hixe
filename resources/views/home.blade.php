@@ -170,7 +170,7 @@
   </div>
 </div>
 @if (Auth::check())
-  <form action="auth/logout" method="POST">
+  <form action="/auth/logout" method="POST">
   @csrf
     <tr>
       <td><img alt="Github" width="25" heigth="25" src="img/github.png">{{Auth::user()->name}}<button type="submit">Logout</button></td>
