@@ -213,7 +213,7 @@ class HikeController extends Controller
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach($data as $row)
             {
-                $output .= '<li><a href="#">'.$row->location.'</a></li>';
+                $output .= '<li>'.$row->location.'</li>';
             }
             $output .= '</ul>';
             echo $output;

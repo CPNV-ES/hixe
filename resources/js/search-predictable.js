@@ -1,22 +1,22 @@
-    $('#destination-input').keyup(function(){
-        var query = $(this).val();
+document.querySelectorAll('.destination-input').forEach( input => {
+    input.addEventListener('keyup', () => {
+        var query = input.value;
         if(query != '')
         {
             var _token = $('input[name="_token"]').val();
             $.ajax({
-                url: $(this).data('url'),
+                url: input.dataset.url,
                 method:"POST",
                 data:{query:query, _token:_token},
                 success:function(data){
-                    $('#destinationList').fadeIn();
-                    $('#destinationList').html(data);
+                    destinationList.innerHTML = data;
+                    destinationList.querySelectorAll("li").forEach(li=> {
+                        li.addEventListener("click", () => {
+                            input.value = li.innerText;
+                        })
+                    });
                 }
             });
         }
     });
-
-    $(document).on('click', 'li', function(){
-        $('#destination-input').val($(this).text());
-        $('#destinationList').fadeOut();
-    });
-
+});
