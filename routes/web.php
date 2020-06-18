@@ -14,11 +14,9 @@ Route::get('/', 'HikeController@myHike');
 
 // Hikes
 Route::resource('hikes', 'HikeController');
+Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
 
 Route::resource('profile', 'UserController');
-
-// Hikes
-Route::resource('hikes', 'HikeController');
 
 // Calendar
 Route::get('hikes_calendar','HikeCalendarController@index');

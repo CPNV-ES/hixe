@@ -196,4 +196,13 @@ class HikeController extends Controller
         $hike->delete();
         return Redirect::route('hikes.index', ['msg' => 'Success']);
     }
+
+    public function registerToHike($hike_id){
+        $hike = Hike::find($hike_id);
+
+        $hike->users()->attach(Auth::user()->id, ['role_id'=> 3]);
+        
+        $hikes = Hike::all();
+        return view('hikes.index')->with(compact('hikes'));
+    }
 }
