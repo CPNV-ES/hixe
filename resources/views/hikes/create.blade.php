@@ -1,7 +1,6 @@
 @extends('layouts.base')
 @push('scripts')
     <script src="{{ asset('/js/hixe-form.js') }}"></script>
-    <script src="{{ asset('/js/search-predictable.js') }}"></script>
 @endpush
 
 @section('title', 'Accueil')

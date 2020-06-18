@@ -199,7 +199,7 @@ class HikeController extends Controller
     }
 
     /**
-     * Receive AJAX request from search-predictable.js
+     * Receive AJAX request from addSearchAutocomplete function in hixe-form.js
      * @param Request $request
      */
     function fetch(Request $request)
@@ -210,12 +210,12 @@ class HikeController extends Controller
             $data = DB::table('destinations')
                 ->where('location', 'LIKE', "%{$query}%") // location is the column name
                 ->get();
-            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            $output = '<div id="destinationList"><ul class="dropdown-menu" style="display:block; position:relative">';
             foreach($data as $row)
             {
                 $output .= '<li>'.$row->location.'</li>';
             }
-            $output .= '</ul>';
+            $output .= '</ul></div>';
             echo $output;
         }
     }

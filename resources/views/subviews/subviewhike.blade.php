@@ -249,7 +249,6 @@
                             {{ csrf_field() }}
                         </div>
                         <!-- Autocomplete location goes here -->
-                        <div id="destinationList"></div>
 
                     </td>
                     <td>
