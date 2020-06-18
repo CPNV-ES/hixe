@@ -10,7 +10,7 @@
 |
 */
 
-Route::get('/', 'HikeController@myHixe');
+Route::get('/', 'HikeController@myHike');
 
 // Hikes
 Route::resource('hikes', 'HikeController');
@@ -26,8 +26,6 @@ Route::get('hikes_calendar','HikeCalendarController@index');
 Route::get('hikes_calendar/{date}','HikeCalendarController@show');
 
 //multi hikes
-
-
 Route::resource('multiHikes', 'MultiHikesController');
 
 

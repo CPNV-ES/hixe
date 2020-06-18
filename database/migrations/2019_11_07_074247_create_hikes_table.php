@@ -23,7 +23,7 @@ class CreateHikesTable extends Migration {
 			$table->integer('min_num_participants')->nullable();
 			$table->integer('max_num_participants')->nullable();
 			$table->boolean('difficulty');
-			$table->string('additional_info', 45)->nullable();
+			$table->string('additional_info', 255)->nullable();
 			$table->integer('drop_in_altitude');
 			$table->integer('state_id')->unsigned()->index('fk_hikes_states1_idx');
 		});

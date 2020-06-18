@@ -117,7 +117,7 @@
                 <a class="nav-item nav-link" href="/hikes_calendar">Calendrier</a>
             <a class="nav-item nav-link" href="{{route('hikes.create')}}">Créer une course</a>
                 <a class="nav-item nav-link" href="{{route('hikes.index')}}">Liste des courses</a>
-                <a class="nav-item nav-link" href="{{route('multiHikes.create')}}">Créer multiples courses</a>
+                <a class="nav-item nav-link" href="{{route('multiHikes.index')}}">Créer multiples courses</a>
             </div>
         </div>
     </nav>
@@ -129,6 +129,7 @@
 </div>
 
 @stack('scripts')
+<script src="{{ asset('/js/utils.js') }}"></script>
 </body>
 
 
