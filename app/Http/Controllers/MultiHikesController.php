@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Hike;
 use App\Models\User;
 use storage\framework\sessions;
+use App\Http\Requests\MultiHikesPost;
 use Redirect;
 use Session;
 
@@ -26,19 +27,8 @@ class MultiHikesController extends Controller{
       //return view('multihikes.create');
     }
 
-    public function store(Request $request){
-      $validatedData = $request->validate([
-        'name' => 'required',
-        'meetingLocation' => 'required',
-        'meetingDate' => 'required',
-        'hikeDate' => 'required',
-        'start' => 'required',
-        'finish' => 'required',
-        'difficulty' => 'required',
-        'denivele' => 'required'
-        //|after_or_equal:start
-        //|after:start
-      ]);
+    public function store(MultiHikesPost $request){
+      $validatedData = $request->validated();
 
       $bResult = true;
       foreach($validatedData as $i){
@@ -75,8 +65,8 @@ class MultiHikesController extends Controller{
         //with doesn't working
         return Redirect::route('multiHikes.index', ['msg' => 'Errors']);
       }
-      
-      
-      
+
+
+
     }
 }

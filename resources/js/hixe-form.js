@@ -28,71 +28,47 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Add training row on click
+    // Add course row on click
     tableTraining.querySelector('tbody').addEventListener('change', evt => {
         addRow(evt.target.parentElement.parentElement.parentElement.parentElement);
         evt.target.addEventListener('change', evt => { evt.stopPropagation(); });
+
     });
 
-    // Delete training row on click
+
     tableTraining.querySelectorAll('button[name="remove-cours"]').forEach(element => {
         element.addEventListener("click", evt => {
             deleteRow(element.parentElement.parentElement.parentElement);
         });
     });
 
-
+    tableMaterial.querySelectorAll('button[name="remove-material"]').forEach(element => {
+        element.addEventListener("click", evt => {
+            deleteRow(element.parentElement.parentElement.parentElement);
+        });
+    });
     // Add material row on click
     tableMaterial.querySelector('tbody').addEventListener('change', evt => {
         addRow(evt.target.parentElement.parentElement.parentElement.parentElement);
         evt.target.addEventListener('change', evt => { evt.stopPropagation(); });
     });
 
-    // Delete material row
-    tableMaterial.querySelectorAll('button[name="remove-material"]').forEach(element => {
-        element.addEventListener("click", evt => {
-            deleteRow(element.parentElement.parentElement.parentElement);
-        });
-    });
-
-
-    // Add destination row on click
-    tableDestination.querySelector('tbody').addEventListener('change', evt => {
-        addRow(evt.target.parentElement.parentElement.parentElement.parentElement.parentElement);
-        evt.target.addEventListener('change', evt1 => { evt.stopPropagation(); });
-
-    });
-
-    // Delete destination row on click
-    tableDestination.querySelectorAll('button[name="remove-destination"]').forEach(element => {
-        element.addEventListener("click", evt => {
-            deleteRow(element.parentElement.parentElement.parentElement);
-        });
-    });
-
-    /*
-    /////////////////////////////////
-    Old functionality for navigation
-    /////////////////////////////////
     // Add step for hike
     addRowStep.addEventListener('click', function () {
         addStep(this.parentElement.querySelector('table tbody tr'));
-    });*/
+    });
 
-    /*
     document.querySelectorAll('tbody .btn').forEach(function (elem) {
         elem.addEventListener('click', function () {
-            deleteRow(elem.parentElement.parentElement.parentElement);
+            deleteRow(elem.parentElement.parentElement.parentElement)
         });
     });
-    */
 
-    /*
     function addStep(elem) {
         // Contain the step input
         var newStep = elem.cloneNode(true);
 
-        // Unfill content
+        // Unifll content
         newStep.querySelector('select[type="button"]').value = '';
 
         // Show delete button
@@ -107,5 +83,5 @@ document.addEventListener("DOMContentLoaded", function () {
         elem.parentNode.insertBefore(newStep, destination);
 
     }
-    */
+
 });

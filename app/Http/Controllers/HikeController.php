@@ -13,6 +13,8 @@ use Redirect;
 use Session;
 use Auth;
 use App\Models\Destination;
+use App\Http\Requests\HikesPost;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class HikeController extends Controller
 {
@@ -24,8 +26,13 @@ class HikeController extends Controller
     public function index(Request $msg)
     {
         foreach($msg->request->all() as $message){
-            if($message != "Errors"){
-              Session::flash('success', "La course été supprimer");
+            switch($message){
+                case "Success":
+                    Session::flash('success', "La course été supprimé");
+                    break;
+                case "Add":
+                    Session::flash('success', "La course été Ajouté");
+                    break;
             }
           }
         $hikes = Hike::all();
@@ -51,41 +58,38 @@ class HikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-       
-        $newHike = new Hike;
-        $newHike->name = $request->input('hikeName');
-        $newHike->meeting_location = $request->input('locationRdv');
-        $newHike->meeting_date = $request->input('dateRdv').' '.$request->input('timeRdv');
-        $newHike->beginning_date = $request->input('dateHike').' '.$request->input('startHike');
-        $newHike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
-        $newHike->min_num_participants = $request->input('minParticipants');
-        $newHike->max_num_participants = $request->input('maxParticipants');
-        $newHike->difficulty = $request->input('difficulty');
-        $newHike->additional_info = $request->input('addInfo');
-        $newHike->drop_in_altitude = $request->input('dropAltitude');
+    public function store(HikesPost $request){
+            $newHike = new Hike;
+            $newHike->name = $request->input('hikeName');
+            $newHike->meeting_location = $request->input('locationRdv');
+            $newHike->meeting_date = $request->input('dateRdv').' '.$request->input('timeRdv');
+            $newHike->beginning_date = $request->input('dateHike').' '.$request->input('startHike');
+            $newHike->ending_date = $request->input('dateHike').' '.$request->input('endHike');
+            $newHike->min_num_participants = $request->input('minParticipants');
+            $newHike->max_num_participants = $request->input('maxParticipants');
+            $newHike->difficulty = $request->input('difficulty');
+            $newHike->additional_info = $request->input('addInfo');
+            $newHike->drop_in_altitude = $request->input('dropAltitude');
 
-        // TO DO : Take the real state_id
-        $newHike->state_id = 1;
+            // TO DO : Take the real state_id
+            $newHike->state_id = 1;
+            $newHike->save();
 
-        $newHike->save();
+            foreach($request->trainings as $training) {
+                $newHike->trainings()->attach($training);
+            }
 
-        foreach($request->trainings as $training) {
-            $newHike->trainings()->attach($training);
-        }
-
-        foreach($request->equipment as $material) {
-            $newHike->equipment()->attach($material);
-        }
-        $i=0;
-        foreach($request->hikestep as $hikestep) {
-            $i++;
-            $newHike->destinations()->attach($hikestep,['order'=>$i]);
-        }
-
-        return redirect()->action("HikeController@index");
-
+            foreach($request->equipment as $material) {
+                $newHike->equipment()->attach($material);
+            }
+            $i=0;
+            foreach($request->hikestep as $hikestep) {
+                $i++;
+                $newHike->destinations()->attach($hikestep,['order'=>$i]);
+            }
+            return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
+
 
 
     /**
@@ -135,9 +139,9 @@ class HikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(HikesPost $request, $id)
     {
-        
+
         $hike = Hike::find($id);
         $hike->equipment()->detach();
         $hike->trainings()->detach();
@@ -158,7 +162,7 @@ class HikeController extends Controller
 
         $hike->save();
 
-        
+
         foreach($request->trainings as $training) {
             $hike->trainings()->attach($training);
         }
@@ -173,7 +177,7 @@ class HikeController extends Controller
         }
         return Redirect::route('hikes.show',$id);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -184,7 +188,7 @@ class HikeController extends Controller
     public function destroy($id)
     {
         $hike = Hike::find($id);
-        
+
         $hike->users()->detach();
         $hike->equipment()->detach();
         $hike->trainings()->detach();

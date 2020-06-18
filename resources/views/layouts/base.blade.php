@@ -24,6 +24,11 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- for show profile 
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+
 
 </head>
 
@@ -93,16 +98,14 @@
                     <p>Calendrier</p>
                 </div>
             </div>
-                <div class="col-md-1 containermenu" onclick="location.href='/Profile'">
+            @if(Auth::check())
+                <div class="col-md-1 containermenu" onclick="location.href='{{ route('profile.show',Auth::user()->id) }}'">
                     <div class="menuright">
                         <i class="fas fa-user fa-2x"></i>
-                        @if(Auth::check())
-                            <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p>
-                            @else
-                            <p>Connexion</p>
-                        @endif
+                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p> 
                     </div>
                 </div>
+            @endif
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

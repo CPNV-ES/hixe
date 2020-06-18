@@ -11,10 +11,10 @@
 
 <div class="container mt-4 table-responsive">
     @if (Session::has('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-        @endif
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
     <table  id="hikesTable"  class="table table table-hover mt-3">
         <thead>
             <tr>

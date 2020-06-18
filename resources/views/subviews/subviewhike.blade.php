@@ -50,7 +50,7 @@
                     @endforeach
                     <tr>
                         <td>
-                            <select id="test" name="trainings[]" type="button" class="form-control test">
+                            <select name="trainings[]" type="button" class="form-control">
                                 <option disabled selected><< Sélectionner un cours >></option>
                                 @foreach($trainings as $training)
                                     <option>{{$training->description}}</option>
@@ -181,7 +181,7 @@
 
     <div class="form-group col-md-4">
 
-        <table class="table" id="tableDestination">
+        <table class="table">
             <thead>
                 <th>Destination & Étapes</th>
                 <th></th>
@@ -218,7 +218,7 @@
                     </td>
                     <td>
                         <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" name="remove-destination">
+                            <button type="button" class="btn btn-outline-secondary" name="remove-material">
                                 X
                             </button>
                         </div>
@@ -227,7 +227,6 @@
                 @endforeach
                 @endif
                 @if(!$hike->exists)
-
                 <tr>
                     <td>
                         <div class="input-group">
@@ -236,7 +235,6 @@
                                     <i class="fas fa-map-marker-alt"> </i>
                                 </div>
                             </div>
-
                             <select name="hikestep[]" type="button" class="form-control">
                                 <option disabled selected><< Sélectionner une destination >></option>
                             @foreach($destinations as $destination)
@@ -253,9 +251,14 @@
                         </div>
                     </td>
                 </tr>
+
                 @endif
+                <tr id="destination">
+
+                </tr>
             </tbody>
         </table>
+        <input type="button" value="Ajouter une étape" class="btn btn-secondary" id="addRowStep"/>
     </div>
     <div class="form-group offset-4 col-md-4">
         <label>Informations additionnelles</label>
@@ -267,7 +270,7 @@
     <div class="form-group col-md-2">
         <label>Dénivelé</label>
         <div class="input-group">
-        <input name="dropAltitude" type="number" class="form-control" value="{{ $hike->drop_in_altitude ?? '' }}">
+        <input name="dropAltitude" min="1" type="number" class="form-control" value="{{ $hike->drop_in_altitude ?? '' }}">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     mètres
@@ -291,7 +294,7 @@
     <div class="form-group col-md-2">
         <label>Participants</label>
         <div class="input-group">
-            <input type="number" name="minParticipants" class="form-control" value="{{$hike->min_num_participants ?? ''}}">
+            <input type="number" name="minParticipants" min="1" class="form-control" value="{{$hike->min_num_participants ?? ''}}">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     min
@@ -307,7 +310,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 
