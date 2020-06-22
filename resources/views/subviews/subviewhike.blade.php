@@ -114,7 +114,7 @@
                     @foreach ($hike->equipment as $hikeitem)
                     <tr>
                         <td>
-                            <select name="equipment[]" type="button" class="form-control" readonly>
+                            <select name="equipment[]" type="button" class="form-control no-new-entry">
                                 @foreach($equipment as $item)
                                 <option
                                 @if($item->name == $hikeitem->name)
