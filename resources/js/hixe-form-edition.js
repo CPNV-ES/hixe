@@ -52,6 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     // Add material row on click
     tableMaterial.querySelector('tbody').addEventListener('change', evt => {
+        if(evt.target.classList.contains("no-new-entry")){
+            return;
+        }
         addRow(evt.target.parentElement.parentElement.parentElement.parentElement);
         evt.target.addEventListener('change', evt => { evt.stopPropagation(); });
     });
