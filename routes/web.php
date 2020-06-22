@@ -32,3 +32,7 @@ Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/callback', 'Auth\AuthController@handleProviderCallback');
 Route::post('auth/logout', 'Auth\AuthController@logoutUser');
 
+// Autocomplete input
+Route::post('hikes/create/fetch', 'HikeController@fetch')->name('autocomplete.fetch');
+
+

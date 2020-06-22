@@ -227,6 +227,7 @@
                 @endforeach
                 @endif
                 @if(!$hike->exists)
+
                 <tr>
                     <td>
                         <div class="input-group">
@@ -235,17 +236,24 @@
                                     <i class="fas fa-map-marker-alt"> </i>
                                 </div>
                             </div>
-                            <select name="hikestep[]" type="button" class="form-control">
+
+                            <!-- <select name="hikestep[]" type="button" class="form-control">
                                 <option disabled selected><< Sélectionner une destination >></option>
                             @foreach($destinations as $destination)
                                 <option value="{{ $destination->id }}">{{ $destination->location }}</option>
                             @endforeach
-                            </select>
+                            </select> -->
+
+                            <input type="text" name="hikestep[]" class="form-control destination-input" placeholder="Destination" data-url="{{ route('autocomplete.fetch') }}"/>
+
+                            {{ csrf_field() }}
                         </div>
+                        <!-- Autocomplete location goes here -->
+
                     </td>
                     <td>
                         <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" name="remove-destination" hidden>
+                            <button type="button" class="btn btn-outline-secondary" name="remove-material" hidden>
                                 X
                             </button>
                         </div>
@@ -310,6 +318,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 

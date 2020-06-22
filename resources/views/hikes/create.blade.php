@@ -27,7 +27,7 @@
                     </ul>
                 </div>
             @endif
-            
+
         </div>
 
         <form method="POST" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
@@ -38,5 +38,5 @@
             </div>
         </form>
     </div>
-    
+
     @endsection
