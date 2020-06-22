@@ -244,7 +244,7 @@
                             @endforeach
                             </select> -->
 
-                            <input type="text" name="destination[]" class="form-control destination-input" placeholder="Destination" data-url="{{ route('autocomplete.fetch') }}"/>
+                            <input type="text" name="hikestep[]" class="form-control destination-input" placeholder="Destination" data-url="{{ route('autocomplete.fetch') }}"/>
 
                             {{ csrf_field() }}
                         </div>

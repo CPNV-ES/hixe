@@ -83,15 +83,21 @@ class HikeController extends Controller
             foreach($request->equipment as $material) {
                 $newHike->equipment()->attach($material);
             }
+
+            // Create hiksteps entries
             $i=0;
-            foreach($request->hikestep as $hikestep) {
+            foreach($request->input('hikestep') as $hikestep) {
+                // Add destination in location column
+                $newDestination = new Destination();
+                $newDestination->location = $hikestep;
+                $newDestination->save();
+                // Attach newDestination to newHike
                 $i++;
-                $newHike->destinations()->attach($hikestep,['order'=>$i]);
+                $newHike->destinations()->attach($newDestination->id,['order'=>$i]);
             }
+
             return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
-
-
 
     /**
      * Display the specified resource.
