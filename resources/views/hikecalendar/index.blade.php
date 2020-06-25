@@ -8,7 +8,7 @@
 
 
 <div class="container">
-    <h1>Calendar testestestesssst</h1>
+    <h1>Calendar</h1>
 <div id='calendar'></div>
 </div>
 {{-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
