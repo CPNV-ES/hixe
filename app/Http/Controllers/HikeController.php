@@ -15,6 +15,7 @@ use Auth;
 use App\Models\Destination;
 use App\Http\Requests\HikesPost;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\DB;
 
 class HikeController extends Controller
 {
@@ -82,15 +83,21 @@ class HikeController extends Controller
             foreach($request->equipment as $material) {
                 $newHike->equipment()->attach($material);
             }
+
+            // Create hiksteps entries
             $i=0;
-            foreach($request->hikestep as $hikestep) {
+            foreach($request->input('hikestep') as $hikestep) {
+                // Add destination in location column
+                $newDestination = new Destination();
+                $newDestination->location = $hikestep;
+                $newDestination->save();
+                // Attach newDestination to newHike
                 $i++;
-                $newHike->destinations()->attach($hikestep,['order'=>$i]);
+                $newHike->destinations()->attach($newDestination->id,['order'=>$i]);
             }
+
             return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
-
-
 
     /**
      * Display the specified resource.
@@ -195,5 +202,27 @@ class HikeController extends Controller
         $hike->destinations()->detach();
         $hike->delete();
         return Redirect::route('hikes.index', ['msg' => 'Success']);
+    }
+
+    /**
+     * Receive AJAX request from addSearchAutocomplete function in hixe-form.js
+     * @param Request $request
+     */
+    function fetch(Request $request)
+    {
+        if($request->get('query'))
+        {
+            $query = $request->get('query');
+            $data = DB::table('destinations')
+                ->where('location', 'LIKE', "%{$query}%") // location is the column name
+                ->get();
+            $output = '<div id="destinationList"><ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach($data as $row)
+            {
+                $output .= '<li>'.$row->location.'</li>';
+            }
+            $output .= '</ul></div>';
+            echo $output;
+        }
     }
 }

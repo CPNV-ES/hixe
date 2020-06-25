@@ -83,6 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
         elem.parentNode.insertBefore(newStep, destination);
         addSearchAutocomplete();
     }
+<<<<<<< HEAD
+
+});
+=======
     addSearchAutocomplete();
 });
 
@@ -128,3 +132,4 @@ function addSearchAutocomplete(){
 
 
 
+>>>>>>> feature/destination-predictable

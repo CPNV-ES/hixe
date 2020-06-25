@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var newStep = elem.cloneNode(true);
 
         // Unifll content
-        newStep.querySelector('input').value = '';
+        newStep.querySelector('select[type="button"]').value = '';
 
         // Show delete button
         newStep.querySelector('button').hidden = false;
@@ -81,50 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Insert clone before destination id
         elem.parentNode.insertBefore(newStep, destination);
-        addSearchAutocomplete();
+
     }
-    addSearchAutocomplete();
+    
 });
-
-
-function addSearchAutocomplete(){
-    document.querySelectorAll('.destination-input').forEach( input => {
-        input.addEventListener('keyup', () => {
-            var query = input.value;
-            if(query != '')
-            {
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: input.dataset.url,
-                    method:"POST",
-                    data:{query:query, _token:_token},
-                    success:function(data){
-                        var list = input.parentElement.parentElement;
-
-                        // Remove redudant query content from autocomplete list
-                        if (document.querySelector('#destinationList'))
-                            destinationList.remove();
-
-                        // Convert DOM's text in HTML format
-                        var doc = new DOMParser().parseFromString(data, "text/xml");
-                        list.appendChild(doc.documentElement);
-
-                        list = destinationList;
-                        list.querySelectorAll("li").forEach(li=> {
-                            li.addEventListener("click", () => {
-                                input.value = li.innerHTML;
-
-                                // remove list's content when element selected
-                                list.remove();
-                            })
-                        });
-                    }
-                });
-            }
-        });
-    });
-}
-
-
-
-
