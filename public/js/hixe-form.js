@@ -81,11 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
-=======
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
->>>>>>> 329cde8f5be221f843c1a5ae9621322204292e2d
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -162,11 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Contain the step input
     var newStep = elem.cloneNode(true); // Unifll content
 
-<<<<<<< HEAD
     newStep.querySelector('input').value = ''; // Show delete button
-=======
-    newStep.querySelector('select[type="button"]').value = ''; // Show delete button
->>>>>>> 329cde8f5be221f843c1a5ae9621322204292e2d
 
     newStep.querySelector('button').hidden = false; // Delete step
 
@@ -175,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }); // Insert clone before destination id
 
     elem.parentNode.insertBefore(newStep, destination);
-<<<<<<< HEAD
     addSearchAutocomplete();
   }
 
@@ -222,25 +213,13 @@ function addSearchAutocomplete() {
 /***/ }),
 
 /***/ 1:
-=======
-  }
-});
-
-/***/ }),
-
-/***/ 3:
->>>>>>> 329cde8f5be221f843c1a5ae9621322204292e2d
 /*!*****************************************!*\
   !*** multi ./resources/js/hixe-form.js ***!
   \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Gael.OBERSON\Documents\GitHub\hixe\resources\js\hixe-form.js */"./resources/js/hixe-form.js");
-=======
-module.exports = __webpack_require__(/*! C:\Users\GOB\Documents\GitProjet\hixe\resources\js\hixe-form.js */"./resources/js/hixe-form.js");
->>>>>>> 329cde8f5be221f843c1a5ae9621322204292e2d
 
 
 /***/ })
