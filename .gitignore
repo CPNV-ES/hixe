@@ -34,3 +34,6 @@ yarn-error.log
 /public/package-lock.json
 /public/package.json
 /public/composer.lock
+
+# SSH
+/config/*_rsa*
