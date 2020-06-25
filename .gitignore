@@ -10,12 +10,27 @@ app/storage/
 public/storage
 public/hot
 storage/*.key
-.env.*.php
 .env.php
 .env
 Homestead.yaml
 Homestead.json
+package-lock.json
+
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 .idea/
+
+/.vscode
+/.vagrant
+/public/node_modules
+.bak
+.DS_Store
+composer.lock
+.phpunit.result.cache
+yarn-error.log
+/public/css
+/public/js
+/public/package-lock.json
+/public/package.json
+/public/composer.lock
