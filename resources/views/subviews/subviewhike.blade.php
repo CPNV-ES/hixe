@@ -29,9 +29,9 @@
                     @foreach ($hike->trainings as $hiketraining)
                     <tr>
                         <td>
-                            <select name="trainings[]" type="button" class="form-control" readonly>
+                            <select name="trainings[]" type="button" class="form-control no-new-entry">
                                 @foreach($trainings as $training)
-                                    <option 
+                                    <option
                                     @if($hiketraining->description == $training->description)
                                         selected
                                     @endif
@@ -114,7 +114,7 @@
                     @foreach ($hike->equipment as $hikeitem)
                     <tr>
                         <td>
-                            <select name="equipment[]" type="button" class="form-control" readonly>
+                            <select name="equipment[]" type="button" class="form-control no-new-entry">
                                 @foreach($equipment as $item)
                                 <option
                                 @if($item->name == $hikeitem->name)
@@ -157,7 +157,7 @@
                         <select name="equipment[]" type="button" class="form-control">
                             <option disabled selected><< Sélectionner un matériel >></option>
                             @foreach($equipment as $item)
-                                
+
                             <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
@@ -173,7 +173,7 @@
                 @endif
             </tbody>
         </table>
-        
+
     </div>
 </div>
 
@@ -187,7 +187,7 @@
                 <th></th>
             </thead>
                 <tbody>
-                
+
                 @if($hike->exists)
                 @foreach ($hike->destinations as $waypoint)
                 <tr>
@@ -198,14 +198,14 @@
                                     <i class="fas fa-map-marker-alt"> </i>
                                 </div>
                             </div>
-                           
+
                             <select name="hikestep[]" type="button" class="form-control">
                             @foreach($destinations as $destination)
-                            
-                                <option 
-                                
-                                @if($waypoint->location == $destination->location) 
-                                    selected  
+
+                                <option
+
+                                @if($waypoint->location == $destination->location)
+                                    selected
                                 @endif
                                 value="{{ $destination->id }}"
                                 >
@@ -227,7 +227,7 @@
                 @endforeach
                 @endif
                 @if(!$hike->exists)
-                
+
                 <tr>
                     <td>
                         <div class="input-group">
@@ -236,14 +236,20 @@
                                     <i class="fas fa-map-marker-alt"> </i>
                                 </div>
                             </div>
-                         
-                            <select name="hikestep[]" type="button" class="form-control">
+
+                            <!-- <select name="hikestep[]" type="button" class="form-control">
                                 <option disabled selected><< Sélectionner une destination >></option>
                             @foreach($destinations as $destination)
                                 <option value="{{ $destination->id }}">{{ $destination->location }}</option>
                             @endforeach
-                            </select>
+                            </select> -->
+
+                            <input type="text" name="hikestep[]" class="form-control destination-input" placeholder="Destination" data-url="{{ route('autocomplete.fetch') }}"/>
+
+                            {{ csrf_field() }}
                         </div>
+                        <!-- Autocomplete location goes here -->
+
                     </td>
                     <td>
                         <div class="input-group-append">
@@ -253,10 +259,10 @@
                         </div>
                     </td>
                 </tr>
-            
+
                 @endif
                 <tr id="destination">
-                    
+
                 </tr>
             </tbody>
         </table>
@@ -272,7 +278,7 @@
     <div class="form-group col-md-2">
         <label>Dénivelé</label>
         <div class="input-group">
-        <input name="dropAltitude" type="number" class="form-control" value="{{ $hike->drop_in_altitude ?? '' }}">
+        <input name="dropAltitude" min="1" type="number" class="form-control" value="{{ $hike->drop_in_altitude ?? '' }}">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     mètres
@@ -296,7 +302,7 @@
     <div class="form-group col-md-2">
         <label>Participants</label>
         <div class="input-group">
-            <input type="number" name="minParticipants" class="form-control" value="{{$hike->min_num_participants ?? ''}}">
+            <input type="number" name="minParticipants" min="1" class="form-control" value="{{$hike->min_num_participants ?? ''}}">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     min
@@ -312,7 +318,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 

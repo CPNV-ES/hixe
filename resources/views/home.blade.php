@@ -156,10 +156,26 @@
                       <a href="#" class="ForgetPwd">Forget Password?</a>
                   </div>
               </form>
+              @if (!Auth::check())
+              <form action="auth/logout" method="POST">
+              @csrf
+                  <tr>
+                      <td><a href="/auth/github"><img alt="Github" width="25" heigth="25" src="img/github.png">Login with GitHub</a></td>
+                  </tr>
+              @endif
           </div>
         @endif
       </div>
     </div>
   </div>
 </div>
+@if (Auth::check())
+  <form action="/auth/logout" method="POST">
+  @csrf
+    <tr>
+      <td><img alt="Github" width="25" heigth="25" src="img/github.png">{{Auth::user()->name}}<button type="submit">Logout</button></td>
+    </tr>
+  </form>
+@endif
+
 @endsection

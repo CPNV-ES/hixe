@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @push('scripts')
-    <script src="{{ asset('/js/hixe-form.js') }}"></script>
+    <script src="{{ asset('/js/hixe-form-edition.js') }}"></script>
 @endpush
 
 @section('title', 'Accueil')
@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center pagetitle">Créer une course</h1>
+                <h1 class="text-center pagetitle">Éditer une course</h1>
                 <h1 class="text-center pagetitle">Nom Hike</h1>
             </div>
         </div>

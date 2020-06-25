@@ -17,8 +17,17 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center pagetitle">Créer une course</h1>
-                <h1 class="text-center pagetitle">Nom Hike</h1>
             </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
         </div>
 
         <form method="POST" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
@@ -29,5 +38,5 @@
             </div>
         </form>
     </div>
-    
+
     @endsection

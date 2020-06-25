@@ -7,6 +7,15 @@
 <div class="content">
     <div class="row justify-content-md-center">
       <div class="col-md-12">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- MSG succes or error doesn't working -->
         @if (Session::has('success'))
             <div class="alert alert-success">
@@ -17,6 +26,15 @@
             <div class="alert alert-danger">
                 {{ Session::get('error') }}
             </div>
+        @endif
+        @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+          </div>
         @endif
         <div class="card">
           <div class="card-header">
@@ -53,7 +71,7 @@
                                         <td>
                                           <select class="form-control" name="chef[]">
                                           @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>  
+                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
                                           @endforeach
                                           </select>
                                         </td>
