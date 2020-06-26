@@ -12,11 +12,17 @@
 
 Route::get('/', 'HikeController@myHike');
 
+// Hikes registration
+Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
+
+
 // Calendar
 Route::get('hikes_calendar','HikeCalendarController@index');
 Route::get('hikes_calendar/{date}','HikeCalendarController@show');
 
-// Authentification
+
+
+//Authentification
 Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/callback', 'Auth\AuthController@handleProviderCallback');
 Route::post('auth/logout', 'Auth\AuthController@logoutUser');
@@ -26,8 +32,11 @@ Route::post('hikes/create/fetch', 'HikeController@fetch')->name('autocomplete.fe
 
 // Hikes
 Route::resource('hikes', 'HikeController');
+
+// Profile
 Route::resource('profile', 'UserController');
 
 // Multi hikes
 Route::resource('multiHikes', 'MultiHikesController');
+
 
