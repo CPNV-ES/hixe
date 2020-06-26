@@ -5,7 +5,7 @@ set :deploy_to, "/home/#{fetch(:swisscenter_username)}/#{fetch(:application)}"
 set :use_sudo, false
 set :laravel_set_acl_paths, false
 set :laravel_upload_dotenv_file_on_deploy, false
-set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader'
+set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --optimize-autoloader --no-plugins --no-scripts'
 
 SSHKit.config.command_map[:composer] = "php -d allow_url_fopen=true #{shared_path.join('composer')}"
 

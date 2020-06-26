@@ -30,6 +30,7 @@
                 <th scope="col">État</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,14 @@
                 <td>{{ $hike->min_num_participants }}</td>
                 <td>{{ $hike->max_num_participants }}</td>
                 <td>{{ $hike->state->name }}</td>
+                @if($hike->users()->where('user_id', Auth::user()->id)->exists())
+                    <td>Déjà inscrit</td>
+                    <!--<td><a href="#" class="btn btn-primary disabled"><i class="fas fa-plus-square"></i></a></td>-->
+                @elseif($hike->state->id == 2)
+                    <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
+                @else
+                    <td>Indisponible</td>
+                @endif
                 <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
                 <td>
                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">

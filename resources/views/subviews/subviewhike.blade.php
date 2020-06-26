@@ -53,7 +53,7 @@
                             <select name="trainings[]" type="button" class="form-control">
                                 <option disabled selected><< Sélectionner un cours >></option>
                                 @foreach($trainings as $training)
-                                    <option>{{$training->description}}</option>
+                                    <option value="{{$training->id}}">{{ $training->description }}>{{$training->description}}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -138,7 +138,7 @@
                             <select name="equipment[]" type="button" class="form-control">
                                 <option disabled selected><< Sélectionner un matériel >></option>
                                 @foreach($equipment as $item)
-                                <option>{{$item->name}}</option>
+                                <option value="{{$item->id}}">{{ $item->name }}>{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </td>
