@@ -65,7 +65,7 @@
         @if(Auth::check())
         <div class="col-md-10">
         <div class="title m-b-md">
-            <h3>Cours a venir</h3>
+            <h3>Courses à venir</h3>
         </div>
         <table  id="hikesTable"  class="table table table-hover mt-3">
             <thead>
@@ -105,7 +105,7 @@
             </tbody>
         </table>
         <div class="title m-b-md">
-            <h3>Cours Effectuer</h3>
+            <h3>Courses effectuées</h3>
         </div>
         <table  id="hikesTable"  class="table table table-hover mt-3">
             <thead>
