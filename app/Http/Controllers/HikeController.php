@@ -76,28 +76,40 @@ class HikeController extends Controller
             $newHike->state_id = 1;
             $newHike->save();
 
-            foreach($request->trainings as $training) {
-                $newHike->trainings()->attach($training);
+            if (isset($request->trainings)) {
+
+                foreach($request->trainings as $training) {
+                    $newHike->trainings()->attach($training);
+                }
+
             }
 
-            foreach($request->equipment as $material) {
-                $newHike->equipment()->attach($material);
+            if (isset($request->equipment)) {
+
+                foreach($request->equipment as $material) {
+                    $newHike->equipment()->attach($material);
+                }
             }
 
-            // Create hiksteps entries
-            $i=0;
-            foreach($request->input('hikestep') as $hikestep) {
-                // Add destination in location column
-                $newDestination = new Destination();
-                $newDestination->location = $hikestep;
-                $newDestination->save();
-                // Attach newDestination to newHike
-                $i++;
-                $newHike->destinations()->attach($newDestination->id,['order'=>$i]);
+            if (!empty($request->input('hikstep'))) {
+
+
+                // Create hiksteps entries
+                $i=0;
+                foreach($request->input('hikestep') as $hikestep) {
+                    // Add destination in location column
+                    $newDestination = new Destination();
+                    $newDestination->location = $hikestep;
+                    $newDestination->save();
+                    // Attach newDestination to newHike
+                    $i++;
+                    $newHike->destinations()->attach($newDestination->id,['order'=>$i]);
+                }
             }
 
             return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
+
 
     /**
      * Display the specified resource.
@@ -168,19 +180,32 @@ class HikeController extends Controller
         $hike->state_id = 1;
 
         $hike->save();
+        if (isset($request->trainings)) {
 
-
-        foreach($request->trainings as $training) {
-            $hike->trainings()->attach($training);
+            foreach ($request->trainings as $training) {
+                $hike->trainings()->attach($training);
+            }
         }
 
-        foreach($request->equipment as $material) {
-            $hike->equipment()->attach($material);
+        if (isset($request->equipment)) {
+
+            foreach ($request->equipment as $material) {
+                $hike->equipment()->attach($material);
+            }
         }
-        $i=0;
-        foreach($request->hikestep as $hikestep) {
-            $i++;
-            $hike->destinations()->attach($hikestep,['order'=>$i]);
+
+        if (!empty($request->input('hikstep'))) {
+
+            $i=0;
+            foreach($request->input('hikestep') as $hikestep) {
+                // Add destination in location column
+                $newDestination = new Destination();
+                $newDestination->location = $hikestep;
+                $newDestination->save();
+                // Attach newDestination to newHike
+                $i++;
+                $hike->destinations()->attach($newDestination->id,['order'=>$i]);
+            }
         }
         return Redirect::route('hikes.show',$id);
     }
@@ -208,7 +233,7 @@ class HikeController extends Controller
         $hike = Hike::find($hike_id);
 
         $hike->users()->attach(Auth::user()->id, ['role_id'=> 3]);
-        
+
         $hikes = Hike::all();
         return view('hikes.index')->with(compact('hikes'));
     }
