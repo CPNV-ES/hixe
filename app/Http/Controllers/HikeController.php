@@ -204,6 +204,15 @@ class HikeController extends Controller
         return Redirect::route('hikes.index', ['msg' => 'Success']);
     }
 
+    public function registerToHike($hike_id){
+        $hike = Hike::find($hike_id);
+
+        $hike->users()->attach(Auth::user()->id, ['role_id'=> 3]);
+        
+        $hikes = Hike::all();
+        return view('hikes.index')->with(compact('hikes'));
+    }
+
     /**
      * Receive AJAX request from addSearchAutocomplete function in hixe-form.js
      * @param Request $request
