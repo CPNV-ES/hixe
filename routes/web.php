@@ -32,7 +32,7 @@ Route::post('hikes/create/fetch', 'HikeController@fetch')->name('autocomplete.fe
 
 // Hikes
 //Route::resource('hikes', 'HikeController');
-Route::post('hikes','HikeController@store ')->name('hikes.store');
+Route::post('hikes','HikeController@store')->name('hikes.store');
 Route::get('hikes','HikeController@index')->name('hikes.index');
 Route::get('hikes/create','HikeController@create')->name('hikes.create');
 Route::put('hikes/{hike}','HikeController@update')->name('hikes.update');
