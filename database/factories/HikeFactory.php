@@ -7,17 +7,19 @@ use App\Models\State;
 use Faker\Generator as Faker;
 
 $factory->define(Hike::class, function (Faker $faker) {
-  return [
-    'name' => 'test',
-    'meeting_location' => $faker->streetAddress,
-    'meeting_date' => $faker->dateTimeBetween('now', '+1 month'),
-    'beginning_date' => $faker->dateTimeBetween('now', '+1 day'),
-    'ending_date' => $faker->dateTimeBetween('now', '+10 day'),
-    'min_num_participants' => $faker->randomNumber(1),
-    'max_num_participants' => $faker->randomNumber(1),
-    'difficulty' => 5,
-    'additional_info' => $faker->text(45),
-    'drop_in_altitude' => $faker->randomNumber(3),
-    'state_id' => State::all()->random()->id
-  ];
+    $names = ["Pigne d'Arolla","Glacier du Tour","Miroir d'Argentine","Dent de Morcles","Becs du Bosson","Dent Blanche","Mont Tendre","Aiguilles Vertes","Aiguilles Rouges","Zinal Rothorn","Weisshorn","Bishorn","Castor et Pollux","Plaine Morte"];
+    $bdate = $faker->dateTimeBetween('-1 month', '+1 month');
+    return [
+        'name' => $names[rand(0,count($names)-1)],
+        'meeting_location' => $faker->streetAddress,
+        'meeting_date' => $bdate,
+        'beginning_date' => $bdate,
+        'ending_date' => $bdate,
+        'min_num_participants' => $faker->randomNumber(1),
+        'max_num_participants' => $faker->randomNumber(1),
+        'difficulty' => rand(1,5),
+        'additional_info' => $faker->text(45),
+        'drop_in_altitude' => $faker->randomNumber(3),
+        'state_id' => State::all()->random()->id
+    ];
 });

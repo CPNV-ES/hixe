@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Models\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /*
@@ -23,7 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email_address' => $faker->unique()->safeEmail,
         'member_number' => $faker->numberBetween($min = 1000, $max = 9000),
         'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'password' => $faker->password,
+        'password' => Hash::make('Pa$$w0rd'),
         'created_at' => now(),
         'updated_at' => now(),
     ];
