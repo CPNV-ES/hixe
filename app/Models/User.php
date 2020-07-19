@@ -14,7 +14,7 @@ class User extends Authenticatable
   ];
 
   public function hikes(){
-      return $this->belongsToMany(Hike::Class)->withPivot('role_id');
+      return $this->belongsToMany(Hike::class)->withPivot('role_id')->orderBy('meeting_date','desc');
   }
 
 }
