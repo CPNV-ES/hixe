@@ -39,4 +39,7 @@ yarn-error.log
 /config/*_rsa*
 
 *.bak
-public
+public/css
+public/js
+public/lib
+
