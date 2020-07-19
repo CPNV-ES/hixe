@@ -13,17 +13,6 @@ class HikeTrainingTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('hike_training')->insert([
-            'hike_id' => Hike::all()->random()->id,
-            'training_id' => Training::all()->random()->id,
-        ]);
-        DB::table('hike_training')->insert([
-            'hike_id' => Hike::all()->random()->id,
-            'training_id' => Training::all()->random()->id,
-        ]);
-        DB::table('hike_training')->insert([
-            'hike_id' => Hike::all()->random()->id,
-            'training_id' => Training::all()->random()->id,
-        ]);
+        for ($i = 0; $i < 10; $i++) DB::table('hike_training')->insert(['hike_id' => Hike::all()->random()->id,'training_id' => Training::all()->random()->id]);
     }
 }

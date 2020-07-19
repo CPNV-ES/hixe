@@ -13,13 +13,25 @@ class EquipmentTableSeeder extends Seeder
     public function run()
     {
         Equipment::insert([
-            'name' => 'Snowmobile',
+            'name' => 'Crampons',
         ]);
         Equipment::insert([
-            'name' => 'Sticks',
+            'name' => 'Casque',
         ]);
         Equipment::insert([
-            'name' => 'Bindings',
+            'name' => 'Piolet',
+        ]);
+        Equipment::insert([
+            'name' => 'Corde 30m',
+        ]);
+        Equipment::insert([
+            'name' => 'Baudrier',
+        ]);
+        Equipment::insert([
+            'name' => 'Kit Crevasse',
+        ]);
+        Equipment::insert([
+            'name' => 'Mousquetons',
         ]);
     }
 }
