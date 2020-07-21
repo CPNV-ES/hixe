@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\User;
 
 
 use Socialite;
@@ -20,7 +20,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider()
     {
-        
+
         return Socialite::driver('github')->stateless()->redirect();
     }
 

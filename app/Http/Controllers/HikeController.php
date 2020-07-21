@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Equipment;
-use App\Models\Training;
+use App\Equipment;
+use App\Training;
 use Illuminate\Http\Request;
-use App\Models\Hike;
-use App\Models\User;
-use App\Models\Role;
+use App\Hike;
+use App\User;
+use App\Role;
 use storage\framework\sessions;
 use Redirect;
 use Session;
 use Auth;
-use App\Models\Destination;
+use App\Destination;
 use App\Http\Requests\HikesPost;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\Support\Facades\DB;
@@ -120,13 +120,6 @@ class HikeController extends Controller
     public function show($id){
         $hike = Hike::find($id);
         return view('hikes.show')->with(compact('hike'));
-    }
-
-    public function myHikes(){
-        $hikes = Hike::whereHas('users', function ($u) {
-            $u->where('users.id',Auth::user()->id);
-        })->orderBy('meeting_date','desc')->get();
-        return view('home')->with(compact('hikes'));
     }
 
     /**
