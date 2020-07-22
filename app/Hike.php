@@ -46,4 +46,9 @@ class Hike extends Model
     }
 
     #endregion
+    #region --- Business ---
+    public function isOpen() {
+        return $this->state->id <= 2; // TODO Make it right using slugs
+    }
+    #endregion
 }
