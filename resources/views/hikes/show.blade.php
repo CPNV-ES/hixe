@@ -52,6 +52,12 @@
                     @endif
                 </div>
             @endif
+            @if($hike->additional_info)
+                <hr>
+                <div class="text-left">
+                    {{ $hike->additional_info }}
+                </div>
+            @endif
         </div>
     </div>
 @endsection
