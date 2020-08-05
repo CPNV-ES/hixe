@@ -1,181 +1,38 @@
-<style>
-.select:hover{
-    cursor: pointer;
-}
-  .login-container{
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-.login-form-1{
-    padding: 5%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-}
-.login-form-1 h3{
-    text-align: center;
-    color: #333;
-}
-.login-form-2{
-    padding: 5%;
-    background: #0062cc;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-}
-.login-form-2 h3{
-    text-align: center;
-    color: #fff;
-}
-.login-container form{
-    padding: 10%;
-}
-.btnSubmit
-{
-    width: 50%;
-    border-radius: 1rem;
-    padding: 1.5%;
-    border: none;
-    cursor: pointer;
-}
-.login-form-1 .btnSubmit{
-    font-weight: 600;
-    color: #fff;
-    background-color: #0062cc;
-}
-.login-form-2 .btnSubmit{
-    font-weight: 600;
-    color: #0062cc;
-    background-color: #fff;
-}
-.login-form-2 .ForgetPwd{
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-}
-.login-form-1 .ForgetPwd{
-    color: #0062cc;
-    font-weight: 600;
-    text-decoration: none;
-}
-</style>
 @extends('layouts.base')
 
 @section('title', 'Accueil')
 
 @section('body-content')
-<div class="content">
-    <div class="row justify-content-md-center mt-4">
-        @if(Auth::check())
-        <div class="col-md-10">
-        <div class="title m-b-md">
-            <h3>Courses à venir</h3>
-        </div>
-        <table  id="hikesTable"  class="table table table-hover mt-3">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Guide</th>
-                    <th scope="col">Inscrits</th>
-                    <th scope="col">Minimum</th>
-                    <th scope="col">Maximum</th>
-                    <th scope="col">État</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach ($hikes as $hike)
-                @if($hike->beginning_date > date('Y-m-d H:i:s'))
-                    @php
-                    $arrayEmail = implode(', ', $hike->users()->pluck('email_address')->toArray());
-                    $emailCo = Auth::user()->email_address;
-                    $pos = strpos($arrayEmail, $emailCo);
-                    @endphp
-                    @if($pos == true || $pos == Auth::user()->email_address)
-                        <tr class="select" onclick="location='{{ route('hikes.show', $hike) }}'">
-                            <th scope="row">{{ $hike->name }}</th>
-                            <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
-                            <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-                            <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                            <td>{{ $hike->users()->count() }}</td>
-                            <td>{{ $hike->min_num_participants }}</td>
-                            <td>{{ $hike->max_num_participants }}</td>
-                            <td>{{ $hike->state->name }}</td>
+    <div class="content">
+        <div class="row justify-content-md-center mt-4">
+            <div class="col-md-10">
+                @if(Auth::check())
+                    <h2>Mes courses</h2>
+                    <table id="hikesTable" class="table table table-hover mt-3">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Guide</th>
+                            <th scope="col">Avec</th>
                         </tr>
-                    @endif
+                        </thead>
+                        <tbody>
+                        @foreach ($hikes as $hike)
+                            <tr class="select {{ $hike->beginning_date < date('Y-m-d H:i:s') ? 'oldhike' : '' }}" onclick="location.href='{{ route('hikes.show', $hike) }}'">
+                                <th scope="row">{{ $hike->name }}</th>
+                                <td>{{ \Carbon\Carbon::parse($hike->meeting_date)->format('d M Y') }}</td>
+                                <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                                <td>{{ implode(', ', $hike->users()->pluck('firstname')->toArray()) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <h1>Vous devez vous authentifier pour accéder à Hixe</h1>
                 @endif
-            @endforeach
-            </tbody>
-        </table>
-        <div class="title m-b-md">
-            <h3>Courses effectuées</h3>
+            </div>
         </div>
-        <table  id="hikesTable"  class="table table table-hover mt-3">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Guide</th>
-                    <th scope="col">Inscrits</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach ($hikes as $hike)
-                @if($hike->beginning_date < date('Y-m-d H:i:s'))
-                    @php
-                    $arrayEmail = implode(', ', $hike->users()->pluck('email_address')->toArray());
-                    $emailCo = Auth::user()->email_address;
-                    $pos = strpos($arrayEmail, $emailCo);
-                    @endphp
-                    @if($pos == true || $pos == Auth::user()->email_address)
-                        <tr class="select" onclick="location.href='{{ route('hikes.show', $hike) }}'">
-                            <th scope="row">{{ $hike->name }}</th>
-                            <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
-                            <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-                            <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                            <td>{{ implode(', ', $hike->users()->pluck('firstname')->toArray()) }}</td>
-                        </tr>
-                    @endif
-                @endif
-            @endforeach
-            </tbody>
-        </table>
-        @else
-        <div class="col-md-4">
-          <div class="col-md-12 login-form-1">
-              <h3>Login</h3>
-              <form>
-                  <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Your Email *" value="" />
-                  </div>
-                  <div class="form-group">
-                      <input type="password" class="form-control" placeholder="Your Password *" value="" />
-                  </div>
-                  <div class="form-group">
-                      <input type="submit" class="btnSubmit" value="Login" />
-                  </div>
-                  <div class="form-group">
-                      <a href="#" class="ForgetPwd">Forget Password?</a>
-                  </div>
-              </form>
-              @if (!Auth::check())
-              <form action="auth/logout" method="POST">
-              @csrf
-                  <tr>
-                      <td><a href="/auth/github"><img alt="Github" width="25" heigth="25" src="img/github.png">Login with GitHub</a></td>
-                  </tr>
-              @endif
-          </div>
-        @endif
-      </div>
     </div>
-  </div>
-</div>
-@if (Auth::check())
-  <form action="/auth/logout" method="POST">
-  @csrf
-    <tr>
-      <td><img alt="Github" width="25" heigth="25" src="img/github.png">{{Auth::user()->name}}<button type="submit">Logout</button></td>
-    </tr>
-  </form>
-@endif
 
 @endsection

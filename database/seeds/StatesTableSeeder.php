@@ -13,19 +13,19 @@ class StatesTableSeeder extends Seeder
     public function run()
     {
         State::insert([
-            'name' => 'Draft',
+            'name' => 'Préparation',
         ]);
         State::insert([
-            'name' => 'Open',
+            'name' => 'Inscriptions',
         ]);
         State::insert([
-            'name' => 'Confirmed',
+            'name' => 'Prête',
         ]);
         State::insert([
-            'name' => 'Cancelled',
-        ])
-        ;State::insert([
-        'name' => 'Done',
+            'name' => 'Annulée',
+        ]);
+        State::insert([
+            'name' => 'Effectuée',
         ]);
     }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserEdit;
-use App\Models\User;
-use App\Models\Role;
+use App\User;
+use App\Role;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class UserController extends Controller
@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**

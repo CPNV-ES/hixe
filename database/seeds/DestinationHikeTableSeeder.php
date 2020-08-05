@@ -13,17 +13,8 @@ class DestinationHikeTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('destination_hike')->insert([
-            'hike_id' => Hike::all()->random()->id,
-            'destination_id' => Destination::all()->random()->id,
-        ]);
-        DB::table('destination_hike')->insert([
-            'hike_id' => Hike::all()->random()->id,
-            'destination_id' => Destination::all()->random()->id,
-        ]);
-        DB::table('destination_hike')->insert([
-            'hike_id' => Hike::all()->random()->id,
-            'destination_id' => Destination::all()->random()->id,
-        ]);
+        foreach (Hike::all() as $hike) {
+            for ($i = 0; $i < rand(1,4); $i++) DB::table('destination_hike')->insert(['hike_id' => $hike->id, 'destination_id' => Destination::all()->random()->id]);
+        }
     }
 }
