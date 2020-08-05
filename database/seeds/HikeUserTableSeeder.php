@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\Hike;
-use App\Models\Role;
+use App\User;
+use App\Hike;
+use App\Role;
 
 class HikeUserTableSeeder extends Seeder
 {

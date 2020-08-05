@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Hike;
-use App\Models\State;
+use App\Hike;
+use App\State;
 use Faker\Generator as Faker;
 
 $factory->define(Hike::class, function (Faker $faker) {

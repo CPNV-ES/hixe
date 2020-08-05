@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Training;
-use App\Models\Hike;
+use App\Training;
+use App\Hike;
 
 class HikeTrainingTableSeeder extends Seeder
 {

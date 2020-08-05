@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Hike;
+use App\Hike;
 use Illuminate\Database\Seeder;
 
 class HikesTableSeeder extends Seeder
@@ -13,6 +13,6 @@ class HikesTableSeeder extends Seeder
   public function run()
   {
     $nbToCreate = 12;
-    factory(App\Models\Hike::class, $nbToCreate)->create();
+    factory(App\Hike::class, $nbToCreate)->create();
   }
 }
