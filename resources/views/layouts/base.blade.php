@@ -86,6 +86,7 @@
                 <div class="text-center">
                     <a href="/"><img class="img-fluid" src="{{ asset('img/logo.png') }}"/></a>
                 </div>
+                <div class="versiontag">v{{ config('app.version') }}</div>
             </div>
             <div class="col-md-8">
                 <div class="text-center">
