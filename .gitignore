@@ -29,8 +29,6 @@ package-lock.json
 composer.lock
 .phpunit.result.cache
 yarn-error.log
-/public/css
-/public/js
 /public/package-lock.json
 /public/package.json
 /public/composer.lock
@@ -39,7 +37,4 @@ yarn-error.log
 /config/*_rsa*
 
 *.bak
-public/css
-public/js
-public/lib
 log
