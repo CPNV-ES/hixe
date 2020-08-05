@@ -8,7 +8,7 @@
 # server "db.example.com", user: "deploy", roles: %w{db}
 
 set :swisscenter_username, "hixe2020"
-set :swisscenter_servername, "web21.swisscenter.com"
+set :swisscenter_servername, "hixe.mycpnv.ch"
 
 set :repo_url, "git@github.com:CPNV-ES/hixe.git"
 

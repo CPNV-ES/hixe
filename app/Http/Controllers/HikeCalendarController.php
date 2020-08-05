@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Hike;
-use App\Models\User;
-use App\Models\Role;
+use App\Hike;
+use App\User;
+use App\Role;
 
 class HikeCalendarController extends Controller
 {

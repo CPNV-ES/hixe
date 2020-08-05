@@ -10,7 +10,7 @@
 |
 */
 
-Route::get('/', 'HikeController@myHike');
+Route::get('/', 'HomeController@index');
 
 // Hikes registration
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');

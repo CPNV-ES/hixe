@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Hike;
-use App\Models\User;
+use App\Hike;
+use App\User;
 use storage\framework\sessions;
 use App\Http\Requests\MultiHikesPost;
 use Redirect;

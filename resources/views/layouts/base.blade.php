@@ -24,7 +24,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- for show profile 
+    <!-- for show profile
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
@@ -86,6 +86,7 @@
                 <div class="text-center">
                     <a href="/"><img class="img-fluid" src="{{ asset('img/logo.png') }}"/></a>
                 </div>
+                <div class="versiontag">v{{ config('app.version') }}</div>
             </div>
             <div class="col-md-8">
                 <div class="text-center">
@@ -93,16 +94,18 @@
                 </div>
             </div>
             <div class="col-md-1 containermenu">
-                <div class="menuright">
-                    <i class="far fa-calendar-alt fa-2x"></i>
-                    <p>Calendrier</p>
-                </div>
+                <a class="nav-item nav-link" href="/hikes_calendar">
+                    <div class="menuright">
+                        <i class="far fa-calendar-alt fa-2x"></i>
+                        <p>Calendrier</p>
+                    </div>
+                </a>
             </div>
             @if(Auth::check())
                 <div class="col-md-1 containermenu" onclick="location.href='{{ route('profile.show',Auth::user()->id) }}'">
                     <div class="menuright">
                         <i class="fas fa-user fa-2x"></i>
-                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p> 
+                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p>
                     </div>
                 </div>
             @endif
@@ -116,11 +119,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/">Mes Courses <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="/hikes_calendar">Calendrier</a>
-            <a class="nav-item nav-link" href="{{route('hikes.create')}}">Créer une course</a>
-                <a class="nav-item nav-link" href="{{route('hikes.index')}}">Liste des courses</a>
-                <a class="nav-item nav-link" href="{{route('multiHikes.index')}}">Créer multiples courses</a>
+                <a class="nav-item nav-link {{ $view_name == 'home' ? 'active' : '' }}" href="/">Mes Courses <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link {{ $view_name == 'hikes-index' ? 'active' : '' }}" href="{{route('hikes.index')}}">Liste des courses</a>
+                <a class="nav-item nav-link {{ $view_name == 'hikes-create' ? 'active' : '' }}" href="{{route('hikes.create')}}">Créer une course</a>
+                <a class="nav-item nav-link {{ $view_name == 'multihikes-create' ? 'active' : '' }}" href="{{route('multiHikes.index')}}">Créer plusieurs courses</a>
             </div>
         </div>
     </nav>
