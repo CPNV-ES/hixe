@@ -27,16 +27,15 @@
                     </ul>
                 </div>
             @endif
-
         </div>
 
         <form method="POST" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
             @csrf
-            @include('subviews/subviewhike', $hike)
-            <div class="form-group offset-8 col-md-2">
-                <input type="submit" class="btn btn-primary" value="Sauvegarder">
+            @include('hikes.editmaindata')
+            <div class="form-row justify-content-center">
+                <input type="submit" class="btn btn-primary" value="Créer">
             </div>
         </form>
     </div>
 
-    @endsection
+@endsection
