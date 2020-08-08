@@ -66,7 +66,7 @@ class HikeController extends Controller
     public function store(HikesPost $request)
     {
         $newHike = new Hike;
-        $newHike->name = $request->input('name');
+        $newHike->name = $request->input('hikeName');
         $newHike->meeting_location = $request->input('meetloc');
         $newHike->meeting_date = $request->input('meettime');
         $newHike->beginning_date = $request->input('starttime');
@@ -78,9 +78,9 @@ class HikeController extends Controller
         $newHike->drop_in_altitude = $request->input('elevation');
         $newHike->state_id = 1; // TODO : use slugs
         $newHike->save();
+        $newHike->trainings()->attach([1,2]);
         return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
-
 
     /**
      * Display the specified resource.
@@ -118,7 +118,6 @@ class HikeController extends Controller
      */
     public function update(HikesPost $request, $id)
     {
-        dd($request->input('removetraining'));
         $hike = Hike::find($id);
         $hike->equipment()->detach();
         $hike->trainings()->detach();

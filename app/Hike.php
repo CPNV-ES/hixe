@@ -50,5 +50,26 @@ class Hike extends Model
     public function isOpen() {
         return $this->state->id <= 2; // TODO Make it right using slugs
     }
+
+    /**
+     * Tells if a training is required for this hike
+     * @param Training $t
+     * @return false|int|string
+     */
+    public function trainingIsRequired (Training $t)
+    {
+        return array_search($t->id, $this->trainings()->pluck('trainings.id')->toArray()) !== FALSE;
+    }
+
+    /**
+     * Tells if this hike goes by the destination
+     * @param Destination $d
+     * @return false|int|string
+     */
+    public function goesBy (Destination $d)
+    {
+        return array_search($d->id, $this->destinations()->pluck('destinations.id')->toArray()) !== FALSE;
+    }
+
     #endregion
 }

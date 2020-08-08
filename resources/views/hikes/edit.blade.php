@@ -12,7 +12,6 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous">
     </script>
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">

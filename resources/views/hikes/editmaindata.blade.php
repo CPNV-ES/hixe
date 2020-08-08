@@ -5,14 +5,14 @@
             <input type="text" name="hikeName" class="form-control col-6" value="{{ $hike->name }}">
         </div>
         @if ($states->count > 1) // Show dropdown only if it really offers a choice
-            <div class="form-row">
-                <label class="form-control bg-transparent col-2 border-0 text-right">Etat</label>
-                <select name="state" class="form-control col-2">
-                    @foreach($states as $state)
-                        <option value="{{$state->id}}" {{ $hike->state ? ($hike->state->id == $state->id ? 'selected' : '') : '' }}>{{ $state->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+        <div class="form-row">
+            <label class="form-control bg-transparent col-2 border-0 text-right">Etat</label>
+            <select name="state" class="form-control col-2">
+                @foreach($states as $state)
+                    <option value="{{$state->id}}" {{ $hike->state ? ($hike->state->id == $state->id ? 'selected' : '') : '' }}>{{ $state->name }}</option>
+                @endforeach
+            </select>
+        </div>
         @endif
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous à </label>
@@ -41,6 +41,14 @@
         <div class="form-row">
             <label class="form-control bg-transparent border-0 text-center">Divers</label>
             <textarea class="form-control" name="info">{{ $hike->additional_info }}</textarea>
+        </div>
+        <div class="form-row">
+            <label class="form-control bg-transparent border-0 text-center">Cours requis</label>
+            <select multiple name="trainings[]">
+                @foreach($trainings as $training)
+                    <option value="{{ $training->id }}" {{ $hike->trainingIsRequired($training) ? 'selected' : '' }}>{{ $training->description }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 </div>
