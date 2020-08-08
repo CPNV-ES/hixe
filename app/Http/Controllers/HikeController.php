@@ -52,9 +52,8 @@ class HikeController extends Controller
         $equipment = Equipment::all();
         $trainings = Training::all();
         $destinations = Destination::all();
-        $states = State::find(1); // Preparation TODO use slug instead of id
         $hike = new Hike();
-        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations', 'states'));
+        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations'));
     }
 
     /**
@@ -78,7 +77,7 @@ class HikeController extends Controller
         $newHike->drop_in_altitude = $request->input('elevation');
         $newHike->state_id = 1; // TODO : use slugs
         $newHike->save();
-        $newHike->trainings()->attach([1,2]);
+        $newHike->trainings()->attach($request->input('trainings'));
         return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
 
@@ -105,8 +104,9 @@ class HikeController extends Controller
         $equipment = Equipment::all();
         $trainings = Training::all();
         $destinations = Destination::all();
+        $states = State::all();
         $hike = Hike::find($id);
-        return view('hikes.edit')->with(compact(['hike', 'trainings', 'equipment', 'destinations']));
+        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'destinations','states'));
     }
 
     /**
@@ -123,47 +123,19 @@ class HikeController extends Controller
         $hike->trainings()->detach();
         $hike->destinations()->detach();
         $hike->name = $request->input('hikeName');
-        $hike->meeting_location = $request->input('locationRdv');
-        $hike->meeting_date = $request->input('dateRdv') . ' ' . $request->input('timeRdv');
-        $hike->beginning_date = $request->input('dateHike') . ' ' . $request->input('startHike');
-        $hike->ending_date = $request->input('dateHike') . ' ' . $request->input('endHike');
-        $hike->min_num_participants = $request->input('minParticipants');
-        $hike->max_num_participants = $request->input('maxParticipants');
+        $hike->meeting_location = $request->input('meetloc');
+        $hike->meeting_date = $request->input('meettime');
+        $hike->beginning_date = $request->input('starttime');
+        $hike->ending_date = $request->input('endtime');
+        $hike->min_num_participants = $request->input('minp');
+        $hike->max_num_participants = $request->input('maxp');
         $hike->difficulty = $request->input('difficulty');
-        $hike->additional_info = $request->input('addInfo');
-        $hike->drop_in_altitude = $request->input('dropAltitude');
-
-        // TO DO : Take the real state_id
-        $hike->state_id = 1;
-
+        $hike->additional_info = $request->input('info');
+        $hike->drop_in_altitude = $request->input('elevation');
+        $hike->state_id = $request->input('state');
+        $hike->trainings()->attach($request->input('trainings'));
         $hike->save();
-        if (isset($request->trainings)) {
 
-            foreach ($request->trainings as $training) {
-                $hike->trainings()->attach($training);
-            }
-        }
-
-        if (isset($request->equipment)) {
-
-            foreach ($request->equipment as $material) {
-                $hike->equipment()->attach($material);
-            }
-        }
-
-        if (!empty($request->input('hikstep'))) {
-
-            $i = 0;
-            foreach ($request->input('hikestep') as $hikestep) {
-                // Add destination in location column
-                $newDestination = new Destination();
-                $newDestination->location = $hikestep;
-                $newDestination->save();
-                // Attach newDestination to newHike
-                $i++;
-                $hike->destinations()->attach($newDestination->id, ['order' => $i]);
-            }
-        }
         return Redirect::route('hikes.show', $id);
     }
 

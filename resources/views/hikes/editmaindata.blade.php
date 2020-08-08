@@ -4,7 +4,7 @@
             <label class="form-control bg-transparent col-2 border-0 text-right">Nom</label>
             <input type="text" name="hikeName" class="form-control col-6" value="{{ $hike->name }}">
         </div>
-        @if ($states->count > 1) // Show dropdown only if it really offers a choice
+        @if (isset($states))
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Etat</label>
             <select name="state" class="form-control col-2">
@@ -22,9 +22,9 @@
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Départ</label>
-            <input type="datetime-local" name="starttime" class="form-control col-3" value="{{ $hike->beginning_date ? \Carbon\Carbon::parse($hike->meeting_date)->format('Y-m-d\TH:i') : '' }}">
+            <input type="datetime-local" name="starttime" class="form-control col-3" value="{{ $hike->beginning_date ? \Carbon\Carbon::parse($hike->beginning_date)->format('Y-m-d\TH:i') : '' }}">
             <label class="form-control bg-transparent col-2 border-0 text-right">Retour prévu</label>
-            <input type="datetime-local" name="endtime" class="form-control col-3" value="{{ $hike->ending_date ? \Carbon\Carbon::parse($hike->meeting_date)->format('Y-m-d\TH:i') : '' }}">
+            <input type="datetime-local" name="endtime" class="form-control col-3" value="{{ $hike->ending_date ? \Carbon\Carbon::parse($hike->ending_date)->format('Y-m-d\TH:i') : '' }}">
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Dénivelé</label>

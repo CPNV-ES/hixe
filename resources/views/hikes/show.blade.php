@@ -48,7 +48,7 @@
                         <p>Equipement obligatoire : {{ implode(', ', $hike->equipment()->pluck('name')->toArray()) }}</p>
                     @endif
                     @if (count($hike->trainings) > 0)
-                        <p>Cours requis : {{ implode(', ', $hike->trainings()->pluck('certificate_number')->toArray()) }}</p>
+                        <p>Cours requis : {{ implode(', ', $hike->trainings()->pluck('description')->toArray()) }}</p>
                     @endif
                 </div>
             @endif
