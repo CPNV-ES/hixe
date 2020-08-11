@@ -77,7 +77,10 @@ class HikeController extends Controller
         $newHike->drop_in_altitude = $request->input('elevation');
         $newHike->state_id = 1; // TODO : use slugs
         $newHike->save();
-        $newHike->trainings()->attach($request->input('trainings'));
+        $selectedequipment = array_keys($request->input('equipment'));
+        $selectedtrainings = array_keys($request->input('trainings'));
+        $newHike->trainings()->attach($selectedtrainings);
+        $newHike->equipment()->attach($selectedequipment);
         return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
 
@@ -118,6 +121,9 @@ class HikeController extends Controller
      */
     public function update(HikesPost $request, $id)
     {
+        $selectedequipment = array_keys($request->input('equipment'));
+        $selectedtrainings = array_keys($request->input('trainings'));
+
         $hike = Hike::find($id);
         $hike->equipment()->detach();
         $hike->trainings()->detach();
@@ -132,8 +138,8 @@ class HikeController extends Controller
         $hike->additional_info = $request->input('info');
         $hike->drop_in_altitude = $request->input('elevation');
         $hike->state_id = $request->input('state');
-        $hike->trainings()->attach($request->input('trainings'));
-        $hike->equipment()->attach($request->input('equipment'));
+        $hike->trainings()->attach($selectedtrainings);
+        $hike->equipment()->attach($selectedequipment);
         $hike->save();
 
         return Redirect::route('hikes.show', $id);

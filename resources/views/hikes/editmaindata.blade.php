@@ -44,20 +44,20 @@
         </div>
         <div class="form-row">
             <div class="col-6">
-                <label class="form-control bg-transparent border-0 text-center">Cours requis</label>
-                <select class="col-10" multiple name="trainings[]" size="{{ $trainings->count() }}">
-                    @foreach($trainings as $training)
-                        <option value="{{ $training->id }}" {{ $hike->trainingIsRequired($training) ? 'selected' : '' }}>{{ $training->description }}</option>
-                    @endforeach
-                </select>
+                <label class="form-control bg-transparent border-0 text-left">Cours requis</label>
+                @foreach($trainings as $training)
+                    <div class="row">
+                        <input type="checkbox" class="form-control col-1" name="trainings[{{ $training->id }}]" {{ $hike->trainingIsRequired($training) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $training->description }}</label>
+                    </div>
+                @endforeach
             </div>
             <div class="col-6">
-                <label class="form-control bg-transparent border-0 text-center">Matériel requis</label>
-                <select class="col-10" multiple name="equipment[]" size="{{ $equipment->count() }}">
-                    @foreach($equipment as $eqp)
-                        <option value="{{ $eqp->id }}"{{ $hike->equipmentIsRequired($eqp) ? 'selected' : '' }}>{{ $eqp->name }}</option>
-                    @endforeach
-                </select>
+                <label class="form-control bg-transparent border-0 text-left">Matériel requis</label>
+                @foreach($equipment as $eqp)
+                    <div class="row">
+                        <input type="checkbox" class="form-control col-1" name="equipment[{{ $eqp->id }}]" {{ $hike->equipmentIsRequired($eqp) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $eqp->name }}</label>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
