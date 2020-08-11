@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Destination;
+use App\Destination;
 
 class DestinationsTableSeeder extends Seeder
 {

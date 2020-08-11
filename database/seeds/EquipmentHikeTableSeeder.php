@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Equipment;
-use App\Models\Hike;
+use App\Equipment;
+use App\Hike;
 
 class EquipmentHikeTableSeeder extends Seeder
 {
