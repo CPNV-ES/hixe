@@ -121,7 +121,6 @@ class HikeController extends Controller
         $hike = Hike::find($id);
         $hike->equipment()->detach();
         $hike->trainings()->detach();
-        $hike->destinations()->detach();
         $hike->name = $request->input('hikeName');
         $hike->meeting_location = $request->input('meetloc');
         $hike->meeting_date = $request->input('meettime');
@@ -134,6 +133,7 @@ class HikeController extends Controller
         $hike->drop_in_altitude = $request->input('elevation');
         $hike->state_id = $request->input('state');
         $hike->trainings()->attach($request->input('trainings'));
+        $hike->equipment()->attach($request->input('equipment'));
         $hike->save();
 
         return Redirect::route('hikes.show', $id);
@@ -153,7 +153,6 @@ class HikeController extends Controller
         $hike->users()->detach();
         $hike->equipment()->detach();
         $hike->trainings()->detach();
-        $hike->destinations()->detach();
         $hike->delete();
         return Redirect::route('hikes.index', ['msg' => 'Success']);
     }

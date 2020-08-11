@@ -62,13 +62,13 @@ class Hike extends Model
     }
 
     /**
-     * Tells if this hike goes by the destination
-     * @param Destination $d
+     * Tells if a piece of equipment is required for this hike
+     * @param Equipment $t
      * @return false|int|string
      */
-    public function goesBy (Destination $d)
+    public function equipmentIsRequired (Equipment $e)
     {
-        return array_search($d->id, $this->destinations()->pluck('destinations.id')->toArray()) !== FALSE;
+        return array_search($e->id, $this->equipment()->pluck('equipment.id')->toArray()) !== FALSE;
     }
 
     #endregion
