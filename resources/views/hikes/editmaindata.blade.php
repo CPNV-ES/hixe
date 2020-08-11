@@ -15,6 +15,14 @@
             </div>
         @endif
         <div class="form-row">
+            <label class="form-control bg-transparent col-2 border-0 text-right">Guide</label>
+            <select class="form-control col-4" name="guide">
+                @foreach($users as $user)
+                    <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous à </label>
             <input type="text" name="meetloc" class="form-control col-4" value="{{ $hike->meeting_location }}">
             <label class="form-control bg-transparent col-1 border-0 text-right"> le </label>

@@ -52,8 +52,9 @@ class HikeController extends Controller
         $equipment = Equipment::all();
         $trainings = Training::all();
         $destinations = Destination::all();
+        $users = User::all(); // to allow picking a guide
         $hike = new Hike();
-        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations'));
+        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations','users'));
     }
 
     /**
@@ -77,10 +78,11 @@ class HikeController extends Controller
         $newHike->drop_in_altitude = $request->input('elevation');
         $newHike->state_id = 1; // TODO : use slugs
         $newHike->save();
-        $selectedequipment = array_keys($request->input('equipment'));
-        $selectedtrainings = array_keys($request->input('trainings'));
+        $selectedequipment = $request->input('equipment') != null ? array_keys($request->input('equipment')) : [];
+        $selectedtrainings = $request->input('equipment') != null ? array_keys($request->input('trainings')) : [];
         $newHike->trainings()->attach($selectedtrainings);
         $newHike->equipment()->attach($selectedequipment);
+        $newHike->setOneGuide($request->input('guide'));
         return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
 
@@ -106,10 +108,10 @@ class HikeController extends Controller
     {
         $equipment = Equipment::all();
         $trainings = Training::all();
-        $destinations = Destination::all();
         $states = State::all();
         $hike = Hike::find($id);
-        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'destinations','states'));
+        $users = User::all(); // to allow picking a guide
+        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment','states','users'));
     }
 
     /**
@@ -121,9 +123,6 @@ class HikeController extends Controller
      */
     public function update(HikesPost $request, $id)
     {
-        $selectedequipment = array_keys($request->input('equipment'));
-        $selectedtrainings = array_keys($request->input('trainings'));
-
         $hike = Hike::find($id);
         $hike->equipment()->detach();
         $hike->trainings()->detach();
@@ -138,8 +137,11 @@ class HikeController extends Controller
         $hike->additional_info = $request->input('info');
         $hike->drop_in_altitude = $request->input('elevation');
         $hike->state_id = $request->input('state');
+        $selectedequipment = $request->input('equipment') != null ? array_keys($request->input('equipment')) : [];
+        $selectedtrainings = $request->input('equipment') != null ? array_keys($request->input('trainings')) : [];
         $hike->trainings()->attach($selectedtrainings);
         $hike->equipment()->attach($selectedequipment);
+        $hike->setOneGuide($request->input('guide'));
         $hike->save();
 
         return Redirect::route('hikes.show', $id);

@@ -25,6 +25,11 @@ class Hike extends Model
         return $this->users()->where('role_id', 1);
     }
 
+    public function participants()
+    {
+        return $this->users()->where('role_id', '!=', 1);
+    }
+
     public function destinations()
     {
         return $this->belongsToMany(Destination::class)->withPivot('order');
@@ -71,5 +76,14 @@ class Hike extends Model
         return array_search($e->id, $this->equipment()->pluck('equipment.id')->toArray()) !== FALSE;
     }
 
+    /**
+     * Define the user with id = $gid as the sole guide of the hike
+     * @param $gid
+     */
+    public function setOneGuide($gid)
+    {
+        $this->guides()->detach();
+        $this->guides()->attach($gid, ['role_id' => 1]);
+    }
     #endregion
 }
