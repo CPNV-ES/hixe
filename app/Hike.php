@@ -25,6 +25,11 @@ class Hike extends Model
         return $this->users()->where('role_id', 1);
     }
 
+    public function participants()
+    {
+        return $this->users()->where('role_id', '!=', 1);
+    }
+
     public function destinations()
     {
         return $this->belongsToMany(Destination::class)->withPivot('order');
@@ -49,6 +54,36 @@ class Hike extends Model
     #region --- Business ---
     public function isOpen() {
         return $this->state->id <= 2; // TODO Make it right using slugs
+    }
+
+    /**
+     * Tells if a training is required for this hike
+     * @param Training $t
+     * @return false|int|string
+     */
+    public function trainingIsRequired (Training $t)
+    {
+        return array_search($t->id, $this->trainings()->pluck('trainings.id')->toArray()) !== FALSE;
+    }
+
+    /**
+     * Tells if a piece of equipment is required for this hike
+     * @param Equipment $t
+     * @return false|int|string
+     */
+    public function equipmentIsRequired (Equipment $e)
+    {
+        return array_search($e->id, $this->equipment()->pluck('equipment.id')->toArray()) !== FALSE;
+    }
+
+    /**
+     * Define the user with id = $gid as the sole guide of the hike
+     * @param $gid
+     */
+    public function setOneGuide($gid)
+    {
+        $this->guides()->detach();
+        $this->guides()->attach($gid, ['role_id' => 1]);
     }
     #endregion
 }

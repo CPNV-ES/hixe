@@ -17,13 +17,5 @@ class DatabaseSeeder extends Seeder
     $this->call([EquipmentTableSeeder::class]);
     $this->call([DestinationsTableSeeder::class]);
     $this->call([TrainingsTableSeeder::class]);
-    $this->call([HikesTableSeeder::class]);
-
-    //Intermediate tables seeding
-    $this->call([HikeUserTableSeeder::class]);
-    $this->call([HikeTrainingTableSeeder::class]);
-    $this->call([DestinationHikeTableSeeder::class]);
-    $this->call([EquipmentHikeTableSeeder::class]);
-
   }
 }
