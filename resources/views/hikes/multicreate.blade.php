@@ -60,7 +60,7 @@
                                             <td>Min Pers.</td>
                                             <td>Max Pers.</td>
                                             <td>Dénivelé*</td>
-                                            <td>Difficulé*</td>
+                                            <td>Difficulté*</td>
                                             <td>Info</td>
                                             </thead>
                                             <tbody>
