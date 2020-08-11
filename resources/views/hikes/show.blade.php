@@ -36,7 +36,7 @@
             <hr>
             <div class="text-left">
                 <p>Guides : {{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</p>
-                <p>Participants : {{ implode(', ', $hike->users()->pluck('firstname')->toArray()) }}</p>
+                <p>Participants : {{ implode(', ', $hike->participants()->pluck('firstname')->toArray()) }}</p>
                 @if ($hike->isOpen())
                     <p>Nombre prévu : entre {{ $hike->min_num_participants }} et {{ $hike->max_num_participants }}</p>
                 @endif
@@ -48,7 +48,7 @@
                         <p>Equipement obligatoire : {{ implode(', ', $hike->equipment()->pluck('name')->toArray()) }}</p>
                     @endif
                     @if (count($hike->trainings) > 0)
-                        <p>Cours requis : {{ implode(', ', $hike->trainings()->pluck('certificate_number')->toArray()) }}</p>
+                        <p>Cours requis : {{ implode(', ', $hike->trainings()->pluck('description')->toArray()) }}</p>
                     @endif
                 </div>
             @endif
