@@ -8,8 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $hikes = Auth::user()->hikes;
+    public function index()
+    {
+        // This fixes an issue where the Auth::user is not defined when first 
+        // launching the app.
+        // TODO: Find a better way to fix this
+        $hikes = Auth::user() ? Auth::user()->hikes : [];
+
         return view('home')->with(compact('hikes'));
     }
 }
