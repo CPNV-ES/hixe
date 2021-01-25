@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/js/hikes-editmaindata.js": "/js/hikes-editmaindata.js",
     "/js/hixe-form.js": "/js/hixe-form.js",
     "/js/hixe-form-edition.js": "/js/hixe-form-edition.js",
     "/js/utils.js": "/js/utils.js",
@@ -10,6 +11,8 @@
     "/lib/fullcalendar/fullcalendar.min.js": "/lib/fullcalendar/fullcalendar.min.js",
     "/lib/fullcalendar/fullcalendar.min.css": "/lib/fullcalendar/fullcalendar.min.css",
     "/lib/moment/moment.min.js": "/lib/moment/moment.min.js",
+    "/lib/bootstrap-datepicker/bootstrap-datepicker.min.js": "/lib/bootstrap-datepicker/bootstrap-datepicker.min.js",
+    "/lib/bootstrap-datepicker/bootstrap-datepicker.min.css": "/lib/bootstrap-datepicker/bootstrap-datepicker.min.css",
     "/lib/datatables/min/jquery.dataTables.min.js": "/lib/datatables/min/jquery.dataTables.min.js",
     "/lib/datatables/js/dataTables.bootstrap4.min.js": "/lib/datatables/js/dataTables.bootstrap4.min.js",
     "/lib/datatables/css/dataTables.bootstrap4.min.css": "/lib/datatables/css/dataTables.bootstrap4.min.css",

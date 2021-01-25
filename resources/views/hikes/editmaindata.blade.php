@@ -1,3 +1,11 @@
+@push('scripts')
+    <script src="{{ asset('/js/hikes-editmaindata.js') }}"></script>
+@endpush
+
+<script src="/lib/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+<link rel="stylesheet" href="/lib/bootstrap-datepicker/bootstrap-datepicker.min.css">
+
 <div class="container mt-4 table-responsive text-center">
     <div class="jumbotron pt-2 pb-2">
         <div class="form-row">
@@ -24,9 +32,15 @@
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous à </label>
-            <input type="text" name="meetloc" class="form-control col-4" value="{{ $hike->meeting_location }}">
+            {{-- <input type="text" name="meetloc" class="form-control col-4" value="{{ $hike->meeting_location }}"> --}}
+            <div class='input-group date' id='datetimepicker3'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+             </div>
             <label class="form-control bg-transparent col-1 border-0 text-right"> le </label>
-            <input type="datetime-local" name="meettime" class="form-control col-3" value="{{ $hike->meeting_date ? \Carbon\Carbon::parse($hike->meeting_date)->format('Y-m-d\TH:i') : '' }}">
+            <input type="date" name="meettime" class="form-control col-3" value="{{ $hike->meeting_date ? \Carbon\Carbon::parse($hike->meeting_date)->format('Y-m-d\TH:i') : '' }}">
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Départ</label>
