@@ -2,9 +2,17 @@
     <script src="{{ asset('/js/hikes-editmaindata.js') }}"></script>
 @endpush
 
-<script src="/lib/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="/lib/moment/moment.min.js"></script>
+<script src="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
-<link rel="stylesheet" href="/lib/bootstrap-datepicker/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+
+<style>
+    @font-face { 
+        font-family: "Glyphicons Halflings"; 
+        src: url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.woff") format("woff"), 
+    }
+</style>
 
 <div class="container mt-4 table-responsive text-center">
     <div class="jumbotron pt-2 pb-2">
@@ -31,12 +39,12 @@
             </select>
         </div>
         <div class="form-row">
-            <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous à </label>
+            <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous</label>
             {{-- <input type="text" name="meetloc" class="form-control col-4" value="{{ $hike->meeting_location }}"> --}}
-            <div class='input-group date' id='datetimepicker3'>
+            <div class='input-group date' id='datetimepicker1'>
                 <input type='text' class="form-control" />
                 <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
+                    <span class="far fa-calendar-alt fa-2x"></span>
                 </span>
              </div>
             <label class="form-control bg-transparent col-1 border-0 text-right"> le </label>
