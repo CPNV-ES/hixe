@@ -12,7 +12,7 @@
     "/lib/fullcalendar/fullcalendar.min.css": "/lib/fullcalendar/fullcalendar.min.css",
     "/lib/moment/moment.min.js": "/lib/moment/moment.min.js",
     "/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js": "/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js",
-    "/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker-standalone.css": "/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker-standalone.css",
+    "/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css": "/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css",
     "/lib/datatables/min/jquery.dataTables.min.js": "/lib/datatables/min/jquery.dataTables.min.js",
     "/lib/datatables/js/dataTables.bootstrap4.min.js": "/lib/datatables/js/dataTables.bootstrap4.min.js",
     "/lib/datatables/css/dataTables.bootstrap4.min.css": "/lib/datatables/css/dataTables.bootstrap4.min.css",
