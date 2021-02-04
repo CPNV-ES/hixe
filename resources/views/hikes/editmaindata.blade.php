@@ -44,25 +44,17 @@
             <label class="form-control bg-transparent col-2 border-0 text-right">le</label>
             <div class='input-group mb-3 date col-3 datetimepicker' data-input="#meettime">
                 <input type='text' class="form-control" />
-                <input type="number" name="meettime" id="meettime" hidden />
+                <input type="number" name="meettime" id="meettime" hidden value="{{ strtotime($hike->meeting_date) }}"/>
                 <div class="input-group-append input-group-addon">
                     <span class="input-group-text far fa-calendar-alt fa-1x p-2"></span>
                 </div>
-             </div>              
-            {{-- <label class="form- bcontrolg-transparent col-1 border-0 text-right"> le </label>
-            <input type="date" name="meettime" class="form-control col-3" value="{{ $hike->meeting_date ? \Carbon\Carbon::parse($hike->meeting_date)->format('Y-m-d\TH:i') : '' }}"> --}}
+             </div>
         </div>
-        {{-- <div class="form-row">
-            <label class="form-control bg-transparent col-2 border-0 text-right">Départ</label>
-            <input type="datetime-local" name="starttime" class="form-control col-3" value="{{ $hike->beginning_date ? \Carbon\Carbon::parse($hike->beginning_date)->format('Y-m-d\TH:i') : '' }}">
-            <label class="form-control bg-transparent col-2 border-0 text-right">Retour prévu</label>
-            <input type="datetime-local" name="endtime" class="form-control col-3" value="{{ $hike->ending_date ? \Carbon\Carbon::parse($hike->ending_date)->format('Y-m-d\TH:i') : '' }}">
-        </div> --}}
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Départ</label>
             <div class='input-group mb-3 date col-3 datetimepicker' data-input="#starttime">
                 <input type='text' class="form-control" />
-                <input type="number" name="starttime" id="starttime" hidden />
+                <input type="number" name="starttime" id="starttime" value="{{ strtotime($hike->beginning_date) }}" hidden />
                 <div class="input-group-append input-group-addon">
                     <span class="input-group-text far fa-calendar-alt fa-1x p-2"></span>
                 </div>
@@ -70,7 +62,7 @@
              <label class="form-control bg-transparent col-2 border-0 text-right">Retour prévu</label>
              <div class='input-group mb-3 date col-3 datetimepicker' data-input="#endtime">
                 <input type='text' class="form-control" />
-                <input type="number" name="endtime" id="endtime" hidden />
+                <input type="number" name="endtime" id="endtime" value="{{ strtotime($hike->ending_date) }}" hidden />
                 <div class="input-group-append input-group-addon">
                     <span class="input-group-text far fa-calendar-alt fa-1x p-2"></span>
                 </div>
