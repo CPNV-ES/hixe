@@ -93,8 +93,8 @@
                             <div class="row footer ">
                                 <div class="col-md-12 pr-1 d-flex justify-content-end">
                                     <form>
-                                        <input file type="file" accept=".csv" name="csv" id="csv" size="60">
-                                        <input type="button" value="Read" name="B1" id="B1" class="btn btn-dark" onclick="execFile()">
+                                        <input file type="file" accept=".csv" name="csv" id="csv" size="60" class="btn btn-light" >
+                                        <input type="button" value="Read" name="B1" id="B1" class="btn btn-dark" onclick="execFile()" style="margin-right:15px">
                                     </form>
                                     <div id="insert-more" class="btn btn-secondary btn-round" style="margin-right:15px"> Add Row</div>
                                     <button type="submit" class="btn btn-primary btn-round">{{__('Save')}}</button>
