@@ -29,7 +29,7 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     # composer i
     # npm i
     ```
-4. Compoler les assets CSS et Javascript
+4. Transpiler les assets CSS et Javascript
     ```
     # npm run dev
     ```
