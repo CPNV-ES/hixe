@@ -68,9 +68,9 @@ class HikeController extends Controller
         $newHike = new Hike;
         $newHike->name = $request->input('hikeName');
         $newHike->meeting_location = $request->input('meetloc');
-        $newHike->meeting_date = $request->input('meettime');
-        $newHike->beginning_date = $request->input('starttime');
-        $newHike->ending_date = $request->input('endtime');
+        $newHike->meeting_date = date('Y-m-d H:i:s', $request->input('meettime'));
+        $newHike->beginning_date = date('Y-m-d H:i:s', $request->input('starttime'));
+        $newHike->ending_date = date('Y-m-d H:i:s', $request->input('endtime'));
         $newHike->min_num_participants = $request->input('minp');
         $newHike->max_num_participants = $request->input('maxp');
         $newHike->difficulty = $request->input('difficulty');

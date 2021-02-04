@@ -1,3 +1,19 @@
+@push('scripts')
+    <script src="{{ asset('/js/hikes-editmaindata.js') }}"></script>
+@endpush
+
+<script src="/lib/moment/moment.min.js"></script>
+<script src="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet" href="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+
+<style>
+    @font-face { 
+        font-family: "Glyphicons Halflings"; 
+        src: url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.woff") format("woff"), 
+    }
+</style>
+
 <div class="container mt-4 table-responsive text-center">
     <div class="jumbotron pt-2 pb-2">
         <div class="form-row">
@@ -23,16 +39,34 @@
             </select>
         </div>
         <div class="form-row">
-            <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous à </label>
-            <input type="text" name="meetloc" class="form-control col-4" value="{{ $hike->meeting_location }}">
-            <label class="form-control bg-transparent col-1 border-0 text-right"> le </label>
-            <input type="datetime-local" name="meettime" class="form-control col-3" value="{{ $hike->meeting_date ? \Carbon\Carbon::parse($hike->meeting_date)->format('Y-m-d\TH:i') : '' }}">
+            <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous</label>
+            <input type="text" name="meetloc" class="form-control col-3" value="{{ $hike->meeting_location }}">
+            <label class="form-control bg-transparent col-2 border-0 text-right">le</label>
+            <div class='input-group mb-3 date col-3 datetimepicker' data-input="#meettime">
+                <input type='text' class="form-control" />
+                <input type="number" name="meettime" id="meettime" hidden value="{{ strtotime($hike->meeting_date) }}"/>
+                <div class="input-group-append input-group-addon">
+                    <span class="input-group-text far fa-calendar-alt fa-1x p-2"></span>
+                </div>
+             </div>
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Départ</label>
-            <input type="datetime-local" name="starttime" class="form-control col-3" value="{{ $hike->beginning_date ? \Carbon\Carbon::parse($hike->beginning_date)->format('Y-m-d\TH:i') : '' }}">
-            <label class="form-control bg-transparent col-2 border-0 text-right">Retour prévu</label>
-            <input type="datetime-local" name="endtime" class="form-control col-3" value="{{ $hike->ending_date ? \Carbon\Carbon::parse($hike->ending_date)->format('Y-m-d\TH:i') : '' }}">
+            <div class='input-group mb-3 date col-3 datetimepicker' data-input="#starttime">
+                <input type='text' class="form-control" />
+                <input type="number" name="starttime" id="starttime" value="{{ strtotime($hike->beginning_date) }}" hidden />
+                <div class="input-group-append input-group-addon">
+                    <span class="input-group-text far fa-calendar-alt fa-1x p-2"></span>
+                </div>
+             </div>
+             <label class="form-control bg-transparent col-2 border-0 text-right">Retour prévu</label>
+             <div class='input-group mb-3 date col-3 datetimepicker' data-input="#endtime">
+                <input type='text' class="form-control" />
+                <input type="number" name="endtime" id="endtime" value="{{ strtotime($hike->ending_date) }}" hidden />
+                <div class="input-group-append input-group-addon">
+                    <span class="input-group-text far fa-calendar-alt fa-1x p-2"></span>
+                </div>
+             </div>
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Dénivelé</label>
