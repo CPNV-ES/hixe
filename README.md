@@ -68,11 +68,8 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     ```
     # php artisan migrate
     ```
-9. Ajouter dans la base de données le Status: `En cours` dans la table **status** avec l'`id`: 1
-    ```sql
-    INSERT INTO `states` (`id`, `name`) VALUES ('1', 'En cours');
-    ```
-10. Lancer le serveur
+    
+9. Lancer le serveur
     ```
     # php artisan serve
     ```
