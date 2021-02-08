@@ -13,6 +13,9 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::insert([
+            'name' => 'Adminstrateur',
+        ]);
+        Role::insert([
             'name' => 'Guide',
         ]);
         Role::insert([
