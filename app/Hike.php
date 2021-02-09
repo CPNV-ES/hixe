@@ -40,6 +40,11 @@ class Hike extends Model
         return $this->belongsTo(State::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(HikeType::class);
+    }
+
     public function equipment()
     {
         return $this->belongsToMany(Equipment::Class);
