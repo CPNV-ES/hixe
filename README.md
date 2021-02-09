@@ -62,7 +62,7 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
 
     - Si les champs ci-dessus sont vide -> erreur message : .env incomplet
     - Si les champs si dessus ne corresponde pas à un utilisateur dans la DB -> le crée
-    - Si les comps si le mots de passe ou l'email est faut -> erreur message : Accès refusé
+    - Si les champs si le mots de passe ou l'email est faut -> erreur message : Accès refusé
 
 8. Effectuer la migration de la base de données
     ```
