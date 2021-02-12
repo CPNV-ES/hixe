@@ -13,16 +13,19 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::insert([
-            'slug' => 'admin',
-            'name' => 'Adminstrateur',
-        ]);
-        Role::insert([
+            'id' => 1,
             'slug' => 'hike_manager',
             'name' => 'Guide',
         ]);
         Role::insert([
+            'id' => 2,
             'slug' => 'hiker',
             'name' => 'Participant',
+        ]);
+        Role::insert([
+            'id' => 3,
+            'slug' => 'admin',
+            'name' => 'Adminstrateur',
         ]);
     }
 }
