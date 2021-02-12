@@ -47,4 +47,17 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class,'role_id');
     }
+
+    /**
+     * Verify if the user has the role given by checking the slug
+     * 
+     * @var string
+     * @return bool
+     */
+    public function hasRole($roleSlug){
+        if($this->role->slug === $roleSlug){
+            return true;
+        }
+        return false;
+    }   
 }
