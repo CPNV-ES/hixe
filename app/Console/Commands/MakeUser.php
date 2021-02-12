@@ -13,7 +13,7 @@ class MakeUser extends Command
      *
      * @var string
      */
-    protected $signature = 'make:user {firstname} {lastname} {email_address} {member_number} {birthdate} {password}';
+    protected $signature = 'make:user {firstname} {lastname} {email_address} {member_number} {birthdate} {password} {role}';
 
     /**
      * The console command description.
@@ -45,6 +45,7 @@ class MakeUser extends Command
         $member_number = $this->argument('member_number');
         $birthdate = $this->argument('birthdate');
         $password = Hash::make($this->argument('password'));
+        $role = $this->argument('role');
 
         if(User::where('member_number', '=', $email_address)->exists()){
             $this->line("Erreur: l'utilisateur $firstname existe déjà");
@@ -56,6 +57,7 @@ class MakeUser extends Command
             $user->email_address = $email_address;
             $user->member_number = $member_number;
             $user->birthdate = $birthdate;
+            $user->role_id = $role;
             $user->save();
             $this->line("L'utilisateur $firstname à été créé.");
         }
