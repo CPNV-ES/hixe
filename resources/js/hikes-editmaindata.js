@@ -14,10 +14,14 @@ $(() => {
     }).each((_, datetimepicker) => {
         let input = document.querySelector(datetimepicker.dataset['input']);
 
-        if (input) {
+        if (input?.value != '') {
             // Set the datetimepicker date to the value of the PHP timestamp 
             // of the input
             $(datetimepicker).data('DateTimePicker').date(new Date(input.value * 1000));
+        } else {
+            let now = Date.now();
+            input.value = Math.round(now / 1000);
+            $(datetimepicker).data('DateTimePicker').date(now);
         }
     });
 });
