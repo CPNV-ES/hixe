@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email_address', 'github_id', 'member_number', 'birthdate', 'password', 'remember_token', 'created_at', 'updated_at'
+        'firstname', 'lastname', 'email_address', 'github_id', 'member_number', 'birthdate', 'password', 'remember_token', 'created_at', 'updated_at', 'role_id'
     ];
 
     /**
@@ -44,4 +44,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Hike::class)->withPivot('role_id')->orderBy('meeting_date','desc');
     }
 
+    public function role(){
+        return $this->belongsTo(Role::class,'role_id');
+    }
 }
