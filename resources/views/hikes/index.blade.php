@@ -64,6 +64,7 @@
         @endforeach
     </tbody>
     </table>
+    <input type="button" class="btn btn-primary" value="Créer une nouvelle course">
 
 </div>
 
