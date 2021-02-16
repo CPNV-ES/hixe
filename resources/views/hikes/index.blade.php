@@ -20,7 +20,7 @@
     <table  id="hikesTable"  class="table table table-hover mt-3">
         <thead>
             <tr>
-                <th scope="col">Name</th>
+                <th scope="col">Nom</th>
                 <th scope="col">Date</th>
                 <th scope="col">Destination</th>
                 <th scope="col">Guide</th>
@@ -64,6 +64,7 @@
         @endforeach
     </tbody>
     </table>
+
 </div>
 
 <script>
