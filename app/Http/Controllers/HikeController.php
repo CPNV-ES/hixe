@@ -63,24 +63,24 @@ class HikeController extends Controller
      */
     public function store(HikesPost $request)
     {
-        $newHike = new Hike;
-        $newHike->name = $request->input('hikeName');
-        $newHike->meeting_location = $request->input('meetloc');
-        $newHike->meeting_date = date('Y-m-d H:i:s', $request->input('meettime'));
-        $newHike->beginning_date = date('Y-m-d H:i:s', $request->input('starttime'));
-        $newHike->ending_date = date('Y-m-d H:i:s', $request->input('endtime'));
-        $newHike->min_num_participants = $request->input('minp');
-        $newHike->max_num_participants = $request->input('maxp');
-        $newHike->difficulty = $request->input('difficulty');
-        $newHike->additional_info = $request->input('info');
-        $newHike->drop_in_altitude = $request->input('elevation');
-        $newHike->state_id = 1; // TODO : use slugs
-        $newHike->save();
+        $hike = new Hike;
+        $hike->name = $request->input('hikeName');
+        $hike->meeting_location = $request->input('meetloc');
+        $hike->meeting_date = date('Y-m-d H:i:s', $request->input('meettime'));
+        $hike->beginning_date = date('Y-m-d H:i:s', $request->input('starttime'));
+        $hike->ending_date = date('Y-m-d H:i:s', $request->input('endtime'));
+        $hike->min_num_participants = $request->input('minp');
+        $hike->max_num_participants = $request->input('maxp');
+        $hike->difficulty = $request->input('difficulty');
+        $hike->additional_info = $request->input('info');
+        $hike->drop_in_altitude = $request->input('elevation');
+        $hike->state_id = 1; // TODO : use slugs
+        $hike->save();
         $selectedequipment = $request->input('equipment') != null ? array_keys($request->input('equipment')) : [];
         $selectedtrainings = $request->input('equipment') != null ? array_keys($request->input('trainings')) : [];
-        $newHike->trainings()->attach($selectedtrainings);
-        $newHike->equipment()->attach($selectedequipment);
-        $newHike->setOneGuide($request->input('guide'));
+        $hike->trainings()->attach($selectedtrainings);
+        $hike->equipment()->attach($selectedequipment);
+        $hike->setOneGuide($request->input('guide'));
         return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
 
