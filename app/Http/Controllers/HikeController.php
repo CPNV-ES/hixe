@@ -112,9 +112,10 @@ class HikeController extends Controller
         $equipment = Equipment::all();
         $trainings = Training::all();
         $states = State::all();
+        $hike_types = HikeType::all();
         $hike = Hike::find($id);
         $users = User::all(); // to allow picking a guide
-        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users'));
+        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users', 'hike_types'));
     }
 
     /**
@@ -131,14 +132,18 @@ class HikeController extends Controller
         $hike->trainings()->detach();
         $hike->name = $request->input('hikeName');
         $hike->meeting_location = $request->input('meetloc');
-        $hike->meeting_date = $request->input('meettime');
-        $hike->beginning_date = $request->input('starttime');
-        $hike->ending_date = $request->input('endtime');
+        $hike->meeting_date = date('Y-m-d H:i:s', $request->input('meettime'));
+        $hike->beginning_date = date('Y-m-d H:i:s', $request->input('starttime'));
+        $hike->ending_date = date('Y-m-d H:i:s', $request->input('endtime'));
         $hike->min_num_participants = $request->input('minp');
         $hike->max_num_participants = $request->input('maxp');
         $hike->difficulty = $request->input('difficulty');
         $hike->additional_info = $request->input('info');
         $hike->drop_in_altitude = $request->input('elevation');
+
+        $hike_type = HikeType::find($request->input('hike_type'));
+        $hike->type()->associate($hike_type);
+
         $hike->state_id = $request->input('state');
         $selectedequipment = $request->input('equipment') != null ? array_keys($request->input('equipment')) : [];
         $selectedtrainings = $request->input('equipment') != null ? array_keys($request->input('trainings')) : [];

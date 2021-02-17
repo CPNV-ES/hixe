@@ -38,14 +38,16 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-row">
-            <label for="hike_type" class="form-control bg-transparent col-2 border-0 text-right">Type de course</label>
-            <select id="hike_type" class="form-control col-4" name="hike_type">
-                @foreach($hike_types as $type)
-                    <option value="{{$type->id}}">{{$type->name}}</option>
-                @endforeach
-            </select>
-        </div>
+        @if (isset($hike_types))
+            <div class="form-row">
+                <label for="hike_type" class="form-control bg-transparent col-2 border-0 text-right">Type de course</label>
+                <select id="hike_type" class="form-control col-4" name="hike_type">
+                    @foreach($hike_types as $type)
+                        <option value="{{$type->id}}"  {{ $hike->type ? ($hike->type->id == $type->id ? 'selected' : '') : '' }}>{{$type->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous</label>
             <input type="text" name="meetloc" class="form-control col-3" value="{{ $hike->meeting_location }}">
