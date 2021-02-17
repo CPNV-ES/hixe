@@ -8,15 +8,13 @@ use App\Training;
 use Illuminate\Http\Request;
 use App\Hike;
 use App\User;
-use App\Role;
-use storage\framework\sessions;
-use Redirect;
-use Session;
-use Auth;
 use App\Destination;
+use App\HikeType;
 use App\Http\Requests\HikesPost;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class HikeController extends Controller
 {
