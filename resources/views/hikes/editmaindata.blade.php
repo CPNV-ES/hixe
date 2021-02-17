@@ -39,6 +39,14 @@
             </select>
         </div>
         <div class="form-row">
+            <label for="hike_type" class="form-control bg-transparent col-2 border-0 text-right">Type de course</label>
+            <select id="hike_type" class="form-control col-4" name="hike_type">
+                @foreach($hike_types as $type)
+                    <option value="{{$type->id}}">{{$type->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Rendez-vous</label>
             <input type="text" name="meetloc" class="form-control col-3" value="{{ $hike->meeting_location }}">
             <label class="form-control bg-transparent col-2 border-0 text-right">le</label>
@@ -77,7 +85,7 @@
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Participants: minimum </label>
             <input type="number" name="minp" class="form-control col-1" value="{{ $hike->min_num_participants }}">
-            <label class="form-control bg-transparent col-1 border-0 text-right"> maximum </label>
+            <label class="form-control bg-transparent col-2 border-0 text-right"> maximum </label>
             <input type="number" name="maxp" class="form-control col-1" value="{{ $hike->max_num_participants }}">
         </div>
         <div class="form-row">

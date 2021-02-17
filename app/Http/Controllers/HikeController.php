@@ -50,9 +50,10 @@ class HikeController extends Controller
         $equipment = Equipment::all();
         $trainings = Training::all();
         $destinations = Destination::all();
+        $hike_types = HikeType::all();
         $users = User::all(); // to allow picking a guide
         $hike = new Hike();
-        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations','users'));
+        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations', 'users', 'hike_types'));
     }
 
     /**
@@ -74,6 +75,10 @@ class HikeController extends Controller
         $hike->difficulty = $request->input('difficulty');
         $hike->additional_info = $request->input('info');
         $hike->drop_in_altitude = $request->input('elevation');
+
+        $hike_type = HikeType::find($request->input('hike_type'));
+        $hike->type()->associate($hike_type);
+
         $hike->state_id = 1; // TODO : use slugs
         $hike->save();
         $selectedequipment = $request->input('equipment') != null ? array_keys($request->input('equipment')) : [];
@@ -109,7 +114,7 @@ class HikeController extends Controller
         $states = State::all();
         $hike = Hike::find($id);
         $users = User::all(); // to allow picking a guide
-        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment','states','users'));
+        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users'));
     }
 
     /**
