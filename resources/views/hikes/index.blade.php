@@ -68,7 +68,6 @@
     @else
         <div class="p-3 mb-2 bg-light text-dark"> Aucunes courses n'existent actuellement. </div>
     @endif
-
     <a class="btn btn-primary" href="{{route('hikes.create')}}">Créer une nouvelle course</a>
 </div>
 
