@@ -28,6 +28,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <a class="btn btn-primary" href="{{route('hikes.create')}}">Créer une nouvelle course</a>
                 @else
                     <h1>Vous devez vous authentifier pour accéder à Hixe</h1>
                 @endif

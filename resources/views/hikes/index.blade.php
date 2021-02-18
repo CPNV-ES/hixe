@@ -64,8 +64,7 @@
         @endforeach
     </tbody>
     </table>
-    <input type="button" class="btn btn-primary" value="Créer une nouvelle course">
-
+    <a class="btn btn-primary" href="{{route('hikes.create')}}">Créer une nouvelle course</a>
 </div>
 
 <script>
