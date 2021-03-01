@@ -8,15 +8,13 @@ use App\Training;
 use Illuminate\Http\Request;
 use App\Hike;
 use App\User;
-use App\Role;
-use storage\framework\sessions;
-use Redirect;
-use Session;
-use Auth;
 use App\Destination;
+use App\HikeType;
 use App\Http\Requests\HikesPost;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class HikeController extends Controller
 {
@@ -52,9 +50,10 @@ class HikeController extends Controller
         $equipment = Equipment::all();
         $trainings = Training::all();
         $destinations = Destination::all();
+        $hike_types = HikeType::all();
         $users = User::all(); // to allow picking a guide
         $hike = new Hike();
-        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations','users'));
+        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations', 'users', 'hike_types'));
     }
 
     /**
@@ -65,24 +64,28 @@ class HikeController extends Controller
      */
     public function store(HikesPost $request)
     {
-        $newHike = new Hike;
-        $newHike->name = $request->input('hikeName');
-        $newHike->meeting_location = $request->input('meetloc');
-        $newHike->meeting_date = date('Y-m-d H:i:s', $request->input('meettime'));
-        $newHike->beginning_date = date('Y-m-d H:i:s', $request->input('starttime'));
-        $newHike->ending_date = date('Y-m-d H:i:s', $request->input('endtime'));
-        $newHike->min_num_participants = $request->input('minp');
-        $newHike->max_num_participants = $request->input('maxp');
-        $newHike->difficulty = $request->input('difficulty');
-        $newHike->additional_info = $request->input('info');
-        $newHike->drop_in_altitude = $request->input('elevation');
-        $newHike->state_id = 1; // TODO : use slugs
-        $newHike->save();
+        $hike = new Hike;
+        $hike->name = $request->input('hikeName');
+        $hike->meeting_location = $request->input('meetloc');
+        $hike->meeting_date = date('Y-m-d H:i:s', $request->input('meettime'));
+        $hike->beginning_date = date('Y-m-d H:i:s', $request->input('starttime'));
+        $hike->ending_date = date('Y-m-d H:i:s', $request->input('endtime'));
+        $hike->min_num_participants = $request->input('minp');
+        $hike->max_num_participants = $request->input('maxp');
+        $hike->difficulty = $request->input('difficulty');
+        $hike->additional_info = $request->input('info');
+        $hike->drop_in_altitude = $request->input('elevation');
+
+        $hike_type = HikeType::find($request->input('hike_type'));
+        $hike->type()->associate($hike_type);
+
+        $hike->state_id = 1; // TODO : use slugs
+        $hike->save();
         $selectedequipment = $request->input('equipment') != null ? array_keys($request->input('equipment')) : [];
         $selectedtrainings = $request->input('equipment') != null ? array_keys($request->input('trainings')) : [];
-        $newHike->trainings()->attach($selectedtrainings);
-        $newHike->equipment()->attach($selectedequipment);
-        $newHike->setOneGuide($request->input('guide'));
+        $hike->trainings()->attach($selectedtrainings);
+        $hike->equipment()->attach($selectedequipment);
+        $hike->setOneGuide($request->input('guide'));
         return Redirect::route('hikes.index', ['msg' => 'Add']);
     }
 
@@ -109,9 +112,10 @@ class HikeController extends Controller
         $equipment = Equipment::all();
         $trainings = Training::all();
         $states = State::all();
+        $hike_types = HikeType::all();
         $hike = Hike::find($id);
         $users = User::all(); // to allow picking a guide
-        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment','states','users'));
+        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users', 'hike_types'));
     }
 
     /**
@@ -128,14 +132,18 @@ class HikeController extends Controller
         $hike->trainings()->detach();
         $hike->name = $request->input('hikeName');
         $hike->meeting_location = $request->input('meetloc');
-        $hike->meeting_date = $request->input('meettime');
-        $hike->beginning_date = $request->input('starttime');
-        $hike->ending_date = $request->input('endtime');
+        $hike->meeting_date = date('Y-m-d H:i:s', $request->input('meettime'));
+        $hike->beginning_date = date('Y-m-d H:i:s', $request->input('starttime'));
+        $hike->ending_date = date('Y-m-d H:i:s', $request->input('endtime'));
         $hike->min_num_participants = $request->input('minp');
         $hike->max_num_participants = $request->input('maxp');
         $hike->difficulty = $request->input('difficulty');
         $hike->additional_info = $request->input('info');
         $hike->drop_in_altitude = $request->input('elevation');
+
+        $hike_type = HikeType::find($request->input('hike_type'));
+        $hike->type()->associate($hike_type);
+
         $hike->state_id = $request->input('state');
         $selectedequipment = $request->input('equipment') != null ? array_keys($request->input('equipment')) : [];
         $selectedtrainings = $request->input('equipment') != null ? array_keys($request->input('trainings')) : [];

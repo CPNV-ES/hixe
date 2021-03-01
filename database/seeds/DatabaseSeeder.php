@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
     $this->call([UsersTableSeeder::class]);
     $this->call([HikesTableSeeder::class]);
     $this->call([HikeTrainingTableSeeder::class]); 
+    $this->call([HikeTypesTableSeeder::class]);
   }
 }
