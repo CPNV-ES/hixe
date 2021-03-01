@@ -39,6 +39,7 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     # php artisan key:generate
     ```
 6. Éditez le fichier `.env` :
+
     A. Définissez la connection à votre **Base de Donnée**, dans notre cas nous utilisons le driver mysql :
     ```
     DB_CONNECTION=mysql
