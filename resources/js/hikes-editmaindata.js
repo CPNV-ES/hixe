@@ -21,7 +21,7 @@ $(() => {
         } else {
             let now = Date.now();
             input.value = Math.round(now / 1000);
-            $(datetimepicker).data('DateTimePicker').date(now);
+            $(datetimepicker).data('DateTimePicker').date(new Date(now));
         }
     });
 });
