@@ -62,4 +62,4 @@ Route::get('multiHikes/{multiHike}/edit', 'MultiHikesController@edit')->name('mu
 
 // Import hikes with csv file
 //Route::resource('importHikes', 'ImportHikesController');
-Route::post('readFile', 'ReadFileController@store')->name('readFile.store');
+Route::post('readFile', 'ImportController@store')->name('readFile.store');
