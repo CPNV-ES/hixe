@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Redirect;
 
-class ReadFileController extends Controller
+class ImportController extends Controller
 {
     /**
      * Display a listing of the resource.

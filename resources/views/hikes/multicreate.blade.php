@@ -44,7 +44,7 @@
                         <p><em>Champs obligatoire*</em></p>
                         <div class="row footer ">
                             <div class="col-md-12 pr-1 d-flex justify-content-end" style="padding-bottom: 15px;">
-                                <form method="POST" action="{{ route('readFile.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('import.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" accept=".csv" name="csv" class="btn btn-light" >
                                     <button type="submit" class="btn btn-dark btn-round">{{__('Read')}}</button>
