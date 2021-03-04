@@ -42,7 +42,16 @@
                     </div>
                     <div class="card-body">
                         <p><em>Champs obligatoire*</em></p>
-                        <form method="POST" action="{{ route("multiHikes.store") }}" autocomplete="off"
+                        <div class="row footer ">
+                            <div class="col-md-12 pr-1 d-flex justify-content-end" style="padding-bottom: 15px;">
+                                <form method="POST" action="{{ route('readFile.store') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" accept=".csv" name="csv" class="btn btn-light" >
+                                    <button type="submit" class="btn btn-dark btn-round">{{__('Read')}}</button>
+                                </form>
+                            </div>
+                        </div>
+                        <form method="POST" action="{{ route('multiHikes.store') }}" autocomplete="off"
                               enctype="multipart/form-data">
                         @csrf
                         @method('post')
@@ -64,27 +73,53 @@
                                             <td>Info</td>
                                             </thead>
                                             <tbody>
-                                            <tr id="rows">
-                                                <td><input type="text" name="name[]" class="form-control" value=''></td>
-                                                <td>
-                                                    <select class="form-control" name="chef[]">
-                                                        @foreach($users as $user)
-                                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td><input type="text" name="meetingLocation[]" class="form-control" value=''></td>
-                                                <td><input type="date" name="meetingDate[]" class="form-control" value='' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
-                                                <td><input type="date" name="hikeDate[]" class="form-control"></td>
-                                                <td><input type="time" name="start[]" class="form-control" value='' onblur="AutoInpute(value, this, 'finish[]')"></td>
-                                                <td><input type="time" name="finish[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" name="min[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" name="max[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" name="denivele[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value=''></td>
-                                                <td><input type="text" name="info[]" class="form-control" value=''></td>
-                                                <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
-                                            </tr>
+                                                @if(!empty($arrayFromCSV))
+                                                    @foreach($arrayFromCSV as $arrayFromCSVs => $value)
+                                                        <tr id="rows">
+                                                            <td><input type="text" name="name[]" class="form-control" value='{{$value[0]}}'></td>
+                                                            <td>
+                                                            <select class="form-control" name="chef[]">
+                                                                @foreach($users as $user)
+                                                                    <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            </td>
+                                                            <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$value[1]}}'></td>
+                                                            <td><input type="date" name="meetingDate[]" class="form-control" value='{{$value[2]}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                            <td><input type="date" name="hikeDate[]" class="form-control" value='{{$value[3]}}'></td>
+                                                            <td><input type="time" name="start[]" class="form-control" value='{{$value[4]}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                            <td><input type="time" name="finish[]" class="form-control" value='{{$value[5]}}'></td>
+                                                            <td><input type="number" min="1" name="min[]" class="form-control" value='{{$value[6]}}'></td>
+                                                            <td><input type="number" min="1" name="max[]" class="form-control" value='{{$value[7]}}'></td>
+                                                            <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$value[8]}}'></td>
+                                                            <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$value[9]}}'></td>
+                                                            <td><input type="text" name="info[]" class="form-control" value='{{$value[10]}}'></td>
+                                                            <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr id="rows">
+                                                        <td><input type="text" name="name[]" class="form-control" value=''></td>
+                                                        <td>
+                                                            <select class="form-control" name="chef[]">
+                                                                @foreach($users as $user)
+                                                                    <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" name="meetingLocation[]" class="form-control" value=''></td>
+                                                        <td><input type="date" name="meetingDate[]" class="form-control" value='' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                        <td><input type="date" name="hikeDate[]" class="form-control"></td>
+                                                        <td><input type="time" name="start[]" class="form-control" value='' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                        <td><input type="time" name="finish[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" name="min[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" name="max[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" name="denivele[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value=''></td>
+                                                        <td><input type="text" name="info[]" class="form-control" value=''></td>
+                                                        <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                    </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -92,10 +127,6 @@
                             </div>
                             <div class="row footer ">
                                 <div class="col-md-12 pr-1 d-flex justify-content-end">
-                                    <form>
-                                        <input file type="file" accept=".csv" name="csv" id="csv" size="60" class="btn btn-light" >
-                                        <input type="button" value="Read" name="B1" id="B1" class="btn btn-dark" onclick="execFile()" style="margin-right:15px">
-                                    </form>
                                     <div id="insert-more" class="btn btn-secondary btn-round" style="margin-right:15px"> Add Row</div>
                                     <button type="submit" class="btn btn-primary btn-round">{{__('Save')}}</button>
                                 </div>
