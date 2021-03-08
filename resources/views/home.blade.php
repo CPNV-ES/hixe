@@ -8,7 +8,7 @@
             <div class="col-md-10">
                 @if(Auth::check())
                     <h2>Mes courses</h2>
-                    @if(!($hikes->isEmpty())){
+                    @if(!($hikes->isEmpty()))
                         <table id="hikesTable" class="table table table-hover mt-3">
                             <thead>
                             <tr>
@@ -29,7 +29,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                    }
                     @else 
                         <div class="p-3 mb-2 bg-light text-dark"> Aucunes courses n'existent actuellement sous votre nom. </div>
                     @endif
