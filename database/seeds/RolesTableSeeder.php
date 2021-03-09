@@ -16,16 +16,19 @@ class RolesTableSeeder extends Seeder
             'id' => 1,
             'slug' => 'hike_manager',
             'name' => 'Guide',
+            'hikeable' => true
         ]);
         Role::insert([
             'id' => 2,
             'slug' => 'hiker',
             'name' => 'Participant',
+            'hikeable' => true
         ]);
         Role::insert([
             'id' => 3,
             'slug' => 'admin',
             'name' => 'Adminstrateur',
+            'hikeable' => false
         ]);
     }
 }
