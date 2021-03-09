@@ -77,18 +77,19 @@
             // page is now ready, initialize the calendar...
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
-                events : [
-                    @foreach($hikes as $hike)
-                    {
-                        title : '{{ $hike->name }}',
-                        start : '{{ $hike->beginning_date }}',
-                        end : '{{$hike->ending_date}}',
-                        url: 'hikes/{{$hike->id}}',
-    
-                    },
-                    @endforeach
-                ],
-    
+                events : async (start, end, timezone, callback) => {
+                    const response = await axios.get(`/hikes?start_date=${start.unix()}&end_date=${end.unix()}`);
+                    const hikes = response.data;
+                    
+                    callback(hikes.map(hike => {
+                        return {
+                            title: hike.name,
+                            start: hike.beginning_date,
+                            end: hike.ending_date,
+                            url: `hikes/${hike.id}`,
+                        }
+                   }));
+                },
                 dayClick: function(date, jsEvent, view) {
                     var newdate = moment(date).format("YYYY-MM-DD");
                     window.location.href ="/hikes_calendar/"+newdate;
