@@ -11,6 +11,7 @@ use App\User;
 use App\Destination;
 use App\HikeType;
 use App\Http\Requests\HikesPost;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -23,9 +24,18 @@ class HikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $msg)
+    public function index(Request $request)
     {
-        foreach ($msg->request->all() as $message) {
+        if (\Str::contains($request->header('Accept'), 'application/json')) {
+            $start_date = $request->query('start_date');
+            $end_date = $request->query('end_date');
+
+            $hikes = Hike::all()->where('beginning_date', '<=',  1614470400)->where('ending_date', '>=', $end_date);
+
+            return response()->json($hikes);
+        }
+
+        foreach ($request->request->all() as $message) {
             switch ($message) {
                 case "Success":
                     Session::flash('success', "La course été supprimé");
