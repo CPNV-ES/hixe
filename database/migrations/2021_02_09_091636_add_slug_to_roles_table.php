@@ -15,6 +15,7 @@ class AddSlugToRolesTable extends Migration
     {
         Schema::table('roles', function (Blueprint $table) {
             $table->string('slug');
+            $table->boolean('hikeable');
         });
     }
 
