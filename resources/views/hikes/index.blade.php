@@ -12,7 +12,7 @@
     @endif
 
     @if(!$hikes->isEmpty())
-        <table  id="hikesTable" class="table table-hover mt-3">
+        <table id="hikesTable" class="table table-hover mt-3">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
@@ -41,11 +41,10 @@
                         <td>{{ $hike->state->name }}</td>
                         @if($hike->users()->where('user_id', Auth::user()->id)->exists())
                             <td>Déjà inscrit</td>
-                            <!--<td><a href="#" class="btn btn-primary disabled"><i class="fas fa-plus-square"></i></a></td>-->
                         @elseif($hike->state->id == 2)
                             <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
                         @else
-                            <td>Indisponible</td>
+                            <td class="text-muted font-italic">Indisponible</td>
                         @endif
                         <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
                         <td>
