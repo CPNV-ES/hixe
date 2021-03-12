@@ -3,13 +3,6 @@
 @section('title', 'Toutes les courses')
 
 @section('body-content')
-{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.20/b-1.6.1/b-flash-1.6.1/kt-2.5.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.css"/> --}}
-<script src='/lib/jquery/jquery.min.js'></script>
-<script src='/lib/datatables/min/jquery.dataTables.min.js'></script>
-<script src='/lib/datatables/js/dataTables.bootstrap4.min.js'></script>
-<link rel='stylesheet' href='/lib/datatables/css/dataTables.bootstrap4.min.css'/>
 
 <div class="container mt-4 table-responsive">
     @if (Session::has('success'))
