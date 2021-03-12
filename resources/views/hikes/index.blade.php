@@ -4,14 +4,15 @@
 
 @section('body-content')
 
-<div class="container mt-4 table-responsive">
+<div class="container-fluid mt-4 table-responsive">
     @if (Session::has('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}
         </div>
     @endif
+
     @if(!$hikes->isEmpty())
-        <table  id="hikesTable"  class="table table table-hover mt-3">
+        <table  id="hikesTable" class="table table-hover mt-3">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
@@ -28,36 +29,36 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($hikes as $hike)
-                <tr onclick="location='{{ route('hikes.show', $hike) }}'">
-                    <td scope="row">{{ $hike->name }}</td>
-                    <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
-                    <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-                    <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                    <td>{{ $hike->users()->count() }}</td>
-                    <td>{{ $hike->min_num_participants }}</td>
-                    <td>{{ $hike->max_num_participants }}</td>
-                    <td>{{ $hike->state->name }}</td>
-                    @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                        <td>Déjà inscrit</td>
-                        <!--<td><a href="#" class="btn btn-primary disabled"><i class="fas fa-plus-square"></i></a></td>-->
-                    @elseif($hike->state->id == 2)
-                        <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
-                    @else
-                        <td>Indisponible</td>
-                    @endif
-                    <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
-                    <td>
-                        <form action="{{route('hikes.destroy',$hike)}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="_method" value="DELETE"/>
-                            <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+                @foreach ($hikes as $hike)
+                    <tr onclick="location='{{ route('hikes.show', $hike) }}'">
+                        <td scope="row">{{ $hike->name }}</td>
+                        <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
+                        <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                        <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                        <td>{{ $hike->users()->count() }}</td>
+                        <td>{{ $hike->min_num_participants }}</td>
+                        <td>{{ $hike->max_num_participants }}</td>
+                        <td>{{ $hike->state->name }}</td>
+                        @if($hike->users()->where('user_id', Auth::user()->id)->exists())
+                            <td>Déjà inscrit</td>
+                            <!--<td><a href="#" class="btn btn-primary disabled"><i class="fas fa-plus-square"></i></a></td>-->
+                        @elseif($hike->state->id == 2)
+                            <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
+                        @else
+                            <td>Indisponible</td>
+                        @endif
+                        <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
+                        <td>
+                            <form action="{{route('hikes.destroy',$hike)}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
         </tbody>
-        </table>
+    </table>
     @else
         <div class="p-3 mb-2 bg-light text-dark"> Aucunes courses n'existent actuellement. </div>
     @endif
