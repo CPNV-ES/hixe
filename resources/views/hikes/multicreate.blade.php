@@ -36,6 +36,22 @@
                         </ul>
                     </div>
                 @endif
+                
+                @if (Session::has('good'))
+                    <div class="alert alert-success">
+                        {{ Session::get('good') }}
+                    </div>
+                @endif
+                @if (Session::has('empty'))
+                    <div class="alert alert-success">
+                        {{ Session::get('empty') }}
+                    </div>
+                @endif
+                @if (Session::has('noCSV'))
+                    <div class="alert alert-success">
+                        {{ Session::get('noCSV') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h5 class="title">{{__(" Insérer des courses")}}</h5>
