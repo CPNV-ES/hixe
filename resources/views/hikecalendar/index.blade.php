@@ -6,7 +6,7 @@
     <div class="container fluid">
         <h1>Calendar</h1>
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-2 mb-2">
                 <div class="mb-2">
                     <label for="type">Calendriers</label>
                     <div class="input-group">
@@ -31,13 +31,14 @@
                 <div class="mb-2">
                     <label for="type">Type</label>
                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle w-100" name="type" type="button"
-                            id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-primary dropdown-toggle w-100" name="type" type="button" id="type"
+                            data-toggle="dropdown" data-value="all" aria-haspopup="true" aria-expanded="false">
                             Tous
                         </button>
                         <div class="dropdown-menu" aria-labelledby="type">
-                            <a class="dropdown-item" href="#">Haute-route</a>
-                            <a class="dropdown-item" href="#">Alpinisme</a>
+                            <button class="dropdown-item" data-value="all">Tous</button>
+                            <button class="dropdown-item" data-value="1">Haute-route</button>
+                            <button class="dropdown-item" data-value="2">Alpinisme</button>
                         </div>
                     </div>
                 </div>
@@ -45,17 +46,19 @@
                     <label for="difficulty">Difficulté</label>
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle w-100" name="difficulty" type="button"
-                            id="difficulty" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            id="difficulty" data-toggle="dropdown" data-value="all" aria-haspopup="true"
+                            aria-expanded="false">
                             Toutes
                         </button>
                         <div class="dropdown-menu" aria-labelledby="difficulty">
-							@for($i = 1; $i <= 10; $i++)
-                            	<a class="dropdown-item" href="#">{{$i}}</a>
-							@endfor
+                            <button class="dropdown-item" data-value="all">Toutes</button>
+                            @for ($i = 1; $i <= 10; $i++)
+                                <button class="dropdown-item" data-value="{{ $i }}">{{ $i }}</button>
+                            @endfor
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
             <div class="col-lg-10">
                 <div id='calendar'></div>
             </div>
@@ -66,21 +69,29 @@
     <script src='/lib/fullcalendar/fullcalendar.min.js'></script>
     <link rel='stylesheet' href='/lib/fullcalendar/fullcalendar.min.css' />
     <style>
-        .fc-day:hover{
-            background:lightblue;
+        .fc-day:hover {
+            background: lightblue;
             cursor: pointer;
         }
-    
-     </style>
+
+    </style>
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
+
             // page is now ready, initialize the calendar...
-            $('#calendar').fullCalendar({
+            const calendar = $('#calendar').fullCalendar({
                 // put your options and callbacks here
-                events : async (start, end, timezone, callback) => {
-                    const response = await axios.get(`/hikes?start_date=${start.unix()}&end_date=${end.unix()}`);
+                events: async (start, end, timezone, callback) => {
+                    const querystring = new URLSearchParams({
+                        start_date: start.unix(),
+                        end_date: end.unix(),
+                        type: $('#type').data('value'),
+                        difficulty: $('#difficulty').data('value'),
+                    }).toString();
+
+                    const response = await axios.get(`/hikes?${querystring}`);
                     const hikes = response.data;
-                    
+
                     callback(hikes.map(hike => {
                         return {
                             title: hike.name,
@@ -88,26 +99,32 @@
                             end: hike.ending_date,
                             url: `hikes/${hike.id}`,
                         }
-                   }));
+                    }));
                 },
                 dayClick: function(date, jsEvent, view) {
                     var newdate = moment(date).format("YYYY-MM-DD");
-                    window.location.href ="/hikes_calendar/"+newdate;
+                    window.location.href = "/hikes_calendar/" + newdate;
                 },
                 eventClick: function(info) {
                     info.jsEvent.preventDefault(); // don't let the browser navigate
-    
+
                     if (info.event.url) {
                         window.open(info.event.url);
                     }
                 },
-    
-            })
 
-            $(".dropdown-menu a").click(function(){
-                $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-                $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+            });
+
+            $(".dropdown-item").click(function() {
+                const button = $(this).parents(".dropdown").find('.btn');
+
+                button.html($(this).text() + ' <span class="caret"></span>');
+                button.val($(this).data('value'));
+                button.data('value', $(this).data('value'));
+
+                calendar.fullCalendar('refetchEvents');
             });
         });
+
     </script>
 @endsection

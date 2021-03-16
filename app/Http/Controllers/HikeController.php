@@ -29,10 +29,20 @@ class HikeController extends Controller
         if (\Str::contains($request->header('Accept'), 'application/json')) {
             $start_date = $request->query('start_date');
             $end_date = $request->query('end_date');
+            $difficulty = $request->query('difficulty');
+            $type = $request->query('type');
 
-            $hikes = Hike::all()->where('beginning_date', '<=',  1614470400)->where('ending_date', '>=', $end_date);
+            $hikes = Hike::between($start_date, $end_date);
 
-            return response()->json($hikes);
+            if ($type != 'all') {
+                $hikes =  $hikes->where('type_id', $type);
+            }
+
+            if ($difficulty != 'all') {
+                $hikes = $hikes->where('difficulty', $difficulty);
+            }
+
+            return response()->json($hikes->get());
         }
 
         foreach ($request->request->all() as $message) {
