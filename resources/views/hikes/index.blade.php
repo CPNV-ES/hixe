@@ -62,14 +62,4 @@
     @endif
     <a class="btn btn-primary" href="{{route('hikes.create')}}">Créer une nouvelle course</a>
 </div>
-
-<script>
-    $(document).ready(function() {
-        var table = $('#hikesTable').DataTable();
-        $('#hikesTable tbody').on('click', 'tr', function() {
-            //window.location =  route('hikes.show', $hike)
-        });
-    });
-</script>
-
 @endsection
