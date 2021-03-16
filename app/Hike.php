@@ -55,6 +55,21 @@ class Hike extends Model
         return $this->belongsToMany(Training::Class);
     }
 
+    /**
+     * Get hikes between two dates
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param int $start_date
+     * @param int $end_date
+     * @return void
+     */
+    public function scopeBetween($query, int $start_timestamp, int $end_timestamp) {
+        $start_date = date('Y-m-d H:i:s', $start_timestamp);
+        $end_date = date('Y-m-d H:i:s', $end_timestamp);
+    
+        return $query->where('beginning_date', '>=', $start_date)->where('ending_date', '<=',$end_date);
+    }
+
     #endregion
     #region --- Business ---
     public function isOpen() {
