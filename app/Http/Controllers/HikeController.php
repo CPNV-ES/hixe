@@ -35,6 +35,7 @@ class HikeController extends Controller
                     break;
             }
         }
+
         $hikes = Hike::all();
         return view('hikes.index')->with(compact(['hikes']));
     }
