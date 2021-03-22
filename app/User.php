@@ -55,9 +55,6 @@ class User extends Authenticatable
      * @return bool
      */
     public function hasRole($roleSlug){
-        if($this->role->slug === $roleSlug){
-            return true;
-        }
-        return false;
+        return $this->role->slug === $roleSlug;
     }   
 }
