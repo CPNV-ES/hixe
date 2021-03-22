@@ -43,13 +43,8 @@
                     </div>
                 @endif
                 @if (Session::has('empty'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
                         {{ Session::get('empty') }}
-                    </div>
-                @endif
-                @if (Session::has('noCSV'))
-                    <div class="alert alert-success">
-                        {{ Session::get('noCSV') }}
                     </div>
                 @endif
                 <div class="card">
@@ -89,8 +84,8 @@
                                             <td>Info</td>
                                             </thead>
                                             <tbody>
-                                                @if(!empty($arrayFromCSV))
-                                                    @foreach($arrayFromCSV as $arrayFromCSVs => $value)
+                                                @if(!empty($hikes))
+                                                    @foreach($hikes as $hike => $value)
                                                         <tr id="rows">
                                                             <td><input type="text" name="name[]" class="form-control" value='{{$value[0]}}'></td>
                                                             <td>

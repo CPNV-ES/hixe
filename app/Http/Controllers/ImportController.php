@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Import;
 use App\User;
+use App\HikeCSV;
 use Illuminate\Http\Request;
 use Session;
 
@@ -38,32 +38,22 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('csv');
-        $extension = $file->getClientOriginalName();
-        //dd(preg_match("/\.csv$/", $extension));
-
-        if (preg_match("/\.csv$/", $extension)){
-            if (!empty($file)){
-                if (($handle = fopen($file, 'r')) !== FALSE){
-                    $arrayFromCSV = [];
-                    while (($datas = fgetcsv($handle, 1000, ';')) !== FALSE) {
-                        $arrayFromCSV[] = $datas;
-                    }
-                    fclose($handle);
-                }
-                $users = User::all();
-                Session::flash('good', "Toutes vos courses contenues dans votre fichier ont été importé!");
-                return view('hikes.multicreate')->with(compact('users', 'arrayFromCSV'));
-            } else {
-                $users = User::all();
-                Session::flash('empty', "Votre fichier est vide!");
-                return view('hikes.multicreate')->with(compact('users'));
-            }
-        } else{
+        $hikes = HikeCSV::loadHike($file);
+        //$hikes = new HikeCSV($file);
+        //$hikes->loadHike($file);
+        //dd($hikes);
+        
+        if (!empty($file)){
             $users = User::all();
-            Session::flash('noCSV', "Votre fichier n'est pas un csv");
+            Session::flash('good', "Toutes vos courses contenues dans votre fichier ont été importé!");
+            return view('hikes.multicreate')->with(compact('users', 'hikes'));
+        } 
+        
+        if (empty($file)){
+            $users = User::all();
+            Session::flash('empty', "Votre fichier est vide!");
             return view('hikes.multicreate')->with(compact('users'));
         }
-
     }
 
     /**
