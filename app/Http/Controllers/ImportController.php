@@ -39,10 +39,6 @@ class ImportController extends Controller
     {
         $file = $request->file('csv');
         $hikes = HikeCSV::loadHike($file);
-        //$hikes = new HikeCSV($file);
-        //$hikes->loadHike($file);
-        //dd($hikes);
-        
         if (!empty($file)){
             $users = User::all();
             Session::flash('good', "Toutes vos courses contenues dans votre fichier ont été importé!");

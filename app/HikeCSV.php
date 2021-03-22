@@ -2,29 +2,32 @@
 
 namespace App;
 
+use DateTime;
 
 class HikeCSV
 {
     static function loadHike($file)
     {
         if (($handle = fopen($file, 'r')) !== FALSE){
-            $arrayFromCSV = [];
+            $arrayHikes = [];
 
-            while (($datas = fgetcsv($handle, 1000, ';')) !== FALSE) {
-                $arrayFromCSV[] = $datas;
+            //|| ";"
+            while (($datas = fgetcsv($handle, 1000, ',' )) !== FALSE) {
+                $arrayHikes[] = $datas;
             }
             fclose($handle);
         }
-        return $arrayFromCSV;
+        return $arrayHikes;
     }
 
-    //changer le nom de $arrayFromCSV
-    //envoyer $hikes dans la view
-    //créer la function IsValidate
-    //La mettre en place dans la view et dans le controller
+    //créer la function dateIsValid
+    //La mettre en place dans la view et dans le controller if it's == background greeen else != red 
+    // mettre sous regex la condition de séparation
+    // voir comment faire un bon flash msg
 
-    public function isValidate()
+    public function dateIsValid($date, $format = 'Y-m-d')
     {
-        //code pour valider les différente ligne
+        $dt = DateTime::createFromFormat($format, $date);
+        return $dt && $dt->format($format) === $date;
     }
 }
