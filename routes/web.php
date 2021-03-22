@@ -10,7 +10,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->middleware('role:hiker,hike_manager,admin');
 
 // Hikes registration
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
