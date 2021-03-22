@@ -3,6 +3,7 @@
 @section('title', 'Toutes les courses')
 
 @section('body-content')
+
 <div class="container-fluid mt-4 table-responsive">
     @if (Session::has('success'))
         <div class="alert alert-success">

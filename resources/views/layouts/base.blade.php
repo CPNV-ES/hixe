@@ -25,9 +25,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- List interactions -->
-    <script src='/lib/datatables/min/jquery.dataTables.min.js'></script>
-    <script src='/lib/datatables/js/dataTables.bootstrap4.min.js'></script>
-    <link rel='stylesheet' href='/lib/datatables/css/dataTables.bootstrap4.min.css'/>
+    <script src={{ asset('/lib/jquery/jquery.min.js') }}></script>
+    <script src={{ asset('/lib/datatables/min/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('/lib/datatables/js/dataTables.bootstrap4.min.js') }}></script>
+    <link rel='stylesheet' href={{ asset('/lib/datatables/css/dataTables.bootstrap4.min.css') }}/>
 </head>
 
 <style>
