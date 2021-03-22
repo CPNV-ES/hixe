@@ -33,7 +33,9 @@
                         <td scope="row">{{ $hike->name }}</td>
                         <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
                         <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                        
                         <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+
                         <td>{{ $hike->users()->count() }}</td>
                         <td>{{ $hike->min_num_participants }}</td>
                         <td>{{ $hike->max_num_participants }}</td>
