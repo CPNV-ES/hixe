@@ -3,7 +3,7 @@
 use App\HikeType;
 use Illuminate\Database\Seeder;
 
-class HikeTypesTableSeeder extends Seeder
+class HikeTypeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

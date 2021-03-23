@@ -17,6 +17,15 @@
     <script src="https://kit.fontawesome.com/30414cf885.js" crossorigin="anonymous"></script>
 
     <script src="{{ asset('/js/app.js')}}"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- List interactions -->
+    <script src={{ asset('/lib/jquery/jquery.min.js') }}></script>
+    <script src={{ asset('/lib/datatables/min/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('/lib/datatables/js/dataTables.bootstrap4.min.js') }}></script>
+    <link rel='stylesheet' href={{ asset('/lib/datatables/css/dataTables.bootstrap4.min.css') }}/>
 </head>
 
 <style>

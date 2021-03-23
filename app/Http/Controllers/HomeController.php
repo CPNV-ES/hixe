@@ -15,6 +15,6 @@ class HomeController extends Controller
         // TODO: Find a better way to fix this
         $hikes = Auth::user() ? Auth::user()->hikes : [];
 
-        return view('home')->with(compact('hikes'));
+        return view('hikes.index')->with(compact(['hikes']));
     }
 }
