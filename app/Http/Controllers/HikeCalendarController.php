@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Hike;
+use App\HikeType;
 use App\User;
 use App\Role;
 
@@ -17,7 +18,8 @@ class HikeCalendarController extends Controller
     public function index()
     {
         $hikes=Hike::all();
-        return view('hikecalendar.index')->with(compact(['hikes']));
+        $hike_types = HikeType::all();
+        return view('hikecalendar.index')->with(compact(['hikes', 'hike_types']));
     }
 
     /**

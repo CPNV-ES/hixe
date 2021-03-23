@@ -37,12 +37,13 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="type">
                             <button class="dropdown-item" data-value="all">Tous</button>
-                            <button class="dropdown-item" data-value="1">Haute-route</button>
-                            <button class="dropdown-item" data-value="2">Alpinisme</button>
+                            @foreach ($hike_types as $type)
+                                <button class="dropdown-item" data-value="{{ $type->id }}">{{ $type->name }}</button>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="mb-2">
                     <label for="difficulty">Difficulté</label>
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle w-100" name="difficulty" type="button"
@@ -58,13 +59,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="mb-2">
+                    <button id="resetFilters" class="btn btn-primary">Réinitilaiser</button>
+                </div>
             </div>
             <div class="col-lg-10">
                 <div id='calendar'></div>
             </div>
         </div>
     </div>
-    <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/moment/moment.min.js"></script>
     <script src='/lib/fullcalendar/fullcalendar.min.js'></script>
     <link rel='stylesheet' href='/lib/fullcalendar/fullcalendar.min.css' />
@@ -121,6 +124,20 @@
                 button.html($(this).text() + ' <span class="caret"></span>');
                 button.val($(this).data('value'));
                 button.data('value', $(this).data('value'));
+
+                calendar.fullCalendar('refetchEvents');
+            });
+
+            $("#resetFilters").click(function() {
+                const type = $('#type');
+                const difficulty = $('#difficulty');
+
+                type.html($(type).next().children().first().text() + ' <span class="caret"></span>');
+                difficulty.html($(difficulty).next().children().first().text() +
+                    ' <span class="caret"></span>');
+
+                type.data('value', 'all');
+                difficulty.data('value', 'all');
 
                 calendar.fullCalendar('refetchEvents');
             });
