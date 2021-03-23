@@ -3,6 +3,7 @@
 @section('title', 'Toutes les courses')
 
 @section('body-content')
+
 <div class="container-fluid mt-4 table-responsive">
     @if (Session::has('success'))
         <div class="alert alert-success">
@@ -62,4 +63,10 @@
     @endif
     <a class="btn btn-primary" href="{{route('hikes.create')}}">Créer une nouvelle course</a>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#hikesTable').DataTable();
+    });
+</script>
 @endsection
