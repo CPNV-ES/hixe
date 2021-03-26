@@ -191,7 +191,8 @@ class HikeController extends Controller
         $hike->equipment()->detach();
         $hike->trainings()->detach();
         $hike->delete();
-        return Redirect::route('hikes.index', ['msg' => 'Success']);
+
+        return Redirect::route('hikes.index')->with('warning','Hike supprimée !');
     }
 
     public function registerToHike($hike_id)
