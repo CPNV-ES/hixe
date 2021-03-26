@@ -123,9 +123,9 @@
         </div>
     </nav>
 
-
     <div class="content">
         @yield('body-content')
+        @include('popup-message')
     </div>
 </div>
 
