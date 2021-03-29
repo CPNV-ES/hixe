@@ -93,8 +93,8 @@
     </nav>
 
     <div class="content">
-        @yield('body-content')
         @include('../popup-message/index')
+        @yield('body-content')
     </div>
 </div>
 
