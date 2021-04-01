@@ -5,12 +5,6 @@
 @section('body-content')
 
 <div class="container-fluid mt-4 table-responsive">
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
-
     @if(!$hikes->isEmpty())
         <table id="hikesTable" class="table table-hover mt-3">
             <thead>
