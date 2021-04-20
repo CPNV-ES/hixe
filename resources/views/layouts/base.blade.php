@@ -28,37 +28,6 @@
     <link rel='stylesheet' href={{ asset('/lib/datatables/css/dataTables.bootstrap4.min.css') }}/>
 </head>
 
-<style>
-
-    .menuright {
-        text-align: center;
-
-    }
-
-    .containermenu {
-        vertical-align: center;
-        margin-top: auto;
-        margin-bottom: auto;
-
-    }
-
-    .containermenu:hover {
-        color: #bf0000;
-
-    }
-
-    @media screen and (max-width: 770px) {
-        .menuright {
-            margin-top: 2%;
-        }
-
-        .logo {
-            text-align: center;
-        }
-    }
-
-</style>
-
 <body>
 <div class="none">
 
@@ -123,8 +92,8 @@
         </div>
     </nav>
 
-
     <div class="content">
+        @include('../popup-message/index')
         @yield('body-content')
     </div>
 </div>
@@ -135,3 +104,33 @@
 
 
 </html>
+
+<style>
+
+    .menuright {
+        text-align: center;
+
+    }
+
+    .containermenu {
+        vertical-align: center;
+        margin-top: auto;
+        margin-bottom: auto;
+
+    }
+
+    .containermenu:hover {
+        color: #bf0000;
+
+    }
+
+    @media screen and (max-width: 770px) {
+        .menuright {
+            margin-top: 2%;
+        }
+
+        .logo {
+            text-align: center;
+        }
+    }
+</style>

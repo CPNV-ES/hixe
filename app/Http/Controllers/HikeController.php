@@ -45,17 +45,6 @@ class HikeController extends Controller
             return response()->json($hikes->get());
         }
 
-        foreach ($request->request->all() as $message) {
-            switch ($message) {
-                case "Success":
-                    Session::flash('success', "La course été supprimé");
-                    break;
-                case "Add":
-                    Session::flash('success', "La course été Ajouté");
-                    break;
-            }
-        }
-
         $hikes = Hike::all();
         return view('hikes.index')->with(compact(['hikes']));
     }
@@ -107,7 +96,8 @@ class HikeController extends Controller
         $hike->trainings()->attach($selectedtrainings);
         $hike->equipment()->attach($selectedequipment);
         $hike->setOneGuide($request->input('guide'));
-        return Redirect::route('hikes.index', ['msg' => 'Add']);
+
+        return Redirect::route('hikes.index')->with('success','La course a été ajoutée');
     }
 
     /**
@@ -173,7 +163,7 @@ class HikeController extends Controller
         $hike->setOneGuide($request->input('guide'));
         $hike->save();
 
-        return Redirect::route('hikes.show', $id);
+        return Redirect::route('hikes.show', $id)->with('success','La course a correctement été modifiée');;
     }
 
 
@@ -191,7 +181,8 @@ class HikeController extends Controller
         $hike->equipment()->detach();
         $hike->trainings()->detach();
         $hike->delete();
-        return Redirect::route('hikes.index', ['msg' => 'Success']);
+
+        return Redirect::route('hikes.index')->with('warning','Hike supprimée !');
     }
 
     public function registerToHike($hike_id)

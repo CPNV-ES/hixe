@@ -14,11 +14,6 @@
                 <div class="row">
                     <div class="col-10">
                         <h2>Votre Profils</h2>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                     </div>
                     <div class="col-2">
                         <a href="{{route('profile.edit',$user)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
