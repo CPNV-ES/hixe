@@ -163,7 +163,7 @@ class HikeController extends Controller
         $hike->setOneGuide($request->input('guide'));
         $hike->save();
 
-        return Redirect::route('hikes.show', $id);
+        return Redirect::route('hikes.show', $id)->with('success','La course a correctement été modifiée');;
     }
 
 
