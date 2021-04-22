@@ -70,7 +70,7 @@
                 <div class="col-md-1 containermenu" onclick="location.href='{{ route('profile.show',Auth::user()->id) }}'">
                     <div class="menuright">
                         <i class="fas fa-user fa-2x"></i>
-                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p>
+                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}} <span class="text-sm-left"><strong>{{ Auth::user()->role->name }}</strong></span></p>
                     </div>
                 </div>
             @endif

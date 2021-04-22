@@ -27,5 +27,6 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => Hash::make('Pa$$w0rd'),
         'created_at' => now(),
         'updated_at' => now(),
+        'role_id' => 2,
     ];
 });
