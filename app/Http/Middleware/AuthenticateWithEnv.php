@@ -23,7 +23,7 @@ class AuthenticateWithEnv
             //Test si l'utilsiateur du .env existe dans la DB
             if(User::where('email_address', '=', env('USER_EMAIL'))->exists()){
                 //Test la connexion avec l'utilisateur du .env
-                if(!Auth::attempt(['firstname' => env('USER_FIRSTNAME'), 'lastname' => env('USER_LASTNAME'), 'email_address' => env('USER_EMAIL'), 'member_number' => env('USER_NUMBER'), 'birthdate' => env('USER_BIRTHDATE'), 'password' => env('USER_PASSWORD'), 'role_id' => env('ROLE')])) {
+                if(!Auth::attempt(['firstname' => env('USER_FIRSTNAME'), 'lastname' => env('USER_LASTNAME'), 'email_address' => env('USER_EMAIL'), 'member_number' => env('USER_NUMBER'), 'birthdate' => env('USER_BIRTHDATE'), 'password' => env('USER_PASSWORD')])) {
                     return response('Erreur 409 : Accès refusée.', 409);
                 }
             }else{

@@ -65,11 +65,25 @@ class User extends Authenticatable
             }
         }
         return false;
-    }   
+    }
 
     public function setRole($roleSlug){
-        $role = Role::where('slug',$roleSlug);
-        dd($this->role->save($role));
-        return 0;
+        $role = null;
+        try {
+            $role = Role::where('slug',$roleSlug)->first();
+            if(!isset($role)){
+               throw new \Exception("Role not found");
+            }
+            $this->role_id = $role->id ?? $this->role;
+            $this->save();
+            echo("Le role de l'utilisateur a été mise à jour en " .  $role->name . PHP_EOL);
+        }
+        catch(\Exception $e){
+            report($e);
+            echo("Le role de l'utilisateur n'a pas été modifié" . PHP_EOL);
+            return false;
+        }
+
+        return $this;
     }
 }
