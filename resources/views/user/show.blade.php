@@ -30,7 +30,7 @@
                         <p><i class="fas fa-birthday-cake"></i> {{ date('d.m.Y', strtotime( $user->birthdate)) }}</p>
                         <p><i class="fas fa-envelope"></i> {{ $user->email_address }}</p>
                         <p><i class="fas fa-list-ol"></i> Numéro de membre : {{ $user->member_number }}</p>
-                        <p><i class="fas fa-list-ol"></i> Role : {{ $user->role->slug }}</p>
+                        <p><i class="fas fa-list-ol"></i> Role : {{ $user->role->name }}</p>
                         
 
                         @if($user->hikes->isNotEmpty())
