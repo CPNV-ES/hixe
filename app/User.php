@@ -55,6 +55,21 @@ class User extends Authenticatable
      * @return bool
      */
     public function hasRole($roleSlug){
-        return $this->role->slug === $roleSlug;
+        if(is_string($roleSlug)){
+            return $this->role->slug === $roleSlug;
+        }
+
+        foreach ($roleSlug as $r) {
+            if($this->hasRole($r)){
+                return true;
+            }
+        }
+        return false;
     }   
+
+    public function setRole($roleSlug){
+        $role = Role::where('slug',$roleSlug);
+        dd($this->role->save($role));
+        return 0;
+    }
 }
