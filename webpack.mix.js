@@ -50,3 +50,4 @@ mix.js('resources/js/app.js', 'public/js')
 
     .copy('node_modules/datatables.net-searchpanes-bs4/css/searchPanes.bootstrap4.min.css', 'public/lib/datatables/searchPanes/css')
     .copy('node_modules/datatables.net-searchpanes-bs4/js/searchPanes.bootstrap4.min.js', 'public/lib/datatables/searchPanes/js')
+mix.browserSync('127.0.0.1:8000');
