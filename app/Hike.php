@@ -22,12 +22,12 @@ class Hike extends Model
 
     public function guides()
     {
-        return $this->users()->where('role_id', 1);
+        return $this->users()->where('hike_user.role_id', 1); // Avoid ambiguous relations
     }
 
     public function participants()
     {
-        return $this->users()->where('role_id', '!=', 1);
+        return $this->users()->where('hike_user.role_id', '!=', 1); // Avoid ambiguous relations
     }
 
     public function destinations()
