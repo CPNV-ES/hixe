@@ -85,9 +85,9 @@
                                             </thead>
                                             <tbody>
                                                 @if(!empty($hikes))
-                                                    @foreach($hikes as $hike => $value)
+                                                    @foreach($hikes as $hike)
                                                         <tr id="rows">
-                                                            <td><input type="text" name="name[]" class="form-control" value='{{$value[0]}}'></td>
+                                                            <td><input type="text" name="name[]" class="form-control" value='{{$hike->name}}'></td>
                                                             <td>
                                                             <select class="form-control" name="chef[]">
                                                                 @foreach($users as $user)
@@ -95,16 +95,16 @@
                                                                 @endforeach
                                                             </select>
                                                             </td>
-                                                            <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$value[1]}}'></td>
-                                                            <td><input type="date" name="meetingDate[]" class="form-control" value='{{$value[2]}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
-                                                            <td><input type="date" name="hikeDate[]" class="form-control" value='{{$value[3]}}'></td>
-                                                            <td><input type="time" name="start[]" class="form-control" value='{{$value[4]}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
-                                                            <td><input type="time" name="finish[]" class="form-control" value='{{$value[5]}}'></td>
-                                                            <td><input type="number" min="1" name="min[]" class="form-control" value='{{$value[6]}}'></td>
-                                                            <td><input type="number" min="1" name="max[]" class="form-control" value='{{$value[7]}}'></td>
-                                                            <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$value[8]}}'></td>
-                                                            <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$value[9]}}'></td>
-                                                            <td><input type="text" name="info[]" class="form-control" value='{{$value[10]}}'></td>
+                                                            <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}'></td>
+                                                            <td><input type="date" name="meetingDate[]" class="form-control" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                            <td><input type="date" name="hikeDate[]" class="form-control" value='{{$hike->hikeDate}}'></td>
+                                                            <td><input type="time" name="start[]" class="form-control" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                            <td><input type="time" name="finish[]" class="form-control" value='{{$hike->finish}}'></td>
+                                                            <td><input type="number" min="1" name="min[]" class="form-control" value='{{$hike->min}}'></td>
+                                                            <td><input type="number" min="1" name="max[]" class="form-control" value='{{$hike->max}}'></td>
+                                                            <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$hike->denivele}}'></td>
+                                                            <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$hike->difficulty}}'></td>
+                                                            <td><input type="text" name="info[]" class="form-control" value='{{$hike->info}}'></td>
                                                             <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
                                                         </tr>
                                                     @endforeach
