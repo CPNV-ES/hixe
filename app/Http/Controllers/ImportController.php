@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\HikeCSV;
 use Illuminate\Http\Request;
+use App\Http\Requests\MultiHikesPost;
 use Session;
 
 class ImportController extends Controller
@@ -35,22 +36,12 @@ class ImportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MultiHikesPost $request)
     {
         $file = $request->file('csv');
         $hikes = HikeCSV::loadHike($file);
-        $validated = $hikes->validate([
-            'name' => ['required|max:100' => 'Nous avons besoin du nom de la course'],
-            'meetingLocation' => ['required|max:100' =>'Nous avons besoin du lieu de rendez-vous'],
-            'meetingDate' => 'required|date',
-            'hikeDate' => 'required|date',
-            'start' => 'required',
-            'finish' => 'required',
-            'min' => 'numeric|min:1',
-            'max' => 'numeric|max:9',
-            'denivele' => 'required|numeric|min:1',
-            'difficulty' => 'required|numeric|min:1',
-        ]);
+        $validated = $hikes->validated();
+        
         if (!empty($file)){
             $users = User::all();
             Session::flash('good', "Toutes vos courses contenues dans votre fichier ont été importé!");
