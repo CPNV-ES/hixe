@@ -39,7 +39,18 @@ class ImportController extends Controller
     {
         $file = $request->file('csv');
         $hikes = HikeCSV::loadHike($file);
-        //dd($hikes);
+        $validated = $hikes->validate([
+            'name' => ['required|max:100' => 'Nous avons besoin du nom de la course'],
+            'meetingLocation' => ['required|max:100' =>'Nous avons besoin du lieu de rendez-vous'],
+            'meetingDate' => 'required|date',
+            'hikeDate' => 'required|date',
+            'start' => 'required',
+            'finish' => 'required',
+            'min' => 'numeric|min:1',
+            'max' => 'numeric|max:9',
+            'denivele' => 'required|numeric|min:1',
+            'difficulty' => 'required|numeric|min:1',
+        ]);
         if (!empty($file)){
             $users = User::all();
             Session::flash('good', "Toutes vos courses contenues dans votre fichier ont été importé!");
