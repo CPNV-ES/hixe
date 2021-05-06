@@ -25,18 +25,18 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     ```
 3. Installer les dépendances
     ```
-    # cd hixe
-    # composer i
-    # npm i
+    cd hixe
+    composer i
+    npm i
     ```
 4. Transpiler les assets CSS et Javascript
     ```
-    # npm run dev
+    npm run dev
     ```
 5. Préparez le fichier de **configuration**
     ```
-    # cp .env.example .env
-    # php artisan key:generate
+    cp .env.example .env
+    php artisan key:generate
     ```
 6. Éditez le fichier `.env` :
 
@@ -69,19 +69,19 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
 
     A. Créer les tables avec l'outil migrate
     ```
-    # php artisan migrate
+    php artisan migrate
     ```
     B. Remplir la base de donnée avec nos seeds préfaits
     ```
-    # php artisan db:seed
+    php artisan db:seed
     ```
 
     Note : Si vous souhaitez **drop&restart** vos seeds car vous avez des erreurs à corriger ou que vous avez des nouveautés à implémenter, vous pouvez ``refresh`` les seeds avec la commande :
     ```
-    # php artisan migrate:fresh --seed
+    php artisan migrate:fresh --seed
     ```
 
 8. Lancer le serveur
     ```
-    # php artisan serve
+    php artisan serve
     ```
