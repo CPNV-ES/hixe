@@ -40,6 +40,8 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     ```
 6. Éditez le fichier `.env` :
 
+    Note : Si cela n'est pas déjà fait, nous vous conseillons de créer une base de donnée à cette étape et de retenir son nom pour l'ajouter dans le champ ``DB_DATABASE``. 
+
     A. Définissez la connection à votre **Base de Donnée**, dans notre cas nous utilisons le driver mysql :
     ```
     DB_CONNECTION=mysql
@@ -49,6 +51,7 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     DB_USERNAME=[DB_Username]
     DB_PASSWORD=[DB_Password]
     ```
+
     B. Pour nos expériences du côté applicatif, nous avons un utilisateur test. Il est possible de le modifier si besoin.
    
    ```
@@ -60,11 +63,23 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     USER_BIRTHDATE=2020-01-03
    ```
 
-8. Effectuer la migration de la base de données
+8. Remplir la base de donnée
+    Si vous n'avez pas encore créer votre base de donnée, vous pouvez le faire comme cela.
+
+    A. Créer les tables avec l'outil migrate
     ```
     # php artisan migrate
     ```
-    
+    B. Remplir la base de donnée avec nos seeds préfaits
+    ```
+    # php artisan db:seed
+    ```
+
+    Note : Si vous souhaitez **drop&restart** vos seeds car vous avez des erreurs à corriger ou que vous avez des nouveautés à implémenter, vous pouvez ``refresh`` les seeds avec la commande :
+    ```
+    # php artisan migrate:fresh --seed
+    ```
+
 9. Lancer le serveur
     ```
     # php artisan serve
