@@ -63,7 +63,8 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     USER_BIRTHDATE=2020-01-03
    ```
 
-8. Remplir la base de donnée
+7. Remplir la base de donnée
+
     Si vous n'avez pas encore créer votre base de donnée, vous pouvez le faire comme cela.
 
     A. Créer les tables avec l'outil migrate
@@ -80,7 +81,7 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     # php artisan migrate:fresh --seed
     ```
 
-9. Lancer le serveur
+8. Lancer le serveur
     ```
     # php artisan serve
     ```
