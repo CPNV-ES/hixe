@@ -1,4 +1,4 @@
-# Hixe
+Hixe
 
 (De l'anglais "Hikes" (randonnées) écrit phonétiquement)
 
@@ -8,7 +8,7 @@ Au delà de la problématique standard de fixer une date et rassembler un groupe
 
 La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tree/master/docs/user), les documents à caractère technique [ici](https://github.com/CPNV-ES/hixe/tree/master/docs/technical) et si vous voulez installer Hikes sur un poste de développement, rendez-vous [ici](https://github.com/CPNV-ES/hixe/tree/master/docs/install).
 
-# Installation
+Installation
 
 1. Valider que les pré-requis suivants sont bien installés sur votre machine
    
@@ -25,18 +25,18 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     ```
 3. Installer les dépendances
     ```
-    # cd hixe
-    # composer i
-    # npm i
+    cd hixe
+    composer i
+    npm i
     ```
 4. Transpiler les assets CSS et Javascript
     ```
-    # npm run dev
+    npm run dev
     ```
 5. Préparez le fichier de **configuration**
     ```
-    # cp .env.example .env
-    # php artisan key:generate
+    cp .env.example .env
+    php artisan key:generate
     ```
 6. Éditez le fichier `.env` :
 
@@ -65,23 +65,23 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
 
 7. Remplir la base de donnée
 
-    Si vous n'avez pas encore créer votre base de donnée, vous pouvez le faire comme cela.
+    Si vous n'avez pas encore créé votre base de donnée, vous pouvez le faire comme cela.
 
     A. Créer les tables avec l'outil migrate
     ```
-    # php artisan migrate
+    php artisan migrate
     ```
     B. Remplir la base de donnée avec nos seeds préfaits
     ```
-    # php artisan db:seed
+    php artisan db:seed
     ```
 
     Note : Si vous souhaitez **drop&restart** vos seeds car vous avez des erreurs à corriger ou que vous avez des nouveautés à implémenter, vous pouvez ``refresh`` les seeds avec la commande :
     ```
-    # php artisan migrate:fresh --seed
+    php artisan migrate:fresh --seed
     ```
 
 8. Lancer le serveur
     ```
-    # php artisan serve
+    php artisan serve
     ```
