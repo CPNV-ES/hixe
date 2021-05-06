@@ -65,8 +65,6 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
 
 7. Remplir la base de donnée
 
-    Si vous n'avez pas encore créer votre base de donnée, vous pouvez le faire comme cela.
-
     A. Créer les tables avec l'outil migrate
     ```
     php artisan migrate
