@@ -71,19 +71,19 @@ class User extends Authenticatable
         $role = null;
         try {
             $role = Role::where('slug',$roleSlug)->first();
-            if(!isset($role)){
+
+            if(!isset($role) && $role != null){
                throw new \Exception("Role not found");
             }
             $this->role_id = $role->id ?? $this->role;
             $this->save();
-            echo("Le role de l'utilisateur a été mise à jour en " .  $role->name . PHP_EOL);
+            print("Le role de l'utilisateur a été mise à jour en " .  $role->name . PHP_EOL);
         }
         catch(\Exception $e){
             report($e);
-            echo("Le role de l'utilisateur n'a pas été modifié" . PHP_EOL);
+            print("Le role de l'utilisateur n'a pas été modifié" . PHP_EOL);
             return false;
         }
-
         return $this;
     }
 }
