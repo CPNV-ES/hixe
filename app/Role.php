@@ -12,6 +12,10 @@ class Role extends Model
       'name'
   ];
 
+  public static function hiker() {
+    return Role::where('slug', 'hiker')->first();
+  }
+
   public function users(){
     return $this->hasMany(User::class);
   }
