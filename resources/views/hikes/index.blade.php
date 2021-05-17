@@ -34,7 +34,7 @@
                         <td>{{ $hike->max_num_participants }}</td>
                         <td>{{ $hike->state->name }}</td>
                         @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                            <td>Déjà inscrit</td>
+                            <td><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-secondary"><i class="far fa-minus-square"></i></a></td>
                         @elseif($hike->state->id == 2)
                             <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
                         @else

@@ -195,6 +195,16 @@ class HikeController extends Controller
         return view('hikes.index')->with(compact('hikes'));
     }
 
+    public function unregisterToHike($hike_id)
+    {
+        $hike = Hike::find($hike_id);
+
+        $hike->users()->detach(Auth::user()->id, ['role_id' => 3]);
+
+        $hikes = Hike::all();
+        return view('hikes.index')->with(compact('hikes'));
+    }
+
     /**
      * Receive AJAX request from addSearchAutocomplete function in hixe-form.js
      * @param Request $request

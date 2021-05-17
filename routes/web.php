@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index');
 
 // Hikes registration
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
+Route::get('unregister_hike/{id}', 'hikeController@unregisterToHike')->name('hike.unregisterhike');
 
 
 // Calendar
