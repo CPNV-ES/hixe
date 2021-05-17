@@ -47,12 +47,12 @@ class Hike extends Model
 
     public function equipment()
     {
-        return $this->belongsToMany(Equipment::Class);
+        return $this->belongsToMany(Equipment::class);
     }
 
     public function trainings()
     {
-        return $this->belongsToMany(Training::Class);
+        return $this->belongsToMany(Training::class);
     }
 
     /**

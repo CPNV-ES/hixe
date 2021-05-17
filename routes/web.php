@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 
 // Hikes registration
-Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
+Route::get('register_hike/{id}', 'HikeController@registerToHike')->name('hike.registerhike');
 
 
 // Calendar
