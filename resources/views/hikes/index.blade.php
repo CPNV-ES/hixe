@@ -6,7 +6,19 @@
 
 <div class="container-fluid mt-4 table-responsive">
     @if(isset($hikes) && !$hikes->isEmpty())
-        <table id="hikesTable" class="table table-hover mt-3">
+        <div class="container-fluid">
+            <div class="col-2">
+                <form method="GET">
+                    @csrf
+                    <div class="input-group mb-3"> 
+                    <input name="q" type="search" class="form-control" value="{{$query}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table id="hikesTable" class="table mt-3">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
@@ -45,7 +57,7 @@
                             <form action="{{route('hikes.destroy',$hike)}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE"/>
-                                <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
+                                <button id="delete-btn" type="submit" class="btn btn-outline-danger" data-name="{{$hike->name}}"><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -53,14 +65,33 @@
         </tbody>
     </table>
     @else
-        <div class="p-3 mb-2 bg-light text-dark"> Aucunes courses n'existent actuellement. </div>
+        <div class="p-3 mb-2 bg-light text-dark">
+            @if(isset($query))
+                Aucun résultat ne correspond à votre recherche
+            @else
+                Aucunes courses n'existent actuellement.
+            @endif
+        </div>
     @endif
     <a class="btn btn-primary" href="{{route('hikes.create')}}">Créer une nouvelle course</a>
 </div>
 
 <script>
     $(document).ready(function() {
-        $('#hikesTable').DataTable();
+        $('#hikesTable').DataTable({
+            searching: false,
+            paging: false,
+            info: false,
+        });
+    });
+
+    $("#delete-btn").on("click", function(evt) {
+        var confirmed = confirm("Êtes vous sûr de vouloir supprimer : " + $("#delete-btn").data("name"));
+
+        if (!confirmed) {
+            evt.stopPropagation();
+            evt.preventDefault();
+        }
     });
 </script>
 @endsection

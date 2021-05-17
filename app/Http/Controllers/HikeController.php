@@ -11,11 +11,10 @@ use App\User;
 use App\Destination;
 use App\HikeType;
 use App\Http\Requests\HikesPost;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class HikeController extends Controller
 {
@@ -26,27 +25,65 @@ class HikeController extends Controller
      */
     public function index(Request $request)
     {
-        if (\Str::contains($request->header('Accept'), 'application/json')) {
+        $query = $request->query('q');
+
+        if (Str::contains($request->header('Accept'), 'application/json')) {
             $start_date = $request->query('start_date');
             $end_date = $request->query('end_date');
             $difficulty = $request->query('difficulty');
             $type = $request->query('type');
 
-            $hikes = Hike::between($start_date, $end_date);
-
-            if ($type != 'all') {
-                $hikes =  $hikes->where('type_id', $type);
+            if (isset($start_date) && isset($end_date)) {
+                $hikes = Hike::between($start_date, $end_date);
             }
 
-            if ($difficulty != 'all') {
+            // FIXME: this will override the $hikes set above
+            if (isset($participants)) {
+                $hikes = Hike::whereHas('participants', function ($query) use ($participants) {
+                    return $query->whereIn('hike_user.user_id', $participants);
+                });
+            }
+
+            if (isset($type) && $type != 'all') {
+                $hikes = $hikes->where('type_id', $type);
+            }
+
+            if (isset($difficulty) && $difficulty != 'all') {
                 $hikes = $hikes->where('difficulty', $difficulty);
             }
 
-            return response()->json($hikes->get());
+            if (isset($hikes)) {
+                $hikes = $hikes->get();
+            } else {
+                $hikes = Hike::all();
+            }
+
+            return response()->json($hikes);
         }
 
-        $hikes = Hike::all();
-        return view('hikes.index')->with(compact(['hikes']));
+        if (isset($query)) {
+            $hikes = Hike::whereHas('participants', function ($q) use ($query) {
+                $needles = explode(' ', $query);
+
+                if ($needles) {
+                    foreach($needles as $needle) {
+                        $q = $q->where('firstname', 'like', "%{$needle}%")->orWhere('lastname', 'like', "%{$needle}%");
+                    }
+                } else {
+                    $q->where('firstname', 'like', "%{$query}%")->orWhere('lastname', 'like', "%{$query}%");
+                }
+
+                return $q;
+            });
+        } 
+
+        if (isset($hikes)) {
+            $hikes = $hikes->get();
+        } else {
+            $hikes = Hike::all();
+        }
+        
+        return view('hikes.index')->with(compact(['hikes', 'query']));
     }
 
 
