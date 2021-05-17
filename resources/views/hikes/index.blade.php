@@ -19,8 +19,11 @@
                     <th scope="col">État</th>
                     @if(Auth::check())
                         <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        
+                        @if(Auth::user()->hasRole("hike_manager"))
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        @endif
                     @endif
                 </tr>
             </thead>
@@ -44,14 +47,17 @@
                             @else
                                 <td class="text-muted font-italic">Indisponible</td>
                             @endif
-                            <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
-                            <td>
-                                <form action="{{route('hikes.destroy',$hike)}}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE"/>
-                                    <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
+
+                            @if(Auth::user()->hasRole("hike_manager"))
+                                <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
+                                <td>
+                                    <form action="{{route('hikes.destroy',$hike)}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE"/>
+                                        <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            @endif
                         @endif
                     </tr>
                 @endforeach
