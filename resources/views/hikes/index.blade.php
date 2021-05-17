@@ -5,7 +5,7 @@
 @section('body-content')
 
 <div class="container-fluid mt-4 table-responsive">
-    @if(!$hikes->isEmpty())
+    @if(isset($hikes) && !$hikes->isEmpty())
         <table id="hikesTable" class="table table-hover mt-3">
             <thead>
                 <tr>
