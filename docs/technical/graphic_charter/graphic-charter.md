@@ -3,6 +3,29 @@
 ## Goals
 The objectif of a graphic charter is to know how to properly implement views with its objects (Buttons, Tags, ...).
 
+# Hikes states & Badges 
+Each hikes has a state like "Incription, Effectuée, Prête". Our Team choose to put color on name to make them more user friendly.
+
+
+![tags](https://raw.githubusercontent.com/CPNV-ES/hixe/feature/graphic_charter/docs/technical/graphic_charter/img/Tags.PNG)
+
+```html
+<span class="badge badge-secondary">Préparation</span>
+<span class="badge badge-info">Inscription</span>
+<span class="badge badge-success">Prête</span>
+<span class="badge badge-primary">En cours</span>
+<span class="badge badge-danger">Annulée</span>
+<span class="badge badge-dark">Effectuée</span>
+```
+
+You can read more about tags [here](https://getbootstrap.com/docs/4.0/components/badge/).
+
+# Alert
+This project also uses popup-message :
+![popup](https://raw.githubusercontent.com/CPNV-ES/hixe/feature/graphic_charter/docs/technical/graphic_charter/img/popup.PNG)
+
+A specific message needs to be implemented with this [way](https://github.com/CPNV-ES/hixe/blob/develop/docs/technical/popup-message.md), please follow it correctly !
+
 # Objects
 This project uses Bootstrap as CSS framework and font-awesome for icons. 
 
@@ -48,29 +71,5 @@ When the button is hover,
 it looks like that :
 
 ![destroy_button_hover](https://raw.githubusercontent.com/CPNV-ES/hixe/feature/graphic_charter/docs/technical/graphic_charter/img/destroy_button_hover.PNG)  
-
-# Hikes states & Badges 
-Each hikes has a state like "Incription, Effectuée, Prête". Our Team choose to put color on name to make them more user friendly.
-
-
-![tags](https://raw.githubusercontent.com/CPNV-ES/hixe/feature/graphic_charter/docs/technical/graphic_charter/img/Tags.PNG)
-
-```html
-<span class="badge badge-secondary">Préparation</span>
-<span class="badge badge-info">Inscription</span>
-<span class="badge badge-success">Prête</span>
-<span class="badge badge-primary">En cours</span>
-<span class="badge badge-danger">Annulée</span>
-<span class="badge badge-dark">Effectuée</span>
-```
-
-You can read more about tags [here](https://getbootstrap.com/docs/4.0/components/badge/).
-
-# Alert
-This project also uses popup-message :
-![popup](https://raw.githubusercontent.com/CPNV-ES/hixe/feature/graphic_charter/docs/technical/graphic_charter/img/popup.PNG)
-
-A specific message needs to be implemented with this [way](https://github.com/CPNV-ES/hixe/blob/develop/docs/technical/popup-message.md), please follow it correctly !
-
 
 
