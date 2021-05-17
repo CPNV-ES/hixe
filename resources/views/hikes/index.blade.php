@@ -20,7 +20,7 @@
                     @if(Auth::check())
                         <th scope="col"></th>
                         
-                        @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))))
+                        @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
                             <th scope="col"></th>
                             <th scope="col"></th>
                         @endif
@@ -41,14 +41,14 @@
 
                         @if(Auth::check())
                             @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                                <td><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-secondary"><i class="far fa-minus-square"></i></a></td>
+                                <td><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-minus-square"></i></a></td>
                             @elseif($hike->state->id == 2)  
                                 <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
                             @else
-                                <td class="text-muted font-italic">Indisponible</td>
+                                <td><a class="btn btn-outline-light" data-toggle="tooltip" title="Seule une course en 'Préparation' vous offre la possibilité de vous y inscrire."><i class="fas fa-minus"></i></a> </td>
                             @endif
 
-                            @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))))
+                            @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
                                 <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
                                 <td>
                                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
