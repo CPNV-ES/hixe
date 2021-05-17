@@ -20,7 +20,7 @@
                     @if(Auth::check())
                         <th scope="col"></th>
                         
-                        @if(Auth::user()->hasRole("hike_manager"))
+                        @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))))
                             <th scope="col"></th>
                             <th scope="col"></th>
                         @endif
@@ -48,7 +48,7 @@
                                 <td class="text-muted font-italic">Indisponible</td>
                             @endif
 
-                            @if(Auth::user()->hasRole("hike_manager"))
+                            @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))))
                                 <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
                                 <td>
                                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
