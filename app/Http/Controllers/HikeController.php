@@ -192,7 +192,7 @@ class HikeController extends Controller
         $hike->users()->attach(Auth::user()->id, ['role_id' => 3]);
 
         $hikes = Hike::all();
-        return Redirect::route('hikes.show', $hike_id)->with('success','Inscription réussie !');;
+        return Redirect::route('hikes.show', $hike_id)->with('success','Inscription réussie !');
     }
 
     public function unregisterToHike($hike_id)
@@ -202,7 +202,7 @@ class HikeController extends Controller
         $hike->users()->detach(Auth::user()->id, ['role_id' => 3]);
 
         $hikes = Hike::all();
-        return view('hikes.index')->with(compact('hikes'));
+        return Redirect::route('hikes.index')->with('success','Désinscription réussie !');
     }
 
     /**
