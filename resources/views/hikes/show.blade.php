@@ -64,6 +64,8 @@
             @endif
             
             @if(Auth::check())
+            {{ dd($hike->CouldBeRegistered())}}
+
                 <hr>
                 <div class="p-2 text-left">
                     @if($hike->users()->where('user_id', Auth::user()->id)->exists())

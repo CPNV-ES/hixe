@@ -55,6 +55,21 @@ class Hike extends Model
         return $this->belongsToMany(Training::Class);
     }
 
+    /*
+    Return true if :
+        - The maximum number of participants is not reached
+        - The start date is in the future
+    */
+    public function CouldBeRegistered(){
+        if(($this->participants()->count() <= $this->max_num_participants))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     /**
      * Get hikes between two dates
      *
