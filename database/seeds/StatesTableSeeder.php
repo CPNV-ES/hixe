@@ -13,6 +13,9 @@ class StatesTableSeeder extends Seeder
     public function run()
     {
         State::insert([
+            'name' => 'En cours',
+        ]);
+        State::insert([
             'name' => 'Préparation',
         ]);
         State::insert([
