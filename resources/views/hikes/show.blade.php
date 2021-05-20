@@ -9,9 +9,18 @@
         <div class="jumbotron pt-2 pb-2">
             <div class="row">
                 <div class="col-sm-12 d-flex justify-content-end">
-                    <div class="p-2">
-                        <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
-                    </div>
+                    @if(Auth::check())
+                        @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
+                            <div class="p-2">
+                                @if($hike->users()->where('user_id', Auth::user()->id)->exists())
+                                    <a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-minus-square fa-2x"></i></a>
+                                @elseif($hike->state->id == 2)  
+                                    <a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square fa-2x"></i></a>
+                                @endif
+                                <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit fa-2x"></i></a>
+                            </div>
+                        @endif
+                    @endif
                 </div>
             </div>
             <h1 class="display-4">{{ $hike->name }}</h1>
@@ -60,4 +69,4 @@
             @endif
         </div>
     </div>
-@endsection
+    @endsection
