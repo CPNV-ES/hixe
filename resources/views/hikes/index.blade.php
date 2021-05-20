@@ -18,10 +18,10 @@
                     <th scope="col">Maximum</th>
                     <th scope="col">État</th>
                     @if(Auth::check())
-                        <th scope="col"> Inscriptions </th>
+                        <th class="text-center" scope="col"> Inscription </th>
                         
                         @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
-                            <th class="text-center" colspan="2" scope="col">Édition</th>
+                            <th class="text-center" colspan="2" scope="col">Gestion</th>
                         @endif
                     @endif
                 </tr>
