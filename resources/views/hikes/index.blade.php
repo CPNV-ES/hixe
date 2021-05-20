@@ -41,11 +41,11 @@
 
                         @if(Auth::check())
                             @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                                <td><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-minus-square"></i></a></td>
+                                <td><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square"></i></a></td>
                             @elseif($hike->state->id == 2)  
-                                <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
+                                <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square"></i></a></td>
                             @else
-                                <td><a class="btn btn-outline-light" data-toggle="tooltip" title="Seule une course en 'Préparation' vous offre la possibilité de vous y inscrire."><i class="fas fa-minus"></i></a> </td>
+                                <td></td>
                             @endif
 
                             @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
