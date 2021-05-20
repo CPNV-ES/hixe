@@ -10,16 +10,11 @@
             <div class="row">
                 <div class="col-sm-12 d-flex justify-content-end">
                     @if(Auth::check())
-                            <div class="p-2">
-                                @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                                    <a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square fa-2x"></i></a>
-                                @elseif($hike->state->id == 2)  
-                                    <a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square fa-2x"></i></a>
-                                @endif
-                        @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
+                        <div class="p-2">
+                            @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
                                 <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit fa-2x"></i></a>
-                        @endif
-                            </div>
+                            @endif
+                        </div>
                     @endif
                 </div>
             </div>
@@ -65,6 +60,17 @@
                 <hr>
                 <div class="text-left">
                     {{ $hike->additional_info }}
+                </div>
+            @endif
+            
+            @if(Auth::check())
+                <hr>
+                <div class="p-2 text-left">
+                    @if($hike->users()->where('user_id', Auth::user()->id)->exists())
+                        <a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square fa-2x"></i></a>
+                    @elseif($hike->state->id == 2)  
+                        <a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square fa-2x"></i></a>
+                    @endif
                 </div>
             @endif
         </div>
