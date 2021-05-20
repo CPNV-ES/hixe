@@ -61,6 +61,11 @@ class Hike extends Model
         - The start date is in the future
     */
     public function CouldBeRegistered(){
+        $ldate = new DateTime('now');
+        $ldate = date('Y-m-d H:i:s');
+        
+        dd($mytime->toDateTimeString());
+
         if(($this->participants()->count() <= $this->max_num_participants))
         {
             return true;
