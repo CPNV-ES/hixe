@@ -36,15 +36,15 @@
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Dénivelé</label>
-            <input type="number" name="elevation" class="form-control col-1" value="{{ $hike->drop_in_altitude }}">
+            <input type="number" min="1" name="elevation" class="form-control col-1" value="{{ $hike->drop_in_altitude }}">
             <label class="form-control bg-transparent col-2 border-0 text-right">Difficulté technique</label>
-            <input type="number" name="difficulty" class="form-control col-1" value="{{ $hike->difficulty }}">
+            <input type="number" min="1" max="9" name="difficulty" class="form-control col-1" value="{{ $hike->difficulty }}">
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Participants: minimum </label>
-            <input type="number" name="minp" class="form-control col-1" value="{{ $hike->min_num_participants }}">
+            <input type="number" name="minp" min="1" class="form-control col-1" value="{{ $hike->min_num_participants }}">
             <label class="form-control bg-transparent col-1 border-0 text-right"> maximum </label>
-            <input type="number" name="maxp" class="form-control col-1" value="{{ $hike->max_num_participants }}">
+            <input type="number" name="maxp" min="1" class="form-control col-1" value="{{ $hike->max_num_participants }}">
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent border-0 text-center">Divers</label>
