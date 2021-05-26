@@ -43,7 +43,6 @@ class ImportController extends Controller
         
         if (!empty($file)){
             $users = User::all();
-            Session::flash('good', "Toutes vos courses contenues dans votre fichier ont été importé!");
             return view('hikes.multicreate')->with(compact('users', 'validatedHikes'));
         } 
         
