@@ -84,8 +84,8 @@
                                             <td>Info</td>
                                             </thead>
                                             <tbody>
-                                                @if(!empty($hikes))
-                                                    @foreach($hikes as $hike)
+                                                @if(!empty($validatedHikes))
+                                                    @foreach($validatedHikes as $hike)
                                                         <tr id="rows">
                                                             <td><input type="text" name="name[]" class="form-control" value='{{$hike->name}}'></td>
                                                             <td>

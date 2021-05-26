@@ -39,13 +39,12 @@ class ImportController extends Controller
     {
         $file = $request->file('csv');
         $hikes = HikeCSV::loadHike($file);
-        $validated = HikeCSV::validationMultiHikes($hikes);
-        dd();
+        $validatedHikes = HikeCSV::validationMultiHikes($hikes);
         
         if (!empty($file)){
             $users = User::all();
             Session::flash('good', "Toutes vos courses contenues dans votre fichier ont été importé!");
-            return view('hikes.multicreate')->with(compact('users', 'hikes'));
+            return view('hikes.multicreate')->with(compact('users', 'validatedHikes'));
         } 
         
         if (empty($file)){

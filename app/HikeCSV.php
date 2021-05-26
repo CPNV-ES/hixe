@@ -72,7 +72,7 @@ class HikeCSV
     }
 
     static function validationMultiHikes($hikes){
-        $validateHike = array();
+        $validatedHike = array();
         foreach ($hikes as $hike){
 
             if(empty($hike->name)){
@@ -131,8 +131,8 @@ class HikeCSV
                 $hike->difficultyError = "Le champ difficulté doit comporter uniquement des chiffres";
             } 
 
-            $validateHike[] = $hike;
+            $validatedHike[] = $hike;
         }
-        return $validateHike;
+        return $validatedHike;
     }
 }
