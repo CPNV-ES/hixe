@@ -7,14 +7,14 @@
 <div class="container-fluid mt-4 table-responsive">
     @if(isset($hikes) && !$hikes->isEmpty())
         <div class="container-fluid">
-            <div class="col-2">
+            <div class="col-2 position-relative search-bar">
                 <form method="GET">
-                    @csrf
                     <div class="input-group mb-3"> 
-                    <input name="q" type="search" class="form-control" value="{{$query}}">
+                    <input id="search" name="q" type="search" class="form-control" value="{{$query ?? ""}}" autocomplete="off">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
+                    <div id="search-results" class="search-results"></div>
                 </form>
             </div>
         </div>
@@ -67,9 +67,10 @@
     @else
         <div class="p-3 mb-2 bg-light text-dark">
             @if(isset($query))
-                Aucun résultat ne correspond à votre recherche
+                <p>Aucun résultat ne correspond à votre recherche</p>
+                <a class="btn btn-primary" href="{{url()->current()}}">Annuler la recherche</a>
             @else
-                Aucunes courses n'existent actuellement.
+                <p>Aucunes courses n'existent actuellement.</p>
             @endif
         </div>
     @endif
@@ -80,8 +81,6 @@
     $(document).ready(function() {
         $('#hikesTable').DataTable({
             searching: false,
-            paging: false,
-            info: false,
         });
     });
 
@@ -92,6 +91,43 @@
             evt.stopPropagation();
             evt.preventDefault();
         }
+    });
+
+    $("#search").on("input", function(evt) {
+        var query = evt.target.value;
+
+        if (query.length === 0) {
+            $("#search-results").empty();
+        }
+
+        if (query.length < 3) {
+            return;
+        }
+
+        $.ajax({
+            url: "/api/users/search?q=" + query,
+        }).done(function(data) {
+            var users = data;
+
+            $("#search-results").empty();
+
+            for(var i = 0; i < users.length; i++) {
+                var user = users[i];
+                var fullname = user.firstname + " " + user.lastname;
+
+                var row = $("<div></div>");
+                row.addClass("search-results__row");
+
+                var link = $("<a></a>");
+                link.addClass("search-results__link");
+                link.attr("href", "?q=" + fullname)
+                link.text(fullname);
+                row.append(link);
+
+                $("#search-results").append(row);
+            }
+
+        });
     });
 </script>
 @endsection
