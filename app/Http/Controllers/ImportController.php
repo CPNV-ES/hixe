@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\HikeCSV;
 use Illuminate\Http\Request;
-use App\Http\Requests\MultiHikesPost;
 use Session;
 
 class ImportController extends Controller
@@ -36,11 +35,11 @@ class ImportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MultiHikesPost $request)
+    public function store(Request $request)
     {
         $file = $request->file('csv');
         $hikes = HikeCSV::loadHike($file);
-        $validated = $hikes->validated();
+        $validated = HikeCSV::validationMultiHikes($hikes);
         
         if (!empty($file)){
             $users = User::all();
