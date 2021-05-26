@@ -72,60 +72,66 @@ class HikeCSV
     }
 
     static function validationMultiHikes($hikes){
+        function validateDate($date, $format = 'd.m.Y H:i')
+        {
+            $d = DateTime::createFromFormat($format, $date);
+            return $d && $d->format($format) == $date;
+        }
+
         $validatedHike = array();
         foreach ($hikes as $hike){
 
             if(empty($hike->name)){
                 $hike->nameError = "Le champ nom de la course est obligatoire";
-            } elseif( substr("name", 0, 60)){
+            } elseif( strlen($hike->name) > 60){
                 $hike->nameError = "le champ nom de la course écrivez au max 60 caractères";
             }
 
-            if(empty("meetingLocation")){
-                $hike->meetingDateError = "Le champ lieu de rendez-vous est obligatoire";
-            } elseif(substr("name", 0, 60)){
-                $hike->meetingDateError = "Dans le champ lieu de rendez-vous écrivez au max 60 caractères";
+            if(empty($hike->meetingLocation)){
+                $hike->meetingLocationError = "Le champ lieu de rendez-vous est obligatoire";
+            } elseif( strlen($hike->meetingLocation) > 60){
+                $hike->meetingLocationError = "Dans le champ lieu de rendez-vous écrivez au max 60 caractères";
             }
                     
-            if(empty("meetingDate")){
-                $hike->meetingLocationError = "Le champ début du rendez-vous (date) est obligatoire";
-            } elseif(!DateTime::createFromFormat('d-m-Y', 'meetingDate')){
-                $hike->meetingLocationError = "Le champ début du rendez-vous (date) doit être sous ce format dd.mm.YYYY";
+            if(empty($hike->meetingDate)){
+                $hike->meetingDateError = "Le champ début du rendez-vous (date) est obligatoire";
+            } elseif(!validateDate($hike->meetingDate, 'd.m.Y')){
+                $hike->meetingDateError = "Le champ début du rendez-vous (date) doit être sous ce format dd.mm.YYYY";
             }
                     
-            if(empty("hikeDate")){
+            if(empty($hike->hikeDate)){
                 $hike->hikeDateError = "Le champ fin du rendez-vous (date) est obligatoire";
-            } elseif(!DateTime::createFromFormat('d-m-Y', 'hikeDate')){
+            } elseif(!validateDate($hike->hikeDate, 'd.m.Y')){
                 $hike->hikeDateError = "Le champ fin du rendez-vous (date) doit être sous ce format dd.mm.YYYY";
             }
                     
-            if(empty("start")){
+            if(empty($hike->start)){
                 $hike->startError = "Le champ débuz du rendez-vous (temps) est obligatoire";
-            } elseif(!DateTime::createFromFormat('H:i', 'start')){
+            } elseif(!validateDate($hike->start, 'H:i')){
                 $hike->startError = "Le champ début du rendez-vous (heure) doit être sous ce format HH:mm";
             }
                     
-            if(empty("finish")){
+            if(empty($hike->finish)){
                 $hike->finishError = "Le champ fin du rendez-vous (temps) est obligatoire";
-            } elseif(!DateTime::createFromFormat('H:i', 'finish')){
+            } elseif(!validateDate($hike->finish, 'H:i')){
                 $hike->finishError = "Le champ fin du rendez-vous (heure) doit être sous ce format HH:mm";
             }
                     
-            if(is_numeric("min")){
+            if(!is_numeric($hike->min)){
                 $hike->minError = "Le champ minimum de personne doit comporter uniquement des chiffres";
             } 
                     
-            if(is_numeric("max")){
+            if(!is_numeric($hike->max)){
                 $hike->maxError = "Le champ maximum de personne doit comporter uniquement des chiffres";
             } 
                     
-            if(empty("denivele")){
+            if(empty($hike->denivele)){
                 $hike->deniveleError = "Le champ dénivelé est obligatoire";
             }elseif(is_numeric("denivele")){
                 $hike->deniveleError = "Le champ dénivelé doit comporter uniquement des chiffres";
             } 
                     
-            if(empty("difficulty")){
+            if(empty($hike->difficulty)){
                 $hike->difficultyError = "Le champ difficulté est obligatoire";
             }elseif(is_numeric("difficulty")){
                 $hike->difficultyError = "Le champ difficulté doit comporter uniquement des chiffres";
