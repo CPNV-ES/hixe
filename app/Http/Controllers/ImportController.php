@@ -40,6 +40,7 @@ class ImportController extends Controller
         $file = $request->file('csv');
         $hikes = HikeCSV::loadHike($file);
         $validated = HikeCSV::validationMultiHikes($hikes);
+        dd();
         
         if (!empty($file)){
             $users = User::all();

@@ -3,7 +3,6 @@
 namespace App;
 
 use DateTime;
-use Illuminate\Support\Facades\Validator;
 
 class HikeCSV
 {
@@ -136,6 +135,4 @@ class HikeCSV
         }
         return $validateHike;
     }
-    // view si valeur null mettre red sinon green
-    // voir comment faire un bon flash msg avec matthieu
 }
