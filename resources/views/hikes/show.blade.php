@@ -69,7 +69,7 @@
                     <div class="p-2 text-left">
                         @if($hike->users()->where('user_id', Auth::user()->id)->exists())
                             <a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square fa-2x"></i></a>
-                        @elseif($hike->state->id == 2)  
+                        @elseif($hike->state->id == 3)  
                             <a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square fa-2x"></i></a>
                         @endif
                     </div>

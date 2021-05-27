@@ -42,7 +42,7 @@
                             @if($hike->couldBeRegistered())
                                 @if($hike->users()->where('user_id', Auth::user()->id)->exists())
                                     <td class="text-center"><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square"></i></a></td>
-                                @elseif($hike->state->id == 2)  
+                                @elseif($hike->state->id == 3)  
                                     <td class="text-center"><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square"></i></a></td>
                                 @else
                                     <td></td>
