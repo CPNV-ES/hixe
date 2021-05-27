@@ -41,7 +41,7 @@
                             <td class="text-muted font-italic">Indisponible</td>
                         @endif
                         <td>
-                            <a title="dupliquer" href={{route('hikes.create')}}" class="btn btn-outline-primary"><i class="far fa-copy"></i></a>
+                            <a title="dupliquer" href="{{route('hikes.create',['id' => $hike->id])}}" class="btn btn-outline-primary"><i class="far fa-copy"></i></a>
                         </td>
                         <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
                         <td>

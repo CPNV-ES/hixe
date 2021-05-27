@@ -62,8 +62,15 @@ class HikeController extends Controller
         $destinations = Destination::all();
         $hike_types = HikeType::all();
         $users = User::all(); // to allow picking a guide
-        $hike = new Hike();
-        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations', 'users', 'hike_types'));
+
+        $hike_src = Hike::find($request->query('id'));
+        $hike = $hike_src->replicate();
+        $guide_id = $hike_src->guides->first()->id ?? null;
+
+        $trainingsArray = $hike_src->trainings->pluck('id')->toArray();
+        $equipmentsArray = $hike_src->equipment->toArray();
+
+        return view('hikes.create')->with(compact('hike','equipment', 'trainings', 'destinations', 'users', 'hike_types','guide_id','trainingsArray','equipmentsArray'));
     }
 
     /**
