@@ -62,15 +62,15 @@ class Hike extends Model
         - The start date is in the future
     */
     public function couldBeRegistered(){
+        // Get dates in carbon format
         $meeting_date = Carbon::createFromFormat("Y-m-d H:i:s", $this->meeting_date); 
         $now = Carbon::createFromFormat("Y-m-d H:i:s", Carbon::now());
 
-        if(($this->participants()->count() <= $this->max_num_participants) && ($meeting_date->greaterThan($now)))
-        {
-            return true;
-        }else{
-            return false;
-        }
+        // Tests
+        $is_max_participants_reached = $this->participants()->count() <= $this->max_num_participants;
+        $is_meeting_date_in_future = $meeting_date->greaterThan($now);
+
+        return $is_max_participants_reached && $is_meeting_date_in_future;
     }
 
 
