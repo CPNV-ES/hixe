@@ -30,9 +30,13 @@
                     <th scope="col">Minimum</th>
                     <th scope="col">Maximum</th>
                     <th scope="col">État</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    @if(Auth::check())
+                        <th class="text-center" scope="col"> Inscription </th>
+                        
+                        @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
+                            <th class="text-center" colspan="2" scope="col">Gestion</th>
+                        @endif
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -46,12 +50,31 @@
                         <td>{{ $hike->min_num_participants }}</td>
                         <td>{{ $hike->max_num_participants }}</td>
                         <td>{{ $hike->state->name }}</td>
-                        @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                            <td><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-secondary"><i class="far fa-minus-square"></i></a></td>
-                        @elseif($hike->state->id == 2)
-                            <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
-                        @else
-                            <td class="text-muted font-italic">Indisponible</td>
+
+                        @if(Auth::check())
+                            @if($hike->couldBeRegistered())
+                                @if($hike->users()->where('user_id', Auth::user()->id)->exists())
+                                    <td class="text-center"><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square"></i></a></td>
+                                @elseif($hike->state->id == 3)  
+                                    <td class="text-center"><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square"></i></a></td>
+                                @else
+                                    <td></td>
+                                @endif
+                            @else
+                                <td></td>
+                            @endif
+                            @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
+                                <td class="text-center">
+                                    <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <form action="{{route('hikes.destroy',$hike)}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE"/>
+                                        <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            @endif
                         @endif
                         <td>
                             <a title="dupliquer" href="{{route('hikes.create',['id' => $hike->id])}}" class="btn btn-outline-primary"><i class="far fa-copy"></i></a>

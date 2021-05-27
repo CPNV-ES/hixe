@@ -21,7 +21,7 @@ $factory->define(Hike::class, function (Faker $faker) {
         'difficulty' => rand(1,5),
         'additional_info' => $faker->text(45),
         'drop_in_altitude' => $faker->randomNumber(3),
-        'state_id' => State::all()->random()->id,
+        'state_id' => 3,
         'type_id' => HikeType::all()->random()->id,
     ];
 });
