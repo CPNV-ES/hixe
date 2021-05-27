@@ -3,6 +3,16 @@
 @endpush
 <script src="/lib/moment/moment.min.js"></script>
 <script src="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script>
+    window.onbeforeunload = function() {
+        if(document.querySelector('input[name="hikeName"]').value != ''){
+            return '';
+        }
+        else{
+            return;
+        }
+    }
+</script>
 
 <link rel="stylesheet" href="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
 <style>
