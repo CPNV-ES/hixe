@@ -38,19 +38,18 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('csv');
+        if (!empty($file)){
         $hikes = HikeCSV::loadHike($file);
         $validatedHikes = HikeCSV::validationMultiHikes($hikes);
-        
-        if (!empty($file)){
-            $users = User::all();
-            return view('hikes.multicreate')->with(compact('users', 'validatedHikes'));
+
+        $users = User::all();
+        return view('hikes.multicreate')->with(compact('users', 'validatedHikes'));
         } 
         
-        if (empty($file)){
-            $users = User::all();
-            Session::flash('empty', "Votre fichier est vide!");
-            return view('hikes.multicreate')->with(compact('users'));
-        }
+        $users = User::all();
+        Session::flash('empty', "Votre fichier est vide!");
+        return view('hikes.multicreate')->with(compact('users'));
+    
     }
 
     /**
