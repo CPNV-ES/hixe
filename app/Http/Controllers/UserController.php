@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserEdit;
 use App\User;
 use App\Role;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
+
+/**
+ * @OA\Info(title="Hixe API", version="0.1.0")
+ * 
+ */
 
 class UserController extends Controller
 {
@@ -101,6 +105,24 @@ class UserController extends Controller
         //
     }
 
+    /**
+     * @OA\Get(
+     *  path="/api/users/search",
+     *  description="Search users",
+     *  @OA\Parameter(
+     *      name="q",
+     *      in="query",
+     *      description="Query to filter by",
+     *      required=true,
+     *      @OA\Schema(type="string"),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Ok",
+     *      @OA\JsonContent(ref="#/components/schemas/User"),
+     *  ),
+     * )
+     */
     public function search(Request $request) {
         $query = $request->query('q');
 
