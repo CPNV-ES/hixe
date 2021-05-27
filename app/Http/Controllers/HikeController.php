@@ -33,7 +33,7 @@ class HikeController extends Controller
             $hikes = $hikes->withParticipants($query);
         } 
         
-        if (Str::contains($request->header('Accept'), 'application/json')) {
+        if ($request->expectsJson()) {
             $start_date = $request->query('start_date');
             $end_date = $request->query('end_date');
             $difficulty = $request->query('difficulty');
