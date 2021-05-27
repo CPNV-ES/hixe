@@ -39,14 +39,17 @@
                         <td>{{ $hike->state->name }}</td>
 
                         @if(Auth::check())
-                            @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                                <td class="text-center"><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square"></i></a></td>
-                            @elseif($hike->state->id == 2)  
-                                <td class="text-center"><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square"></i></a></td>
+                            @if($hike->couldBeRegistered())
+                                @if($hike->users()->where('user_id', Auth::user()->id)->exists())
+                                    <td class="text-center"><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square"></i></a></td>
+                                @elseif($hike->state->id == 2)  
+                                    <td class="text-center"><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square"></i></a></td>
+                                @else
+                                    <td></td>
+                                @endif
                             @else
                                 <td></td>
                             @endif
-
                             @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
                                 <td class="text-center">
                                     <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
