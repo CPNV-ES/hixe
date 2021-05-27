@@ -72,7 +72,7 @@ class HikeCSV
     }
 
     static function validationMultiHikes($hikes){
-        function validateDate($date, $format = 'd.m.Y H:i')
+        function validateDate($date, $format = 'Y-m-d H:i')
         {
             $d = DateTime::createFromFormat($format, $date);
             return $d && $d->format($format) == $date;
@@ -95,14 +95,14 @@ class HikeCSV
                     
             if(empty($hike->meetingDate)){
                 $hike->meetingDateError = "Le champ début du rendez-vous (date) est obligatoire";
-            } elseif(!validateDate($hike->meetingDate, 'd.m.Y')){
-                $hike->meetingDateError = "Le champ début du rendez-vous (date) doit être sous ce format dd.mm.YYYY";
+            } elseif(!validateDate($hike->meetingDate, 'Y-m-d')){
+                $hike->meetingDateError = "Le champ début du rendez-vous (date) doit être sous ce format Y-m-d";
             }
                     
             if(empty($hike->hikeDate)){
                 $hike->hikeDateError = "Le champ fin du rendez-vous (date) est obligatoire";
-            } elseif(!validateDate($hike->hikeDate, 'd.m.Y')){
-                $hike->hikeDateError = "Le champ fin du rendez-vous (date) doit être sous ce format dd.mm.YYYY";
+            } elseif(!validateDate($hike->hikeDate, 'Y-m-d')){
+                $hike->hikeDateError = "Le champ fin du rendez-vous (date) doit être sous ce format Y-m-d";
             }
                     
             if(empty($hike->start)){
