@@ -1,0 +1,101 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Hixe API",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/users/search": {
+            "get": {
+                "description": "Search users",
+                "operationId": "App\\Http\\Controllers\\UserController::search",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Query to filter by",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "title": "User model",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "number",
+                        "format": "int64"
+                    },
+                    "firstname": {
+                        "title": "firstname",
+                        "description": "firstname",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "title": "lastname",
+                        "description": "lastname",
+                        "type": "string"
+                    },
+                    "email_address": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "member_number": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "birthdate": {
+                        "title": "birthdate",
+                        "description": "birthdate",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "created_at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "updated_at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "role_id": {
+                        "title": "role_id",
+                        "description": "role_id",
+                        "type": "number",
+                        "format": "int64"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

@@ -10,12 +10,12 @@ use App\Hike;
 use App\User;
 use App\Destination;
 use App\HikeType;
+use App\Http\Requests\HikesGetRequest;
 use App\Http\Requests\HikesPost;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class HikeController extends Controller
 {
@@ -24,29 +24,52 @@ class HikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(HikesGetRequest $request)
     {
-        if (\Str::contains($request->header('Accept'), 'application/json')) {
+        $query = $request->query('q');
+        $hikes = Hike::query();
+
+        if (isset($query)) {
+            $hikes = $hikes->withParticipants($query);
+        } 
+        
+        if ($request->expectsJson()) {
             $start_date = $request->query('start_date');
             $end_date = $request->query('end_date');
             $difficulty = $request->query('difficulty');
             $type = $request->query('type');
+            $includes = array_filter(explode(",", $request->query('includes')));
 
-            $hikes = Hike::between($start_date, $end_date);
-
-            if ($type != 'all') {
-                $hikes =  $hikes->where('type_id', $type);
+            if (isset($start_date) && isset($end_date)) {
+                $hikes = $hikes->between($start_date, $end_date);
             }
 
-            if ($difficulty != 'all') {
+            if (isset($participants)) {
+                $hikes = $hikes->whereHas('participants', function ($query) use ($participants) {
+                    return $query->whereIn('hike_user.user_id', $participants);
+                });
+            }
+
+            if (isset($type) && $type != 'all') {
+                $hikes = $hikes->where('type_id', $type);
+            }
+
+            if (isset($difficulty) && $difficulty != 'all') {
                 $hikes = $hikes->where('difficulty', $difficulty);
             }
 
-            return response()->json($hikes->get());
+            foreach ($includes as $include) {
+                $hikes = $hikes->with($include);
+            }
+            
+            $hikes = $hikes->get();
+
+            return response()->json($hikes);
         }
 
-        $hikes = Hike::all();
-        return view('hikes.index')->with(compact(['hikes']));
+        $hikes = $hikes->get();
+
+        return view('hikes.index')->with(compact(['hikes', 'query']));
     }
 
 
