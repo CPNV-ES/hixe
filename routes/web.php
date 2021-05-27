@@ -62,3 +62,7 @@ Route::put('multiHikes/{multiHike}', 'MultiHikesController@update')->name('multi
 Route::get('multiHikes/{multiHike}', 'MultiHikesController@show')->name('multiHikes.show');
 Route::delete('multiHikes/{multiHike}', 'MultiHikesController@destroy')->name('multiHikes.destroy');
 Route::get('multiHikes/{multiHike}/edit', 'MultiHikesController@edit')->name('multiHikes.edit');
+
+// Import hikes with csv file
+//Route::resource('importHikes', 'ImportHikesController');
+Route::post('import', 'ImportController@store')->name('import.store');
