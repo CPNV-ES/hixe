@@ -64,7 +64,7 @@
             @endif
             
             @if(Auth::check())
-            {{ dd($hike->CouldBeRegistered())}}
+            {{ dd($hike->couldBeRegistered())}}
 
                 <hr>
                 <div class="p-2 text-left">

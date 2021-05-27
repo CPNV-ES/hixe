@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Carbon\Carbon;
 
 class Hike extends Model
 {
@@ -47,26 +48,24 @@ class Hike extends Model
 
     public function equipment()
     {
-        return $this->belongsToMany(Equipment::Class);
+        return $this->belongsToMany(Equipment::class);
     }
 
     public function trainings()
     {
-        return $this->belongsToMany(Training::Class);
+        return $this->belongsToMany(Training::class);
     }
 
     /*
-    Return true if :
+    This function returns true if it's possible to be registered to an hike. Here's the conditions :
         - The maximum number of participants is not reached
         - The start date is in the future
     */
-    public function CouldBeRegistered(){
-        $ldate = new DateTime('now');
-        $ldate = date('Y-m-d H:i:s');
-        
-        dd($mytime->toDateTimeString());
+    public function couldBeRegistered(){
+        $meeting_date = Carbon::createFromFormat("Y-m-d H:i:s", $this->meeting_date); 
+        $now = Carbon::createFromFormat("Y-m-d H:i:s", Carbon::now());
 
-        if(($this->participants()->count() <= $this->max_num_participants))
+        if(($this->participants()->count() <= $this->max_num_participants) && ($meeting_date->greaterThan($now)))
         {
             return true;
         }else{
