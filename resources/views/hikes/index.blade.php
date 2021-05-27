@@ -5,7 +5,7 @@
 @section('body-content')
 
 <div class="container-fluid mt-4 table-responsive">
-    @if(isset($hikes) && !$hikes->isEmpty())
+    @if(isset($hikes) && !$hikes->isEmpty() && Auth::user())
         <div class="container-fluid">
             <div class="col-2 position-relative search-bar">
                 <form method="GET">
@@ -13,6 +13,7 @@
                     <input id="search" name="q" type="search" class="form-control" value="{{$query ?? ""}}" autocomplete="off">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                        <button id="search-bar-reset" class="btn d-none" class="btn" type="submit"><i class="fas fa-times"></i></button>
                     </div>
                     <div id="search-results" class="search-results"></div>
                 </form>
@@ -91,6 +92,17 @@
             evt.stopPropagation();
             evt.preventDefault();
         }
+    });
+
+    if ($("#search").attr("value")) {
+        $("#search-bar-reset").removeClass("d-none");
+    }
+
+    $("#search-bar-reset").on("click", function(evt) {
+        evt.preventDefault();
+
+        // Remove the querystring from the url
+        window.location.search = "";
     });
 
     $("#search").on("input", function(evt) {
