@@ -56,7 +56,7 @@
                                                 @if(!empty($validatedHikes))
                                                     @foreach($validatedHikes as $hike)
                                                         @if(empty($hike->nameError || $hike->meetingLocationError || $hike->meetingDateError || $hike->hikeDateError || $hike->startError || $hike->finishError || $hike->minError || $hike->maxError || $hike->deniveleError || $hike->difficultyError || $hike->infoError))
-                                                            <td style="background-color: green"><p style="color:white">Vous avez bien emporté la course</p></td>
+                                                            <td style="background-color: green"></td>
                                                         @else
                                                             <td style="background-color: red"><p style="color:white">{{$hike->nameError}}</p></td>
                                                             <td style="background-color: red"><p style="color:white"></p></td>
