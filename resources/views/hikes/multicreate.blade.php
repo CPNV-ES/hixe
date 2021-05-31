@@ -27,7 +27,7 @@
                                 <form method="POST" action="{{ route('import.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" accept=".csv" name="csv" class="btn btn-light" >
-                                    <button type="submit" class="btn btn-dark btn-round">{{__('Read')}}</button>
+                                    <button title="Importer" type="submit" class="btn btn-outline-secondary "><i class="fas fa-upload"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                                             <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$hike->denivele}}'></td>
                                                             <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$hike->difficulty}}'></td>
                                                             <td><input type="text" name="info[]" class="form-control" value='{{$hike->info}}'></td>
-                                                            <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                            <td><button title="Supprimer" type="submit" class="btn btn-outline-danger" onclick="deleteRow(this)"><i class="fas fa-trash-alt"></i></button></td>
                                                         </tr>
                                                     @endforeach
                                                 @else
@@ -113,7 +113,8 @@
                                                         <td><input type="number" min="1" name="denivele[]" class="form-control" value=''></td>
                                                         <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value=''></td>
                                                         <td><input type="text" name="info[]" class="form-control" value=''></td>
-                                                        <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                        <td><button title="Supprimer" type="submit" class="btn btn-outline-danger" onclick="deleteRow(this)"><i class="fas fa-trash-alt"></i></button></td>
+                                                        
                                                     </tr>
                                                 @endif
                                             </tbody>
