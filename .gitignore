@@ -40,3 +40,4 @@ yarn-error.log
 log
 *_icescrum*
 public/mix-manifest.json
+public/js/*
