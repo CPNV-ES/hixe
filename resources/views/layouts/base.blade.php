@@ -8,60 +8,25 @@
     <title>@yield('title') - Hixe</title>
 
     <!-- Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet" type="text/css">
+    
     <!--Font Awesome -->
     <script src="https://kit.fontawesome.com/30414cf885.js" crossorigin="anonymous"></script>
 
-    <script src="{{ asset('/lib/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('/lib/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/app.js')}}"></script>
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- for show profile
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
-
-
+    <!-- List interactions -->
+    <script src={{ asset('/lib/jquery/jquery.min.js') }}></script>
+    <script src={{ asset('/lib/datatables/min/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('/lib/datatables/js/dataTables.bootstrap4.min.js') }}></script>
+    <link rel='stylesheet' href={{ asset('/lib/datatables/css/dataTables.bootstrap4.min.css') }}/>
 </head>
-
-<style>
-
-    .menuright {
-        text-align: center;
-
-    }
-
-    .containermenu {
-        vertical-align: center;
-        margin-top: auto;
-        margin-bottom: auto;
-
-    }
-
-    .containermenu:hover {
-        color: #bf0000;
-
-    }
-
-    @media screen and (max-width: 770px) {
-        .menuright {
-            margin-top: 2%;
-        }
-
-        .logo {
-            text-align: center;
-        }
-    }
-
-</style>
 
 <body>
 <div class="none">
@@ -102,12 +67,19 @@
                 </a>
             </div>
             @if(Auth::check())
-                <div class="col-md-1 containermenu" onclick="location.href='{{ route('profile.show',Auth::user()->id) }}'">
+                 <a class="col-md-1 containermenu" href="{{ route('profile.show', Auth::user()) }}">
                     <div class="menuright">
                         <i class="fas fa-user fa-2x"></i>
-                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</p>
+                        <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}} <span class="text-sm-left"><strong>{{ Auth::user()->role->name }}</strong></span></p>
                     </div>
-                </div>
+                </a>
+            @else
+                <a class="col-md-1 containermenu" href="/auth/github">
+                    <div class="menuright">
+                        <i class="fas fa-user fa-2x"></i>
+                        <p>Se connecter</p>
+                    </div>
+                </a>
             @endif
         </div>
     </div>
@@ -127,8 +99,8 @@
         </div>
     </nav>
 
-
     <div class="content">
+        @include('../popup-message/index')
         @yield('body-content')
     </div>
 </div>
@@ -139,3 +111,33 @@
 
 
 </html>
+
+<style>
+
+    .menuright {
+        text-align: center;
+
+    }
+
+    .containermenu {
+        vertical-align: center;
+        margin-top: auto;
+        margin-bottom: auto;
+
+    }
+
+    .containermenu:hover {
+        color: #bf0000;
+
+    }
+
+    @media screen and (max-width: 770px) {
+        .menuright {
+            margin-top: 2%;
+        }
+
+        .logo {
+            text-align: center;
+        }
+    }
+</style>

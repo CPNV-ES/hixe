@@ -3,76 +3,160 @@
 @section('title', 'Toutes les courses')
 
 @section('body-content')
-{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.20/b-1.6.1/b-flash-1.6.1/kt-2.5.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.css"/> --}}
-<script src='/lib/jquery/jquery.min.js'></script>
-<script src='/lib/datatables/min/jquery.dataTables.min.js'></script>
-<script src='/lib/datatables/js/dataTables.bootstrap4.min.js'></script>
-<link rel='stylesheet' href='/lib/datatables/css/dataTables.bootstrap4.min.css'/>
 
-<div class="container mt-4 table-responsive">
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
+<div class="container-fluid mt-4 table-responsive">
+    @if(isset($hikes) && !$hikes->isEmpty() && Auth::user())
+        <div class="container-fluid">
+            <div class="col-2 position-relative search-bar">
+                <form method="GET">
+                    <div class="input-group mb-3"> 
+                    <input id="search" name="q" type="search" class="form-control" value="{{$query ?? ""}}" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                        <button id="search-bar-reset" class="btn d-none" class="btn" type="submit"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div id="search-results" class="search-results"></div>
+                </form>
+            </div>
+        </div>
+        <table id="hikesTable" class="table mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Guide</th>
+                    <th scope="col">Inscrits</th>
+                    <th scope="col">Minimum</th>
+                    <th scope="col">Maximum</th>
+                    <th scope="col">État</th>
+                    @if(Auth::check())
+                        <th class="text-center" scope="col"> Inscription </th>
+                        @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
+                            <th class="text-center" colspan="3" scope="col">Gestion</th>
+                        @endif
+                    @endif
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($hikes as $hike)
+                    <tr onclick="location='{{ route('hikes.show', $hike) }}'">
+                        <td scope="row">{{ $hike->name }}</td>
+                        <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
+                        <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
+                        <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
+                        <td>{{ $hike->users()->count() }}</td>
+                        <td>{{ $hike->min_num_participants }}</td>
+                        <td>{{ $hike->max_num_participants }}</td>
+                        <td>{{ $hike->state->name }}</td>
+
+                        @if(Auth::check())
+                            @if($hike->couldBeRegistered())
+                                @if($hike->users()->where('user_id', Auth::user()->id)->exists())
+                                    <td class="text-center"><a href="{{ route('hike.unregisterhike', $hike->id) }}" class="btn btn-outline-danger"><i class="far fa-minus-square"></i></a></td>
+                                @elseif($hike->state->id == 3)  
+                                    <td class="text-center"><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-success"><i class="far fa-plus-square"></i></a></td>
+                                @else
+                                    <td></td>
+                                @endif
+                            @else
+                                <td></td>
+                            @endif
+                            @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
+                                <td class="text-center">
+                                    <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <a title="dupliquer" href="{{route('hikes.create',['id' => $hike->id])}}" class="btn btn-outline-primary"><i class="far fa-copy"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <form action="{{route('hikes.destroy',$hike)}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE"/>
+                                        <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            @endif
+                        @endif
+                    </tr>
+                @endforeach
+        </tbody>
+    </table>
+    @else
+        <div class="p-3 mb-2 bg-light text-dark">
+            @if(isset($query))
+                <p>Aucun résultat ne correspond à votre recherche</p>
+                <a class="btn btn-primary" href="{{url()->current()}}">Annuler la recherche</a>
+            @else
+                <p>Aucunes courses n'existent actuellement.</p>
+            @endif
         </div>
     @endif
-    <table  id="hikesTable"  class="table table table-hover mt-3">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Destination</th>
-                <th scope="col">Guide</th>
-                <th scope="col">Inscrits</th>
-                <th scope="col">Minimum</th>
-                <th scope="col">Maximum</th>
-                <th scope="col">État</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach ($hikes as $hike)
-            <tr onclick="location='{{ route('hikes.show', $hike) }}'">
-                <td scope="row">{{ $hike->name }}</td>
-                <td>{{ date('d.m.Y à H:i:s', strtotime($hike->meeting_date)) }}</td>
-                <td>{{ implode(', ', $hike->destinations()->pluck('location')->toArray()) }}</td>
-                <td>{{ implode(', ', $hike->guides()->pluck('firstname')->toArray()) }}</td>
-                <td>{{ $hike->users()->count() }}</td>
-                <td>{{ $hike->min_num_participants }}</td>
-                <td>{{ $hike->max_num_participants }}</td>
-                <td>{{ $hike->state->name }}</td>
-                @if($hike->users()->where('user_id', Auth::user()->id)->exists())
-                    <td>Déjà inscrit</td>
-                    <!--<td><a href="#" class="btn btn-primary disabled"><i class="fas fa-plus-square"></i></a></td>-->
-                @elseif($hike->state->id == 2)
-                    <td><a href="{{ route('hike.registerhike', $hike->id) }}" class="btn btn-outline-primary"><i class="far fa-plus-square"></i></a></td>
-                @else
-                    <td>Indisponible</td>
-                @endif
-                <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
-                <td>
-                    <form action="{{route('hikes.destroy',$hike)}}" method="POST">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE"/>
-                        <button type="submit" class="btn btn-outline-danger" onclick='return confirm("Êtes vous sûr de vouloir supprimer : {{ $hike->name }} ?")'><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-    </table>
+    <a class="btn btn-primary" href="{{route('hikes.create')}}">Créer une nouvelle course</a>
 </div>
 
 <script>
     $(document).ready(function() {
-        var table = $('#hikesTable').DataTable();
-        $('#hikesTable tbody').on('click', 'tr', function() {
-            //window.location =  route('hikes.show', $hike)
+        $('#hikesTable').DataTable({
+            searching: false,
+        });
+    });
+
+    $("#delete-btn").on("click", function(evt) {
+        var confirmed = confirm("Êtes vous sûr de vouloir supprimer : " + $("#delete-btn").data("name"));
+
+        if (!confirmed) {
+            evt.stopPropagation();
+            evt.preventDefault();
+        }
+    });
+
+    if ($("#search").attr("value")) {
+        $("#search-bar-reset").removeClass("d-none");
+    }
+
+    $("#search-bar-reset").on("click", function(evt) {
+        evt.preventDefault();
+
+        // Remove the querystring from the url
+        window.location.search = "";
+    });
+
+    $("#search").on("input", function(evt) {
+        var query = evt.target.value;
+
+        if (query.length === 0) {
+            $("#search-results").empty();
+        }
+
+        if (query.length < 3) {
+            return;
+        }
+
+        $.ajax({
+            url: "/api/users/search?q=" + query,
+        }).done(function(data) {
+            var users = data;
+
+            $("#search-results").empty();
+
+            for(var i = 0; i < users.length; i++) {
+                var user = users[i];
+                var fullname = user.firstname + " " + user.lastname;
+
+                var row = $("<div></div>");
+                row.addClass("search-results__row");
+
+                var link = $("<a></a>");
+                link.addClass("search-results__link");
+                link.attr("href", "?q=" + fullname)
+                link.text(fullname);
+                row.append(link);
+
+                $("#search-results").append(row);
+            }
+
         });
     });
 </script>
-
 @endsection

@@ -16,33 +16,22 @@
                         </ul>
                     </div>
                 @endif
-            <!-- MSG succes or error doesn't working -->
-                @if (Session::has('success'))
-                    <div class="alert alert-success">
-                        {{ Session::get('success') }}
-                    </div>
-                @endif
-                @if (Session::has('error'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('error') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="card">
                     <div class="card-header">
                         <h5 class="title">{{__(" Insérer des courses")}}</h5>
                     </div>
                     <div class="card-body">
                         <p><em>Champs obligatoire*</em></p>
-                        <form method="POST" action="{{ route("multiHikes.store") }}" autocomplete="off"
+                        <div class="row footer ">
+                            <div class="col-md-12 pr-1 d-flex justify-content-end" style="padding-bottom: 15px;">
+                                <form method="POST" action="{{ route('import.store') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" accept=".csv" name="csv" class="btn btn-light" >
+                                    <button type="submit" class="btn btn-dark btn-round">{{__('Read')}}</button>
+                                </form>
+                            </div>
+                        </div>
+                        <form method="POST" action="{{ route('multiHikes.store') }}" autocomplete="off"
                               enctype="multipart/form-data">
                         @csrf
                         @method('post')
@@ -64,27 +53,69 @@
                                             <td>Info</td>
                                             </thead>
                                             <tbody>
-                                            <tr id="rows">
-                                                <td><input type="text" name="name[]" class="form-control" value=''></td>
-                                                <td>
-                                                    <select class="form-control" name="chef[]">
-                                                        @foreach($users as $user)
-                                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td><input type="text" name="meetingLocation[]" class="form-control" value=''></td>
-                                                <td><input type="date" name="meetingDate[]" class="form-control" value='' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
-                                                <td><input type="date" name="hikeDate[]" class="form-control"></td>
-                                                <td><input type="time" name="start[]" class="form-control" value='' onblur="AutoInpute(value, this, 'finish[]')"></td>
-                                                <td><input type="time" name="finish[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" name="min[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" name="max[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" name="denivele[]" class="form-control" value=''></td>
-                                                <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value=''></td>
-                                                <td><input type="text" name="info[]" class="form-control" value=''></td>
-                                                <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
-                                            </tr>
+                                                @if(!empty($validatedHikes))
+                                                    @foreach($validatedHikes as $hike)
+                                                        @if(empty($hike->nameError || $hike->meetingLocationError || $hike->meetingDateError || $hike->hikeDateError || $hike->startError || $hike->finishError || $hike->minError || $hike->maxError || $hike->deniveleError || $hike->difficultyError || $hike->infoError))
+                                                            <td style="background-color: green"><p style="color:white">Vous avez bien emporté la course</p></td>
+                                                        @else
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->nameError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white"></p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->meetingLocationError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->meetingDateError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->hikeDateError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->startError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->finishError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->minError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->maxError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->deniveleError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->difficultyError}}</p></td>
+                                                            <td style="background-color: red"><p style="color:white">{{$hike->infoError}}</p></td>
+                                                        @endif
+                                                        <tr id="rows">
+                                                            <td><input type="text" name="name[]" class="form-control" value='{{$hike->name}}'></td>
+                                                            <td>
+                                                            <select class="form-control" name="chef[]">
+                                                                @foreach($users as $user)
+                                                                    <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            </td>
+                                                            <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}'></td>
+                                                            <td><input type="date" name="meetingDate[]" class="form-control" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                            <td><input type="date" name="hikeDate[]" class="form-control" value='{{$hike->hikeDate}}'></td>
+                                                            <td><input type="time" name="start[]" class="form-control" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                            <td><input type="time" name="finish[]" class="form-control" value='{{$hike->finish}}'></td>
+                                                            <td><input type="number" min="1" name="min[]" class="form-control" value='{{$hike->min}}'></td>
+                                                            <td><input type="number" min="1" name="max[]" class="form-control" value='{{$hike->max}}'></td>
+                                                            <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$hike->denivele}}'></td>
+                                                            <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$hike->difficulty}}'></td>
+                                                            <td><input type="text" name="info[]" class="form-control" value='{{$hike->info}}'></td>
+                                                            <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr id="rows">
+                                                        <td><input type="text" name="name[]" class="form-control" value=''></td>
+                                                        <td>
+                                                            <select class="form-control" name="chef[]">
+                                                                @foreach($users as $user)
+                                                                    <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" name="meetingLocation[]" class="form-control" value=''></td>
+                                                        <td><input type="date" name="meetingDate[]" class="form-control" value='' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                        <td><input type="date" name="hikeDate[]" class="form-control"></td>
+                                                        <td><input type="time" name="start[]" class="form-control" value='' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                        <td><input type="time" name="finish[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" name="min[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" name="max[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" name="denivele[]" class="form-control" value=''></td>
+                                                        <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value=''></td>
+                                                        <td><input type="text" name="info[]" class="form-control" value=''></td>
+                                                        <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                    </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

@@ -14,11 +14,6 @@
                 <div class="row">
                     <div class="col-10">
                         <h2>Votre Profils</h2>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                     </div>
                     <div class="col-2">
                         <a href="{{route('profile.edit',$user)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
@@ -30,6 +25,7 @@
                         <p><i class="fas fa-birthday-cake"></i> {{ date('d.m.Y', strtotime( $user->birthdate)) }}</p>
                         <p><i class="fas fa-envelope"></i> {{ $user->email_address }}</p>
                         <p><i class="fas fa-list-ol"></i> Numéro de membre : {{ $user->member_number }}</p>
+                        <p><i class="fas fa-list-ol"></i> Role : {{ $user->role->name }}</p>
                         
 
                         @if($user->hikes->isNotEmpty())

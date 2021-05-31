@@ -39,3 +39,4 @@ yarn-error.log
 *.bak
 log
 *_icescrum*
+public/mix-manifest.json

@@ -14,13 +14,6 @@ class MultiHikesController extends Controller
 {
     public function index(Request $msg)
     {
-        foreach ($msg->request->all() as $message) {
-            if ($message == "Errors") {
-                Session::flash('error', "Errors lors de l'ajout des courses");
-            } else {
-                Session::flash('success', "Toutes vos courses ont été créé");
-            }
-        }
         $users = User::all();
         return view('hikes.multicreate')->with(compact('users'));
     }
@@ -59,10 +52,11 @@ class MultiHikesController extends Controller
                 ]);
             }
             //with doesn't working
-            return Redirect::route('multiHikes.index', ['msg' => 'Success']);
+            return Redirect::route('multiHikes.index')->with('success','Les courses ont correctement été ajoutées !');
+
         } else {
             //with doesn't working
-            return Redirect::route('multiHikes.index', ['msg' => 'Errors']);
+            return Redirect::route('multiHikes.index')->with('error','Impossible de sauvegarder les courses !');
         }
 
 

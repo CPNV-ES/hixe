@@ -14,14 +14,14 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/hixe-form.js', 'public/js')
     .js('resources/js/hixe-form-edition.js', 'public/js')
+    .js('resources/js/hikes-editmaindata.js', 'public/js')
     .js('resources/js/utils.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .copy('node_modules/jquery/dist/jquery.min.js', 'public/lib/jquery')
-    .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/lib/bootstrap')
-    .copy('node_modules/bootstrap/dist/js/bootstrap.min.js', 'public/lib/bootstrap')
     .copy('node_modules/fullcalendar/dist/fullcalendar.min.js', 'public/lib/fullcalendar')
     .copy('node_modules/fullcalendar/dist/fullcalendar.min.css', 'public/lib/fullcalendar')
     .copy('node_modules/moment/min/moment.min.js', 'public/lib/moment')
+    .copy('node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js', 'public/lib/eonasdan-bootstrap-datetimepicker')
+    .copy('node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'public/lib/eonasdan-bootstrap-datetimepicker')
 
     .copy('node_modules/datatables.net/js/jquery.dataTables.min.js', 'public/lib/datatables/min')
     .copy('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js', 'public/lib/datatables/js')
@@ -50,3 +50,4 @@ mix.js('resources/js/app.js', 'public/js')
 
     .copy('node_modules/datatables.net-searchpanes-bs4/css/searchPanes.bootstrap4.min.css', 'public/lib/datatables/searchPanes/css')
     .copy('node_modules/datatables.net-searchpanes-bs4/js/searchPanes.bootstrap4.min.js', 'public/lib/datatables/searchPanes/js')
+mix.browserSync('127.0.0.1:8000');

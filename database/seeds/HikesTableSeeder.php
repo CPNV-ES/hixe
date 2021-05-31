@@ -13,6 +13,6 @@ class HikesTableSeeder extends Seeder
   public function run()
   {
     $nbToCreate = 12;
-    factory(App\Hike::class, $nbToCreate)->create();
+    factory(Hike::class, $nbToCreate)->create();
   }
 }

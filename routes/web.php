@@ -10,15 +10,18 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'HomeController@index');
 
 // Hikes registration
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
+Route::get('unregister_hike/{id}', 'hikeController@unregisterToHike')->name('hike.unregisterhike');
 
 
 // Calendar
-Route::get('hikes_calendar','HikeCalendarController@index');
-Route::get('hikes_calendar/{date}','HikeCalendarController@show');
+Route::get('hikes_calendar', 'HikeCalendarController@index');
+Route::get('hikes_calendar/{date}', 'HikeCalendarController@show');
 
 
 
@@ -32,13 +35,13 @@ Route::post('hikes/create/fetch', 'HikeController@fetch')->name('autocomplete.fe
 
 // Hikes
 //Route::resource('hikes', 'HikeController');
-Route::post('hikes','HikeController@store')->name('hikes.store');
-Route::get('hikes','HikeController@index')->name('hikes.index');
-Route::get('hikes/create','HikeController@create')->name('hikes.create');
-Route::put('hikes/{hike}','HikeController@update')->name('hikes.update');
-Route::delete('hikes/{hike}','HikeController@destroy')->name('hikes.destroy');
-Route::get('hikes/{hike}','HikeController@show')->name('hikes.show');
-Route::get('hikes/{hike}/edit','HikeController@edit')->name('hikes.edit');
+Route::post('hikes', 'HikeController@store')->name('hikes.store');
+Route::get('hikes', 'HikeController@index')->name('hikes.index');
+Route::get('hikes/create', 'HikeController@create')->name('hikes.create');
+Route::put('hikes/{hike}', 'HikeController@update')->name('hikes.update');
+Route::delete('hikes/{hike}', 'HikeController@destroy')->name('hikes.destroy');
+Route::get('hikes/{hike}', 'HikeController@show')->name('hikes.show');
+Route::get('hikes/{hike}/edit', 'HikeController@edit')->name('hikes.edit');
 
 // Profile
 //Route::resource('profile', 'UserController');
@@ -60,4 +63,6 @@ Route::get('multiHikes/{multiHike}', 'MultiHikesController@show')->name('multiHi
 Route::delete('multiHikes/{multiHike}', 'MultiHikesController@destroy')->name('multiHikes.destroy');
 Route::get('multiHikes/{multiHike}/edit', 'MultiHikesController@edit')->name('multiHikes.edit');
 
-
+// Import hikes with csv file
+//Route::resource('importHikes', 'ImportHikesController');
+Route::post('import', 'ImportController@store')->name('import.store');
