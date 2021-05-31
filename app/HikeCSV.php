@@ -83,13 +83,13 @@ class HikeCSV
 
             if(empty($hike->name)){
                 $hike->nameError = "Le champ nom de la course est obligatoire";
-            } elseif( strlen($hike->name) > 60){
+            } elseif( strlen($hike->name) > 20){
                 $hike->nameError = "le champ nom de la course écrivez au max 60 caractères";
             }
 
             if(empty($hike->meetingLocation)){
                 $hike->meetingLocationError = "Le champ lieu de rendez-vous est obligatoire";
-            } elseif( strlen($hike->meetingLocation) > 60){
+            } elseif( strlen($hike->meetingLocation) > 20){
                 $hike->meetingLocationError = "Dans le champ lieu de rendez-vous écrivez au max 60 caractères";
             }
                     
