@@ -69,7 +69,7 @@
                                                                 </select>
                                                             </td>
                                                             @if(empty($hike->meetingLocationError))
-                                                                <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}' style=""></td>
+                                                                <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}'></td>
                                                             @else
                                                                 <td><input type="text" name="meetingLocation[]" class="form-control is-invalid" value='{{$hike->meetingLocation}}'></td>
                                                             @endif
@@ -155,8 +155,8 @@
                             </div>
                             <div class="row footer ">
                                 <div class="col-md-12 pr-1 d-flex justify-content-end">
-                                    <div id="insert-more" class="btn btn-secondary btn-round" style="margin-right:15px"> Add Row</div>
-                                    <button type="submit" class="btn btn-primary btn-round">{{__('Save')}}</button>
+                                    <div title="Dupliquer" id="insert-more" class="btn btn-outline-secondary btn-round" style="margin-right:15px"><i class="fas fa-copy"></i></div>
+                                    <button title="Sauver" type="submit" class="btn btn-outline-primary btn-round"><i class="fas fa-edit"></i></button>
                                 </div>
                             </div>
                         </form>
