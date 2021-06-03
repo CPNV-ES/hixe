@@ -54,7 +54,7 @@
                                                             @if(empty($hike->nameError))
                                                                 <td><input type="text" name="name[]" class="form-control" value='{{$hike->name}}'></td>
                                                             @else
-                                                                <td><input type="text" name="name[]" class="form-control is-invalid" value='{{$hike->name}}' style="border: 1px solid red;"></td>
+                                                                <td><input title="{{$hike->nameError}}" type="text" name="name[]" class="form-control is-invalid" value='{{$hike->name}}' style="border: 1px solid red;"></td>
                                                             @endif
                                                             <td style="padding:10;">
                                                                 <select class="form-control" name="chef[]">
@@ -66,52 +66,52 @@
                                                             @if(empty($hike->meetingLocationError))
                                                                 <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}'></td>
                                                             @else
-                                                                <td><input type="text" name="meetingLocation[]" class="form-control is-invalid" value='{{$hike->meetingLocation}}'></td>
+                                                                <td><input title="{{$hike->meetingLocationError}}" type="text" name="meetingLocation[]" class="form-control is-invalid" value='{{$hike->meetingLocation}}'></td>
                                                             @endif
                                                             @if(empty($hike->meetingDateError))
                                                                 <td><input type="date" name="meetingDate[]" class="form-control" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
                                                             @else
-                                                                <td><input type="date" name="meetingDate[]" class="form-control is-invalid" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                                <td><input title="{{$hike->meetingDateError}}" type="date" name="meetingDate[]" class="form-control is-invalid" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
                                                             @endif
                                                             @if(empty($hike->hikeDateError))
                                                                 <td><input type="date" name="hikeDate[]" class="form-control" value='{{$hike->hikeDate}}'></td> 
                                                             @else
-                                                                <td><input type="date" name="hikeDate[]" class="form-control is-invalid" value='{{$hike->hikeDate}}'></td> 
+                                                                <td><input title="{{$hike->hikeDateError}}" type="date" name="hikeDate[]" class="form-control is-invalid" value='{{$hike->hikeDate}}'></td> 
                                                             @endif
                                                             @if(empty($hike->startError))
                                                                 <td><input type="time" name="start[]" class="form-control" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
                                                             @else
-                                                                <td><input type="time" name="start[]" class="form-control is-invalid" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                                <td><input title="{{$hike->startError}}" type="time" name="start[]" class="form-control is-invalid" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
                                                             @endif
                                                             @if(empty($hike->finishError))
                                                                 <td><input type="time" name="finish[]" class="form-control" value='{{$hike->finish}}'></td>
                                                             @else
-                                                                <td><input type="time" name="finish[]" class="form-control is-invalid" value='{{$hike->finish}}'></td>
+                                                                <td><input title="{{$hike->finishError}}" type="time" name="finish[]" class="form-control is-invalid" value='{{$hike->finish}}'></td>
                                                             @endif
                                                             @if(empty($hike->minError))
                                                                 <td><input type="number" min="1" name="min[]" class="form-control" value='{{$hike->min}}'></td>
                                                             @else
-                                                                <td><input type="number" min="1" name="min[]" class="form-control is-invalid" value='{{$hike->min}}'></td>
+                                                                <td><input title="{{$hike->minError}}" type="number" min="1" name="min[]" class="form-control is-invalid" value='{{$hike->min}}'></td>
                                                             @endif
                                                             @if(empty($hike->maxError))
                                                                 <td><input type="number" min="1" name="max[]" class="form-control" value='{{$hike->max}}'></td>
                                                             @else
-                                                                <td><input type="number" min="1" name="max[]" class="form-control is-invalid" value='{{$hike->max}}'></td>
+                                                                <td><input title="{{$hike->maxError}}" type="number" min="1" name="max[]" class="form-control is-invalid" value='{{$hike->max}}'></td>
                                                             @endif
                                                             @if(empty($hike->deniveleError))
                                                                 <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$hike->denivele}}'></td>
                                                             @else
-                                                                <td><input type="number" min="1" name="denivele[]" class="form-control is-invalid" value='{{$hike->denivele}}'></td>
+                                                                <td><input title="{{$hike->deniveleError}}" type="number" min="1" name="denivele[]" class="form-control is-invalid" value='{{$hike->denivele}}'></td>
                                                             @endif
                                                             @if(empty($hike->difficultyError))
                                                                 <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$hike->difficulty}}'></td>
                                                             @else
-                                                                <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control is-invalid" value='{{$hike->difficulty}}'></td>
+                                                                <td><input title="{{$hike->difficultyError}}" type="number" min="1" max="9" name="difficulty[]" class="form-control is-invalid" value='{{$hike->difficulty}}'></td>
                                                             @endif
                                                             @if(empty($hike->infoError))
                                                                 <td><input type="text" name="info[]" class="form-control" value='{{$hike->info}}'></td>
                                                             @else
-                                                                <td><input type="text" name="info[]" class="form-control is-invalid" value='{{$hike->info}}'></td>
+                                                                <td><input title="{{$hike->infoError}}" type="text" name="info[]" class="form-control is-invalid" value='{{$hike->info}}'></td>
                                                             @endif
                                                             <td><button title="Supprimer" type="submit" class="btn btn-outline-danger" onclick="deleteRow(this)"><i class="fas fa-trash-alt"></i></button></td>
                                                             @if(empty($hike->nameError || $hike->meetingLocationError || $hike->meetingDateError || $hike->hikeDateError || $hike->startError || $hike->finishError || $hike->minError || $hike->maxError || $hike->deniveleError || $hike->difficultyError || $hike->infoError))
