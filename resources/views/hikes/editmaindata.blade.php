@@ -4,14 +4,18 @@
 <script src="/lib/moment/moment.min.js"></script>
 <script src="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script>
-    window.onbeforeunload = function() {
-        if(document.querySelector('input[name="hikeName"]').value != ''){
-            return '';
+    window.onbeforeunload = () => {
+        let msg = "Vous êtes sur le point de partir vous aller perdre vos modifications"
+        if(document.querySelector('input[name="hikeName"]').value != '' ){
+            return msg;
         }
-        else{
-            return;
-        }
+        return;
     }
+
+    document.querySelector('#create_hike_form').addEventListener('submit',(e) => {
+        window.onbeforeunload = null
+        return true
+    })
 </script>
 
 <link rel="stylesheet" href="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
