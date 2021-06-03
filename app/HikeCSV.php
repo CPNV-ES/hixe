@@ -52,6 +52,9 @@ class HikeCSV
     {
         if (($handle = fopen($file, 'r')) !== FALSE){
             while (($datas = fgetcsv($handle, 1000, ';' )) !== FALSE) {
+                if(!isset($datas[1])){
+                    return $datas == null;
+                }
                 $arrayHikes[] = new HikeCSV(
                     $datas[0],
                     $datas[1],

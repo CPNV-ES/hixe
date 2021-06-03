@@ -7,15 +7,6 @@
     <div class="content">
         <div class="row justify-content-md-center">
             <div class="col-md-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="card">
                     <div class="card-header">
                         <h5 class="title">{{__(" Insérer des courses")}}</h5>

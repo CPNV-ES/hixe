@@ -6,6 +6,7 @@ use App\User;
 use App\HikeCSV;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Redirect;
 
 class ImportController extends Controller
 {
@@ -38,18 +39,22 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('csv');
-        if (!empty($file)){
+
+        if (empty($file)){
+            $users = User::all();
+            return Redirect::route('multiHikes.index')->with('error',"Votre fichier est vide!");
+        } 
+
         $hikes = HikeCSV::loadHike($file);
+        if($hikes == false){
+            $users = User::all();
+            return Redirect::route('multiHikes.index')->with('error',"Votre fichier n'est pas valide!");
+        }
+
         $validatedHikes = HikeCSV::validationMultiHikes($hikes);
 
         $users = User::all();
         return view('hikes.multicreate')->with(compact('users', 'validatedHikes'));
-        } 
-        
-        $users = User::all();
-        Session::flash('empty', "Votre fichier est vide!");
-        return view('hikes.multicreate')->with(compact('users'));
-    
     }
 
     /**
