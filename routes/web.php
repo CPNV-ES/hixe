@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index');
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
 Route::get('unregister_hike/{id}', 'hikeController@unregisterToHike')->name('hike.unregisterhike');
 
+Route::get('roles.index', 'UserController@index')->name('roles.index');
+
 
 // Calendar
 Route::get('hikes_calendar', 'HikeCalendarController@index');
