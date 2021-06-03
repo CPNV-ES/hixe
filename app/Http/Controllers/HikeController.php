@@ -91,6 +91,8 @@ class HikeController extends Controller
         $trainingsArray = null;
         $equipmentsArray = null;
 
+        $guide_id = Auth::user()->id;
+
         if($id = $request->query('id')){
             $hike_src = Hike::find($id);
             $hike = $hike_src->replicate();
@@ -99,6 +101,8 @@ class HikeController extends Controller
             $trainingsArray = $hike_src->trainings->pluck('id')->toArray();
             $equipmentsArray = $hike_src->equipment->pluck('id')->toArray();
         }
+
+        
 
         return view('hikes.create')->with(compact('hike','equipment', 'trainings', 'destinations', 'users', 'hike_types','guide_id','trainingsArray','equipmentsArray'));
     }
