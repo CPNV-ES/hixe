@@ -10,12 +10,12 @@ use App\Hike;
 use App\User;
 use App\Destination;
 use App\HikeType;
+use App\Http\Requests\HikesGetRequest;
 use App\Http\Requests\HikesPost;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class HikeController extends Controller
 {
@@ -24,29 +24,52 @@ class HikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(HikesGetRequest $request)
     {
-        if (\Str::contains($request->header('Accept'), 'application/json')) {
+        $query = $request->query('q');
+        $hikes = Hike::query();
+
+        if (isset($query)) {
+            $hikes = $hikes->withParticipants($query);
+        } 
+        
+        if ($request->expectsJson()) {
             $start_date = $request->query('start_date');
             $end_date = $request->query('end_date');
             $difficulty = $request->query('difficulty');
             $type = $request->query('type');
+            $includes = array_filter(explode(",", $request->query('includes')));
 
-            $hikes = Hike::between($start_date, $end_date);
-
-            if ($type != 'all') {
-                $hikes =  $hikes->where('type_id', $type);
+            if (isset($start_date) && isset($end_date)) {
+                $hikes = $hikes->between($start_date, $end_date);
             }
 
-            if ($difficulty != 'all') {
+            if (isset($participants)) {
+                $hikes = $hikes->whereHas('participants', function ($query) use ($participants) {
+                    return $query->whereIn('hike_user.user_id', $participants);
+                });
+            }
+
+            if (isset($type) && $type != 'all') {
+                $hikes = $hikes->where('type_id', $type);
+            }
+
+            if (isset($difficulty) && $difficulty != 'all') {
                 $hikes = $hikes->where('difficulty', $difficulty);
             }
 
-            return response()->json($hikes->get());
+            foreach ($includes as $include) {
+                $hikes = $hikes->with($include);
+            }
+            
+            $hikes = $hikes->get();
+
+            return response()->json($hikes);
         }
 
-        $hikes = Hike::all();
-        return view('hikes.index')->with(compact(['hikes']));
+        $hikes = $hikes->get();
+
+        return view('hikes.index')->with(compact(['hikes', 'query']));
     }
 
 
@@ -62,8 +85,22 @@ class HikeController extends Controller
         $destinations = Destination::all();
         $hike_types = HikeType::all();
         $users = User::all(); // to allow picking a guide
+
         $hike = new Hike();
-        return view('hikes.create')->with(compact('hike', 'equipment', 'trainings', 'destinations', 'users', 'hike_types'));
+        $guide_id = null;
+        $trainingsArray = null;
+        $equipmentsArray = null;
+
+        if($id = $request->query('id')){
+            $hike_src = Hike::find($id);
+            $hike = $hike_src->replicate();
+            $guide_id = $hike_src->guides->first()->id ?? null;
+
+            $trainingsArray = $hike_src->trainings->pluck('id')->toArray();
+            $equipmentsArray = $hike_src->equipment->pluck('id')->toArray();
+        }
+
+        return view('hikes.create')->with(compact('hike','equipment', 'trainings', 'destinations', 'users', 'hike_types','guide_id','trainingsArray','equipmentsArray'));
     }
 
     /**
@@ -192,7 +229,17 @@ class HikeController extends Controller
         $hike->users()->attach(Auth::user()->id, ['role_id' => 3]);
 
         $hikes = Hike::all();
-        return view('hikes.index')->with(compact('hikes'));
+        return Redirect::route('hikes.show', $hike_id)->with('success','Inscription réussie !');
+    }
+
+    public function unregisterToHike($hike_id)
+    {
+        $hike = Hike::find($hike_id);
+
+        $hike->users()->detach(Auth::user()->id, ['role_id' => 3]);
+
+        $hikes = Hike::all();
+        return Redirect::route('hikes.index')->with('success','Désinscription réussie !');
     }
 
     /**

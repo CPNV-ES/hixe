@@ -10,8 +10,6 @@
 // Text Style
 @import "textstyle";
 
-@import "./datetime-picker";
-
 .select:hover{
     cursor: pointer;
 }
@@ -75,4 +73,39 @@
 .versiontag {
     font-size: 8px;
     color: lightgrey;
+}
+
+.search-bar:focus-within {
+    .search-results {
+        visibility: visible;
+    }
+}
+
+.search-results {
+    position: absolute;
+    z-index: 10000;
+    top: 100%;
+    width: 100%;
+    max-height: 380px;
+    overflow-y: scroll;
+    visibility: hidden;
+
+    &__row {
+        display: flex;
+        background-color: #fff;
+        border: 1px solid #eee;
+        user-select: none;
+        cursor: pointer;
+        
+        &:hover {
+            background-color: #efefef;
+        }
+    }
+    
+    &__link {
+        padding: 8px;
+        width: 100%;
+        color: inherit !important;
+        text-decoration: none !important;
+    }
 }

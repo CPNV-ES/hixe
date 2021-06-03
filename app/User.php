@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'github_id'
     ];
 
     /**
@@ -40,12 +40,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function hikes(){
-        return $this->belongsToMany(Hike::class)->withPivot('role_id')->orderBy('meeting_date','desc');
+    public function hikes()
+    {
+        return $this->belongsToMany(Hike::class)->withPivot('role_id')->orderBy('meeting_date', 'desc');
     }
 
-    public function role(){
-        return $this->belongsTo(Role::class,'role_id');
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     /**
@@ -54,20 +56,22 @@ class User extends Authenticatable
      * @var string
      * @return bool
      */
-    public function hasRole($roleSlug){
-        if(is_string($roleSlug)){
+    public function hasRole($roleSlug)
+    {
+        if (is_string($roleSlug)) {
             return $this->role->slug === $roleSlug;
         }
 
         foreach ($roleSlug as $r) {
-            if($this->hasRole($r)){
+            if ($this->hasRole($r)) {
                 return true;
             }
         }
         return false;
     }
 
-    public function setRole($roleSlug){
+    public function setRole($roleSlug)
+    {
         $role = null;
         try {
             $role = Role::where('slug',$roleSlug)->first();

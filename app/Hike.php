@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Carbon\Carbon;
 
 class Hike extends Model
 {
@@ -47,13 +48,31 @@ class Hike extends Model
 
     public function equipment()
     {
-        return $this->belongsToMany(Equipment::Class);
+        return $this->belongsToMany(Equipment::class);
     }
 
     public function trainings()
     {
-        return $this->belongsToMany(Training::Class);
+        return $this->belongsToMany(Training::class);
     }
+
+    /*
+    This function returns true if it's possible to be registered to an hike. Here's the conditions :
+        - The maximum number of participants is not reached
+        - The start date is in the future
+    */
+    public function couldBeRegistered(){
+        // Get dates in carbon format
+        $meeting_date = Carbon::createFromFormat("Y-m-d H:i:s", $this->meeting_date); 
+        $now = Carbon::createFromFormat("Y-m-d H:i:s", Carbon::now());
+
+        // Tests
+        $is_max_participants_reached = $this->participants()->count() <= $this->max_num_participants;
+        $is_meeting_date_in_future = $meeting_date->greaterThan($now);
+
+        return $is_max_participants_reached && $is_meeting_date_in_future;
+    }
+
 
     /**
      * Get hikes between two dates
@@ -68,6 +87,31 @@ class Hike extends Model
         $end_date = date('Y-m-d H:i:s', $end_timestamp);
     
         return $query->where('beginning_date', '>=', $start_date)->where('ending_date', '<=',$end_date);
+    }
+
+    /**
+     * @param Builder $query
+     * @param string $search_query  The search query that will be used to match against participants firstnames and lastnames
+     * 
+     * @return Builder
+     */
+    public function scopeWithParticipants(Builder $query, string $search_query) {
+        $query->whereHas('participants', function ($q) use ($search_query) {
+            // Split The search query into multiple needles
+            $needles = explode(' ', $search_query);
+
+            if ($needles) {
+                foreach($needles as $needle) {
+                    $q = $q->where('firstname', 'like', "%{$needle}%")->orWhere('lastname', 'like', "%{$needle}%");
+                }
+            } else {
+                $q->where('firstname', 'like', "%{$search_query}%")->orWhere('lastname', 'like', "%{$search_query}%");
+            }
+
+            return $q;
+        });
+
+        return $query;
     }
 
     #endregion

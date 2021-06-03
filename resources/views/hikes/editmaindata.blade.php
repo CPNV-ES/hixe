@@ -1,12 +1,24 @@
 @push('scripts')
     <script src="{{ asset('/js/hikes-editmaindata.js') }}"></script>
 @endpush
-
 <script src="/lib/moment/moment.min.js"></script>
 <script src="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script>
+    window.onbeforeunload = () => {
+        let msg = "Vous êtes sur le point de partir vous aller perdre vos modifications"
+        if(document.querySelector('input[name="hikeName"]').value != '' ){
+            return msg;
+        }
+        return;
+    }
+
+    document.querySelector('#create_hike_form').addEventListener('submit',(e) => {
+        window.onbeforeunload = null
+        return true
+    })
+</script>
 
 <link rel="stylesheet" href="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
-
 <style>
     @font-face { 
         font-family: "Glyphicons Halflings"; 
@@ -20,6 +32,7 @@
             <label class="form-control bg-transparent col-2 border-0 text-right">Nom</label>
             <input type="text" name="hikeName" class="form-control col-6" value="{{ $hike->name }}">
         </div>
+
         @if (isset($states))
             <div class="form-row">
                 <label class="form-control bg-transparent col-2 border-0 text-right">Etat</label>
@@ -34,7 +47,7 @@
             <label class="form-control bg-transparent col-2 border-0 text-right">Guide</label>
             <select class="form-control col-4" name="guide">
                 @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                    <option value="{{$user->id}}" {{ $user->id == ($guide_id ?? null) ? 'selected' : ''}}>{{$user->firstname}} {{$user->lastname}}</option>
                 @endforeach
             </select>
         </div>
@@ -80,15 +93,15 @@
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Dénivelé</label>
-            <input type="number" name="elevation" class="form-control col-1" value="{{ $hike->drop_in_altitude }}">
+            <input type="number" min="1" name="elevation" class="form-control col-1" value="{{ $hike->drop_in_altitude }}">
             <label class="form-control bg-transparent col-2 border-0 text-right">Difficulté technique</label>
-            <input type="number" name="difficulty" class="form-control col-1" value="{{ $hike->difficulty }}">
+            <input type="number" min="1" max="9" name="difficulty" class="form-control col-1" value="{{ $hike->difficulty }}">
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent col-2 border-0 text-right">Participants: minimum </label>
-            <input type="number" name="minp" class="form-control col-1" value="{{ $hike->min_num_participants }}">
-            <label class="form-control bg-transparent col-2 border-0 text-right"> maximum </label>
-            <input type="number" name="maxp" class="form-control col-1" value="{{ $hike->max_num_participants }}">
+            <input type="number" name="minp" min="1" class="form-control col-1" value="{{ $hike->min_num_participants }}">
+            <label class="form-control bg-transparent col-1 border-0 text-right"> maximum </label>
+            <input type="number" name="maxp" min="1" class="form-control col-1" value="{{ $hike->max_num_participants }}">
         </div>
         <div class="form-row">
             <label class="form-control bg-transparent border-0 text-center">Divers</label>
@@ -99,7 +112,7 @@
                 <label class="form-control bg-transparent border-0 text-left">Cours requis</label>
                 @foreach($trainings as $training)
                     <div class="row">
-                        <input type="checkbox" class="form-control col-1" name="trainings[{{ $training->id }}]" {{ $hike->trainingIsRequired($training) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $training->description }}</label>
+                        <input type="checkbox" class="form-control col-1" name="trainings[{{ $training->id }}]" {{ array_search($training->id, $trainingsArray ?? []) !== false || $hike->trainingIsRequired($training) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $training->description }}</label>
                     </div>
                 @endforeach
             </div>
@@ -107,7 +120,7 @@
                 <label class="form-control bg-transparent border-0 text-left">Matériel requis</label>
                 @foreach($equipment as $eqp)
                     <div class="row">
-                        <input type="checkbox" class="form-control col-1" name="equipment[{{ $eqp->id }}]" {{ $hike->equipmentIsRequired($eqp) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $eqp->name }}</label>
+                        <input type="checkbox" class="form-control col-1" name="equipment[{{ $eqp->id }}]" {{  array_search($eqp->id, $equipmentsArray ?? []) !== false || $hike->equipmentIsRequired($eqp) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $eqp->name }}</label>
                     </div>
                 @endforeach
             </div>

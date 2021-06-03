@@ -67,12 +67,19 @@
                 </a>
             </div>
             @if(Auth::check())
-                <div class="col-md-1 containermenu" onclick="location.href='{{ route('profile.show',Auth::user()->id) }}'">
+                 <a class="col-md-1 containermenu" href="{{ route('profile.show', Auth::user()) }}">
                     <div class="menuright">
                         <i class="fas fa-user fa-2x"></i>
                         <p>{{ Auth::user()->firstname }} {{Auth::user()->lastname}} <span class="text-sm-left"><strong>{{ Auth::user()->role->name }}</strong></span></p>
                     </div>
-                </div>
+                </a>
+            @else
+                <a class="col-md-1 containermenu" href="/auth/github">
+                    <div class="menuright">
+                        <i class="fas fa-user fa-2x"></i>
+                        <p>Se connecter</p>
+                    </div>
+                </a>
             @endif
         </div>
     </div>

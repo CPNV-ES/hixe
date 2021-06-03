@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 
 use App\Http\Controllers\Controller;
+use App\Role;
 use App\User;
-
-
-use Socialite;
 
 class AuthController extends Controller
 {
@@ -20,8 +20,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider()
     {
-
-        return Socialite::driver('github')->stateless()->redirect();
+        return Socialite::driver('github')->redirect();
     }
 
     /**
@@ -29,45 +28,49 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
         try {
-            $user = Socialite::driver('github')->stateless()->user();
-        } catch (Exception $e) {
+            $user = Socialite::driver('github')->user();
+        } catch (\Exception $e) {
             return Redirect::to('auth/github');
         }
 
         $authUser = $this->findOrCreateUser($user);
+
         Auth::login($authUser, true);
+
+        // Prevent session fixation
+        $request->session()->regenerate();
 
         return Redirect::to('/');
     }
-
+    
     /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $githubUser
+     * @param $github_user
      * @return User
      */
-    private function findOrCreateUser($githubUser)
+    private function findOrCreateUser($github_user)
     {
-        if ($authUser = User::where('github_id', $githubUser->id)->first()) {
-            return $authUser;
+        $user = User::where('github_id', $github_user->id)->first();
+        
+        if (isset($user)) {
+            return $user;
         }
 
-        if($githubUser->name){
-            return User::create([
-                'firstname' => $githubUser->name,
-                'email_address' => $githubUser->email,
-                'github_id' => $githubUser->id,
-            ]);
-        }else{
-            return User::create([
-                'firstname' => $githubUser->nickname,
-                'email_address' => $githubUser->email,
-                'github_id' => $githubUser->id,
-            ]);
-        }
+        // The role_id column cannot be empty
+        $hiker_role = Role::hiker();
+
+        $user = User::create([
+            'firstname' => $github_user->nickname,
+            'email_address' => $github_user->email,
+            'github_id' => $github_user->id,
+            'role_id' => $hiker_role->id,
+        ]);
+
+        return $user;
     }
 
     public function logoutUser(){
