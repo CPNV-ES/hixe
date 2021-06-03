@@ -17,13 +17,17 @@
                             <div class="col-md-12 pr-1 d-flex justify-content-end" style="padding-bottom: 15px;">
                                 <form method="POST" action="{{ route('import.store') }}" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="file" accept=".csv" name="csv" class="btn btn-light" >
-                                    <button title="Importer" type="submit" class="btn btn-outline-secondary "><i class="fas fa-upload"></i></button>
+                                    <div class="input-group">
+                                        <button title="Importer" type="submit" class="btn btn-outline-secondary" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></button>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" accept=".csv" name="csv">
+                                            <label class="custom-file-label">Choisir un fichier .csv</label>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('multiHikes.store') }}" autocomplete="off"
-                              enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('multiHikes.store') }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
                         @method('post')
                         <!-- Date -->
