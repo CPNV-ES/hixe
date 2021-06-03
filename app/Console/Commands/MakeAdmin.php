@@ -41,9 +41,11 @@ class MakeAdmin extends Command
         $name = $this->argument('name');
 
         if(!empty($name)){
-            $user = User::firstWhere('firstname',$name);
-
-            if($user) $user->setRole('admin');
+            $user = User::firstWhere('firstname','like',$name.'%');
+            if($user) $result = $user->setRole('admin');
+            else {
+                print("L'utilisateur n'a pas été trouvé" . PHP_EOL);
+            }
         }
     }
 }
