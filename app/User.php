@@ -81,7 +81,7 @@ class User extends Authenticatable
             }
             $this->role_id = $role->id ?? $this->role;
             $this->save();
-            print("Le role de l'utilisateur a été mise à jour en " .  $role->name . PHP_EOL);
+            print("Le role de ".$this->firstname." a été mise à jour en " .  $role->name . PHP_EOL);
         }
         catch(\Exception $e){
             report($e);
