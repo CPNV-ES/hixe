@@ -11,6 +11,9 @@
       - [Les différents types sont :](#les-différents-types-sont-)
   - [Roles](#roles)
     - [Slug](#slug)
+    - [Utilisations](#utilisations)
+      - [Relation](#relation)
+      - [Roles](#roles-1)
   - [OAuth](#oauth)
     - [Configuration](#configuration)
     - [Github](#github)
@@ -84,6 +87,19 @@ globalement le slug doit permettre d'identifier un élément de manière simplif
 Définition wikipédia :
 
 _Slug (publication web) est un court texte utilisable dans une URL et facilement compréhensible à la fois par les utilisateurs et les moteurs de recherche pour décrire et identifier une ressource. Noter que pour pouvoir figurer dans une URL, un slug ne doit pas comporter de caractères "interdits" (espaces, caractères diacritiques, etc.). Exemple : pour identifier une image de la Tour Eiffel, le slug Paris-Tour-Eiffel.jpg est plus "parlant' que 1234567.jpg._
+
+### Utilisations
+
+#### Relation
+
+Le modèle "User" possède une méthode permettant de récupérer le nom du role sur l'instance d'un utilisateur avec `$user->role->name` pour plus d'info sur le fonctionnement de cette méthode voir [One To Many](https://laravel.com/docs/6.x/eloquent-relationships#one-to-many) et [One To Many (inverse) ](https://laravel.com/docs/6.x/eloquent-relationships#one-to-many-inverse)
+
+#### Roles
+
+L'on peut vérifier si l'utilisateur à un rôle en appelant la méthode `hasRole()` avec comment paramètre une chaine de caractère contenant le slug sur l'instance d'un user, exemple `$user->hasRole('admin')`
+On peut également vérifier plusieurs rôles en même temps en lui passant un tableau contenant les différents slugs des rôles que l'on souhaiterait vérifier.
+
+L'on peut ajouter un role à un utilisateur à l'aide de la méthode `setRole()` sur l'instance d'un user, exemple : `$user->setRole('admin')`
 
 ## OAuth
 
