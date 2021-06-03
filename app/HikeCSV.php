@@ -130,13 +130,13 @@ class HikeCSV
                     
             if(empty($hike->denivele)){
                 $hike->deniveleError = "Le champ dénivelé est obligatoire";
-            }elseif(is_numeric("denivele")){
+            }elseif(!is_numeric($hike->denivele)){
                 $hike->deniveleError = "Le champ dénivelé doit comporter uniquement des chiffres";
             } 
                     
             if(empty($hike->difficulty)){
                 $hike->difficultyError = "Le champ difficulté est obligatoire";
-            }elseif(is_numeric("difficulty")){
+            }elseif(!is_numeric($hike->difficulty)){
                 $hike->difficultyError = "Le champ difficulté doit comporter uniquement des chiffres";
             } 
 
