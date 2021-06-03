@@ -162,8 +162,9 @@ class HikeController extends Controller
         $states = State::all();
         $hike_types = HikeType::all();
         $hike = Hike::find($id);
+        $guide_id = $hike->guides->first()->id ?? null;
         $users = User::all(); // to allow picking a guide
-        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users', 'hike_types'));
+        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users', 'hike_types','guide_id'));
     }
 
     /**
