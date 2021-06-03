@@ -3,20 +3,6 @@
 @endpush
 <script src="/lib/moment/moment.min.js"></script>
 <script src="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-<script>
-    window.onbeforeunload = () => {
-        let msg = "Vous êtes sur le point de partir vous aller perdre vos modifications"
-        if(document.querySelector('input[name="hikeName"]').value != '' ){
-            return msg;
-        }
-        return;
-    }
-
-    document.querySelector('#create_hike_form').addEventListener('submit',(e) => {
-        window.onbeforeunload = null
-        return true
-    })
-</script>
 
 <link rel="stylesheet" href="/lib/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
 <style>
@@ -127,3 +113,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    let msg = "Vous êtes sur le point de partir vous aller perdre vos modifications"
+    let nameInput = document.querySelector('input[name="hikeName"]')
+    let form = document.querySelector('#hike_form')
+    let formInputs = document.querySelectorAll('#hike_form input')
+    
+    let formChangeFlag = false
+
+    formInputs.forEach((input)=> {
+        input.addEventListener('change', ()=> {
+            formChangeFlag = true
+            console.log('change')
+        })
+    })
+
+    window.onbeforeunload = () => {
+        if(formChangeFlag === true){
+            return msg
+        }
+        return;
+    }
+    form.addEventListener('submit',(e) => {
+        window.onbeforeunload = null
+        return true
+    })
+</script>
