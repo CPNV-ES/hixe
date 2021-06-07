@@ -11,6 +11,7 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Dernière connection</th>
                     <th scope="col">Role</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,17 +31,35 @@
                                 @endforeach
                             </select>    
                         </td>
+                        <td class="text-center"><a href="save me" id="btn_{{$user->id}}" class="btn btn-outline-success btn_hidden"><i class="fas fa-check"></i></a></td>
                     </tr>
 
                     <script>
                         // if the value of the x-selected-list has changed 
                         // -> Display button 
-                        $("#" + {{$user->id}}).on("change", function(evt) {
+                        var list = $("#" + {{$user->id}}); //The list's name is the '#'(For HTML class) char with the role's owner ID.
+
+                        $(list).on("change", function(evt) {
                             alert(evt.target.value + {{$user->id}});
+                            
+                            // Add unsaved tag to show a difference between other lists
+                            $(evt.target).addClass("listbox_unsaved");
+                            $("#btn_" + {{$user->id}}).removeClass("btn_hidden");
                         })
                     </script>
                 @endforeach
             </tbody>
         </table>
     </div>
+
+    <style type="text/css">
+        .listbox_unsaved {
+            border-color:aliceblue;
+        }
+
+        .btn_hidden{
+            visibility: hidden;
+        }
+    </style>
+
 @endsection
