@@ -31,20 +31,27 @@
                                 @endforeach
                             </select>    
                         </td>
-                        <td class="text-center"><a href="save me" id="btn_{{$user->id}}" class="btn btn-outline-success btn_hidden"><i class="fas fa-check"></i></a></td>
+                        <td class="text-center"><a href="{ route('user.updadeRole', $->id)}" id="btn_{{$user->id}}" class="btn btn-outline-success btn_hidden"><i class="fas fa-check"></i></a></td>
                     </tr>
 
                     <script>
-                        // if the value of the x-selected-list has changed 
-                        // -> Display button 
-                        var list = $("#" + {{$user->id}}); //The list's name is the '#'(For HTML class) char with the role's owner ID.
+                        // * Display the button if a value inside the list changes *
 
+                        var list = $("#" + {{$user->id}}); //The list's name is the '#'(For HTML class) char with the role's owner ID.
+                        
                         $(list).on("change", function(evt) {
                             console.log(evt.target.value + {{$user->id}});
-                            
+
                             // Add unsaved tag to show a difference between other lists
                             $(evt.target).addClass("listbox_unsaved");
+
+                            // Display
                             $("#btn_" + {{$user->id}}).removeClass("btn_hidden");
+                        })
+
+                        // * Change the role of the user *
+                        $("#btn_" + {{$user->id}}).on("click", function(evt) {
+                            window.location.href = "/"
                         })
                     </script>
                 @endforeach
