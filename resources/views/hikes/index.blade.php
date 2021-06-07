@@ -142,7 +142,14 @@
 
             for(var i = 0; i < users.length; i++) {
                 var user = users[i];
-                var fullname = user.firstname + " " + user.lastname;
+                var fullname = "";
+                
+                if (user.firstname) {
+                    fullname += user.firstname;
+                }
+                if (user.lastname) {
+                    fullname += user.lastname;
+                }
 
                 var row = $("<div></div>");
                 row.addClass("search-results__row");

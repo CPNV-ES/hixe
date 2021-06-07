@@ -32,13 +32,15 @@ class MultiHikesPost  extends FormRequest
             'start'             => 'required',
             'finish'            => 'required',
             'difficulty'        => 'required',
-            'denivele'          => 'required'
+            'denivele'          => 'required',
+            'hike_type'         => 'required',
         ];
     }
 
     public function messages(){
         return [
             'name.required' => 'Le Nom est obligatoire',
+            'hike_type.required' => 'Le type de course est obligatoire'
         ];
     }
 }

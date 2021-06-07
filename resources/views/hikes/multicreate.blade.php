@@ -49,6 +49,7 @@
                                             <td>Min Pers.</td>
                                             <td>Max Pers.</td>
                                             <td>Dénivelé*</td>
+                                            <td style="min-width: 110px">Type</td>
                                             <td>Difficulté*</td>
                                             <td>Info</td>
                                             </thead>
@@ -111,6 +112,14 @@
                                                         <td><input type="number" min="1" name="min[]" class="form-control" value=''></td>
                                                         <td><input type="number" min="1" name="max[]" class="form-control" value=''></td>
                                                         <td><input type="number" min="1" name="denivele[]" class="form-control" value=''></td>
+                                                        <td>
+                                                            <select id="hike_type" class="form-control" name="hike_type[]" required>
+                                                                <option disabled selected>Choisir un type</option>
+                                                                @foreach($hike_types as $type)
+                                                                    <option value="{{$type->id}}">{{$type->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
                                                         <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value=''></td>
                                                         <td><input type="text" name="info[]" class="form-control" value=''></td>
                                                         <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
