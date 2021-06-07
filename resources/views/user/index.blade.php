@@ -20,7 +20,7 @@
                         <td> {{$user->lastname}} </td>    
                         <td> {{$user->updated_at}} </td>    
                         <td>
-                            <select name="role" id="role_id">
+                            <select name="user_role" id={{$user->id}}>
                                 @foreach ($roles as $role)
                                     @if($user->role->slug == $role->slug)
                                         <option selected="selected" value={{$role->slug}}> {{$role->name}} </option>
@@ -31,6 +31,14 @@
                             </select>    
                         </td>
                     </tr>
+
+                    <script>
+                        // if the value of the x-selected-list has changed 
+                        // -> Display button 
+                        $("#" + {{$user->id}}).on("change", function(evt) {
+                            alert(evt.target.value + {{$user->id}});
+                        })
+                    </script>
                 @endforeach
             </tbody>
         </table>
