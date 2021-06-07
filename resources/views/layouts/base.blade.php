@@ -94,7 +94,9 @@
                 <a class="nav-item nav-link {{ $view_name == 'home' ? 'active' : '' }}" href="/">Mes Courses <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link {{ $view_name == 'hikes-index' ? 'active' : '' }}" href="{{route('hikes.index')}}">Liste des courses</a>
                 <a class="nav-item nav-link {{ $view_name == 'hikes-create' ? 'active' : '' }}" href="{{route('hikes.create')}}">Créer une course</a>
-                <a class="nav-item nav-link {{ $view_name == 'multihikes-create' ? 'active' : '' }}" href="{{route('multiHikes.index')}}">Créer plusieurs courses</a>
+                @if(Auth::user()->hasRole("admin"))
+                    <a class="nav-item nav-link {{ $view_name == 'multihikes-create' ? 'active' : '' }}" href="{{route('multiHikes.index')}}">Créer plusieurs courses</a>
+                @endif
             </div>
         </div>
     </nav>

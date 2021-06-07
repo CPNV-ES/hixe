@@ -53,16 +53,21 @@ Route::get('profile/{profile}', 'UserController@show')->name('profile.show');
 Route::put('profile/{profile}', 'UserController@update')->name('profile.update');
 Route::get('profile/{profile}/edit', 'UserController@edit')->name('profile.edit');
 
-// Multi hikes
-//Route::resource('multiHikes', 'MultiHikesController');
-Route::post('multiHikes', 'MultiHikesController@store')->name('multiHikes.store');
-Route::get('multiHikes', 'MultiHikesController@index')->name('multiHikes.index');
-Route::get('multiHikes/create', 'MultiHikesController@create')->name('multiHikes.create');
-Route::put('multiHikes/{multiHike}', 'MultiHikesController@update')->name('multiHikes.update');
-Route::get('multiHikes/{multiHike}', 'MultiHikesController@show')->name('multiHikes.show');
-Route::delete('multiHikes/{multiHike}', 'MultiHikesController@destroy')->name('multiHikes.destroy');
-Route::get('multiHikes/{multiHike}/edit', 'MultiHikesController@edit')->name('multiHikes.edit');
 
-// Import hikes with csv file
-//Route::resource('importHikes', 'ImportHikesController');
-Route::post('import', 'ImportController@store')->name('import.store');
+Route::middleware(["role:admin"])->group(function () {
+    // Multi hikes
+    //Route::resource('multiHikes', 'MultiHikesController');
+
+    Route::post('multiHikes', 'MultiHikesController@store')->name('multiHikes.store');
+    Route::get('multiHikes', 'MultiHikesController@index')->name('multiHikes.index');
+    Route::get('multiHikes/create', 'MultiHikesController@create')->name('multiHikes.create');
+    Route::put('multiHikes/{multiHike}', 'MultiHikesController@update')->name('multiHikes.update');
+    Route::get('multiHikes/{multiHike}', 'MultiHikesController@show')->name('multiHikes.show');
+    Route::delete('multiHikes/{multiHike}', 'MultiHikesController@destroy')->name('multiHikes.destroy');
+    Route::get('multiHikes/{multiHike}/edit', 'MultiHikesController@edit')->name('multiHikes.edit');
+
+    // Import hikes with csv file
+    //Route::resource('importHikes', 'ImportHikesController');
+    Route::post('import', 'ImportController@store')->name('import.store');
+});
+
