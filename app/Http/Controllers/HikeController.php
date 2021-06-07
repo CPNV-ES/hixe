@@ -91,6 +91,8 @@ class HikeController extends Controller
         $trainingsArray = null;
         $equipmentsArray = null;
 
+        $guide_id = Auth::user()->id;
+
         if($id = $request->query('id')){
             $hike_src = Hike::find($id);
             $hike = $hike_src->replicate();
@@ -99,6 +101,8 @@ class HikeController extends Controller
             $trainingsArray = $hike_src->trainings->pluck('id')->toArray();
             $equipmentsArray = $hike_src->equipment->pluck('id')->toArray();
         }
+
+        
 
         return view('hikes.create')->with(compact('hike','equipment', 'trainings', 'destinations', 'users', 'hike_types','guide_id','trainingsArray','equipmentsArray'));
     }
@@ -162,8 +166,9 @@ class HikeController extends Controller
         $states = State::all();
         $hike_types = HikeType::all();
         $hike = Hike::find($id);
+        $guide_id = $hike->guides->first()->id ?? null;
         $users = User::all(); // to allow picking a guide
-        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users', 'hike_types'));
+        return view('hikes.edit')->with(compact('hike', 'trainings', 'equipment', 'states', 'users', 'hike_types','guide_id'));
     }
 
     /**
