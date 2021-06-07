@@ -40,7 +40,7 @@
                         var list = $("#" + {{$user->id}}); //The list's name is the '#'(For HTML class) char with the role's owner ID.
                         
                         $(list).on("change", function(evt) {
-                            console.log(evt.target.value + {{$user->id}});
+                            //console.log(evt.target.value + {{$user->id}});
 
                             // Add unsaved tag to show a difference between other lists
                             $(evt.target).addClass("listbox_unsaved");
@@ -50,8 +50,11 @@
                         })
 
                         // * Change the role of the user *
+                        var user_id = list;
                         $("#btn_" + {{$user->id}}).on("click", function(evt) {
-                            window.location.href = "/"
+                            console.log("Role : " + $("#{{$user->id}}").val());
+                            alert($("#{{$user->id}}").val());
+                            window.location.href = "{{ route('hikes.update',$user->id, ) }}"
                         })
                     </script>
                 @endforeach
