@@ -52,9 +52,17 @@ class ImportController extends Controller
         }
 
         $validatedHikes = HikeCSV::validationMultiHikes($hikes);
+        
+        $sumError = 0;
+        foreach( $validatedHikes as  $validatedHike){
+            if($validatedHike->error == true){
+                $sumError++;
+            }
+        }
 
         $users = User::all();
-        return view('hikes.multicreate')->with(compact('users', 'validatedHikes'));
+
+        return view('hikes.multicreate')->with(compact('users', 'validatedHikes', 'sumError'));
     }
 
     /**

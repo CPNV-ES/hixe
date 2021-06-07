@@ -31,6 +31,7 @@ class HikeCSV
     public $deniveleError;
     public $difficultyError;
     public $infoError;
+    public $error = false;
 
 
     function __construct($name, $meetingLocation, $meetingDate, $hikeDate, $start, $finish, $min, $max, $denivele, $difficulty, $info)
@@ -83,64 +84,82 @@ class HikeCSV
 
         $validatedHike = array();
         foreach ($hikes as $hike){
-
             if(empty($hike->name)){
                 $hike->nameError = "Le champ nom de la course est obligatoire";
+                $hike->error = true;
             } elseif( strlen($hike->name) > 20){
                 $hike->nameError = "le champ nom de la course écrivez au max 60 caractères";
+                $hike->error = true;
             }
 
             if(empty($hike->meetingLocation)){
                 $hike->meetingLocationError = "Le champ lieu de rendez-vous est obligatoire";
+                $hike->error = true;
             } elseif( strlen($hike->meetingLocation) > 20){
                 $hike->meetingLocationError = "Dans le champ lieu de rendez-vous écrivez au max 60 caractères";
+                $hike->error = true;
             }
                     
             if(empty($hike->meetingDate)){
                 $hike->meetingDateError = "Le champ début du rendez-vous (date) est obligatoire";
+                $hike->error = true;
             } elseif(!validateDate($hike->meetingDate, 'Y-m-d')){
                 $hike->meetingDateError = "Le champ début du rendez-vous (date) doit être sous ce format Y-m-d";
+                $hike->error = true;
             }
                     
             if(empty($hike->hikeDate)){
                 $hike->hikeDateError = "Le champ fin du rendez-vous (date) est obligatoire";
+                $hike->error = true;
             } elseif(!validateDate($hike->hikeDate, 'Y-m-d')){
                 $hike->hikeDateError = "Le champ fin du rendez-vous (date) doit être sous ce format Y-m-d";
+                $hike->error = true;
             }
                     
             if(empty($hike->start)){
                 $hike->startError = "Le champ débuz du rendez-vous (temps) est obligatoire";
+                $hike->error = true;
             } elseif(!validateDate($hike->start, 'H:i')){
                 $hike->startError = "Le champ début du rendez-vous (heure) doit être sous ce format HH:mm";
+                $hike->error = true;
             }
                     
             if(empty($hike->finish)){
                 $hike->finishError = "Le champ fin du rendez-vous (temps) est obligatoire";
+                $hike->error = true;
             } elseif(!validateDate($hike->finish, 'H:i')){
                 $hike->finishError = "Le champ fin du rendez-vous (heure) doit être sous ce format HH:mm";
+                $hike->error = true;
             }
                     
             if(!is_numeric($hike->min)){
                 $hike->minError = "Le champ minimum de personne doit comporter uniquement des chiffres";
+                $hike->error = true;
             } 
                     
             if(!is_numeric($hike->max)){
                 $hike->maxError = "Le champ maximum de personne doit comporter uniquement des chiffres";
+                $hike->error = true;
             } 
                     
             if(empty($hike->denivele)){
                 $hike->deniveleError = "Le champ dénivelé est obligatoire";
+                $hike->error = true;
             }elseif(!is_numeric($hike->denivele)){
                 $hike->deniveleError = "Le champ dénivelé doit comporter uniquement des chiffres";
+                $hike->error = true;
             } 
                     
             if(empty($hike->difficulty)){
                 $hike->difficultyError = "Le champ difficulté est obligatoire";
+                $hike->error = true;
             }elseif(!is_numeric($hike->difficulty)){
                 $hike->difficultyError = "Le champ difficulté doit comporter uniquement des chiffres";
+                $hike->error = true;
             } 
 
             $validatedHike[] = $hike;
+
         }
         return $validatedHike;
     }

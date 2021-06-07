@@ -49,6 +49,7 @@
                                             </thead>
                                             <tbody>
                                                 @if(!empty($validatedHikes))
+                                                    <div class="alert alert-danger alert-block" > Il y a {{$sumError}} courses qui ne sont pas bien remplis!</div>
                                                     @foreach($validatedHikes as $hike)
                                                         <tr id="rows">
                                                             @if(empty($hike->nameError))
@@ -114,7 +115,7 @@
                                                                 <td><input title="{{$hike->infoError}}" type="text" name="info[]" class="form-control is-invalid" value='{{$hike->info}}'></td>
                                                             @endif
                                                             <td><button title="Supprimer" type="submit" class="btn btn-outline-danger" onclick="deleteRow(this)"><i class="fas fa-trash-alt"></i></button></td>
-                                                            @if(empty($hike->nameError || $hike->meetingLocationError || $hike->meetingDateError || $hike->hikeDateError || $hike->startError || $hike->finishError || $hike->minError || $hike->maxError || $hike->deniveleError || $hike->difficultyError || $hike->infoError))
+                                                            @if($hike->error == false))
                                                                 <td><i title="Importation réussi" class="fas fa-check btn btn-outline-success" style="padding-top: 11px; padding-bottom: 10px;"></i></td>
                                                             @endif
                                                         </tr>
