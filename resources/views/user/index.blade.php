@@ -11,7 +11,7 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Dernière connection</th>
                     <th scope="col">Role</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="text-center">Sauvegarder</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +21,7 @@
                         <td> {{$user->lastname}} </td>    
                         <td> {{$user->updated_at}} </td>    
                         <td>
-                            <select name="user_role" id={{$user->id}}>
+                            <select name="user_role" class="form-control w-50" id={{$user->id}}>
                                 @foreach ($roles as $role)
                                     @if($user->role->slug == $role->slug)
                                         <option selected="selected" value={{$role->slug}}> {{$role->name}} </option>
@@ -40,7 +40,7 @@
                         var list = $("#" + {{$user->id}}); //The list's name is the '#'(For HTML class) char with the role's owner ID.
 
                         $(list).on("change", function(evt) {
-                            alert(evt.target.value + {{$user->id}});
+                            console.log(evt.target.value + {{$user->id}});
                             
                             // Add unsaved tag to show a difference between other lists
                             $(evt.target).addClass("listbox_unsaved");
@@ -55,6 +55,8 @@
     <style type="text/css">
         .listbox_unsaved {
             border-color:aliceblue;
+            background-color: #ececec66;
+            font-style: italic;
         }
 
         .btn_hidden{
