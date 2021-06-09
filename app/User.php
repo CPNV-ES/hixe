@@ -7,12 +7,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-/**
- * @OA\Schema(
- *     description="User model",
- *     title="User model",
- * )
- */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -80,19 +74,20 @@ class User extends Authenticatable
     {
         $role = null;
         try {
-            $role = Role::where('slug', $roleSlug)->first();
-            if (!isset($role)) {
-                throw new \Exception("Role not found");
+            $role = Role::where('slug',$roleSlug)->first();
+
+            if(!isset($role) && $role != null){
+               throw new \Exception("Role not found");
             }
             $this->role_id = $role->id ?? $this->role;
             $this->save();
-            echo ("Le role de l'utilisateur a été mise à jour en " .  $role->name . PHP_EOL);
-        } catch (\Exception $e) {
+            print("Le role de ".$this->firstname." a été mise à jour en " .  $role->name . PHP_EOL);
+        }
+        catch(\Exception $e){
             report($e);
-            echo ("Le role de l'utilisateur n'a pas été modifié" . PHP_EOL);
+            print("Le role de l'utilisateur n'a pas été modifié" . PHP_EOL);
             return false;
         }
-
         return $this;
     }
 }

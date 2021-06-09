@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <form method="post" action="{{ route('hikes.update',$hike) }}" enctype="multipart/form-data">
+        <form id="hike_form" method="post" action="{{ route('hikes.update',$hike) }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_method" value="PUT">
             @include('hikes.editmaindata')

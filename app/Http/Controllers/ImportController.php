@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\HikeCSV;
+use App\HikeType;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Redirect;
@@ -61,8 +62,9 @@ class ImportController extends Controller
         }
 
         $users = User::all();
+        $hike_types = HikeType::all();
 
-        return view('hikes.multicreate')->with(compact('users', 'validatedHikes', 'sumError'));
+        return view('hikes.multicreate')->with(compact('users', 'validatedHikes', 'sumError', 'hike_types'));
     }
 
     /**

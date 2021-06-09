@@ -29,7 +29,7 @@
             @endif
         </div>
 
-        <form method="post" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
+        <form id="hike_form" method="post" action="{{ route('hikes.store') }}" enctype="multipart/form-data">
             @csrf
             @include('hikes.editmaindata')
             <div class="form-row justify-content-center">

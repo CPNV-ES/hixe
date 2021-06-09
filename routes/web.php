@@ -12,7 +12,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home.index');
 
 // Hikes registration
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');

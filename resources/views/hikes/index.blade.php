@@ -32,9 +32,8 @@
                     <th scope="col">État</th>
                     @if(Auth::check())
                         <th class="text-center" scope="col"> Inscription </th>
-                        
                         @if((Auth::user()->hasRole("hike_manager")) || Auth::user()->hasRole("admin"))
-                            <th class="text-center" colspan="2" scope="col">Gestion</th>
+                            <th class="text-center" colspan="3" scope="col">Gestion</th>
                         @endif
                     @endif
                 </tr>
@@ -68,6 +67,9 @@
                                     <a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a>
                                 </td>
                                 <td class="text-center">
+                                    <a title="dupliquer" href="{{route('hikes.create',['id' => $hike->id])}}" class="btn btn-outline-primary"><i class="far fa-copy"></i></a>
+                                </td>
+                                <td class="text-center">
                                     <form action="{{route('hikes.destroy',$hike)}}" method="POST">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE"/>
@@ -76,17 +78,6 @@
                                 </td>
                             @endif
                         @endif
-                        <td>
-                            <a title="dupliquer" href="{{route('hikes.create',['id' => $hike->id])}}" class="btn btn-outline-primary"><i class="far fa-copy"></i></a>
-                        </td>
-                        <td><a href="{{route('hikes.edit',$hike)}}" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
-                        <td>
-                            <form action="{{route('hikes.destroy',$hike)}}" method="POST">
-                                @csrf
-                                <input type="hidden" name="_method" value="DELETE"/>
-                                <button id="delete-btn" type="submit" class="btn btn-outline-danger" data-name="{{$hike->name}}"><i class="fas fa-trash-alt"></i></button>
-                            </form>
-                        </td>
                     </tr>
                 @endforeach
         </tbody>
@@ -151,7 +142,14 @@
 
             for(var i = 0; i < users.length; i++) {
                 var user = users[i];
-                var fullname = user.firstname + " " + user.lastname;
+                var fullname = "";
+                
+                if (user.firstname) {
+                    fullname += user.firstname;
+                }
+                if (user.lastname) {
+                    fullname += user.lastname;
+                }
 
                 var row = $("<div></div>");
                 row.addClass("search-results__row");
