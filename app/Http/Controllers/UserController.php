@@ -96,9 +96,9 @@ class UserController extends Controller
         return redirect(route('profile.show',$id))->with("success","Votre profile a été mis à jour !");
     }
 
-    public function updateRole(User $user, Role $role)
+    public function updateRole(User $user, Request $request)
     {
-        dd($user, $role);
+        dd($user);
 
         return view('user.index')->with("success", "Utilisateur sauvegardé !");
     }
