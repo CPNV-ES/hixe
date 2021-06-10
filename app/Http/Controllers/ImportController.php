@@ -39,6 +39,8 @@ class ImportController extends Controller
      */
     public function store(Request $request)
     {
+        $users = User::all();
+        $hike_types = HikeType::all();
         $file = $request->file('csv');
 
         if (empty($file)){
@@ -52,7 +54,7 @@ class ImportController extends Controller
             return Redirect::route('multiHikes.index')->with('error',"Votre fichier n'est pas valide!");
         }
 
-        $validatedHikes = HikeCSV::validationMultiHikes($hikes);
+        $validatedHikes = HikeCSV::validationMultiHikes($hikes, $users, $hike_types);
         
         $sumError = 0;
         foreach( $validatedHikes as  $validatedHike){
@@ -60,9 +62,6 @@ class ImportController extends Controller
                 $sumError++;
             }
         }
-
-        $users = User::all();
-        $hike_types = HikeType::all();
 
         return view('hikes.multicreate')->with(compact('users', 'validatedHikes', 'sumError', 'hike_types'));
     }

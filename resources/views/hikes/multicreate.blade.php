@@ -44,7 +44,7 @@
                                             <td>Min Pers.</td>
                                             <td>Max Pers.</td>
                                             <td>Dénivelé*</td>
-                                            <td style="min-width: 110px">Type</td>
+                                            <td style="min-width: 110px">Type*</td>
                                             <td>Difficulté*</td>
                                             <td>Info</td>
                                             </thead>
@@ -59,12 +59,21 @@
                                                                 <td><input title="{{$hike->nameError}}" type="text" name="name[]" class="form-control is-invalid" value='{{$hike->name}}' style="border: 1px solid red;"></td>
                                                             @endif
                                                             <td style="padding:10;">
-                                                                <select class="form-control" name="chef[]">
-                                                                    <option disabled selected>Choisir un chef</option>
-                                                                    @foreach($users as $user)
-                                                                        <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                                @if(empty($hike->userError))
+                                                                    <select class="form-control" name="chef[]">
+                                                                        <option disabled selected>{{$hike->user}}</option>
+                                                                        @foreach($users as $user)
+                                                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @else
+                                                                    <select title="{{$hike->userError}}" class="form-control is-invalid" name="chef[]">
+                                                                        <option disabled selected>Choisir un chef</option>
+                                                                        @foreach($users as $user)
+                                                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @endif
                                                             </td>
                                                             @if(empty($hike->meetingLocationError))
                                                                 <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}'></td>
@@ -107,12 +116,21 @@
                                                                 <td><input title="{{$hike->deniveleError}}" type="number" min="1" name="denivele[]" class="form-control is-invalid" value='{{$hike->denivele}}'></td>
                                                             @endif
                                                             <td>
-                                                                <select id="hike_type" class="form-control" name="hike_type[]" required>
-                                                                    <option disabled selected>Choisir un type</option>
-                                                                    @foreach($hike_types ?? '' as $type)
-                                                                        <option value="{{$type->id}}">{{$type->name}}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                                 @if(empty($hike->typeError))
+                                                                    <select id="hike_type" class="form-control" name="hike_type[]" required>
+                                                                        <option disabled selected>{{$hike->type}}</option>
+                                                                        @foreach($hike_types ?? '' as $type)
+                                                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @else
+                                                                    <select title="{{$hike->typeError}}" id="hike_type" class="form-control is-invalid" name="hike_type[]" required>
+                                                                        <option disabled selected>Choisir un type</option>
+                                                                        @foreach($hike_types ?? '' as $type)
+                                                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @endif
                                                             </td>
                                                             @if(empty($hike->difficultyError))
                                                                 <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$hike->difficulty}}'></td>
@@ -135,6 +153,7 @@
                                                         <td><input type="text" name="name[]" class="form-control" value=''></td>
                                                         <td>
                                                             <select class="form-control" name="chef[]">
+                                                                <option disabled selected>Choisir un chef</option>
                                                                 @foreach($users as $user)
                                                                     <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
                                                                 @endforeach
