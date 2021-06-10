@@ -92,8 +92,10 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link {{ $currentRoute == 'home.index' ? 'active' : '' }}" href="/">Mes Courses</a>
                 <a class="nav-item nav-link {{ $currentRoute == 'hikes.index' ? 'active' : '' }}" href="{{route('hikes.index')}}">Liste des courses</a>
-                <a class="nav-item nav-link {{ $currentRoute == 'hikes.create' ? 'active' : '' }}" href="{{route('hikes.create')}}">Créer une course</a>
-                <a class="nav-item nav-link {{ $currentRoute == 'multiHikes.index' ? 'active' : '' }}" href="{{route('multiHikes.index')}}">Créer plusieurs courses</a>
+                @if (Auth::user()->hasRole(['admin', 'hike_manager']))
+                    <a class="nav-item nav-link {{ $currentRoute == 'hikes.create' ? 'active' : '' }}" href="{{route('hikes.create')}}">Créer une course</a>
+                    <a class="nav-item nav-link {{ $currentRoute == 'multiHikes.index' ? 'active' : '' }}" href="{{route('multiHikes.index')}}">Créer plusieurs courses</a>
+                @endif
             </div>
         </div>
     </nav>
