@@ -14,11 +14,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home.index');
 
-Route::resources([
-    'hikes' => HikeController::class,
-    'multiHikes' => MultiHikesController::class,
-    'profile' => UserController::class,
-]);
+Route::resource('hikes',HikeController::class)->register();
+Route::resource('multiHikes',MultiHikesController::class)->register();
+Route::resource('profile',UserController::class)->register();
 
 // Hikes registration
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
