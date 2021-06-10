@@ -24,6 +24,9 @@ Route::resources([
 Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
 Route::get('unregister_hike/{id}', 'hikeController@unregisterToHike')->name('hike.unregisterhike');
 
+Route::get('roles', 'UserController@index')->name('roles.index');
+Route::post('updateRoles/{user}', 'UserController@updateRole')->name('roles.updateRoles');
+
 
 // Calendar
 Route::get('hikes_calendar', 'HikeCalendarController@index');
