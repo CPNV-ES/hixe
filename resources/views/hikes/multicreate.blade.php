@@ -60,6 +60,7 @@
                                                             @endif
                                                             <td style="padding:10;">
                                                                 <select class="form-control" name="chef[]">
+                                                                    <option disabled selected>Choisir un chef</option>
                                                                     @foreach($users as $user)
                                                                         <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
                                                                     @endforeach
