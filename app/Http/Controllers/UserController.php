@@ -98,9 +98,11 @@ class UserController extends Controller
 
     public function updateRole(User $user, Request $request)
     {
-        dd($user);
-
-        return view('user.index')->with("success", "Utilisateur sauvegardé !");
+        // Get the role and set it into the user
+        $role = Role::where('slug', '=', $request->input('user_role'))->first();
+        $user->update(['role_id' => $role->id]);
+        
+        return back()->with("success", $user->firstname . " " . $user->lastname . " possède maintenant le rôle de " . $user->role->name);
     }
 
     /**
