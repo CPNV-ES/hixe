@@ -61,7 +61,7 @@
                                                             <td style="padding:10;">
                                                                 @if(empty($hike->userError))
                                                                     <select class="form-control" name="chef[]">
-                                                                        <option disabled selected>{{$hike->user}}</option>
+                                                                        <option selected value="{{$hike->userId}}">{{$hike->user}}</option>
                                                                         @foreach($users as $user)
                                                                             <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
                                                                         @endforeach
@@ -118,7 +118,7 @@
                                                             <td>
                                                                  @if(empty($hike->typeError))
                                                                     <select id="hike_type" class="form-control" name="hike_type[]" required>
-                                                                        <option disabled selected>{{$hike->type}}</option>
+                                                                        <option selected value="{{$hike->typeId}}">{{$hike->type}}</option>
                                                                         @foreach($hike_types ?? '' as $type)
                                                                             <option value="{{$type->id}}">{{$type->name}}</option>
                                                                         @endforeach

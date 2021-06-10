@@ -182,14 +182,13 @@ class HikeCSV
                 $hike->error = true;
             }
 
-            //user
             foreach($users as $user => $value){
                 $name_user = "{$value->firstname} {$value->lastname}";
                 if($hike->user == $name_user){
                     $hike->userId = $value->id;
                 }
             }
-
+            
             if(empty($hike->user)){
                 $hike->userError = "Le champ chef est obligatoire";
                 $hike->error = true;
