@@ -21,17 +21,24 @@
                         <td> {{$user->lastname}} </td>    
                         <td> {{$user->updated_at}} </td>    
                         <td>
+
                         <form id="user_form_{{$user->id}}" method="post" action="{{ route('roles.updateRoles',$user) }}" enctype="multipart/form-data">
                             @csrf
-                            <select name="user_role" class="form-control w-50" id={{$user->id}}>
-                                @foreach ($roles as $role)
-                                    @if($user->role->slug == $role->slug)
-                                        <option selected="selected" value={{$role->slug}}> {{$role->name}} </option>
-                                    @else
-                                        <option value={{$role->slug}}> {{$role->name}} </option>
-                                    @endif
-                                @endforeach
-                            </select>    
+                            <!-- The connected user can't suicide himself (*Downgrade his own role) -->
+                            @if($user->id != Auth::user()->id)
+                                <select name="user_role" class="form-control w-50" id={{$user->id}}>
+                                    @foreach ($roles as $role)
+                                        @if($user->role->slug == $role->slug)
+                                            <option selected="selected" value={{$role->slug}}> {{$role->name}} </option>
+                                        @else
+                                            <option value={{$role->slug}}> {{$role->name}} </option>
+                                        @endif
+                                    @endforeach
+                                </select> 
+                            @else
+                                <p class="forbidden"> Vous n'avez pas le droit de modifier votre rôle. </p>
+                            @endif
+
                             </td>
                             <td class="text-center">
                                 <button type="submit" id="btn_{{$user->id}}" class="btn btn-outline-success btn_hidden">
@@ -66,6 +73,12 @@
 
         .btn_hidden{
             visibility: hidden;
+        }
+
+        .forbidden{
+            font-style: italic;
+            font-size: 12px;
+            color: #ea5a5a;
         }
     </style>
 
