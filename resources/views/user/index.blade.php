@@ -34,7 +34,9 @@
                             </select>    
                             </td>
                             <td class="text-center">
-                                <input type="submit" id="btn_{{$user->id}}" class="btn btn-outline-success btn_hidden" value="Save">
+                                <button type="submit" id="btn_{{$user->id}}" class="btn btn-outline-success btn_hidden">
+                                    <i class="fas fa-check"></i>
+                                </button>
                             </td>
                         </form>
                     </tr>
@@ -56,9 +58,10 @@
 
     <style type="text/css">
         .listbox_unsaved {
-            border-color:aliceblue;
-            background-color: #ececec66;
+            border-color: #38c172;
             font-style: italic;
+            border-bottom-width: 2px;
+            border-top-width: 2px;
         }
 
         .btn_hidden{
