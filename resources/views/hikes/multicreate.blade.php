@@ -20,8 +20,8 @@
                                     <div class="input-group">
                                         <button title="Importer" type="submit" class="btn btn-outline-secondary" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></button>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" accept=".csv" name="csv">
-                                            <label class="custom-file-label">Choisir un fichier .csv</label>
+                                            <input type="file" class="custom-file-input" id="customFile" accept=".csv" name="csv">
+                                            <label class="custom-file-label" for="customFile" data-browse="Choisir un fichier">Votre fichier .csv</label>
                                         </div>
                                     </div>
                                 </form>
@@ -233,5 +233,11 @@
                 var x = document.getElementsByName(name);
                 x[w].value = autoValue;
             }
+        
+            // Display the name of the import file
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
         </script>
 @endsection
