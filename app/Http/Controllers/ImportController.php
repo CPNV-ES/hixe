@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 
 class ImportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin,hike_manager');
+    }
     /**
      * Display a listing of the resource.
      *

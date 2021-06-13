@@ -94,19 +94,21 @@
             <textarea class="form-control" name="info">{{ $hike->additional_info }}</textarea>
         </div>
         <div class="form-row">
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                 <label class="form-control bg-transparent border-0 text-left">Cours requis</label>
                 @foreach($trainings as $training)
-                    <div class="row">
-                        <input type="checkbox" class="form-control col-1" name="trainings[{{ $training->id }}]" {{ array_search($training->id, $trainingsArray ?? []) !== false || $hike->trainingIsRequired($training) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $training->description }}</label>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="trainings[{{ $training->id }}]" name="trainings[{{ $training->id }}]" {{ array_search($training->id, $trainingsArray ?? []) !== false || $hike->trainingIsRequired($training) ? 'checked' : '' }}>
+                        <label class="custom-control-label d-flex" for="trainings[{{ $training->id }}]">{{ $training->description }}</label>
                     </div>
                 @endforeach
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                 <label class="form-control bg-transparent border-0 text-left">Matériel requis</label>
                 @foreach($equipment as $eqp)
-                    <div class="row">
-                        <input type="checkbox" class="form-control col-1" name="equipment[{{ $eqp->id }}]" {{  array_search($eqp->id, $equipmentsArray ?? []) !== false || $hike->equipmentIsRequired($eqp) ? 'checked' : '' }}><label class="form-control col-10 text-left bg-transparent border-0">{{ $eqp->name }}</label>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="equipment[{{ $eqp->id }}]" name="equipment[{{ $eqp->id }}]" {{  array_search($eqp->id, $equipmentsArray ?? []) !== false || $hike->equipmentIsRequired($eqp) ? 'checked' : '' }}>
+                        <label class="custom-control-label d-flex" for="equipment[{{ $eqp->id }}]">{{ $eqp->name }}</label>
                     </div>
                 @endforeach
             </div>

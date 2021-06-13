@@ -15,10 +15,15 @@ use App\Http\Requests\HikesPost;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;
 
 class HikeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:admin,hike_manager')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *

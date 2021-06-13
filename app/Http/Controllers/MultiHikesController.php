@@ -13,6 +13,11 @@ use Session;
 
 class MultiHikesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin,hike_manager');
+    }
+
     public function index(Request $msg)
     {
         $users = User::all();
