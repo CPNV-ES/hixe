@@ -100,6 +100,9 @@ class HikeCSV
             } elseif( strlen($hike->name) > 20){
                 $hike->nameError = "le champ nom de la course écrivez au max 60 caractères";
                 $hike->error = true;
+            } elseif( $hike->name == "Exemple de course"){
+                $hike->nameError = "Supprimez l'example";
+                $hike->error = true;
             }
 
             if(empty($hike->meetingLocation)){

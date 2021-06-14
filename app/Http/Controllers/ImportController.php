@@ -8,6 +8,7 @@ use App\HikeType;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Storage;
 
 class ImportController extends Controller
 {
@@ -113,5 +114,12 @@ class ImportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export(){
+
+        $filepath = public_path('exports/')."model.csv";
+        
+        return response()->download($filepath);
     }
 }

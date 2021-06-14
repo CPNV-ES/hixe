@@ -15,14 +15,15 @@
                         <p><em>Champs obligatoire*</em></p>
                         <div class="row footer ">
                             <div class="col-md-12 pr-1 d-flex justify-content-end" style="padding-bottom: 15px;">
+                                <a href="{{route('import.export')}}" class="btn btn-outline-secondary">Model .csv</a>
                                 <form method="POST" action="{{ route('import.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="input-group">
-                                        <button title="Importer" type="submit" class="btn btn-outline-secondary" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></button>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="customFile" accept=".csv" name="csv">
                                             <label class="custom-file-label" for="customFile" data-browse="Choisir un fichier">Votre fichier .csv</label>
                                         </div>
+                                        <button title="Importer" type="submit" class="btn btn-outline-secondary" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></button>
                                     </div>
                                 </form>
                             </div>
