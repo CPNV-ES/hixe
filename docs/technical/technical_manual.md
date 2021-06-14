@@ -18,6 +18,8 @@
     - [Configuration](#configuration)
     - [Github](#github)
     - [Laravel](#laravel)
+  - [Import csv](#import-csv)
+    - [Model csv](#model-csv)
 
 ## Gestion des styles CSS
 
@@ -126,3 +128,17 @@ GITHUB_ID=<Client ID>
 GITHUB_SECRET=<Client secrets>
 GITHUB_URL=<Authorization callback URL>
 ```
+
+## Import csv
+L'importation de fichier csv sert à importer une multitude de course à l'aide d'un seul fichier csv.  
+Si la course est valide, il y aura une coche en vert pour l'affirmer.   
+**Note :**   
+Si la course ne passe pas les validations, il ne pourra pas être importé et sera mis en évidence.  
+Il y aura un message concernant l'erreur faite lors du survol.  
+Les courses seront importées lorsqu'on aura cliqué sur le bouton sauver.
+ 
+### Model csv
+Le model sert à voir visuellement un exemple de comment entrer les différentes données des diverses courses.  
+**Note :**   
+L'exemple en question ne peut pas être importé.  
+Le model csv est stocké dans `public/exports/model.csv`
