@@ -63,5 +63,6 @@ Route::middleware(["role:admin,hike_manager"])->group(function () {
     // Import hikes with csv file
     //Route::resource('importHikes', 'ImportHikesController');
     Route::post('import', 'ImportController@store')->name('import.store');
+    Route::get('import', 'ImportController@export')->name('import.export');
 });
 
