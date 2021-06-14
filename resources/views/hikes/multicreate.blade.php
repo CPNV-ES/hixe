@@ -50,7 +50,9 @@
                                             </thead>
                                             <tbody>
                                                 @if(!empty($validatedHikes))
+                                                    @if($sumError != 0)
                                                     <div class="alert alert-danger alert-block" > Il y a {{$sumError}} courses qui ne sont pas bien remplis!</div>
+                                                    @endif
                                                     @foreach($validatedHikes as $hike)
                                                         <tr id="rows">
                                                             @if(empty($hike->nameError))
