@@ -1,29 +1,6 @@
 # Documentation technique
 
-<<<<<<< HEAD
 Bob est un développeur qui vient de rejoindre l'équipe de développement du TRUC. Ce document répond aux questions qu'il se pose.
-=======
-
--   [Manuelle technique](#manuelle-technique)
-    -   [Gestion des styles CSS](#gestion-des-styles-css)
-    -   [Charte graphique](#charte-graphique)
-    -   [Gestion des champs dates sur le client](#gestion-des-champs-dates-sur-le-client)
-    -   [Popup-message](#popup-message)
-        -   [Description](#description)
-        -   [Utilisation](#utilisation)
-        -   [Paramètres](#paramètres)
-            -   [Les différents types sont :](#les-différents-types-sont-)
-    -   [Roles](#roles)
-        -   [Slug](#slug)
-        -   [Utilisations](#utilisations)
-            -   [Relation](#relation)
-            -   [Roles](#roles-1)
-    -   [OAuth](#oauth)
-        -   [Configuration](#configuration)
-        -   [Github](#github)
-        -   [Laravel](#laravel)
-    -   [Import csv](#import-csv) - [Model csv](#model-csv)
-        > > > > > > > 703a488c741322d34f702deb30344d2e27094648
 
 ### A quoi sert Hixe ? Qui l'utilise et pourquoi ?
 
@@ -168,6 +145,20 @@ Il vous faudra valider que les pré-requis suivants soient bien installés sur v
 
 Lorsque nous créons un nouvel incrément à notre projet, nos utilisons git flow. De plus, nous utilisons la convention de nommage [snake_case](https://en.wikipedia.org/wiki/Snake_case) pour écrire le nom de nos features.
 
+### ToDo
+
+#### Liste des utilisateurs
+
+Il pourrait être possible de sauvegarder plusieurs rôles d'utilisateur en même temps. Un peu comme la sauvegarde des multi-courses.
+
+#### Validations
+
+Avoir une seule fonction de validation pour créer des courses et multi-courses.
+
+#### Documentation swagger
+
+Documenter certaine route qui ne le sont pas.
+
 ## Design technique
 
-Voir les détails [ici](./technical_details.md)
+[Voir le manuel](https://github.com/CPNV-ES/hixe/blob/develop/docs/technical/graphical_charter/graphical_charter.md)
