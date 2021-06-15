@@ -1,6 +1,29 @@
 # Documentation technique
 
+<<<<<<< HEAD
 Bob est un développeur qui vient de rejoindre l'équipe de développement du TRUC. Ce document répond aux questions qu'il se pose.
+=======
+
+-   [Manuelle technique](#manuelle-technique)
+    -   [Gestion des styles CSS](#gestion-des-styles-css)
+    -   [Charte graphique](#charte-graphique)
+    -   [Gestion des champs dates sur le client](#gestion-des-champs-dates-sur-le-client)
+    -   [Popup-message](#popup-message)
+        -   [Description](#description)
+        -   [Utilisation](#utilisation)
+        -   [Paramètres](#paramètres)
+            -   [Les différents types sont :](#les-différents-types-sont-)
+    -   [Roles](#roles)
+        -   [Slug](#slug)
+        -   [Utilisations](#utilisations)
+            -   [Relation](#relation)
+            -   [Roles](#roles-1)
+    -   [OAuth](#oauth)
+        -   [Configuration](#configuration)
+        -   [Github](#github)
+        -   [Laravel](#laravel)
+    -   [Import csv](#import-csv) - [Model csv](#model-csv)
+        > > > > > > > 703a488c741322d34f702deb30344d2e27094648
 
 ### A quoi sert Hixe ? Qui l'utilise et pourquoi ?
 
