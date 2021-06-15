@@ -20,7 +20,7 @@ class AddHikeTypes extends Migration {
 		
 		Schema::table('hikes', function(Blueprint $table)
 		{
-			$table->integer('type_id')->unsigned()->index('fk_hikes_hike_types1_idx');
+			$table->integer('type_id')->unsigned()->index('fk_hikes_hike_types1_idx')->nullable();
 			$table->foreign('type_id', 'fk_hikes_hike_types1')->references('id')->on('hike_types')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}

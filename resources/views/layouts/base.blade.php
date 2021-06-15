@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>@yield('title') - Hixe</title>
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -30,7 +29,6 @@
 
 <body>
 <div class="none">
-
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -90,11 +88,19 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <?php $currentRoute = Route::currentRouteName() ?>
             <div class="navbar-nav">
-                <a class="nav-item nav-link {{ $view_name == 'home' ? 'active' : '' }}" href="/">Mes Courses <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link {{ $view_name == 'hikes-index' ? 'active' : '' }}" href="{{route('hikes.index')}}">Liste des courses</a>
-                <a class="nav-item nav-link {{ $view_name == 'hikes-create' ? 'active' : '' }}" href="{{route('hikes.create')}}">Créer une course</a>
-                <a class="nav-item nav-link {{ $view_name == 'multihikes-create' ? 'active' : '' }}" href="{{route('multiHikes.index')}}">Créer plusieurs courses</a>
+                <a class="nav-item nav-link {{ $currentRoute == 'home' ? 'active' : '' }}" href="/">Mes Courses <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link {{ $currentRoute == 'hikes-index' ? 'active' : '' }}" href="{{route('hikes.index')}}">Liste des courses</a>
+                @if(Auth::check())
+                    @if (Auth::user()->hasRole(['admin', 'hike_manager']))
+                        <a class="nav-item nav-link {{ $currentRoute == 'hikes.create' ? 'active' : '' }}" href="{{route('hikes.create')}}">Créer une course</a>
+                        <a class="nav-item nav-link {{ $currentRoute == 'multiHikes.index' ? 'active' : '' }}" href="{{route('multiHikes.index')}}">Créer plusieurs courses</a>
+                    @endif
+                    @if(Auth::user()->hasRole("admin"))
+                        <a class="nav-item nav-link" href="{{route('roles.index')}}">Liste des utilisateurs</a>
+                    @endif
+                @endif
             </div>
         </div>
     </nav>

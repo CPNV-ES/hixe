@@ -7,15 +7,6 @@
     <div class="content">
         <div class="row justify-content-md-center">
             <div class="col-md-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="card">
                     <div class="card-header">
                         <h5 class="title">{{__(" Insérer des courses")}}</h5>
@@ -24,15 +15,20 @@
                         <p><em>Champs obligatoire*</em></p>
                         <div class="row footer ">
                             <div class="col-md-12 pr-1 d-flex justify-content-end" style="padding-bottom: 15px;">
+                                <a href="{{route('import.export')}}" class="btn btn-outline-secondary">Model .csv</a>
                                 <form method="POST" action="{{ route('import.store') }}" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="file" accept=".csv" name="csv" class="btn btn-light" >
-                                    <button type="submit" class="btn btn-dark btn-round">{{__('Read')}}</button>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" accept=".csv" name="csv">
+                                            <label class="custom-file-label" for="customFile" data-browse="Choisir un fichier">Votre fichier .csv</label>
+                                        </div>
+                                        <button title="Importer" type="submit" class="btn btn-outline-secondary" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('multiHikes.store') }}" autocomplete="off"
-                              enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('multiHikes.store') }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
                         @method('post')
                         <!-- Date -->
@@ -49,48 +45,110 @@
                                             <td>Min Pers.</td>
                                             <td>Max Pers.</td>
                                             <td>Dénivelé*</td>
+                                            <td style="min-width: 110px">Type*</td>
                                             <td>Difficulté*</td>
                                             <td>Info</td>
                                             </thead>
                                             <tbody>
                                                 @if(!empty($validatedHikes))
+                                                    @if($sumError != 0)
+                                                    <div class="alert alert-danger alert-block" > Il y a {{$sumError}} courses qui ne sont pas bien remplis!</div>
+                                                    @endif
                                                     @foreach($validatedHikes as $hike)
-                                                        @if(empty($hike->nameError || $hike->meetingLocationError || $hike->meetingDateError || $hike->hikeDateError || $hike->startError || $hike->finishError || $hike->minError || $hike->maxError || $hike->deniveleError || $hike->difficultyError || $hike->infoError))
-                                                            <td style="background-color: green"><p style="color:white">Vous avez bien emporté la course</p></td>
-                                                        @else
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->nameError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white"></p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->meetingLocationError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->meetingDateError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->hikeDateError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->startError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->finishError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->minError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->maxError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->deniveleError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->difficultyError}}</p></td>
-                                                            <td style="background-color: red"><p style="color:white">{{$hike->infoError}}</p></td>
-                                                        @endif
                                                         <tr id="rows">
-                                                            <td><input type="text" name="name[]" class="form-control" value='{{$hike->name}}'></td>
-                                                            <td>
-                                                            <select class="form-control" name="chef[]">
-                                                                @foreach($users as $user)
-                                                                    <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
-                                                                @endforeach
-                                                            </select>
+                                                            @if(empty($hike->nameError))
+                                                                <td><input type="text" name="name[]" class="form-control" value='{{$hike->name}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->nameError}}" type="text" name="name[]" class="form-control is-invalid" value='{{$hike->name}}' style="border: 1px solid red;"></td>
+                                                            @endif
+                                                            <td style="padding:10;">
+                                                                @if(empty($hike->userError))
+                                                                    <select class="form-control" name="chef[]">
+                                                                        <option selected value="{{$hike->userId}}">{{$hike->user}}</option>
+                                                                        @foreach($users as $user)
+                                                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @else
+                                                                    <select title="{{$hike->userError}}" class="form-control is-invalid" name="chef[]">
+                                                                        <option disabled selected>Choisir un chef</option>
+                                                                        @foreach($users as $user)
+                                                                            <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @endif
                                                             </td>
-                                                            <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}'></td>
-                                                            <td><input type="date" name="meetingDate[]" class="form-control" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
-                                                            <td><input type="date" name="hikeDate[]" class="form-control" value='{{$hike->hikeDate}}'></td>
-                                                            <td><input type="time" name="start[]" class="form-control" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
-                                                            <td><input type="time" name="finish[]" class="form-control" value='{{$hike->finish}}'></td>
-                                                            <td><input type="number" min="1" name="min[]" class="form-control" value='{{$hike->min}}'></td>
-                                                            <td><input type="number" min="1" name="max[]" class="form-control" value='{{$hike->max}}'></td>
-                                                            <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$hike->denivele}}'></td>
-                                                            <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$hike->difficulty}}'></td>
-                                                            <td><input type="text" name="info[]" class="form-control" value='{{$hike->info}}'></td>
-                                                            <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                            @if(empty($hike->meetingLocationError))
+                                                                <td><input type="text" name="meetingLocation[]" class="form-control" value='{{$hike->meetingLocation}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->meetingLocationError}}" type="text" name="meetingLocation[]" class="form-control is-invalid" value='{{$hike->meetingLocation}}'></td>
+                                                            @endif
+                                                            @if(empty($hike->meetingDateError))
+                                                                <td><input type="date" name="meetingDate[]" class="form-control" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                            @else
+                                                                <td><input title="{{$hike->meetingDateError}}" type="date" name="meetingDate[]" class="form-control is-invalid" value='{{$hike->meetingDate}}' onblur="AutoInpute(value, this, 'hikeDate[]')"></td>
+                                                            @endif
+                                                            @if(empty($hike->hikeDateError))
+                                                                <td><input type="date" name="hikeDate[]" class="form-control" value='{{$hike->hikeDate}}'></td> 
+                                                            @else
+                                                                <td><input title="{{$hike->hikeDateError}}" type="date" name="hikeDate[]" class="form-control is-invalid" value='{{$hike->hikeDate}}'></td> 
+                                                            @endif
+                                                            @if(empty($hike->startError))
+                                                                <td><input type="time" name="start[]" class="form-control" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                            @else
+                                                                <td><input title="{{$hike->startError}}" type="time" name="start[]" class="form-control is-invalid" value='{{$hike->start}}' onblur="AutoInpute(value, this, 'finish[]')"></td>
+                                                            @endif
+                                                            @if(empty($hike->finishError))
+                                                                <td><input type="time" name="finish[]" class="form-control" value='{{$hike->finish}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->finishError}}" type="time" name="finish[]" class="form-control is-invalid" value='{{$hike->finish}}'></td>
+                                                            @endif
+                                                            @if(empty($hike->minError))
+                                                                <td><input type="number" min="1" name="min[]" class="form-control" value='{{$hike->min}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->minError}}" type="number" min="1" name="min[]" class="form-control is-invalid" value='{{$hike->min}}'></td>
+                                                            @endif
+                                                            @if(empty($hike->maxError))
+                                                                <td><input type="number" min="1" name="max[]" class="form-control" value='{{$hike->max}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->maxError}}" type="number" min="1" name="max[]" class="form-control is-invalid" value='{{$hike->max}}'></td>
+                                                            @endif
+                                                            @if(empty($hike->deniveleError))
+                                                                <td><input type="number" min="1" name="denivele[]" class="form-control" value='{{$hike->denivele}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->deniveleError}}" type="number" min="1" name="denivele[]" class="form-control is-invalid" value='{{$hike->denivele}}'></td>
+                                                            @endif
+                                                            <td>
+                                                                 @if(empty($hike->typeError))
+                                                                    <select id="hike_type" class="form-control" name="hike_type[]" required>
+                                                                        <option selected value="{{$hike->typeId}}">{{$hike->type}}</option>
+                                                                        @foreach($hike_types ?? '' as $type)
+                                                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @else
+                                                                    <select title="{{$hike->typeError}}" id="hike_type" class="form-control is-invalid" name="hike_type[]" required>
+                                                                        <option disabled selected>Choisir un type</option>
+                                                                        @foreach($hike_types ?? '' as $type)
+                                                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @endif
+                                                            </td>
+                                                            @if(empty($hike->difficultyError))
+                                                                <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value='{{$hike->difficulty}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->difficultyError}}" type="number" min="1" max="9" name="difficulty[]" class="form-control is-invalid" value='{{$hike->difficulty}}'></td>
+                                                            @endif
+                                                            @if(empty($hike->infoError))
+                                                                <td><input type="text" name="info[]" class="form-control" value='{{$hike->info}}'></td>
+                                                            @else
+                                                                <td><input title="{{$hike->infoError}}" type="text" name="info[]" class="form-control is-invalid" value='{{$hike->info}}'></td>
+                                                            @endif
+                                                            <td><button title="Supprimer" type="submit" class="btn btn-outline-danger" onclick="deleteRow(this)"><i class="fas fa-trash-alt"></i></button></td>
+                                                            @if($hike->error == false)
+                                                                <td><i title="Importation réussi" class="fas fa-check btn btn-outline-success" style="padding-top: 11px; padding-bottom: 10px;"></i></td>
+                                                            @endif
                                                         </tr>
                                                     @endforeach
                                                 @else
@@ -98,6 +156,7 @@
                                                         <td><input type="text" name="name[]" class="form-control" value=''></td>
                                                         <td>
                                                             <select class="form-control" name="chef[]">
+                                                                <option disabled selected>Choisir un chef</option>
                                                                 @foreach($users as $user)
                                                                     <option value="{{$user->id}}">{{$user->firstname}} {{$user->lastname}}</option>
                                                                 @endforeach
@@ -111,9 +170,18 @@
                                                         <td><input type="number" min="1" name="min[]" class="form-control" value=''></td>
                                                         <td><input type="number" min="1" name="max[]" class="form-control" value=''></td>
                                                         <td><input type="number" min="1" name="denivele[]" class="form-control" value=''></td>
+                                                        <td>
+                                                            <select id="hike_type" class="form-control" name="hike_type[]" required>
+                                                                <option disabled selected>Choisir un type</option>
+                                                                @foreach($hike_types ?? '' as $type)
+                                                                    <option value="{{$type->id}}">{{$type->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
                                                         <td><input type="number" min="1" max="9" name="difficulty[]" class="form-control" value=''></td>
                                                         <td><input type="text" name="info[]" class="form-control" value=''></td>
-                                                        <td><input type="button" class="btn btn-danger btn-round" value="Delete" onclick="deleteRow(this)"></td>
+                                                        <td><button title="Supprimer" type="submit" class="btn btn-outline-danger" onclick="deleteRow(this)"><i class="fas fa-trash-alt"></i></button></td>
+                                                        
                                                     </tr>
                                                 @endif
                                             </tbody>
@@ -123,8 +191,8 @@
                             </div>
                             <div class="row footer ">
                                 <div class="col-md-12 pr-1 d-flex justify-content-end">
-                                    <div id="insert-more" class="btn btn-secondary btn-round" style="margin-right:15px"> Add Row</div>
-                                    <button type="submit" class="btn btn-primary btn-round">{{__('Save')}}</button>
+                                    <div title="Dupliquer" id="insert-more" class="btn btn-outline-secondary btn-round" style="margin-right:15px"><i class="fas fa-copy"></i></div>
+                                    <button title="Sauver" type="submit" class="btn btn-outline-primary btn-round"><i class="fas fa-edit"></i></button>
                                 </div>
                             </div>
                         </form>
@@ -168,5 +236,11 @@
                 var x = document.getElementsByName(name);
                 x[w].value = autoValue;
             }
+        
+            // Display the name of the import file
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
         </script>
 @endsection

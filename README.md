@@ -8,10 +8,14 @@ Au delà de la problématique standard de fixer une date et rassembler un groupe
 
 La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tree/master/docs/user), les documents à caractère technique [ici](https://github.com/CPNV-ES/hixe/tree/master/docs/technical) et si vous voulez installer Hikes sur un poste de développement, rendez-vous [ici](https://github.com/CPNV-ES/hixe/tree/master/docs/install).
 
+# Informations Technique
+
+[doc](./docs/technical/technical_manual.md)
+
 # Installation
 
 1. Valider que les pré-requis suivants sont bien installés sur votre machine
-   
+
     | Logiciel | Min Version      | Commande             |
     | :------- | :--------------- | :------------------- |
     | composer | 1.9              | `composer --version` |
@@ -40,9 +44,10 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     ```
 6. Éditez le fichier `.env` :
 
-    Note : Si cela n'est pas déjà fait, nous vous conseillons de créer une base de donnée à cette étape et de retenir son nom pour l'ajouter dans le champ ``DB_DATABASE``. 
+    Note : Si cela n'est pas déjà fait, nous vous conseillons de créer une base de donnée à cette étape et de retenir son nom pour l'ajouter dans le champ `DB_DATABASE`.
 
     A. Définissez la connection à votre **Base de Donnée**, dans notre cas nous utilisons le driver mysql :
+
     ```
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -53,28 +58,32 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     ```
 
     B. Pour nos expériences du côté applicatif, nous avons un utilisateur test. Il est possible de le modifier si besoin.
-   
-   ```
-    USER_FIRSTNAME=kev
-    USER_LASTNAME=pasteur
-    USER_EMAIL=kev@gmail.com
-    USER_PASSWORD=12345678
-    USER_NUMBER=1
-    USER_BIRTHDATE=2020-01-03
-   ```
+
+    ```
+     USER_FIRSTNAME=kev
+     USER_LASTNAME=pasteur
+     USER_EMAIL=kev@gmail.com
+     USER_PASSWORD=12345678
+     USER_NUMBER=1
+     USER_BIRTHDATE=2020-01-03
+    ```
 
 7. Remplir la base de donnée
 
     A. Créer les tables avec l'outil migrate
+
     ```
     php artisan migrate
     ```
+
     B. Remplir la base de donnée avec nos seeds préfaits
+
     ```
     php artisan db:seed
     ```
 
-    Note : Si vous souhaitez **drop&restart** vos seeds car vous avez des erreurs à corriger ou que vous avez des nouveautés à implémenter, vous pouvez ``refresh`` les seeds avec la commande :
+    Note : Si vous souhaitez **drop&restart** vos seeds car vous avez des erreurs à corriger ou que vous avez des nouveautés à implémenter, vous pouvez `refresh` les seeds avec la commande :
+
     ```
     php artisan migrate:fresh --seed
     ```

@@ -21,7 +21,9 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        $users = User::all();
+        $roles = Role::all();
+        return view('user.index')->with(compact('users', 'roles'));
     }
 
     /**
@@ -92,6 +94,15 @@ class UserController extends Controller
         $user->email_address = $email;
         $user->save();
         return redirect(route('profile.show',$id))->with("success","Votre profile a été mis à jour !");
+    }
+
+    public function updateRole(User $user, Request $request)
+    {
+        // Get the role and set it into the user
+        $role = Role::where('slug', '=', $request->input('user_role'))->first();
+        $user->update(['role_id' => $role->id]);
+        
+        return back()->with("success", $user->firstname . " " . $user->lastname . " possède maintenant le rôle de " . $user->role->name);
     }
 
     /**
