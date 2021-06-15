@@ -92,3 +92,11 @@ La documentation utilisateur se trouve [là](https://github.com/CPNV-ES/hixe/tre
     ```
     php artisan serve
     ```
+
+# Commandes
+
+## Swagger
+
+Générer la documentation Swagger : 
+
+`php artisan l5-swagger:generate`

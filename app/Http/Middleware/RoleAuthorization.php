@@ -20,6 +20,6 @@ class RoleAuthorization
         if($request->user()->hasRole($roles)){
             return $next($request); 
         }
-        return response('Unauthorized.', 401); // To do make pretty page
+        return abort(401); // To do make pretty page
     }
 }
