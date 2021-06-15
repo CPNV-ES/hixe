@@ -1,128 +1,150 @@
-# Manuelle technique
+# Documentation technique
 
-- [Manuelle technique](#manuelle-technique)
-  - [Gestion des styles CSS](#gestion-des-styles-css)
-  - [Charte graphique](#charte-graphique)
-  - [Gestion des champs dates sur le client](#gestion-des-champs-dates-sur-le-client)
-  - [Popup-message](#popup-message)
-    - [Description](#description)
-    - [Utilisation](#utilisation)
-    - [Paramètres](#paramètres)
-      - [Les différents types sont :](#les-différents-types-sont-)
-  - [Roles](#roles)
-    - [Slug](#slug)
-    - [Utilisations](#utilisations)
-      - [Relation](#relation)
-      - [Roles](#roles-1)
-  - [OAuth](#oauth)
-    - [Configuration](#configuration)
-    - [Github](#github)
-    - [Laravel](#laravel)
+Bob est un développeur qui vient de rejoindre l'équipe de développement du TRUC. Ce document répond aux questions qu'il se pose.
 
-## Gestion des styles CSS
+### A quoi sert Hixe ? Qui l'utilise et pourquoi ?
 
-Les styles CSS sont écris en SCSS. Il respectent la méthodologie BEM.
+Il s'agit d'un gestionnaire de courses pour le [CAS de Sion](https://www.clubalpinsion.ch/) on peut notamment administrer(crud) des courses sous la dénomination de "hikes". Sur chaque hike un guide peut être attribué à la course ainsi que plusieurs participant en fonction des limites de participants définit par course.
 
-## Charte graphique
+Au-delà de pouvoir créer, afficher, modifier, dupliquer une hike. Hixe possède aussi un gestionnaire de multi-courses, lui permettant de créer des courses importées / exportées de fichiers CSV. De plus, il est aussi possible de modifier rapidement les rôles d'utilisateur si cela est necessaire.
 
-[lien](graphical_charter/graphical_charter.md)
+### Dans quel contexte (technique) fonctionne Hixe ?
 
-## Gestion des champs dates sur le client
+Hike est une application web utilisant le framework [Laravel](https://laravel.com/docs/6.x) qui est basé sur le langague de programmation [PHP](https://www.php.net/). Node est utilisé pour transpiler certains assets comme bootstrap, jquery, etc... (Voir package.json). Utilise une base de données relationnel commune MySQL.
 
-Les champs dates sont géré par la librairie `bootstrap-datetimepicker`.
-Il a été choisi d'utiliser une librairie plûtot que les champs HTML de base "date", "datetime-local" car ceux-ci ne sont pas
-implémenter de la même façon sur tout les navigateurs.
+| Nom     | Version   |
+| ------- | --------- |
+| Laravel | 6.x       |
+| PHP     | 7.4       |
+| Node    | 15.6.0    |
+| MySQL   | 5.7.34-37 |
 
-La documentation pour cette librairie se trouve ici : https://getdatepicker.com/4/Functions/#viewdate
+L'application en production est déployé chez l'hébergeur swisscenter à l'aide de capistrano et d'une configuration de déploiement déjà existante lors de la prise en main du projet.
 
-Les dates sont envoyés au serveur sous la forme d'un timestamp PHP.
+l'application à besoin d'internet pour pouvoir utiliser l'authentification à l'aide du OAuth et télécharger les différentes dépendences.
 
-## Popup-message
+Github a été choisit comme fourniseur pour effectuer des tests, mais à terme le but est d'implémenter l'oauth directement sur le site existant dans l'objectif de lier les comptes.
 
-### Description
+### Que puis-je faire pour tester la version actuelle de notre application ?
 
-Les messages sont utilisés lorsque nous souhaitons aviser l'utilisateur de quelque chose.
-Cela peut-être utile pour le rassurer lorsqu'une action est effectuée ou l'informer qu'une erreur s'est produite.
+C'est très simple, il suffit de lire les étapes que nous avons décrites [ici](https://github.com/CPNV-ES/hixe#installation).
 
-Exemple : Ajout d'une course, Inscription à une course.
+N'oubliez pas de choisir la branche github correcte. Sachant que nous utilisisons la méthodologie Gitflow..
 
-**Note** : Pour rediriger un utilisateur sur une route avec un message spécifique, vous aurez besoin d'importer la librarie `Redirect`.
+### MLD de notre base de donnée
 
+![MLD](https://github.com/CPNV-ES/hixe/blob/develop/docs/database/schema_2021_06_10.png?raw=true)
+
+### De quels composants Hixe est-il fait ?
+
+composer.json
+
+```json=
+{
+    "require": {
+        "php": "^7.2",
+        "darkaonline/l5-swagger": "6.*",
+        "fideloper/proxy": "^4.0",
+        "laravel/framework": "^6.0",
+        "laravel/socialite": "^4.3", // OAuth
+        "laravel/tinker": "^1.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
+        "facade/ignition": "^1.4",
+        "fzaninotto/faker": "^1.4", // Generation de valeur aléatoire
+        "laravel/ui": "^1.1",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^3.0",
+        "phpunit/phpunit": "^8.0"
+    }
+}
 ```
-use Illuminate\Support\Facades\Redirect;
+
+package.json
+
+```json=
+{
+    "devDependencies": {
+        "axios": "^0.19",
+        "bootstrap": "^4.0.0",
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "^2.0.1",
+        "cross-env": "^5.1",
+        "jquery": "^3.5.1",
+        "laravel-mix": "^4.0.7",
+        "lodash": "^4.17.13",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^2.3.1",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "dependencies": {
+        "datatables.net-autofill-bs4": "^2.3.5", // Plugin affichage des tableaux
+        "datatables.net-bs4": "^1.10.21", // Affichage des tableaux de hikes
+        "datatables.net-buttons-bs4": "^1.6.2", // Plugin affichage des tableaux
+        "datatables.net-fixedheader-bs4": "^3.1.7", // Plugin affichage des tableaux
+        "datatables.net-keytable-bs4": "^2.5.2", // Plugin affichage des tableaux
+        "datatables.net-responsive-bs4": "^2.2.5", // Plugin affichage des tableaux
+        "datatables.net-rowgroup-bs4": "^1.1.2", // Plugin affichage des tableaux
+        "datatables.net-scroller-bs4": "^2.0.2", // Plugin affichage des tableaux
+        "datatables.net-searchpanes-bs4": "^1.1.1", // Plugin affichage des tableaux
+        "eonasdan-bootstrap-datetimepicker": "^4.17.49",
+        "fullcalendar": "^3.10.2",
+        "jszip": "^3.2.2",
+        "moment": "^2.26.0",
+        "pdfmake": "^0.1.64",
+        "sass": "^1.32.6",
+        "sass-loader": "^7.3.1"
+    }
+}
 ```
 
-### Utilisation
+### Quelles technologies est-ce que je dois connaître pour pouvoir développer ce TRUC ?
 
-Lorsque nous effectuons des actions dans un `controller`, nous pouvons maintenant rediriger l'utilisateur sur un routeur avec un message spécifique.
+Pour pouvoir travailler sur ce projet il faut comprendre les principes suivant
 
-Example :
+-   L'OAuth 2
+-   Structure MVC
+-   Laravel
+    -   Blade
+    -   Eloquent
+    -   Migration
+    -   Seeders
+    -   Factories
 
-```
-return Redirect::route('hikes.index')->with('warning','Hike supprimée !');
-```
+Il faut maitriser :
 
-### Paramètres
+-   PHP
+-   MYSQL
+-   JS
+-   Bootstrap
+-   SCSS
+-   HTML
 
-> _..._->with(`type`, `message`);
+Pourquoi tous ces choix
 
-#### Les différents types sont :
+Le framework est laravel était la technologie imposer lors du début du projet, nous avons donc continuer sur cette lancer. Nous avons fais une étude pour savoir s'il était intéressant de mettre à jour la version du framework et nous avons éstimer que non pour l'instant parce qu'il s'agit de la version LTS (Long Term Support). Cette étude devra peut être réaliser de nouveaux pour les prochains développeurs pour migrer vers la prochaine version LTS de Laravel.
 
-| Type    | Description                                    |
-| ------- | :--------------------------------------------- |
-| success | Affiche un message en vert de **succès**.      |
-| warning | Affiche un message en jaune de **prévention**. |
-| error   | Affiche un message d'**erreur** en rouge.      |
-| info    | Affiche un message **informatif**.             |
+Pour l'authentification OAuth on a utilisé socialite qui est un des choix proposé par la documentation Laravel
 
-## Roles
+Sinon le combo PHP, MySQL est un combo très commun possédant beaucoup de documentation. le JS, le scss, html permete de réaliser des pages à l'aide de blade qui est le template engine fournis par Laravel
 
-### Slug
+### Qu'est-ce que je dois installer sur mon poste de travail pour pouvoir commencer à bosser sur Hixe ?
 
-Pour ne pas lier un id à un rôle spécifique un système de slug a été mis en place, ce système permet d'avoir un nom qui ne sera pas forcément affiché permettant de définir le rôle de manière technique.
+Il vous faudra valider que les pré-requis suivants soient bien installés sur votre machine :
 
-Par exemple, pour le rôle "Administrateur" son slug correspondant pourrait être "admin".
-globalement le slug doit permettre d'identifier un élément de manière simplifier, sans caractère interdit. Cela est utile notamment au niveau du code pour facilement identifier un rôle par un label compréhensible et efficace.
+| Logiciel | Version          | Check Version        |
+| -------- | ---------------- | -------------------- |
+| composer | 1.9              | `composer --version` |
+| npm      | 6.9.0            | `npm -v`             |
+| Node     | 15.6.0           | `node -v`            |
+| git      | 2.23             | `git -version`       |
+| MySQL    | 8.0.17 for Win64 | `mysqld --version`   |
 
-Définition wikipédia :
+### Quelles sont les pratiques appliquées dans ce groupe ?
 
-_Slug (publication web) est un court texte utilisable dans une URL et facilement compréhensible à la fois par les utilisateurs et les moteurs de recherche pour décrire et identifier une ressource. Noter que pour pouvoir figurer dans une URL, un slug ne doit pas comporter de caractères "interdits" (espaces, caractères diacritiques, etc.). Exemple : pour identifier une image de la Tour Eiffel, le slug Paris-Tour-Eiffel.jpg est plus "parlant' que 1234567.jpg._
+Lorsque nous créons un nouvel incrément à notre projet, nos utilisons git flow. De plus, nous utilisons la convention de nommage [snake_case](https://en.wikipedia.org/wiki/Snake_case) pour écrire le nom de nos features.
 
-### Utilisations
+## Design technique
 
-#### Relation
-
-Le modèle "User" possède une méthode permettant de récupérer le nom du role sur l'instance d'un utilisateur avec `$user->role->name` pour plus d'info sur le fonctionnement de cette méthode voir [One To Many](https://laravel.com/docs/6.x/eloquent-relationships#one-to-many) et [One To Many (inverse) ](https://laravel.com/docs/6.x/eloquent-relationships#one-to-many-inverse)
-
-#### Roles
-
-L'on peut vérifier si l'utilisateur à un rôle en appelant la méthode `hasRole()` avec comment paramètre une chaine de caractère contenant le slug sur l'instance d'un user, exemple `$user->hasRole('admin')`
-On peut également vérifier plusieurs rôles en même temps en lui passant un tableau contenant les différents slugs des rôles que l'on souhaiterait vérifier.
-
-L'on peut ajouter un role à un utilisateur à l'aide de la méthode `setRole()` sur l'instance d'un user, exemple : `$user->setRole('admin')`
-
-## OAuth
-
-L'OAuth est actuellement fournie par Github
-
-### Configuration
-
-Pour utiliser Github en tant que Provider OAuth il faut [créer une nouvelle application](https://github.com/settings/applications/new).
-
-### Github
-
-Pour un environnement de développement:
-
-![](images/OAuth.png)
-
-Créez un nouveau `client secret`.
-
-### Laravel
-
-Ajoutez les variables suivantes au `.env` :
-
-```
-GITHUB_ID=<Client ID>
-GITHUB_SECRET=<Client secrets>
-GITHUB_URL=<Authorization callback URL>
-```
+Voir les détails [ici](./technical_details.md)
