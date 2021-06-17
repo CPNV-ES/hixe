@@ -15,7 +15,7 @@
                         <p><em>Champs obligatoire*</em></p>
                         <div class="row footer ">
                             <div class="col-md-12 pr-1 d-flex justify-content-end" style="padding-bottom: 15px;">
-                                <a href="{{route('import.export')}}" class="btn btn-outline-secondary">Model .csv</a>
+                                <a href="{{route('import.export')}}" class="btn btn-outline-secondary">Modèle .csv</a>
                                 <form method="POST" action="{{ route('import.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="input-group">
