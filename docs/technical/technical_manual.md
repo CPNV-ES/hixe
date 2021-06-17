@@ -159,6 +159,10 @@ Avoir une seule fonction de validation pour créer des courses et multi-courses.
 
 Documenter certaine route qui ne le sont pas.
 
+#### Import csv
+
+le workflow des erreurs
+
 ## Design technique
 
 [Voir le manuel](https://github.com/CPNV-ES/hixe/blob/develop/docs/technical/graphical_charter/graphical_charter.md)
