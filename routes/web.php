@@ -22,10 +22,6 @@ Route::resource('profile',UserController::class)->register();
 Route::get('register_hike/{id}', 'HikeController@registerToHike')->name('hike.registerhike');
 Route::get('unregister_hike/{id}', 'HikeController@unregisterToHike')->name('hike.unregisterhike');
 
-Route::get('roles', 'UserController@index')->name('roles.index');
-Route::post('updateRoles/{user}', 'UserController@updateRole')->name('roles.updateRoles');
-
-
 // Calendar
 Route::get('hikes_calendar', 'HikeCalendarController@index');
 Route::get('hikes_calendar/{date}', 'HikeCalendarController@show');
@@ -64,5 +60,7 @@ Route::middleware(["role:admin,hike_manager"])->group(function () {
     //Route::resource('importHikes', 'ImportHikesController');
     Route::post('import', 'ImportController@store')->name('import.store');
     Route::get('import', 'ImportController@export')->name('import.export');
+    Route::get('roles', 'UserController@index')->name('roles.index');
+    Route::post('updateRoles/{user}', 'UserController@updateRole')->name('roles.updateRoles');
 });
 
