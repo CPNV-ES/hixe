@@ -95,6 +95,8 @@ L'importation de fichier csv sert à importer une multitude de course à l'aide 
 Le model sert à voir visuellement un exemple de comment entrer les différentes données des diverses courses.  
 **L'exemple en question ne peut pas être importé.**
 
+TODO : le workflow des erreurs
+
 ### Recherche des participants à une course (barre de recherche)
 
 Il est désormais possible de chercher à quelle course participe une personne.
