@@ -21,7 +21,7 @@ class HikeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:admin,hike_manager')->except(['index', 'show']);
+        $this->middleware('role:admin,hike_manager')->except(['index', 'show', 'registerToHike', 'unregisterToHike', 'fetch']);
     }
 
     /**
