@@ -19,8 +19,8 @@ Route::resource('multiHikes',MultiHikesController::class)->register();
 Route::resource('profile',UserController::class)->register();
 
 // Hikes registration
-Route::get('register_hike/{id}', 'hikeController@registerToHike')->name('hike.registerhike');
-Route::get('unregister_hike/{id}', 'hikeController@unregisterToHike')->name('hike.unregisterhike');
+Route::get('register_hike/{id}', 'HikeController@registerToHike')->name('hike.registerhike');
+Route::get('unregister_hike/{id}', 'HikeController@unregisterToHike')->name('hike.unregisterhike');
 
 Route::get('roles', 'UserController@index')->name('roles.index');
 Route::post('updateRoles/{user}', 'UserController@updateRole')->name('roles.updateRoles');
