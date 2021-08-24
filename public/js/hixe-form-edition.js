@@ -1,1 +1,195 @@
-!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="/",n(n.s=46)}({46:function(e,t,n){e.exports=n(47)},47:function(e,t){document.addEventListener("DOMContentLoaded",(function(){function e(e){var n=e.querySelectorAll("tbody tr"),r=n.last().cloneNode(!0);n.forEach((function(e){e.querySelector(".btn").hidden=!1})),r.querySelectorAll("input").forEach((function(e){e.value=""})),r.querySelector(".btn").addEventListener("click",(function(e){t(r)})),e.querySelector("tbody").appendChild(r)}function t(e){var t=e.parentElement;t.removeChild(e),t.querySelectorAll("tr").length<=1&&(t.querySelector(".btn").hidden=!0)}tableTraining.querySelector("tbody").addEventListener("change",(function(t){t.target.classList.contains("no-new-entry")||(e(t.target.parentElement.parentElement.parentElement.parentElement),t.target.addEventListener("change",(function(e){e.stopPropagation()})))})),tableTraining.querySelectorAll('button[name="remove-cours"]').forEach((function(e){e.addEventListener("click",(function(n){t(e.parentElement.parentElement.parentElement)}))})),tableMaterial.querySelectorAll('button[name="remove-material"]').forEach((function(e){e.addEventListener("click",(function(n){t(e.parentElement.parentElement.parentElement)}))})),tableMaterial.querySelector("tbody").addEventListener("change",(function(t){t.target.classList.contains("no-new-entry")||(e(t.target.parentElement.parentElement.parentElement.parentElement),t.target.addEventListener("change",(function(e){e.stopPropagation()})))})),addRowStep.addEventListener("click",(function(){var e,n;e=this.parentElement.querySelector("table tbody tr"),(n=e.cloneNode(!0)).querySelector('select[type="button"]').value="",n.querySelector("button").hidden=!1,n.querySelector("button").addEventListener("click",(function(){t(n)})),e.parentNode.insertBefore(n,destination)})),document.querySelectorAll("tbody .btn").forEach((function(e){e.addEventListener("click",(function(){t(e.parentElement.parentElement.parentElement)}))}))}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/hixe-form-edition.js":
+/*!*******************************************!*\
+  !*** ./resources/js/hixe-form-edition.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+document.addEventListener("DOMContentLoaded", function () {
+  function addRow(parent) {
+    var rows = parent.querySelectorAll('tbody tr');
+    var lastRow = rows.last().cloneNode(true);
+    rows.forEach(function (elem) {
+      elem.querySelector('.btn').hidden = false;
+    }); // Unfill content of input when added
+
+    lastRow.querySelectorAll('input').forEach(function (elem) {
+      elem.value = "";
+    });
+    lastRow.querySelector('.btn').addEventListener('click', function (a) {
+      // () => Is like function() but doesn't keep the scope
+      deleteRow(lastRow);
+    });
+    parent.querySelector('tbody').appendChild(lastRow);
+  }
+
+  function deleteRow(child) {
+    var parent = child.parentElement;
+    parent.removeChild(child);
+
+    if (parent.querySelectorAll('tr').length <= 1) {
+      parent.querySelector('.btn').hidden = true;
+    }
+  } // Add course row on click
+
+
+  tableTraining.querySelector('tbody').addEventListener('change', function (evt) {
+    if (evt.target.classList.contains("no-new-entry")) {
+      return;
+    }
+
+    addRow(evt.target.parentElement.parentElement.parentElement.parentElement);
+    evt.target.addEventListener('change', function (evt) {
+      evt.stopPropagation();
+    });
+  });
+  tableTraining.querySelectorAll('button[name="remove-cours"]').forEach(function (element) {
+    element.addEventListener("click", function (evt) {
+      deleteRow(element.parentElement.parentElement.parentElement);
+    });
+  });
+  tableMaterial.querySelectorAll('button[name="remove-material"]').forEach(function (element) {
+    element.addEventListener("click", function (evt) {
+      deleteRow(element.parentElement.parentElement.parentElement);
+    });
+  }); // Add material row on click
+
+  tableMaterial.querySelector('tbody').addEventListener('change', function (evt) {
+    if (evt.target.classList.contains("no-new-entry")) {
+      return;
+    }
+
+    addRow(evt.target.parentElement.parentElement.parentElement.parentElement);
+    evt.target.addEventListener('change', function (evt) {
+      evt.stopPropagation();
+    });
+  }); // Add step for hike
+
+  addRowStep.addEventListener('click', function () {
+    addStep(this.parentElement.querySelector('table tbody tr'));
+  });
+  document.querySelectorAll('tbody .btn').forEach(function (elem) {
+    elem.addEventListener('click', function () {
+      deleteRow(elem.parentElement.parentElement.parentElement);
+    });
+  });
+
+  function addStep(elem) {
+    // Contain the step input
+    var newStep = elem.cloneNode(true); // Unifll content
+
+    newStep.querySelector('select[type="button"]').value = ''; // Show delete button
+
+    newStep.querySelector('button').hidden = false; // Delete step
+
+    newStep.querySelector('button').addEventListener('click', function () {
+      deleteRow(newStep);
+    }); // Insert clone before destination id
+
+    elem.parentNode.insertBefore(newStep, destination);
+  }
+});
+
+/***/ }),
+
+/***/ 2:
+/*!*************************************************!*\
+  !*** multi ./resources/js/hixe-form-edition.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /Users/Xavier/Documents/CPNV/Modules/2020-2021/T2/MAW1.2 (T1a)/hixe/resources/js/hixe-form-edition.js */"./resources/js/hixe-form-edition.js");
+
+
+/***/ })
+
+/******/ });
