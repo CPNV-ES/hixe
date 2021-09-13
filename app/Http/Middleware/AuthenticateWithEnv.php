@@ -30,8 +30,6 @@ class AuthenticateWithEnv
                 //Création de l'utilisateur du .env
                 Artisan::call("make:user ". env('USER_FIRSTNAME') ." ". env('USER_LASTNAME')." ". env('USER_EMAIL')." ". env('USER_NUMBER')." ". env('USER_BIRTHDATE')." ". env('USER_PASSWORD'). " ". env('ROLE'));
             }
-        }else{
-            return response('Erreur 409 : .env incomplet.', 409);
         }
         return $next($request);
     }
