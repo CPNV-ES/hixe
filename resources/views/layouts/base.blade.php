@@ -11,7 +11,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet" type="text/css">
-    
+
     <!--Font Awesome -->
     <script src="https://kit.fontawesome.com/30414cf885.js" crossorigin="anonymous"></script>
 
@@ -90,7 +90,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <?php $currentRoute = Route::currentRouteName() ?>
             <div class="navbar-nav">
-                <a class="nav-item nav-link {{ $currentRoute == 'home' ? 'active' : '' }}" href="/">Mes Courses <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link {{ $currentRoute == 'home' ? 'active' : '' }}" href="/{{ Auth::user() ? "?q=".Auth::user()->firstname."%20".Auth::user()->lastname : "" }}">Mes Courses <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link {{ $currentRoute == 'hikes-index' ? 'active' : '' }}" href="{{route('hikes.index')}}">Liste des courses</a>
                 @if(Auth::check())
                     @if (Auth::user()->hasRole(['admin', 'hike_manager']))
